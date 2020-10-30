@@ -1,0 +1,140 @@
+<template>
+    <div class="sortCategory q-mr-sm">
+        <ul class="desktop">
+            <div v-for="item in list" class="sortItem" :class="tab===item.name && 'select'">
+                <li>
+                    <q-btn class="button" @click="tab=item.name">{{ item.text }}</q-btn>
+                </li>
+            </div>
+        </ul>
+        <div class="mobile">
+            <q-tabs
+                v-model="tab"
+                class="q-pb-lg"
+                indicator-color="orange-10"
+                dense
+            >
+                <q-tab v-for="item in list" :name="item.name" :label="item.text" />
+            </q-tabs>
+        </div>
+
+    </div>
+</template>
+
+<script lang="ts">
+import {Vue, Component, Prop} from 'vue-property-decorator';
+
+@Component
+export default class SortCategory extends Vue {
+
+    private list : any[] = [
+        {
+            name : 'count',
+            text : '조회수',
+        },
+        {
+            name : 'new',
+            text : '최신순',
+        },{
+            name : 'name',
+            text : '이름순',
+        }
+    ]
+
+    private tab : string = 'count';
+
+
+
+}
+</script>
+<style lang="scss">
+
+.sortCategory {
+    text-align: right;
+
+    .sortItem {
+        position: relative;
+        display: inline-block;
+        color: #b7b7b7;
+
+        &.select {
+            color: white;
+
+            li {
+                display: inline-block;
+                .button {
+
+                    &::before {
+                        background-color: #ff6430;
+                    }
+                }
+            }
+        }
+
+        li {
+            list-style: none;
+
+            .button {
+                padding-left: 15px;
+
+                &::before {
+                    position: absolute;
+                    content: "";
+                    width: 6px;
+                    height: 6px;
+                    border-radius: 100%;
+                    background-color: #b9b9b9;
+                    top: 14px;
+                    left: 14px;
+                }
+
+                .q-btn__wrapper::before {
+                    box-shadow: none;
+                }
+            }
+        }
+
+
+    }
+
+    .mobile {
+        display: none;
+    }
+
+    @media(max-width: $breakpoint-sm) {
+
+        .desktop {
+            display: none;
+        }
+
+        .mobile {
+            display: initial;
+        }
+
+        text-align: center;
+
+        .sortItem {
+            li {
+                .button {
+                    padding-left: 0;
+
+                    &::before {
+                        display: none;
+                    }
+                }
+
+            }
+            border-left: 1px solid #ffffff47;
+            &:first-child {
+                border-left: none;
+            }
+        }
+
+
+
+
+    }
+}
+
+
+</style>

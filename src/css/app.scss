@@ -1,0 +1,23 @@
+// app global css in SCSS form
+@import "quasar.variables";
+
+.maxWidth {
+    max-width: $breakpoint-md;
+    margin: 0 auto;
+}
+
+.bgColor-0 {
+    background-color: #292929;
+}
+
+.bgColor-1 {
+    background-color: #121212;
+}
+
+.width100p { width: 100%; }
+.height50 { height: 50px; }
+.min-height50 { min-height: 50px; }
+
+.transitionBg { transition: background-color ease-in 0.3s; }
+
+.block { display: block; }
