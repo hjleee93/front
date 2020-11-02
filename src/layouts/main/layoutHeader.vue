@@ -24,9 +24,9 @@
                 </q-toolbar-title>
 
                 <q-tabs v-model="tab" v-if="$q.platform.is.desktop">
-                    <q-tab name="Major" label="베스트" />
-                    <q-tab name="Minor" label="챌리지" />
-                    <q-tab name="G-Studio" label="게임 스튜디오" />
+                    <q-tab name="Major" label="베스트" @click="goTo('/')" />
+                    <q-tab name="Minor" label="챌리지" @click="goTo('/challenge')" />
+                    <q-tab name="G-Studio" label="게임 스튜디오" @click="goTo('/')" />
                 </q-tabs>
 
                 <q-btn
@@ -63,6 +63,10 @@ export default class LayoutHeader extends Vue {
     @Watch( '$store.getters.navTab' )
     private onChangedNavTab() {
         this.tab = this.$store.getters.navTab;
+    }
+
+    async goTo( path : string ) {
+        await this.$router.push( path );
     }
 }
 </script>
