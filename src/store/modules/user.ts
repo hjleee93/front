@@ -1,3 +1,5 @@
+import firebase from "firebase";
+
 enum LoginState {
     none,//초기화중
     logout,
@@ -64,6 +66,7 @@ export default {
         },
     },
 
+    //dispatch
     actions: {
         async loginState(context: any) {
             return new Promise((resolve, reject) => {
@@ -77,6 +80,13 @@ export default {
 
                 wait();
             })
+        },
+        async logout(context: any) {
+            await firebase.auth().signOut();
+            context.commit('user', null);
+            context.commit('idToken', null);
+            context.commit('developer', null);
+            context.commit('loginState', LoginState.logout);
         }
     }
 }

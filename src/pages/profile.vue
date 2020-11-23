@@ -1,0 +1,61 @@
+<template>
+    <q-page>
+        <div class="maxWidth">
+            <q-tabs
+                v-model="tab"
+                dense
+                class="q-pt-lg"
+                indicator-color="color-grey-10"
+                align="left"
+            >
+                <q-tab name="profile" label="프로필" />
+                <q-tab name="private" label="보안 및 개인 정보" />
+            </q-tabs>
+
+            <q-separator />
+
+            <q-tab-panels v-model="tab" animated>
+                <q-tab-panel name="profile" class="bgColor-1 no-scroll">
+                    <profile-tab></profile-tab>
+<!--                    <div class="text-h6">Mails</div>-->
+<!--                    Lorem ipsum dolor sit amet consectetur adipisicing elit.-->
+                </q-tab-panel>
+
+                <q-tab-panel name="private" class="bgColor-1 no-scroll">
+                    <profile-private-tab></profile-private-tab>
+<!--                    <div class="text-h6">Alarms</div>-->
+<!--                    Lorem ipsum dolor sit amet consectetur adipisicing elit.-->
+                </q-tab-panel>
+
+            </q-tab-panels>
+
+        </div>
+        <div style="padding-top: 100px"></div>
+        <footer class="footer text-center q-py-lg text-grey-5">
+            Copy right 2020. zempie. All rights reserved.
+        </footer>
+    </q-page>
+</template>
+
+<script lang="ts">
+import {Vue, Component, Watch} from 'vue-property-decorator';
+import ProfileTab from "components/profile/profileTab.vue";
+import ProfilePrivateTab from "components/profile/profilePrivateTab.vue";
+
+@Component({
+    components: {ProfilePrivateTab, ProfileTab}
+})
+export default class Profile extends Vue {
+    private  tab : string = 'profile';
+
+}
+</script>
+<style lang="scss" scoped>
+
+    .footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        //background-color: #292929;
+    }
+</style>

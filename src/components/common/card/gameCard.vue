@@ -1,5 +1,5 @@
 <template>
-    <div class="card">
+    <div class="card" @click="$router.push( `/play/${'aaa'}` )">
 
         <q-img :src=data.thumb alt="">
         </q-img>
@@ -41,9 +41,10 @@ export default class GameCard extends Vue {
 }
 </script>
 <style scoped lang="scss">
-@import "./../../css/quasar.variables";
+@import "../../../css/quasar.variables";
 
 .card {
+    cursor: pointer;
     padding: 10px;
     @media (max-width: $breakpoint-xs) {
         padding: 2px;

@@ -19,7 +19,7 @@
 
 <script lang="ts">
 import {Vue, Component} from 'vue-property-decorator';
-import GameCard from "components/card/gameCard.vue";
+import GameCard from "components/common/card/gameCard.vue";
 import GenreCategory from "components/main/genreCategory.vue";
 import SortCategory from "components/main/sortCategory.vue";
 import MainFooter from "components/main/mainFooter.vue";
@@ -50,16 +50,4 @@ export default class Home extends Vue {
     top: -50px;
 }
 
-.cardContainer {
-    display: grid;
-    grid-template-columns: 20% 20% 20% 20% 20%;
-
-    @media (max-width: $breakpoint-xs) {
-        grid-template-columns: 33.33% 33.33% 33.33%;
-    }
-
-    @media (min-width: $breakpoint-xs) and (max-width: $breakpoint-sm) {
-        grid-template-columns: 25% 25% 25% 25%
-    }
-}
 </style>

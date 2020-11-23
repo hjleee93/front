@@ -17,9 +17,9 @@
                 active-color="white"
                 class="text-grey-5"
             >
-                <q-tab class="min-height50" name="Major" icon="mail" label="Major" />
-                <q-tab class="min-height50" name="Minor" icon="alarm" label="Minor" />
-                <q-tab class="min-height50" name="G-Studio" icon="movie" label="G-Studio" />
+                <q-tab class="min-height50" name="Major" icon="star" label="베스트"  @click="goTo('/')" />
+                <q-tab class="min-height50" name="Minor" icon="emoji_events" label="챌리지" @click="goTo('/challenge')"/>
+                <q-tab class="min-height50" name="G-Studio" icon="create" label="게임 스튜디오" @click="studio"/>
             </q-tabs>
         </q-footer>
     </div>
@@ -45,6 +45,20 @@ export default class LayoutFooter extends Vue {
     private onChangedNavTab() {
         this.tab = this.$store.getters.navTab;
     }
+
+    async goTo( path : string ) {
+        try {
+            await this.$router.push( path );
+        }
+        catch (e) {
+
+        }
+    }
+
+    async studio() {
+        window.open('http://gtest.fromthered.com/test/zempiestudio/');
+    }
+
 }
 </script>
 

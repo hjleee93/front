@@ -14,7 +14,7 @@
         arrows
         height="300px"
     >
-        <q-carousel-slide name="game" class="column no-wrap flex-center" img-src="/banner/img-main-banner-03.png">
+        <q-carousel-slide name="game" class="column no-wrap flex-center" img-src="banner/img-main-banner-03.png">
             <div class="width100p maxWidth text-left q-pt-lg">
                 <div class="text-h4 text-weight-bold">
                     고퀄리티 캐주얼 게임

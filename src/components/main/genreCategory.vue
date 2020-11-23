@@ -1,15 +1,25 @@
 <template>
     <div class="width100p">
-        <ul class="categoryContainer scroll-x">
+
+        <q-tabs
+            v-model="select"
+            inline-label
+            align="justify"
+            class="text-white q-py-lg"
+            indicator-color="transparent"
+        >
             <template v-for="item in list">
-                <li class="buttonBox shadow-3" :class="select===item.name &&'select'">
-                    <q-btn class="button" @click="select=item.name">
-                        <q-icon class="icon" :name="item.icon"></q-icon>
-                        <span class="text q-ml-md text-weight-bold q-mt-sm ellipsis">{{ item.text }}</span>
+                <q-tab  content-class="width100p self-center no-padding"  class="buttonBox" :name="item.name"  :class="select===item.name &&'select'">
+                    <q-btn class="button width100p" >
+                        <div class="no-wrap">
+                            <q-icon class="icon" :name="item.icon"></q-icon>
+                            <span class="text q-ml-md text-weight-bold q-mt-sm ellipsis">{{ item.text }}</span>
+                        </div>
+
                     </q-btn>
-                </li>
+                </q-tab>
             </template>
-        </ul>
+        </q-tabs>
     </div>
 </template>
 
@@ -19,6 +29,12 @@ import {Vue, Component, Prop} from 'vue-property-decorator';
 @Component
 export default class GenreCategory extends Vue {
     private list: any[] = [
+        {
+            name : 'all',
+            icon: 'sports_esports',
+            text: '전체보기',
+
+        },
         {
             name : 'arcade',
             icon: 'sports_esports',
@@ -44,7 +60,7 @@ export default class GenreCategory extends Vue {
             name : 'puzzle',
             icon: 'fas fa-puzzle-piece',
             text: '퍼즐',
-        }
+        },
     ];
 
     private select : string = 'arcade';
@@ -52,81 +68,60 @@ export default class GenreCategory extends Vue {
 </script>
 <style lang="scss" scoped>
 
-.categoryContainer {
+.buttonBox {
+    min-width: 120px;
+    width: 100%;
+    height: 60px;
 
-    margin: 0;
-    padding: 20px 0;
+    padding: 0 10px;
+    overflow: hidden;
 
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    .button {
+        background-color: #272727;
+        color: #E1DBB4;
+        border-radius: 100px;
 
-    &::-webkit-scrollbar {
-        display: none;
+        width: 100%;
+        height: 100%;
     }
 
-    @media (max-width: $breakpoint-xs) {
-        //grid-template-columns: 33.33% 33.33% 33.33%;
+    &.select {
+        button {
+            background-color: #FFF5CF;
+            color: #C79656;
+        }
     }
 
     @media (min-width: $breakpoint-xs) and (max-width: $breakpoint-sm) {
-        //grid-template-columns: 25% 25% 25% 25%
-    }
 
-    .buttonBox {
-        min-width: 120px;
-        width: 100%;
-        height: 60px;
-
-        padding: 5px 10px;
-        overflow: hidden;
+        height: 50px;
 
         .button {
-            background-color: #272727;
-            color: #E1DBB4;
-            border-radius: 100px;
+            .icon {
+                display: none;
+            }
 
-            width: 100%;
-            height: 100%;
-        }
-
-        &.select {
-            button {
-                background-color: #FFF5CF;
-                color: #C79656;
+            .text {
+                margin-left: 0;
             }
         }
-
-        @media (min-width: $breakpoint-xs) and (max-width: $breakpoint-sm) {
-
-            height: 50px;
-
-            .button {
-                .icon {
-                    display: none;
-                }
-
-                .text {
-                    margin-left: 0;
-                }
-            }
-        }
-
-        @media (max-width: $breakpoint-xs) {
-            height: 50px;
-            button {
-                .icon {
-                    display: none;
-                }
-
-                .text {
-                    margin-left: 0;
-                }
-            }
-        }
-
-
-
     }
+
+    @media (max-width: $breakpoint-xs) {
+        height: 50px;
+        button {
+            .icon {
+                display: none;
+            }
+
+            .text {
+                margin-left: 0;
+            }
+        }
+    }
+
+
+
 }
 
 
