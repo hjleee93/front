@@ -56,7 +56,7 @@ export default class LayoutFooter extends Vue {
     }
 
     async studio() {
-        window.open('http://gtest.fromthered.com/test/zempiestudio/');
+        window.open(process.env.VUE_APP_STUDIO_URL);
     }
 
 }

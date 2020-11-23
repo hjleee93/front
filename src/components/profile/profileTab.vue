@@ -5,12 +5,12 @@
         <div class="text-h6">프로필 사진</div>
         <div class="contentBox row no-wrap">
             <q-avatar size="100px">
-                <img :src="url || 'https://yt3.ggpht.com/a-/AOh14GgyayNSUkUJdTdkfSMlxeiG8G0ayTRyb_JHRxvOOg=s88-c-k-c0x00ffffff-no-rj'">
+                <img :src="url || $store.getters.user && $store.getters.user.picture || '/img/icon_pic_empty_01.png'">
             </q-avatar>
             <div class="q-ml-lg self-center">
                 <div class="row q-mb-sm">
-                    <q-btn color="grey-9 q-mb-sm q-mr-md" @click="fileLoader.addFile()">프로필 사진 추가</q-btn>
-                    <q-btn color="grey-9 q-mb-sm" :disable="!url" @click="reset()">
+                    <q-btn color="grey-9 q-mb-sm q-mr-md" @click="fileLoader.addFile()"  :loading="loading">프로필 사진 변경</q-btn>
+                    <q-btn color="grey-9 q-mb-sm" :disable="!url" @click="reset()"  :loading="loading">
                         <q-icon name="far fa-trash-alt" style="font-size: 16px"></q-icon>
                     </q-btn>
                 </div>
@@ -26,12 +26,13 @@
                 <template>
                     <q-input class="width100p maxWidth400px" filled readonly v-model="email">
                         <template v-slot:append>
-                            <!--                        <q-btn color="grey-9">-->
-                            <!--                            인증 요청-->
-                            <!--                        </q-btn>-->
-                            <div class="q-ml-md bg-grey-9 q-px-md appendBox text-no-wrap">
+
+                            <div v-if="emailVerified" class="q-ml-md bg-grey-9 q-px-md appendBox text-no-wrap">
                                 인증 완료
                             </div>
+                            <q-btn v-else color="grey-9"  @click="emailVerify" :loading="loading">
+                                인증 요청
+                            </q-btn>
                         </template>
                     </q-input>
                 </template>
@@ -46,7 +47,7 @@
         </div>
 
         <div class="text-right q-mt-lg q-mr-md">
-            <q-btn color="grey-9">저장</q-btn>
+            <q-btn color="grey-9" @click="save" :loading="loading">저장</q-btn>
         </div>
     </div>
 </template>
@@ -55,6 +56,8 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import {FileLoader, mbToByte} from "src/scripts/fileLoader";
 import ContentItem from "components/common/contentItem.vue";
+import firebase from "firebase";
+
 @Component({
     components: {ContentItem}
 })
@@ -63,11 +66,23 @@ export default class ProfileTab extends Vue {
     private fileLoader : FileLoader = new FileLoader();
     private file : File = undefined;
 
-    private email : string = 'fr@fromthered.com';
+    private email : string = '';
     private nickname : string = '';
 
-    mounted() {
+    private emailVerified : boolean = false;
+
+    private loading : boolean = false;
+
+    async mounted() {
+        this.loading = true;
         this.fileLoader.on( 'onLoadFile', this.onLoadFile );
+
+        await this.$store.dispatch('loginState');
+        const currentUser = firebase.auth().currentUser;
+        this.email = currentUser.email;
+        this.emailVerified = currentUser.emailVerified;
+        this.nickname = this.$store.getters.user.name;
+        this.loading = false;
     }
 
     onLoadFile( data, file ) {
@@ -82,11 +97,48 @@ export default class ProfileTab extends Vue {
         }
     }
 
-    reset() {
+    async reset() {
         this.url = '';
         this.file = undefined;
         this.$emit('@file', undefined);
     }
+
+    async emailVerify() {
+
+        try {
+            const currentUser = firebase.auth().currentUser;
+            const result = await currentUser.sendEmailVerification();
+            console.log(result);
+        }
+        catch (e) {
+
+            const code = e.code;
+
+            switch (code) {
+                case 'auth/too-many-requests' :
+                    alert( '요청 횟수가 너무 많습니다. 잠시 후 다시 시도해주세요.' )
+                    break;
+            }
+
+        }
+
+
+    }
+
+    async save() {
+        this.loading = true;
+        const result = await this.$api.userUpdateInfo( this.nickname, '', this.file );
+        console.log(result);
+        if( !result.error ) {
+
+            this.$store.commit('userInfoUpdate', {
+                name : this.nickname,
+                picture : this.url
+            });
+        }
+        this.loading = false;
+    }
+
 }
 </script>
 <style lang="scss" scoped>

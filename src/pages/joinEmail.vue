@@ -137,7 +137,7 @@
 
                         <div class="q-my-xl"></div>
 
-                        <q-btn color="positive" :disable="!check1 || !check2" class="width100p height50" @click="emailLogin">회원가입</q-btn>
+                        <q-btn color="positive" :loading="loading" :disable="!check1 || !check2" class="width100p height50" @click="emailLogin">회원가입</q-btn>
 
 
 
@@ -162,6 +162,7 @@ import firebase from "firebase";
 import {LoginState} from "src/store/modules/user";
 import Tos from "components/join/tos.vue";
 import Tos2 from "components/join/tos2.vue";
+import Login from "pages/login.vue";
 @Component({
     components: {Tos2, Tos}
 })
@@ -182,6 +183,8 @@ export default class JoinEmail extends Vue {
 
     private show1 : boolean = false;
     private show2 : boolean = false;
+
+    private loading : boolean = false;
 
 
     async mounted() {
@@ -245,9 +248,23 @@ export default class JoinEmail extends Vue {
 
         if( !this.emailError && !this.passwordError ) {
 
+            this.loading = true;
+
             try {
-                const result = await firebase.auth().signInWithEmailAndPassword(this.email, this.password);
-                console.log(result);
+                const result = await firebase.auth().createUserWithEmailAndPassword(this.email, this.password);
+
+                const currentUser = firebase.auth().currentUser;
+                const idToken = await currentUser.getIdToken();
+                this.$store.commit('idToken', idToken);
+
+                //fixme 여기서 끊기면 망함.
+
+                const result2 = await this.$api.signUp( this.nickname );
+                console.log(result2);
+                const {user} = result2;
+                this.$store.commit('user', user);
+                this.$store.commit('loginState', LoginState.login);
+
                 await this.$router.replace('/');
             }
             catch (e) {
@@ -264,9 +281,14 @@ export default class JoinEmail extends Vue {
                         case 'auth/user-not-found' :
                             alert('등록된 이메일이 아닙니다. 회원가입 후 이용해 주세요.');
                             break;
+                        case 'auth/email-already-in-use':
+                            alert('이미 가입된 이메일 입니다.');
+                            break;
                     }
                 }
             }
+
+            this.loading = false;
         }
     }
 }

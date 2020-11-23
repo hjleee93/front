@@ -71,13 +71,13 @@
                         </q-input>
 
                         <div  class="text-right">
-                            <span class="cursorPoint" @click="$router.replace('/')">비밀번호 찾기</span>
+                            <span class="cursorPoint" @click="$router.replace('/resetPassword')">비밀번호 찾기</span>
                         </div>
 
                         <div class="q-mt-lg"></div>
                         <q-btn color="positive" class="width100p height50" @click="emailLogin">로그인</q-btn>
                         <div class="q-mt-md">
-                            처음이신가요? <span @click="$router.replace('/join_email')" class="text-bold cursorPoint">회원가입</span>
+                            처음이신가요? <span @click="$router.replace('/joinEmail')" class="text-bold cursorPoint">회원가입</span>
                         </div>
 
                         <q-separator class="q-my-lg"></q-separator>
@@ -147,6 +147,7 @@
 import {Vue, Component, Watch} from 'vue-property-decorator';
 import firebase from "firebase";
 import {LoginState} from "src/store/modules/user";
+import {_store} from "src/store";
 
 @Component
 export default class Login extends Vue {
@@ -167,28 +168,6 @@ export default class Login extends Vue {
         }
     }
 
-
-    // async signup() {
-    //
-    //     let result = null;
-    //     const id = this.id;
-    //     const pass = this.pass;
-    //
-    //     try {
-    //         result = await firebase.auth().createUserWithEmailAndPassword( id, pass );
-    //         console.log( result );
-    //     }
-    //     catch (e) {
-    //         console.log(e);
-    //     }
-    //
-    //
-    //
-    //     if( result.user?.emailVerified ) {
-    //         const result2 = await result.user.sendEmailVerification();
-    //         console.log(result2);
-    //     }
-    // }
 
     @Watch( 'email' )
     watchEmail() {
@@ -246,10 +225,29 @@ export default class Login extends Vue {
     }
 
     async google() {
+        await this.$store.dispatch('loginState');
+
         const provider = new firebase.auth.GoogleAuthProvider();
         const result: any = await firebase.auth().signInWithPopup(provider);
-        await this.$router.replace('/');
-        console.log(result);
+
+        if( result.user ) {
+            const token = await firebase.auth().currentUser.getIdToken();
+            this.$store.commit('idToken', token);
+
+            const user = await Vue.$api.user();
+            console.log( user );
+            if( user.error && user.error === '잘 못 된 유저 아이디입니다' ) {
+                alert( '회원가입 후 이용하세요.' );
+                this.$store.commit('loginState', LoginState.no_user );
+                await this.$router.replace('/join');
+                return;
+            }
+
+            this.$store.commit('user', user);
+            this.$store.commit('loginState', LoginState.login );
+            await this.$router.replace('/');
+        }
+
     }
 
     async facebook() {
@@ -257,44 +255,6 @@ export default class Login extends Vue {
         const result: any = await firebase.auth().signInWithPopup(provider);
         await this.$router.replace('/');
         console.log(result);
-
-        // try {
-        //     const result: any = await firebase.auth().signInWithPopup(provider);
-        // }
-        // catch (error) {
-        //     console.log(error);
-        //     const existingEmail = error.email;
-        //     const pendingCred = error.credential;
-        //     const code = error.code;
-        //     switch ( code ) {
-        //         case 'auth/account-exists-with-different-credential': {
-        //             const providers = await firebase.auth().fetchSignInMethodsForEmail(error.email);
-        //
-        //             console.log( providers, firebase.auth.EmailAuthProvider.PROVIDER_ID, firebase.auth.GoogleAuthProvider.PROVIDER_ID );
-        //
-        //             if (providers.indexOf(firebase.auth.EmailAuthProvider.PROVIDER_ID) != -1) {
-        //                 const password = window.prompt('Please provide the password for ' + existingEmail);
-        //                 return firebase.auth().signInWithEmailAndPassword(existingEmail, password);
-        //             } else if (providers.indexOf(firebase.auth.GoogleAuthProvider.PROVIDER_ID) != -1) {
-        //                 const googProvider = new firebase.auth.GoogleAuthProvider();
-        //                 provider.setCustomParameters({'login_hint': existingEmail});
-        //                 return firebase.auth().signInWithPopup(googProvider).then(function(result) {
-        //                     return result.user;
-        //                 });
-        //             }
-        //             break;
-        //         }
-        //     }
-        // }
-        //
-        // console.log(result);
-        //
-        // if( !result.user?.emailVerified ) {
-        //     const result2 = await result.user.sendEmailVerification();
-        //     console.log(result2);
-        // }
-        //
-        // console.log(result);
     }
 }
 </script>

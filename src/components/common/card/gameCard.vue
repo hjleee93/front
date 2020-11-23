@@ -1,11 +1,11 @@
 <template>
-    <div class="card" @click="$router.push( `/play/${'aaa'}` )">
+    <div class="card" @click="$router.push( `/play/${data.pathname}` )">
 
-        <q-img :src=data.thumb alt="">
+        <q-img :src=data.url_thumb alt="">
         </q-img>
 
         <div class="detail text-left q-mt-sm">
-            <img class="developerLogo" :src="data.developer.thumb">
+            <img class="developerLogo" :src="data.developer.picture">
 
             <div class="text">
                 <strong
@@ -26,17 +26,18 @@ import { Vue, Component, Prop } from 'vue-property-decorator';
 
 @Component
 export default class GameCard extends Vue {
-    private data : any = {
-        thumb : 'https://s3.ap-northeast-2.amazonaws.com/zeminiplay.com/games/imgs/4owsAkv8S.png',
-        title : 'Shark Frenzy',
-        developer : {
-            name : 'fromTheRed',
-            thumb : 'https://zemini.s3.ap-northeast-2.amazonaws.com/companies/FTR_Symbol.png',
-        },
-    };
+    @Prop() private data : any;
+    //     {
+    //     thumb : 'https://s3.ap-northeast-2.amazonaws.com/zeminiplay.com/games/imgs/4owsAkv8S.png',
+    //     title : 'Shark Frenzy',
+    //     developer : {
+    //         name : 'fromTheRed',
+    //         thumb : 'https://zemini.s3.ap-northeast-2.amazonaws.com/companies/FTR_Symbol.png',
+    //     },
+    // };
 
     mounted() {
-
+        console.log(this.data);
     }
 }
 </script>

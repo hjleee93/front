@@ -120,7 +120,7 @@ export default class AccountPopupMobile extends Vue {
     }
 
     async serviceCenter() {
-        window.open('http://gtest.fromthered.com/lhs/zempieServiceCenter/');
+        window.open(process.env.VUE_APP_SERVICE_CENTER_URL);
     }
 }
 </script>

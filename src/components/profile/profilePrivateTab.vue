@@ -22,16 +22,19 @@
 
         <div class="q-my-md"></div>
 
-        <div class="text-h6">보안</div>
-        <div class="contentBox">
-            <div class="non-selectable fontSize16">비밀번호 변경은 <span class="underline cursorPoint" @click="$router.push('/')">여기</span>를 클릭해주세요.</div>
+        <div v-if="providerId === 'password'">
+            <div class="text-h6">보안</div>
+            <div class="contentBox">
+                <div class="non-selectable fontSize16">비밀번호 변경은 <span class="underline cursorPoint" @click="reset">여기</span>를 클릭해주세요.</div>
+            </div>
         </div>
+
 
         <div class="q-my-md"></div>
 
         <div class="text-h6">계정 비활성화</div>
         <div class="contentBox">
-            <div class="non-selectable fontSize16">계정 비활성화는 <span class="underline cursorPoint" @click="$router.push('/')">여기</span>를 클릭해주세요.</div>
+            <div class="non-selectable fontSize16">계정 비활성화는 <span class="underline cursorPoint" @click="leave">여기</span>를 클릭해주세요.</div>
         </div>
     </div>
 </template>
@@ -39,12 +42,38 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import ContentItem from "components/common/contentItem.vue";
+import firebase from "firebase";
 @Component({
     components: {ContentItem}
 })
 export default class ProfilePrivateTab extends Vue {
-    private email : string = 'fr@fromthered.com';
+    private email : string = '';
     private phoneNum : string = '010-0000-0000';
+    private providerId : string = '';
+
+    private loading : boolean = false;
+
+    async mounted() {
+        await this.$store.dispatch('loginState');
+        const currentUser = firebase.auth().currentUser;
+        this.email = currentUser.email;
+
+        const provider = currentUser.providerData[0];
+        this.providerId = provider.providerId;
+    }
+
+    async reset() {
+        this.loading = true;
+        const result = await firebase.auth().sendPasswordResetEmail(this.email);
+        console.log(result);
+        alert('재설정 메일을 보냈습니다. 메일을 확인해 주세요.');
+        // await this.$router.replace('/login');
+        this.loading = false;
+    }
+
+    async leave() {
+        await this.$router.push('/leave');
+    }
 }
 </script>
 <style lang="scss" scoped>

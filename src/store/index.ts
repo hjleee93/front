@@ -27,6 +27,8 @@ export interface StateInterface {
   example: unknown;
 }
 
+let _store;
+
 export default store(function ({ Vue }) {
   Vue.use(Vuex);
 
@@ -38,5 +40,11 @@ export default store(function ({ Vue }) {
     strict: !!process.env.DEBUGGING
   });
 
+    _store = Store;
+
   return Store;
 });
+
+export {
+    _store
+}

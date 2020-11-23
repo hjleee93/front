@@ -40,7 +40,7 @@
                 <div class="q-mr-xl"></div>
 
                 <q-avatar class="cursorPoint" v-if="$store.getters.user" size="30px" @click="$store.commit('accountPopupMobile', true)">
-                    <img src="https://yt3.ggpht.com/a-/AOh14GgyayNSUkUJdTdkfSMlxeiG8G0ayTRyb_JHRxvOOg=s88-c-k-c0x00ffffff-no-rj">
+                    <img :src="$store.getters.user && $store.getters.user.picture || '/img/icon_pic_empty_01.png'">
                     <account-popup-desktop v-if="$q.platform.is.desktop"></account-popup-desktop>
                     <account-popup-mobile v-if="$q.platform.is.mobile"></account-popup-mobile>
                 </q-avatar>
@@ -88,7 +88,7 @@ export default class LayoutHeader extends Vue {
     }
 
     async studio() {
-        window.open('http://gtest.fromthered.com/test/zempiestudio/');
+        window.open(process.env.VUE_APP_STUDIO_URL);
     }
 }
 </script>

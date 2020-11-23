@@ -29,12 +29,18 @@ const routes: RouteConfig[] = [
                 path: '/channel/:uid/editing',
                 component: () => import('pages/channelEdit.vue')
             },
+            {
+                name : 'leave',
+                path : '/leave',
+                component: () => import( 'pages/leave.vue' ),
+            },
         ]
     },
     {
         name : 'play',
         path : '/play/:pathname',
         component: () => import( 'pages/play.vue' ),
+        props : true
     },
     {
         name : 'login',
@@ -47,9 +53,14 @@ const routes: RouteConfig[] = [
         component: () => import( 'pages/join.vue' ),
     },
     {
-        name : 'login_email',
-        path : '/join_email',
+        name : 'loginEmail',
+        path : '/joinEmail',
         component: () => import( 'pages/joinEmail.vue' ),
+    },
+    {
+        name : 'resetPassword',
+        path : '/resetPassword',
+        component: () => import( 'pages/resetPassword.vue' ),
     },
 
     // Always leave this as last one,

@@ -76,7 +76,7 @@
 
                         <div class="q-my-xl"></div>
 
-                        <q-btn color="positive" :disable="!check1 || !check2" class="width100p height50" @click="">회원가입</q-btn>
+                        <q-btn color="positive" :loading="loading" :disable="!check1 || !check2" class="width100p height50" @click="signup">회원가입</q-btn>
 
 
 
@@ -101,6 +101,7 @@ import firebase from "firebase";
 import {LoginState} from "src/store/modules/user";
 import Tos from "components/join/tos.vue";
 import Tos2 from "components/join/tos2.vue";
+import Login from "pages/login.vue";
 @Component({
     components: {Tos2, Tos}
 })
@@ -115,14 +116,36 @@ export default class JoinEmail extends Vue {
     private show1 : boolean = false;
     private show2 : boolean = false;
 
+    private loading : boolean = false;
+
 
     async mounted() {
         const loginState =  await this.$store.dispatch('loginState');
         switch (loginState) {
             case LoginState.login:
                 await this.$router.replace('/');
-                break;
+                return;
         }
+
+        const currentUser = firebase.auth().currentUser;
+
+        if( !currentUser ) {
+            await this.$router.replace('/login');
+            return;
+        }
+
+        this.nickname = currentUser.displayName;
+    }
+
+    async signup() {
+        this.loading = true;
+        const result = await this.$api.signUp( this.nickname );
+        console.log(result);
+        const { user } = result;
+        this.$store.commit('user', user);
+        this.$store.commit('loginState', LoginState.login );
+        this.loading = false;
+        await this.$router.replace('/');
     }
 
     // async signup() {

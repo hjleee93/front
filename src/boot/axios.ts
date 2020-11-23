@@ -1,5 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 import { boot } from 'quasar/wrappers';
+import {_store} from "src/store";
 
 declare module 'vue/types/vue' {
   interface Vue {
@@ -21,9 +22,9 @@ const _axios = axios.create(config);
 _axios.interceptors.request.use(
   (cfg) => {
 
-    // if (store.getters.token) {
-    //   cfg.headers.authorization = `Bearer ${store.getters.token}`;
-    // }
+    if (_store.getters.idToken) {
+      cfg.headers.authorization = `Bearer ${_store.getters.idToken}`;
+    }
 
     return cfg;
   },

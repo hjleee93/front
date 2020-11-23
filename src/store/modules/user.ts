@@ -1,4 +1,5 @@
 import firebase from "firebase";
+import Vue from "vue";
 
 enum LoginState {
     none,//초기화중
@@ -64,6 +65,16 @@ export default {
         user(state: any, payload: any) {
             state.user = payload;
         },
+        userInfoUpdate(state: any, payload : any) {
+            if( payload.name ) {
+                state.user.name = payload.name;
+            }
+
+            if( payload.picture ) {
+                state.user.picture = payload.picture;
+            }
+
+        },
     },
 
     //dispatch
@@ -81,6 +92,10 @@ export default {
                 wait();
             })
         },
+        // async login( context: any ) {
+        //     const user = await Vue.$api.user();
+        //
+        // },
         async logout(context: any) {
             await firebase.auth().signOut();
             context.commit('user', null);

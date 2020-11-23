@@ -10,12 +10,14 @@ let app : App;
 
 @Component
 export default class App extends Vue {
-  mounted() {
+  async mounted() {
     // console.log( this.$t('failed'));
     this.$i18n.locale = 'ko';
-    console.log( this.$i18n.t('failed'));
-    console.log( i18n.t('failed') );
+    // console.log( this.$i18n.t('failed'));
+    // console.log( i18n.t('failed') );
     app = this;
+
+    await this.$store.dispatch('loadedGames');
   }
 }
 

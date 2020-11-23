@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, Watch} from 'vue-property-decorator';
+import {Vue, Component, Watch, Prop} from 'vue-property-decorator';
 import firebase from "firebase";
 import {LoginState} from "src/store/modules/user";
 
@@ -23,15 +23,24 @@ import {LoginState} from "src/store/modules/user";
 export default class Play extends Vue {
 
 
+    @Prop() private pathname : string;
+
     private gameData: any;
     private url: string = '';
 
-    mounted() {
+    async mounted() {
+
+        await this.$store.dispatch('loadedGames');
+        this.gameData = this.$store.getters.gameByPathname(this.pathname);
 
         // const game_uid = this.gameData.game_uid;
         // this.url = `${process.env.VUE_APP_LAUNCHER_URL}game/${game_uid}`;
 
-        this.url = 'http://launcher.zempie.com/game/e6f7e952-b29f-4e3c-aae5-cd6d269ef86f';
+        console.log(this.gameData);
+
+        this.url = `${process.env.VUE_APP_LAUNCHER_URL}game/${this.gameData.game_uid}`;
+
+        console.log(this.url);
 
 
         window.addEventListener('message', this.onMessage);
