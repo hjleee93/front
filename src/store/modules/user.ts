@@ -13,7 +13,7 @@ export default {
     state: {
         loginState: LoginState.none,
         idToken: undefined,
-        developer: null,
+        // developer: null,
         user: null,
     },
     getters: {
@@ -37,9 +37,9 @@ export default {
             return state.idToken;
         },
 
-        developer(state: any) {
-            return state.developer;
-        },
+        // developer(state: any) {
+        //     return state.developer;
+        // },
 
         user(state: any) {
             return state.user;
@@ -59,9 +59,9 @@ export default {
             state.idToken = payload;
         },
 
-        developer(state: any, payload: any) {
-            state.developer = payload;
-        },
+        // developer(state: any, payload: any) {
+        //     state.developer = payload;
+        // },
         user(state: any, payload: any) {
             state.user = payload;
         },
@@ -100,7 +100,7 @@ export default {
             await firebase.auth().signOut();
             context.commit('user', null);
             context.commit('idToken', null);
-            context.commit('developer', null);
+            // context.commit('developer', null);
             context.commit('loginState', LoginState.logout);
         }
     }

@@ -5,7 +5,7 @@
         <div class="text-h6">프로필 사진</div>
         <div class="contentBox row no-wrap">
             <q-avatar size="100px">
-                <img :src="url || $store.getters.user && $store.getters.user.picture || '/img/icon_pic_empty_01.png'">
+                <img :src="url || $store.getters.user && $store.getters.user.picture || 'img/icon_pic_empty_01.png'">
             </q-avatar>
             <div class="q-ml-lg self-center">
                 <div class="row q-mb-sm">

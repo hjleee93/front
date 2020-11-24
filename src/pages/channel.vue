@@ -8,7 +8,7 @@
             <div class="row q-px-lg justify-between">
                 <div class="row">
                     <q-avatar size="80px">
-                        <img :src="$store.getters.user.picture || '/img/icon_pic_empty_01.png'">
+                        <img :src="$store.getters.user.picture || 'img/icon_pic_empty_01.png'">
                     </q-avatar>
                     <div class="q-ml-lg self-center">
                         <div class="text-h5">

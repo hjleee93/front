@@ -5,7 +5,7 @@
         </q-img>
 
         <div class="detail text-left q-mt-sm">
-            <img class="developerLogo" :src="data.developer.picture">
+            <img class="developerLogo" :src="data.user.picture">
 
             <div class="text">
                 <strong
@@ -14,7 +14,7 @@
                 </strong>
                 <span
                     class="ellipsis block">
-                        {{data.developer.name}}
+                        {{data.user.name}}
                 </span>
             </div>
         </div>
