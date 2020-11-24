@@ -43,7 +43,7 @@ export default {
 
         user(state: any) {
             return state.user;
-        }
+        },
     },
 
     mutations: {
@@ -74,11 +74,18 @@ export default {
             if( payload.name ) {
                 state.user.name = payload.name;
             }
-
             if( payload.picture ) {
                 state.user.picture = payload.picture;
             }
-
+            if( payload.state_msg ) {
+                state.user.profile.state_msg = payload.state_msg;
+            }
+            if( payload.channel_id ) {
+                state.user.channel_id = payload.channel_id;
+            }
+            if( payload.url_banner ) {
+                state.user.profile.url_banner = payload.url_banner;
+            }
         },
     },
 

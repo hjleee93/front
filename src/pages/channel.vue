@@ -1,7 +1,7 @@
 <template>
     <q-page>
         <div>
-            <q-img src="banner/channels4_banner.jpg">
+            <q-img :src="user && user.profile.url_banner || ''">
             </q-img>
         </div>
         <div class="head  q-pt-lg bg-grey-10">

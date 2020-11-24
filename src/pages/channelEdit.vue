@@ -246,13 +246,38 @@ export default class ChannelEdit extends Vue {
 
         this.loading = true;
 
-        const name = this.channelName !== this.$store.getters.user.name ? this.channelName : null;
-        const picture = this.file;
-        const state_msg = this.stateMsg !== this.$store.getters.user.profile.state_msg ? this.stateMsg : null;
+        const name = this.channelName !== this.$store.getters.user.name ? this.channelName : undefined;
+        const picture = this.file || undefined;
+        const state_msg = this.stateMsg !== this.$store.getters.user.profile.state_msg ? this.stateMsg : undefined;
+        const channel_id = this.channelId !== this.$store.getters.user.channel_idg ? this.channelId : undefined;
+        const banner = this.file2 || undefined;
 
-        const result = await this.$api.updateUser( name, state_msg, picture );
-        if( result.error ) {
-            alert( result.error );
+        if( name || picture || state_msg || channel_id ) {
+            const result = await this.$api.updateUser( name, state_msg, picture, channel_id );
+
+            if( result.error ) {
+                alert( result.error );
+            }
+            else {
+                this.$store.commit('userInfoUpdate', {
+                    name,
+                    picture : this.pictureUrl,
+                    state_msg,
+                    channel_id,
+                });
+            }
+        }
+
+        if( banner ) {
+            const result = await this.$api.updateBanner( banner );
+            if( result.error ) {
+                alert( result.error );
+            }
+            else {
+                this.$store.commit('userInfoUpdate', {
+                    url_banner : this.bannerUrl
+                });
+            }
         }
 
         this.loading = false;

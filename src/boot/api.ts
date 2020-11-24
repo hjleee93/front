@@ -84,16 +84,26 @@ class Api {
         }) );
         return response.result || response;
     }
-    async updateUser( name : string, state_msg : string, file : File ) {
+    async updateUser( name : string, state_msg : string, file : File, channel_id : string ) {
         const formData = new FormData();
         if( name ) { formData.append( 'name', name ); }
         if( state_msg ) { formData.append( 'state_msg', state_msg ); }
         if( file ) { formData.append( 'file', file ); }
+        if( channel_id ) { formData.append( 'channel_id', channel_id ); }
 
 
         const response = await this.request( Vue.$axios.post(`/user/update/info`, formData) );
         return response.result || response;
     }
+
+    async updateBanner( file : File ) {
+        const formData = new FormData();
+        if( file ) { formData.append( 'file', file ); }
+
+        const response = await this.request( Vue.$axios.post(`/user/update/banner`, formData) );
+        return response.result || response;
+    }
+
     async leave( text : string, num : string = '0' ) {
         const response = await this.request( Vue.$axios.post(`/user/leave-zempie`, {
             num,
