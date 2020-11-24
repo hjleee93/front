@@ -80,7 +80,7 @@ export default class ProfileTab extends Vue {
         await this.$store.dispatch('loginState');
         const currentUser = firebase.auth().currentUser;
         this.email = currentUser.email;
-        this.emailVerified = currentUser.emailVerified;
+        this.emailVerified = this.$store.getters.user.email_verified;
         this.nickname = this.$store.getters.user.name;
         this.loading = false;
     }
@@ -127,7 +127,7 @@ export default class ProfileTab extends Vue {
 
     async save() {
         this.loading = true;
-        const result = await this.$api.userUpdateInfo( this.nickname, '', this.file );
+        const result = await this.$api.updateUser( this.nickname, '', this.file );
         console.log(result);
         if( !result.error ) {
 

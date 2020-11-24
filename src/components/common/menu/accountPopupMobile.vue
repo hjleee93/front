@@ -17,16 +17,16 @@
                     <div class="row no-wrap">
                         <div>
                             <q-avatar size="40px">
-                                <img src="https://yt3.ggpht.com/a-/AOh14GgyayNSUkUJdTdkfSMlxeiG8G0ayTRyb_JHRxvOOg=s88-c-k-c0x00ffffff-no-rj">
+                                <img :src="$store.getters.user.picture || 'img/icon_pic_empty_01.png'">
                             </q-avatar>
                         </div>
                         <div class="q-ma-sm"></div>
                         <div>
                             <div class="text-h7">
-                                프롬더레드
+                                {{ $store.getters.user.name }}
                             </div>
                             <div>
-                                ftr@fromthered.com
+                                {{ $store.getters.user.email }}
                             </div>
                         </div>
                     </div>
@@ -43,7 +43,7 @@
                     </div>
                 </q-item-section>
             </q-item>
-            <q-item class="menuItem" clickable @click="$router.push(`/channel/${'ss'}`)">
+            <q-item class="menuItem" clickable @click="$router.push(`/channel/${$store.getters.user.channel_id}`)">
                 <q-item-section>
                     <div class="row">
                         <q-avatar class="icon q-mr-md">

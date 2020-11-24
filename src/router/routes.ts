@@ -21,12 +21,13 @@ const routes: RouteConfig[] = [
             },
             {
                 name: 'channel',
-                path: '/channel/:uid',
-                component: () => import('pages/channel.vue')
+                path: '/channel/:channelId',
+                component: () => import('pages/channel.vue'),
+                props : true,
             },
             {
                 name: 'channelEditing',
-                path: '/channel/:uid/editing',
+                path: '/channel/:channelId/editing',
                 component: () => import('pages/channelEdit.vue')
             },
             {
@@ -53,9 +54,14 @@ const routes: RouteConfig[] = [
         component: () => import( 'pages/join.vue' ),
     },
     {
-        name : 'loginEmail',
+        name : 'joinEmail',
         path : '/joinEmail',
         component: () => import( 'pages/joinEmail.vue' ),
+    },
+    {
+        name : 'joinEmailContinue',
+        path : '/joinEmailContinue',
+        component: () => import( 'pages/joinEmailContinue.vue' ),
     },
     {
         name : 'resetPassword',

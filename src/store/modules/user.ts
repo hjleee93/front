@@ -62,8 +62,13 @@ export default {
         // developer(state: any, payload: any) {
         //     state.developer = payload;
         // },
-        user(state: any, payload: any) {
+        async user(state: any, payload: any) {
             state.user = payload;
+
+            if( state.user && !state.user.email_verified && firebase.auth().currentUser.emailVerified ) {
+                await Vue.$api.verifyEmail();
+                state.user.email_verified = true;
+            }
         },
         userInfoUpdate(state: any, payload : any) {
             if( payload.name ) {

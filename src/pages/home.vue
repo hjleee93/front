@@ -9,7 +9,7 @@
             <sort-category></sort-category>
             <div class="q-pt-none">
                 <div class="cardContainer">
-                    <game-card v-for="game in $store.getters.games" :data="game"></game-card>
+                    <game-card v-for="game in $store.getters.officialGames" :data="game"></game-card>
                 </div>
             </div>
         </div>

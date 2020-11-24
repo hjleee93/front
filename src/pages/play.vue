@@ -36,12 +36,7 @@ export default class Play extends Vue {
         // const game_uid = this.gameData.game_uid;
         // this.url = `${process.env.VUE_APP_LAUNCHER_URL}game/${game_uid}`;
 
-        console.log(this.gameData);
-
         this.url = `${process.env.VUE_APP_LAUNCHER_URL}game/${this.gameData.game_uid}`;
-
-        console.log(this.url);
-
 
         window.addEventListener('message', this.onMessage);
     }

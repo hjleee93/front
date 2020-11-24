@@ -61,13 +61,30 @@ class Api {
         return response.result || response;
     }
 
-    async signUp(nickname : string) {
-        const response = await this.request( Vue.$axios.post(`/user/sign-up`, {
-            nickname,
+    async verifyEmail() {
+        const response = await this.request( Vue.$axios.post(`/user/verify-email`) );
+        return response.result || response;
+    }
+
+    async channel(channel_id) {
+        const response = await this.request( Vue.$axios.get(`/channel/${channel_id}`) );
+        return response.result || response;
+    }
+
+    async verifyChannelId(channel_id) {
+        const response = await this.request( Vue.$axios.post(`/user/verify-channel`, {
+            channel_id
         }) );
         return response.result || response;
     }
-    async userUpdateInfo( name : string, state_msg : string, file : File ) {
+
+    async signUp(name : string) {
+        const response = await this.request( Vue.$axios.post(`/user/sign-up`, {
+            name,
+        }) );
+        return response.result || response;
+    }
+    async updateUser( name : string, state_msg : string, file : File ) {
         const formData = new FormData();
         if( name ) { formData.append( 'name', name ); }
         if( state_msg ) { formData.append( 'state_msg', state_msg ); }

@@ -257,10 +257,8 @@ export default class JoinEmail extends Vue {
                 const idToken = await currentUser.getIdToken();
                 this.$store.commit('idToken', idToken);
 
-                //fixme 여기서 끊기면 망함.
 
                 const result2 = await this.$api.signUp( this.nickname );
-                console.log(result2);
                 const {user} = result2;
                 this.$store.commit('user', user);
                 this.$store.commit('loginState', LoginState.login);

@@ -13,12 +13,12 @@
                     <div>
                         <div class="row no-wrap">
                             <q-avatar size="100px">
-                                <img :src="pictureUrl || 'https://yt3.ggpht.com/a-/AOh14GgyayNSUkUJdTdkfSMlxeiG8G0ayTRyb_JHRxvOOg=s88-c-k-c0x00ffffff-no-rj'">
+                                <img :src="pictureUrl || $store.getters.user && $store.getters.user.picture || 'img/icon_pic_empty_01.png'">
                             </q-avatar>
                             <div class="q-ml-lg self-center">
                                 <div class="row q-mb-sm">
-                                    <q-btn color="grey-9 q-mb-sm q-mr-md" @click="fileLoader.addFile()">프로필 사진 추가</q-btn>
-                                    <q-btn color="grey-9 q-mb-sm" :disable="!url" @click="reset()">
+                                    <q-btn :loading="loading" color="grey-9 q-mb-sm q-mr-md" @click="fileLoader.addFile()">프로필 사진 추가</q-btn>
+                                    <q-btn :loading="loading" color="grey-9 q-mb-sm" :disable="!pictureUrl" @click="reset()">
                                         <q-icon name="far fa-trash-alt" style="font-size: 16px"></q-icon>
                                     </q-btn>
                                 </div>
@@ -36,14 +36,14 @@
                 </div>
                 <div class="contentBox">
                     <div>
-                        <q-img src="/banner/channels4_banner.jpg">
+                        <q-img :src="bannerUrl || $store.getters.user && $store.getters.user.profile.url_banner || ''">
 
                         </q-img>
                     </div>
                     <div class="q-mt-lg">
                         <div>파일 형식 : JPEG,PNG (1707*282 픽셀,최대 15MB 권장)</div>
-                        <q-btn color="grey-9 q-my-sm q-mr-md" @click="fileLoader2.addFile()">이미지 업로드</q-btn>
-                        <q-btn color="grey-9" :disable="!bannerUrl" @click="reset2()">
+                        <q-btn :loading="loading" color="grey-9 q-my-sm q-mr-md" @click="fileLoader2.addFile()">이미지 업로드</q-btn>
+                        <q-btn :loading="loading" color="grey-9" :disable="!bannerUrl" @click="reset2()">
                             <q-icon name="far fa-trash-alt" style="font-size: 16px"></q-icon>
                         </q-btn>
                     </div>
@@ -57,7 +57,7 @@
                     <content-item label="채널명" label-style="q-mt-md">
                         <template>
                             <div class="width100p">
-                                <q-input class="width100p maxWidth400px" filled>
+                                <q-input class="width100p maxWidth400px" v-model="channelName" filled>
                                 </q-input>
                                 <div class="q-my-sm fontSize12 text-grey-5">
                                     나와 내 콘텐츠를 잘 나타내는 채널 이름을 선택하세요. 변경한 채널 이름이 Zempie 계정에도 표시됩니다.
@@ -71,7 +71,7 @@
                     <content-item label="상태 메세지" label-style="q-mt-md">
                         <template>
                             <div class="width100p">
-                                <q-input class="width100p maxWidth400px" filled>
+                                <q-input class="width100p maxWidth400px" v-model="stateMsg" filled>
                                 </q-input>
                                 <div class="q-my-sm fontSize12 text-grey-5">
                                     채널에 대해 설명하세요. 이설명은 채널의 상단에 표시됩니다.
@@ -93,10 +93,10 @@
                             <div class="width100p">
                                 <q-input class="width100p maxWidth400px" filled v-model="channelId">
                                     <template v-slot:append>
-                                        <!--                        <q-btn color="grey-9">-->
-                                        <!--                            확인 요청-->
-                                        <!--                        </q-btn>-->
-                                        <div class="q-ml-md bg-grey-9 q-px-md appendBox text-no-wrap">
+                                        <q-btn :loading="loading" v-if="!confirmChannelId" color="grey-9" @click="verifyChannelId">
+                                            확인 요청
+                                        </q-btn>
+                                        <div v-else class="q-ml-md bg-grey-9 q-px-md appendBox text-no-wrap">
                                             확인 완료
                                         </div>
                                     </template>
@@ -132,12 +132,12 @@
                 </div>
                 <div class="contentBox">
                     <div>
-                        <q-btn color="grey-9" class="">링크 추가</q-btn>
+                        <q-btn :loading="loading" color="grey-9" class="">링크 추가</q-btn>
                     </div>
                 </div>
 
                 <div class="text-right q-mt-lg q-mr-md">
-                    <q-btn color="grey-9">저장</q-btn>
+                    <q-btn :loading="loading" color="grey-9" @click="save">저장</q-btn>
                 </div>
             </div>
 
@@ -166,12 +166,38 @@ export default class ChannelEdit extends Vue {
     private fileLoader : FileLoader = new FileLoader();
     private file : File = undefined;
 
-    private channelId : string = 'hangil6061';
+    private channelId : string = '';
     private channelUrl : string = 'https://www.zempie.com/channel/hangil6061';
+    private confirmChannelId : boolean = true;
 
     private bannerUrl : string = '';
     private fileLoader2 : FileLoader = new FileLoader();
     private file2 : File = undefined;
+
+
+    private channelName : string = '';
+    private stateMsg : string = '';
+
+
+
+    private loading : boolean = false;
+
+    async mounted() {
+        this.loading = true;
+
+
+        await this.$store.dispatch('loginState');
+        this.channelId = this.$store.getters.user.channel_id;
+        this.channelUrl = `${process.env.VUE_APP_ZEMPIE_URL}${this.channelId}`;
+
+        this.channelName = this.$store.getters.user.name;
+        this.stateMsg = this.$store.getters.user.profile.state_msg;
+
+        this.loading = false;
+
+        this.fileLoader.on( 'onLoadFile', this.onLoadFile );
+        this.fileLoader2.on( 'onLoadFile', this.onLoadFile2 );
+    }
 
 
     onLoadFile( data, file ) {
@@ -197,11 +223,54 @@ export default class ChannelEdit extends Vue {
     }
 
     reset() {
-
+        this.pictureUrl = '';
+        this.file = null;
     }
 
     reset2() {
+        this.bannerUrl = '';
+        this.file2 = null;
+    }
 
+    @Watch('channelId')
+    updatedChannelId() {
+        if( this.$store.getters.user.channel_id === this.channelId ) {
+            this.confirmChannelId = true;
+        }
+        else {
+            this.confirmChannelId = false;
+        }
+    }
+
+    async save() {
+
+        this.loading = true;
+
+        const name = this.channelName !== this.$store.getters.user.name ? this.channelName : null;
+        const picture = this.file;
+        const state_msg = this.stateMsg !== this.$store.getters.user.profile.state_msg ? this.stateMsg : null;
+
+        const result = await this.$api.updateUser( name, state_msg, picture );
+        if( result.error ) {
+            alert( result.error );
+        }
+
+        this.loading = false;
+    }
+
+    async verifyChannelId() {
+        this.loading = true;
+
+        const result = await this.$api.verifyChannelId( this.channelId );
+        if( result.error ) {
+            alert( '사용할수 없는 아이디 입니다.' );
+        }
+        else {
+            this.confirmChannelId = true;
+            this.channelUrl = `${process.env.VUE_APP_ZEMPIE_URL}${this.channelId}`;
+        }
+
+        this.loading = false;
     }
 
 

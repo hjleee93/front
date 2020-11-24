@@ -1,13 +1,17 @@
 <template>
     <div class="card" @click="$router.push( `/play/${data.pathname}` )">
 
-        <q-img :src=data.url_thumb alt="">
-        </q-img>
+        <div class="thumbBox">
+            <q-img class="thumb" :src=data.url_thumb alt="">
+            </q-img>
+        </div>
 
-        <div class="detail text-left q-mt-sm">
-            <img class="developerLogo" :src="data.user.picture">
 
-            <div class="text">
+        <div class="row detail text-left q-mt-sm">
+            <q-img class="developerLogo" :src="data.user.picture" @click.stop="$router.push( `/channel/${$store.getters.user.channel_id}` )">
+            </q-img>
+
+            <div class="text q-ml-sm">
                 <strong
                     class="ellipsis block">
                     {{data.title}}
@@ -16,6 +20,66 @@
                     class="ellipsis block">
                         {{data.user.name}}
                 </span>
+            </div>
+
+            <div class="more">
+                <q-btn @click.stop="more">
+                    <q-icon color="grey-5" name="more_vert"></q-icon>
+
+
+                    <q-menu v-if="$q.platform.is.desktop">
+                        <q-list>
+                            <q-item clickable @click="$router.push(`/channel/${data.user.channel_id}`)">
+                                <q-item-section>
+                                    <div class="row">
+                                        <q-icon name="far fa-id-card" class="self-center q-mr-sm"></q-icon>
+                                        <div class="self-center">개발자 채널 가기</div>
+                                    </div>
+                                </q-item-section>
+                            </q-item>
+                            <q-item clickable class="">
+                                <q-item-section>
+                                    <div class="row">
+                                        <q-icon name="report" class="self-center q-mr-sm"></q-icon>
+                                        <div>게임 신고 하기</div>
+                                    </div>
+                                </q-item-section>
+                            </q-item>
+                        </q-list>
+                    </q-menu>
+
+
+                    <q-dialog v-else v-model="popup">
+                        <q-list class="bg-dark width90p maxWidth400px">
+                            <q-item clickable class="" @click="$router.push(`/channel/${data.user.channel_id}`)">
+                                <q-item-section>
+                                    <div class="row">
+                                        <!--                                            <q-icon name="far fa-id-card" class="self-center q-mr-sm"></q-icon>-->
+                                        <div class="self-center">개발자 채널 가기</div>
+                                    </div>
+                                </q-item-section>
+                            </q-item>
+                            <q-item clickable class="">
+                                <q-item-section>
+                                    <div class="row">
+                                        <!--                                            <q-icon name="report" class="self-center q-mr-sm"></q-icon>-->
+                                        <div>게임 신고 하기</div>
+                                    </div>
+                                </q-item-section>
+                            </q-item>
+                            <q-item clickable class="" @click="popup = !popup">
+                                <q-item-section>
+                                    <div class="row">
+                                        <!--                                            <q-icon name="report" class="self-center q-mr-sm"></q-icon>-->
+                                        <div>취소</div>
+                                    </div>
+                                </q-item-section>
+                            </q-item>
+                        </q-list>
+                    </q-dialog>
+
+
+                </q-btn>
             </div>
         </div>
     </div>
@@ -27,6 +91,9 @@ import { Vue, Component, Prop } from 'vue-property-decorator';
 @Component
 export default class GameCard extends Vue {
     @Prop() private data : any;
+
+    private popup : boolean = false;
+
     //     {
     //     thumb : 'https://s3.ap-northeast-2.amazonaws.com/zeminiplay.com/games/imgs/4owsAkv8S.png',
     //     title : 'Shark Frenzy',
@@ -37,7 +104,12 @@ export default class GameCard extends Vue {
     // };
 
     mounted() {
-        console.log(this.data);
+    }
+
+    more() {
+        if( this.$q.platform.is.mobile ) {
+            this.popup = !this.popup;
+        }
     }
 }
 </script>
@@ -55,19 +127,40 @@ export default class GameCard extends Vue {
         padding: 5px;
     }
 
+    .thumbBox {
+        overflow: hidden;
+        border-radius: 6px;
+
+        .thumb {
+            transition: transform 0.15s linear;
+            &:hover {
+                //transition: tra;
+                transform: scale(1.1);
+            }
+        }
+    }
+
+
+
     .detail {
         .developerLogo {
+            border-radius: 40px;
             width: 40px;
             height: 40px;
-
-
-
         }
 
         .text {
-            width: calc(100% - 40px);
+            //40 + 32 + 8(마진)
+            width: calc(100% - 80px);
             display: inline-block;
             //margin-left: 10px
+        }
+
+        .more {
+            width: 32px;
+            button {
+                width: 100%;
+            }
         }
     }
 

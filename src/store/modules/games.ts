@@ -15,6 +15,14 @@ export default {
             return state.games;
         },
 
+        officialGames : ( state : any ) =>{
+            return state.games.filter( game => game.official );
+        },
+
+        noneOfficialGames : ( state : any ) =>{
+            return state.games.filter( game => !game.official );
+        },
+
         gameByTitle : ( state : any ) => (title : string) => {
             return state.games.find( (game:any) => game.title === title );
         },

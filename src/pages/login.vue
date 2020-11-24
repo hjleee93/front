@@ -201,8 +201,28 @@ export default class Login extends Vue {
 
             try {
                 const result = await firebase.auth().signInWithEmailAndPassword(this.email, this.password);
-                console.log(result);
-                await this.$router.replace('/');
+                // console.log(result);
+                // await this.$router.replace('/');
+
+                if(result.user) {
+                    const token = await firebase.auth().currentUser.getIdToken();
+                    this.$store.commit('idToken', token);
+
+                    const result = await Vue.$api.user();
+                    if( result.error && result.error === '잘 못 된 유저 아이디입니다' ) {
+                        alert( '진행중인 회원가입이 절차가 남아 있습니다. 이어서 진행 해주세요.' );
+                        this.$store.commit('loginState', LoginState.no_user );
+                        await this.$router.replace('/joinEmailContinue');
+                        return;
+                    }
+
+                    const {user} = result;
+                    this.$store.commit('user', user);
+                    this.$store.commit('loginState', LoginState.login );
+                    await this.$router.replace('/');
+                }
+
+
             }
             catch (e) {
                 console.log(e);
@@ -234,15 +254,15 @@ export default class Login extends Vue {
             const token = await firebase.auth().currentUser.getIdToken();
             this.$store.commit('idToken', token);
 
-            const user = await Vue.$api.user();
-            console.log( user );
-            if( user.error && user.error === '잘 못 된 유저 아이디입니다' ) {
+            const result = await Vue.$api.user();
+            if( result.error && result.error === '잘 못 된 유저 아이디입니다' ) {
                 alert( '회원가입 후 이용하세요.' );
                 this.$store.commit('loginState', LoginState.no_user );
                 await this.$router.replace('/join');
                 return;
             }
 
+            const { user } = result;
             this.$store.commit('user', user);
             this.$store.commit('loginState', LoginState.login );
             await this.$router.replace('/');
@@ -251,10 +271,28 @@ export default class Login extends Vue {
     }
 
     async facebook() {
+        await this.$store.dispatch('loginState');
+
         const provider = new firebase.auth.FacebookAuthProvider();
         const result: any = await firebase.auth().signInWithPopup(provider);
-        await this.$router.replace('/');
-        console.log(result);
+
+        if( result.user ) {
+            const token = await firebase.auth().currentUser.getIdToken();
+            this.$store.commit('idToken', token);
+
+            const result = await Vue.$api.user();
+            if( result.error && result.error === '잘 못 된 유저 아이디입니다' ) {
+                alert( '회원가입 후 이용하세요.' );
+                this.$store.commit('loginState', LoginState.no_user );
+                await this.$router.replace('/join');
+                return;
+            }
+
+            const { user } = result;
+            this.$store.commit('user', user);
+            this.$store.commit('loginState', LoginState.login );
+            await this.$router.replace('/');
+        }
     }
 }
 </script>
