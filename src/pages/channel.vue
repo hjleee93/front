@@ -46,16 +46,42 @@
 
             <q-separator />
 
-            <q-tab-panels v-model="tab" animated>
-                <q-tab-panel name="games" class="bgColor-1 no-scroll">
-                    <div class="cardContainer">
-                        <game-card v-for="game in games" :data="game"></game-card>
-                    </div>
-                </q-tab-panel>
-                <q-tab-panel name="info" class="bgColor-1 no-scroll">
+            <div class="">
+                <q-tab-panels v-model="tab" animated>
+                    <q-tab-panel name="games" class="bgColor-1 no-scroll">
+                        <div class="maxWidth">
+                            <div class="cardContainer" v-if="games.length">
+                                <game-card v-for="game in games" :data="game"></game-card>
+                            </div>
 
-                </q-tab-panel>
-            </q-tab-panels>
+                            <div v-else>
+                                등록된 게임이 없습니다.
+                            </div>
+                        </div>
+
+
+                    </q-tab-panel>
+                    <q-tab-panel name="info" class="bgColor-1 no-scroll">
+                        <div class="maxWidth">
+                            <div class="contentBox">
+                                <content-item label="비지니스 문의" label-style="">
+                                    <a :href="'mailto:' + email" style="color: #30a6d8">
+                                        {{ email }}
+                                    </a>
+                                </content-item>
+                            </div>
+                            <div class="q-my-lg"></div>
+                            <div class="contentBox">
+                                <content-item label="링크" label-style="">
+                                    없음
+                                </content-item>
+                            </div>
+                        </div>
+                    </q-tab-panel>
+                </q-tab-panels>
+            </div>
+
+
 
         </div>
         <div style="padding-top: 100px"></div>
@@ -71,9 +97,10 @@ import ProfilePrivateTab from "components/profile/profilePrivateTab.vue";
 import GameCard from "components/common/card/gameCard.vue";
 import MainFooter from "components/main/mainFooter.vue";
 import {LoginState} from "src/store/modules/user";
+import ContentItem from "components/common/contentItem.vue";
 
 @Component({
-    components: {MainFooter, GameCard, ProfilePrivateTab, ProfileTab}
+    components: {ContentItem, MainFooter, GameCard, ProfilePrivateTab, ProfileTab}
 })
 export default class Channel extends Vue {
 
@@ -84,37 +111,24 @@ export default class Channel extends Vue {
     private user : any = null;
     private games : any[] = [];
 
+    private email : string = 'hangil6061@naver.com';
+
     async mounted() {
 
         const loginState = await this.$store.dispatch('loginState');
 
-        if( loginState === LoginState.login
-            && this.channelId === this.$store.getters.user.channel_id ) {
-            this.user = this.$store.getters.user;
-
-            const {developed_games} = this.user;
-            if( developed_games ) {
-                for( let i = 0; i < developed_games.length; i++ ) {
-                    developed_games[i].user = this.user;
-                }
-                this.games = developed_games;
-            }
-
-            console.log(this.games);
-
-            return;
-        }
-
         const result = await this.$api.channel( this.channelId );
         const { target } = result;
         this.user = target;
-        const {developed_games} = this.user;
-        if( developed_games ) {
-            for( let i = 0; i < developed_games.length; i++ ) {
-                developed_games[i].user = this.user;
+        const {dev_games} = this.user;
+        if( dev_games ) {
+            for( let i = 0; i < dev_games.length; i++ ) {
+                dev_games[i].user = this.user;
             }
-            this.games = developed_games;
+            this.games = dev_games;
         }
+
+        // this.email = this.user.email;
     }
 
 }

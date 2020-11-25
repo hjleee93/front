@@ -56,6 +56,11 @@ class Api {
 
 
     //USER
+    async session() {
+        const response = await this.request( Vue.$axios.get(`/user/verify-session`) );
+        return response.result || response;
+    }
+
     async user() {
         const response = await this.request( Vue.$axios.get(`/user/info`) );
         return response.result || response;

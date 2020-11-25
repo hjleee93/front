@@ -26,7 +26,6 @@
                 <template>
                     <q-input class="width100p maxWidth400px" filled readonly v-model="email">
                         <template v-slot:append>
-
                             <div v-if="emailVerified" class="q-ml-md bg-grey-9 q-px-md appendBox text-no-wrap">
                                 인증 완료
                             </div>
@@ -127,8 +126,7 @@ export default class ProfileTab extends Vue {
 
     async save() {
         this.loading = true;
-        const result = await this.$api.updateUser( this.nickname, '', this.file );
-        console.log(result);
+        const result = await this.$api.updateUser( this.nickname, undefined, this.file, undefined );
         if( !result.error ) {
 
             this.$store.commit('userInfoUpdate', {

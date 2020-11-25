@@ -30,7 +30,7 @@
 
                 <div class="q-my-md"></div>
 
-                <div class="text-h6">베너 이미지</div>
+                <div class="text-h6">배너 이미지</div>
                 <div class="text-grey-5 q-mb-xs">
                     이 이미지가 채널 상단에 표시됩니다.
                 </div>

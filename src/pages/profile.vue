@@ -41,13 +41,19 @@
 import {Vue, Component, Watch} from 'vue-property-decorator';
 import ProfileTab from "components/profile/profileTab.vue";
 import ProfilePrivateTab from "components/profile/profilePrivateTab.vue";
+import {LoginState} from "src/store/modules/user";
 
 @Component({
     components: {ProfilePrivateTab, ProfileTab}
 })
 export default class Profile extends Vue {
     private  tab : string = 'profile';
-
+    async mounted() {
+        const loginState = await this.$store.dispatch('loginState');
+        if( loginState !== LoginState.login ) {
+            await this.$router.replace('/');
+        }
+    }
 }
 </script>
 <style lang="scss" scoped>

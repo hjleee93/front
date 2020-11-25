@@ -102,6 +102,7 @@ import {LoginState} from "src/store/modules/user";
 import Tos from "components/join/tos.vue";
 import Tos2 from "components/join/tos2.vue";
 import Login from "pages/login.vue";
+import LoginManager from "src/scripts/login";
 @Component({
     components: {Tos2, Tos}
 })
@@ -143,9 +144,16 @@ export default class JoinEmail extends Vue {
         console.log(result);
         const { user } = result;
         this.$store.commit('user', user);
-        this.$store.commit('loginState', LoginState.login );
+        await LoginManager.login();
         this.loading = false;
-        await this.$router.replace('/');
+        // await this.$router.replace('/');
+
+        if( this.$store.getters.redirectUrl ) {
+            window.location.href = this.redirect;
+        }
+        else {
+            await this.$router.replace('/');
+        }
     }
 
     // async signup() {

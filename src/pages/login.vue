@@ -144,13 +144,16 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, Watch} from 'vue-property-decorator';
+import {Vue, Component, Watch, Prop} from 'vue-property-decorator';
 import firebase from "firebase";
 import {LoginState} from "src/store/modules/user";
 import {_store} from "src/store";
+import LoginManager from "src/scripts/login";
 
 @Component
 export default class Login extends Vue {
+
+    @Prop() private redirect! : string;
 
     private email : string = '';
     private password : string = '';
@@ -165,6 +168,11 @@ export default class Login extends Vue {
             case LoginState.login:
                 await this.$router.replace('/');
                 break;
+        }
+
+        if( this.redirect ) {
+            console.log(this.redirect);
+            this.$store.commit('redirectUrl', this.redirect);
         }
     }
 
@@ -218,10 +226,16 @@ export default class Login extends Vue {
 
                     const {user} = result;
                     this.$store.commit('user', user);
-                    this.$store.commit('loginState', LoginState.login );
-                    await this.$router.replace('/');
-                }
+                    await LoginManager.login();
+                    // this.$store.commit('loginState', LoginState.login );
 
+                    if( this.$store.getters.redirectUrl ) {
+                        window.location.href = this.redirect;
+                    }
+                    else {
+                        await this.$router.replace('/');
+                    }
+                }
 
             }
             catch (e) {
@@ -264,8 +278,15 @@ export default class Login extends Vue {
 
             const { user } = result;
             this.$store.commit('user', user);
-            this.$store.commit('loginState', LoginState.login );
-            await this.$router.replace('/');
+            await LoginManager.login();
+            // this.$store.commit('loginState', LoginState.login );
+            // await this.$router.replace('/');
+            if( this.$store.getters.redirectUrl ) {
+                window.location.href = this.redirect;
+            }
+            else {
+                await this.$router.replace('/');
+            }
         }
 
     }
@@ -290,8 +311,15 @@ export default class Login extends Vue {
 
             const { user } = result;
             this.$store.commit('user', user);
-            this.$store.commit('loginState', LoginState.login );
-            await this.$router.replace('/');
+            await LoginManager.login();
+            // this.$store.commit('loginState', LoginState.login );
+            // await this.$router.replace('/');
+            if( this.$store.getters.redirectUrl ) {
+                window.location.href = this.redirect;
+            }
+            else {
+                await this.$router.replace('/');
+            }
         }
     }
 }

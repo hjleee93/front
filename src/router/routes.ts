@@ -44,6 +44,12 @@ const routes: RouteConfig[] = [
         props : true
     },
     {
+        name : 'loginRedirect',
+        path : '/login/:redirect',
+        component: () => import( 'pages/login.vue' ),
+        props : true,
+    },
+    {
         name : 'login',
         path : '/login',
         component: () => import( 'pages/login.vue' ),
@@ -67,6 +73,11 @@ const routes: RouteConfig[] = [
         name : 'resetPassword',
         path : '/resetPassword',
         component: () => import( 'pages/resetPassword.vue' ),
+    },
+    {
+        name : 'authtest',
+        path : '/authtest',
+        component: () => import( 'pages/authtest.vue' ),
     },
 
     // Always leave this as last one,

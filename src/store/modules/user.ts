@@ -4,9 +4,9 @@ import Vue from "vue";
 enum LoginState {
     none,//초기화중
     logout,
-    login_noAuth,
+    login_noAuth,       //개발자 등록 안함
     login,
-    no_user
+    no_user             //회원가입 안함
 }
 
 export default {
@@ -15,6 +15,7 @@ export default {
         idToken: undefined,
         // developer: null,
         user: null,
+        redirectUrl : null,
     },
     getters: {
         loginState(state: any) {
@@ -44,6 +45,10 @@ export default {
         user(state: any) {
             return state.user;
         },
+
+        redirectUrl(state: any) {
+            return state.redirectUrl;
+        },
     },
 
     mutations: {
@@ -57,6 +62,10 @@ export default {
 
         idToken(state: any, payload: any) {
             state.idToken = payload;
+        },
+
+        redirectUrl(state: any, payload: any) {
+            state.redirectUrl = payload;
         },
 
         // developer(state: any, payload: any) {
