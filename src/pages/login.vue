@@ -230,7 +230,7 @@ export default class Login extends Vue {
                     // this.$store.commit('loginState', LoginState.login );
 
                     if( this.$store.getters.redirectUrl ) {
-                        window.location.href = this.redirect;
+                        window.location.href = this.$store.getters.redirectUrl;
                     }
                     else {
                         await this.$router.replace('/');
@@ -282,7 +282,7 @@ export default class Login extends Vue {
             // this.$store.commit('loginState', LoginState.login );
             // await this.$router.replace('/');
             if( this.$store.getters.redirectUrl ) {
-                window.location.href = this.redirect;
+                window.location.href = this.$store.getters.redirectUrl;
             }
             else {
                 await this.$router.replace('/');
@@ -315,7 +315,7 @@ export default class Login extends Vue {
             // this.$store.commit('loginState', LoginState.login );
             // await this.$router.replace('/');
             if( this.$store.getters.redirectUrl ) {
-                window.location.href = this.redirect;
+                window.location.href = this.$store.getters.redirectUrl;
             }
             else {
                 await this.$router.replace('/');

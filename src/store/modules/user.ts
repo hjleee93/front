@@ -2,7 +2,8 @@ import firebase from "firebase";
 import Vue from "vue";
 
 enum LoginState {
-    none,//초기화중
+    none,//초기화중,
+    customToken,               //커스텀 토큰 발급
     logout,
     login_noAuth,       //개발자 등록 안함
     login,
@@ -103,7 +104,8 @@ export default {
         async loginState(context: any) {
             return new Promise((resolve, reject) => {
                 function wait() {
-                    if (context.state.loginState === LoginState.none) {
+                    if (context.state.loginState === LoginState.none
+                        || context.state.loginState === LoginState.customToken ) {
                         setTimeout(wait, 500);
                     } else {
                         return resolve(context.getters.loginState);

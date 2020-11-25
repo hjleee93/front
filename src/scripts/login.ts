@@ -33,7 +33,34 @@ class Login {
                 }
             }
             else {
+                const cookie = Cookie.read(cookieName);
+                if( cookie ) {
+                    const result = await Vue.$api.session();
+                    if( !result || result.error ) {
+                        await Login.logout();
+                    }
+                    const { customToken } = result;
+                    _store.commit('loginState', LoginState.customToken );
+                    await firebase.auth().signInWithCustomToken( customToken );
+                }
+                else {
+                    await Login.logout();
+                }
+            }
+        }
+        else if( _store.getters.loginState === LoginState.customToken ) {
+            const currentUser = firebase.auth().currentUser;
+            const idToken = await currentUser.getIdToken(true);
+            _store.commit('idToken', idToken);
+            console.log(idToken);
+            const result = await Vue.$api.user();
+            if( !result || result.error ) {
                 await Login.logout();
+            }
+            else {
+                const { user } = result;
+                _store.commit('user', user);
+                await Login.login();
             }
         }
     }

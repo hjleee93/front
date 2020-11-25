@@ -74,11 +74,6 @@ const routes: RouteConfig[] = [
         path : '/resetPassword',
         component: () => import( 'pages/resetPassword.vue' ),
     },
-    {
-        name : 'authtest',
-        path : '/authtest',
-        component: () => import( 'pages/authtest.vue' ),
-    },
 
     // Always leave this as last one,
     // but you can also remove it

@@ -149,7 +149,7 @@ export default class JoinEmail extends Vue {
         // await this.$router.replace('/');
 
         if( this.$store.getters.redirectUrl ) {
-            window.location.href = this.redirect;
+            window.location.href = this.$store.getters.redirectUrl;
         }
         else {
             await this.$router.replace('/');
