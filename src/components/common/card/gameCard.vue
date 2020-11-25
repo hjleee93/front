@@ -8,7 +8,7 @@
 
 
         <div class="row detail text-left q-mt-sm">
-            <q-img class="developerLogo" :src="data.user.picture" @click.stop="$router.push( `/channel/${$store.getters.user.channel_id}` )">
+            <q-img class="developerLogo self-center" :src="data.user.picture" @click.stop="$router.push( `/channel/${$store.getters.user.channel_id}` )">
             </q-img>
 
             <div class="text q-ml-sm">
@@ -119,13 +119,49 @@ export default class GameCard extends Vue {
 .card {
     cursor: pointer;
     padding: 10px;
+
+    .detail {
+        .developerLogo {
+            border-radius: 32px;
+            width: 32px;
+            height: 32px;
+        }
+
+        .text {
+            //40 + 32 + 8(마진)
+            width: calc(100% - 72px);
+            display: inline-block;
+            //margin-left: 10px
+        }
+
+        .more {
+            width: 32px;
+            button {
+                width: 100%;
+            }
+        }
+    }
+
     @media (max-width: $breakpoint-xs) {
         padding: 2px;
+
+        .detail {
+            .developerLogo {
+                display: none;
+            }
+            .text {
+                width: calc(100% - 40px);
+                font-size: 12px;
+            }
+        }
+
     }
 
     @media (min-width: $breakpoint-xs) and (max-width: $breakpoint-sm) {
         padding: 5px;
+
     }
+
 
     .thumbBox {
         overflow: hidden;
@@ -142,27 +178,7 @@ export default class GameCard extends Vue {
 
 
 
-    .detail {
-        .developerLogo {
-            border-radius: 40px;
-            width: 40px;
-            height: 40px;
-        }
 
-        .text {
-            //40 + 32 + 8(마진)
-            width: calc(100% - 80px);
-            display: inline-block;
-            //margin-left: 10px
-        }
-
-        .more {
-            width: 32px;
-            button {
-                width: 100%;
-            }
-        }
-    }
 
 
 }

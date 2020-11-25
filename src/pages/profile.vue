@@ -32,7 +32,7 @@
         </div>
         <div style="padding-top: 100px"></div>
         <footer class="footer text-center q-py-lg text-grey-5">
-            Copy right 2020. zempie. All rights reserved.
+            Copyright 2020. zempie. All rights reserved.
         </footer>
     </q-page>
 </template>

@@ -7,7 +7,7 @@
 
                 <div class="text-h6">프로필 사진</div>
                 <div class="text-grey-5 q-mb-xs">
-                    프로필 사진은 동영상 및 댓글 옆과 같이 YouTube에서 채널을 나타내는 위치에 표시됩니다. 여기에서 변경하면 다른 Zempie 서비스에도 반영됩니다.
+                    프로필 사진은 Zempie가 제공하는 서비스의 유저를 나타내는 위치에 표시됩니다.
                 </div>
                 <div class="contentBox">
                     <div>
@@ -32,7 +32,7 @@
 
                 <div class="text-h6">배너 이미지</div>
                 <div class="text-grey-5 q-mb-xs">
-                    이 이미지가 채널 상단에 표시됩니다.
+                    채널 상단에 표시되는 이미지로 자신만의 채널 특성을 표현해보세요.
                 </div>
                 <div class="contentBox">
                     <div>
@@ -41,7 +41,7 @@
                         </q-img>
                     </div>
                     <div class="q-mt-lg">
-                        <div>파일 형식 : JPEG,PNG (1707*282 픽셀,최대 15MB 권장)</div>
+                        <div>파일 형식 : JPEG, PNG (1707*282 픽셀, 최대 15MB 권장)</div>
                         <q-btn :loading="loading" color="grey-9 q-my-sm q-mr-md" @click="fileLoader2.addFile()">이미지 업로드</q-btn>
                         <q-btn :loading="loading" color="grey-9" :disable="!bannerUrl" @click="reset2()">
                             <q-icon name="far fa-trash-alt" style="font-size: 16px"></q-icon>
@@ -60,7 +60,7 @@
                                 <q-input class="width100p maxWidth400px" v-model="channelName" filled>
                                 </q-input>
                                 <div class="q-my-sm fontSize12 text-grey-5">
-                                    나와 내 콘텐츠를 잘 나타내는 채널 이름을 선택하세요. 변경한 채널 이름이 Zempie 계정에도 표시됩니다.
+                                    자신의 콘텐츠를 잘 표현할 수 있는 채널 이름을 지어주세요.
                                 </div>
                             </div>
                         </template>
@@ -74,7 +74,7 @@
                                 <q-input class="width100p maxWidth400px" v-model="stateMsg" filled>
                                 </q-input>
                                 <div class="q-my-sm fontSize12 text-grey-5">
-                                    채널에 대해 설명하세요. 이설명은 채널의 상단에 표시됩니다.
+                                    채널에 대해 설명해주세요. 이 설명은 채널의 상단에 표시되며 누구나 볼 수 있습니다.
                                 </div>
                             </div>
                         </template>
@@ -128,7 +128,7 @@
 
                 <div class="text-h6">링크</div>
                 <div class="q-my-sm text-grey-5">
-                    시청자와 공유할 사이트의 링크를 추가하세요.
+                    공유할 사이트의 링크를 추가하세요.
                 </div>
                 <div class="contentBox">
                     <div>
@@ -145,7 +145,7 @@
         </div>
         <div style="padding-top: 100px"></div>
         <footer class="footer text-center q-py-lg text-grey-5">
-            Copy right 2020. zempie. All rights reserved.
+            Copyright 2020. zempie. All rights reserved.
         </footer>
     </q-page>
 </template>

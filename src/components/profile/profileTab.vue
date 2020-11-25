@@ -14,7 +14,7 @@
                         <q-icon name="far fa-trash-alt" style="font-size: 16px"></q-icon>
                     </q-btn>
                 </div>
-                <div>98x98픽셀 이상, 4MB 이하의 사진이 권장됩니다. PNG 또는 GIF(애니메이션 GIF 제외) 파일을 사용하세요. 사진이 YouTube 커뮤니티 가이드를 준수해야 합니다.</div>
+                <div>1MB 이내의 JPEG, PNG 형식이어야 합니다.</div>
             </div>
         </div>
 

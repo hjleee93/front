@@ -46,7 +46,7 @@
             </q-page>
         </q-page-container>
         <q-footer class="footer q-py-lg bg-dark text-grey-5">
-            Copy right 2020. zempie. All rights reserved.
+            Copyright 2020. zempie. All rights reserved.
         </q-footer>
     </q-layout>
 </template>
