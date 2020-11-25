@@ -33,11 +33,11 @@
                                 <q-icon name="account_box" />
                             </template>
 
-                            <template v-slot:append>
-                                <q-btn color="grey-9">
-                                    중복확인
-                                </q-btn>
-                            </template>
+<!--                            <template v-slot:append>-->
+<!--                                <q-btn color="grey-9">-->
+<!--                                    중복확인-->
+<!--                                </q-btn>-->
+<!--                            </template>-->
 
                         </q-input>
 

@@ -32,11 +32,11 @@
                                 <q-icon name="email" />
                             </template>
 
-                            <template v-slot:append>
-                                <q-btn color="grey-9">
-                                    중복확인
-                                </q-btn>
-                            </template>
+<!--                            <template v-slot:append>-->
+<!--                                <q-btn color="grey-9">-->
+<!--                                    중복확인-->
+<!--                                </q-btn>-->
+<!--                            </template>-->
                         </q-input>
                         <div class="q-mt-xs"></div>
                         <q-input square outlined filled
@@ -94,11 +94,11 @@
                                 <q-icon name="account_box" />
                             </template>
 
-                            <template v-slot:append>
-                                <q-btn color="grey-9">
-                                    중복확인
-                                </q-btn>
-                            </template>
+<!--                            <template v-slot:append>-->
+<!--                                <q-btn color="grey-9">-->
+<!--                                    중복확인-->
+<!--                                </q-btn>-->
+<!--                            </template>-->
 
                         </q-input>
 

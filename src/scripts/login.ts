@@ -13,6 +13,7 @@ class Login {
             const currentUser = firebase.auth().currentUser;
             if ( currentUser ) {
                 const idToken = await currentUser.getIdToken(true);
+
                 _store.commit('idToken', idToken);
                 console.log(idToken);
 

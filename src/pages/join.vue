@@ -33,11 +33,11 @@
                                 <q-icon name="account_box" />
                             </template>
 
-                            <template v-slot:append>
-                                <q-btn color="grey-9">
-                                    중복확인
-                                </q-btn>
-                            </template>
+<!--                            <template v-slot:append>-->
+<!--                                <q-btn color="grey-9">-->
+<!--                                    중복확인-->
+<!--                                </q-btn>-->
+<!--                            </template>-->
 
                         </q-input>
 
@@ -57,7 +57,7 @@
                         </q-slide-transition>
 
 
-                        <div class="q-my-md"></div>
+                        <div class="q-my-lg"></div>
 
                         <div class="row relative-position">
                             <q-checkbox color="grey-9" v-model="check2" label="개인정보취급방침 동의" />

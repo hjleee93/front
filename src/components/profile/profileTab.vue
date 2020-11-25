@@ -108,6 +108,7 @@ export default class ProfileTab extends Vue {
             const currentUser = firebase.auth().currentUser;
             const result = await currentUser.sendEmailVerification();
             console.log(result);
+            alert('인증 메일을 보냈습니다. 등록된 메일함을 확인해 주세요.');
         }
         catch (e) {
 

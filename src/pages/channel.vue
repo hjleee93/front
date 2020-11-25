@@ -15,7 +15,7 @@
                             {{ user && user.name }}
                         </div>
                         <div>
-                            {{ user && user.profile.state_msg || '-' }}
+                            {{ user && user.profile.state_msg || ' ' }}
                         </div>
                     </div>
                 </div>
@@ -111,7 +111,7 @@ export default class Channel extends Vue {
     private user : any = null;
     private games : any[] = [];
 
-    private email : string = 'hangil6061@naver.com';
+    // private email : string = 'hangil6061@naver.com';
 
     async mounted() {
 
@@ -128,7 +128,7 @@ export default class Channel extends Vue {
             this.games = dev_games;
         }
 
-        // this.email = this.user.email;
+        this.email = this.user.email;
     }
 
 }
