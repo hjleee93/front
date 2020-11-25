@@ -89,6 +89,7 @@
 
 <script lang="ts">
 import {Vue, Component, Prop, Watch} from 'vue-property-decorator';
+import Login from "src/scripts/login";
 
 @Component
 export default class AccountPopupMobile extends Vue {
@@ -115,7 +116,9 @@ export default class AccountPopupMobile extends Vue {
 
     async logout() {
         this.active = false;
-        await this.$store.dispatch( 'logout' );
+        await Login.logout();
+
+        // await this.$store.dispatch( 'logout' );
         // this.active = false;
     }
 

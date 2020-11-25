@@ -36,12 +36,15 @@ class Login {
                 const cookie = Cookie.read(cookieName);
                 if( cookie ) {
                     const result = await Vue.$api.session();
+                    console.log(result);
                     if( !result || result.error ) {
                         await Login.logout();
                     }
-                    const { customToken } = result;
-                    _store.commit('loginState', LoginState.customToken );
-                    await firebase.auth().signInWithCustomToken( customToken );
+                    else {
+                        const { customToken } = result;
+                        _store.commit('loginState', LoginState.customToken );
+                        await firebase.auth().signInWithCustomToken( customToken );
+                    }
                 }
                 else {
                     await Login.logout();

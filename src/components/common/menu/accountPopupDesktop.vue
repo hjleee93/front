@@ -65,6 +65,7 @@
 <script lang="ts">
 import {Vue, Component, Prop} from 'vue-property-decorator';
 import firebase from "firebase";
+import Login from "src/scripts/login";
 
 @Component
 export default class AccountPopupDesktop extends Vue {
@@ -74,7 +75,8 @@ export default class AccountPopupDesktop extends Vue {
     }
 
     async logout() {
-        await this.$store.dispatch( 'logout' );
+        // await this.$store.dispatch( 'logout' );
+        await Login.logout();
     }
 
     async serviceCenter() {
