@@ -84,6 +84,7 @@ module.exports = configure(function (/* ctx */) {
             lang: 'en-us', // Quasar language pack
             config: {
                 dark: true,
+                notify: {}
             },
 
             // Possible values for "importStrategy":
@@ -99,7 +100,9 @@ module.exports = configure(function (/* ctx */) {
             // directives: [],
 
             // Quasar plugins
-            plugins: []
+            plugins: [
+                'Notify',
+            ]
         },
 
         // animations: 'all', // --- includes all animations

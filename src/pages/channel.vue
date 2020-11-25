@@ -114,7 +114,7 @@ export default class Channel extends Vue {
     private email : string = '';
 
     async mounted() {
-
+        this.$store.commit('navTab', 'Channel');
         const loginState = await this.$store.dispatch('loginState');
 
         const result = await this.$api.channel( this.channelId );

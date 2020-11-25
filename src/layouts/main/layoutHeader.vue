@@ -15,11 +15,11 @@
 <!--                    @click="$store.commit('leftDrawerOpen', !$store.getters.leftDrawerOpen )"-->
 <!--                />-->
 
-                <q-avatar>
-                    <img src="favicon.ico" style="width: 34px; height: 34px;">
+                <q-avatar @click="goTo('/')">
+                    <img draggable="false" src="favicon.ico" style="width: 34px; height: 34px;">
                 </q-avatar>
 
-                <q-toolbar-title>
+                <q-toolbar-title class="non-selectable" @click="goTo('/')">
                     Zempie
                 </q-toolbar-title>
 
@@ -65,7 +65,6 @@ export default class LayoutHeader extends Vue {
 
     mounted() {
         this.tab = this.$store.getters.navTab;
-        console.log( this.$q.platform.is.mobile )
     }
 
     @Watch( 'tab' )

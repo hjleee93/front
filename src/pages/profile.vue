@@ -49,6 +49,7 @@ import {LoginState} from "src/store/modules/user";
 export default class Profile extends Vue {
     private  tab : string = 'profile';
     async mounted() {
+        this.$store.commit('navTab', 'Profile');
         const loginState = await this.$store.dispatch('loginState');
         if( loginState !== LoginState.login ) {
             await this.$router.replace('/');

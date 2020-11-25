@@ -2,6 +2,7 @@ export default {
     state: {
         navTab: '',
         accountPopupMobile : false,
+        ajaxBar : false,
     },
     getters: {
         navTab(state: any) {
@@ -9,6 +10,9 @@ export default {
         },
         accountPopupMobile(state: any) {
             return state.accountPopupMobile;
+        },
+        ajaxBar(state) {
+            return state.ajaxBar;
         },
     },
 
@@ -18,6 +22,9 @@ export default {
         },
         accountPopupMobile(state: any, payload: boolean) {
             state.accountPopupMobile = payload;
+        },
+        ajaxBar( state, payload ) {
+            state.ajaxBar = payload;
         },
     },
     actions: {}

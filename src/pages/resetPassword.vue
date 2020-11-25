@@ -76,12 +76,16 @@ export default class ResetPassword extends Vue {
     }
 
     async reset() {
+
+        this.$store.commit('ajaxBar', true);
         this.loading = true;
         const result = await firebase.auth().sendPasswordResetEmail(this.email);
         console.log(result);
         alert('재설정 메일을 보냈습니다. 메일을 확인해 주세요.');
         await this.$router.replace('/login');
         this.loading = false;
+
+        this.$store.commit('ajaxBar', false);
     }
 
 

@@ -183,6 +183,7 @@ export default class ChannelEdit extends Vue {
     private loading : boolean = false;
 
     async mounted() {
+        this.$store.commit('navTab', 'ChannelEdit');
         this.loading = true;
 
 
@@ -245,18 +246,21 @@ export default class ChannelEdit extends Vue {
     async save() {
 
         this.loading = true;
+        this.$store.commit('ajaxBar', true);
 
         const name = this.channelName !== this.$store.getters.user.name ? this.channelName : undefined;
         const picture = this.file || undefined;
         const state_msg = this.stateMsg !== this.$store.getters.user.profile.state_msg ? this.stateMsg : undefined;
         const channel_id = this.channelId !== this.$store.getters.user.channel_idg ? this.channelId : undefined;
         const banner = this.file2 || undefined;
+        let isError = false;
 
         if( name || picture || state_msg || channel_id ) {
             const result = await this.$api.updateUser( name, state_msg, picture, channel_id );
 
             if( result.error ) {
                 alert( result.error );
+                isError = true;
             }
             else {
                 this.$store.commit('userInfoUpdate', {
@@ -272,6 +276,7 @@ export default class ChannelEdit extends Vue {
             const result = await this.$api.updateBanner( banner );
             if( result.error ) {
                 alert( result.error );
+                isError = true;
             }
             else {
                 this.$store.commit('userInfoUpdate', {
@@ -281,10 +286,20 @@ export default class ChannelEdit extends Vue {
         }
 
         this.loading = false;
+        this.$store.commit('ajaxBar', false);
+        if( !isError ) {
+            this.$q.notify({
+                message : '저장 되었습니다.',
+                position : 'top',
+                color : 'primary',
+                timeout: 2000
+            });
+        }
     }
 
     async verifyChannelId() {
         this.loading = true;
+        this.$store.commit('ajaxBar', true);
 
         const result = await this.$api.verifyChannelId( this.channelId );
         if( result.error ) {
@@ -293,9 +308,17 @@ export default class ChannelEdit extends Vue {
         else {
             this.confirmChannelId = true;
             this.channelUrl = `${process.env.VUE_APP_ZEMPIE_URL}${this.channelId}`;
+            this.$q.notify({
+                message : '사용할 수 있습니다.',
+                position : 'top',
+                color : 'primary',
+                timeout: 2000
+            });
         }
 
         this.loading = false;
+        this.$store.commit('ajaxBar', false);
+
     }
 
 

@@ -1,10 +1,17 @@
 <template>
     <div id="q-app">
         <router-view/>
+        <q-ajax-bar
+            ref="bar"
+            position="bottom"
+            color="primary"
+            size="10px"
+            skip-hijack
+        />
     </div>
 </template>
 <script lang="ts">
-import {Vue, Component} from 'vue-property-decorator';
+import {Vue, Component, Watch} from 'vue-property-decorator';
 import {i18n} from "boot/i18n";
 
 let app: App;
@@ -26,6 +33,17 @@ export default class App extends Vue {
         //
         // console.log(a);
 
+    }
+
+    @Watch('$store.getters.ajaxBar')
+    onChangeAjaxBar() {
+        if (this.$store.getters.ajaxBar) {
+            //@ts-ignore
+            this.$refs.bar.start();
+        } else {
+            //@ts-ignore
+            this.$refs.bar.stop();
+        }
     }
 }
 

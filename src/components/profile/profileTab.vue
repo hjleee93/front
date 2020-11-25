@@ -126,6 +126,7 @@ export default class ProfileTab extends Vue {
     }
 
     async save() {
+        this.$store.commit('ajaxBar', true);
         this.loading = true;
         const result = await this.$api.updateUser( this.nickname, undefined, this.file, undefined );
         if( !result.error ) {
@@ -134,8 +135,17 @@ export default class ProfileTab extends Vue {
                 name : this.nickname,
                 picture : this.url
             });
+
+            this.$q.notify({
+                message : '저장 되었습니다.',
+                position : 'top',
+                color : 'primary',
+                timeout: 2000
+            });
         }
         this.loading = false;
+        this.$store.commit('ajaxBar', false);
+
     }
 
 }
