@@ -90,6 +90,8 @@ class Api {
     async signUp(name : string) {
         const response = await this.request( Vue.$axios.post(`/user/sign-up`, {
             name,
+        }, {
+            withCredentials : true,
         }) );
         return response.result || response;
     }

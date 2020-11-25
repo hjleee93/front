@@ -1,24 +1,32 @@
 <template>
-  <div id="q-app">
-    <router-view />
-  </div>
+    <div id="q-app">
+        <router-view/>
+    </div>
 </template>
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
-import { i18n } from "boot/i18n";
-let app : App;
+import {Vue, Component} from 'vue-property-decorator';
+import {i18n} from "boot/i18n";
+
+let app: App;
 
 @Component
 export default class App extends Vue {
-  async mounted() {
-    // console.log( this.$t('failed'));
-    this.$i18n.locale = 'ko';
-    // console.log( this.$i18n.t('failed'));
-    // console.log( i18n.t('failed') );
-    app = this;
+    async mounted() {
+        // console.log( this.$t('failed'));
+        this.$i18n.locale = 'ko';
+        // console.log( this.$i18n.t('failed'));
+        // console.log( i18n.t('failed') );
+        app = this;
 
-    await this.$store.dispatch('loadedGames');
-  }
+        await this.$store.dispatch('loadedGames');
+
+        // const a = await this.$axios.get('/__cookie', {
+        //     withCredentials: true
+        // })
+        //
+        // console.log(a);
+
+    }
 }
 
 export {
