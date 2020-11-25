@@ -111,7 +111,7 @@ export default class Channel extends Vue {
     private user : any = null;
     private games : any[] = [];
 
-    // private email : string = 'hangil6061@naver.com';
+    private email : string = '';
 
     async mounted() {
 
