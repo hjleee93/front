@@ -106,7 +106,7 @@
                         <div class="q-mt-lg"></div>
 
                         <div class="row relative-position">
-                            <q-checkbox color="grey-9" v-model="check1" label="이용약관 동의" />
+                            <q-checkbox color="grey-9" class="non-selectable" v-model="check1" label="이용약관 동의" />
                             <div class="absolute-right">
                                 <q-btn color="grey-9" @click="show1 = !show1">전체보기</q-btn>
                             </div>
@@ -122,7 +122,7 @@
                         <div class="q-my-md"></div>
 
                         <div class="row relative-position">
-                            <q-checkbox color="grey-9" v-model="check2" label="개인정보취급방침 동의" />
+                            <q-checkbox color="grey-9" class="non-selectable" v-model="check2" label="개인정보취급방침 동의" />
                             <div class="absolute-right">
                                 <q-btn color="grey-9" @click="show2 = !show2">전체보기</q-btn>
                             </div>

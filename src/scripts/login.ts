@@ -77,15 +77,6 @@ class Login {
     }
 
     static async logout() {
-
-        try {
-            if( _store.getters.user )
-            await Vue.$api.signOut();
-        }
-        catch (e) {
-
-        }
-
         await firebase.auth().signOut();
         await _store.dispatch('logout');
         Cookie.delete( cookieName, process.env.VUE_APP_COOKIE_DOMAIN );

@@ -75,6 +75,15 @@ export default class AccountPopupDesktop extends Vue {
     }
 
     async logout() {
+
+        try {
+            if( this.$store.getters.user )
+                await Vue.$api.signOut();
+        }
+        catch (e) {
+
+        }
+
         // await this.$store.dispatch( 'logout' );
         await Login.logout();
     }

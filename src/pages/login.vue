@@ -72,12 +72,12 @@
                         </q-input>
 
                         <div  class="text-right">
-                            <span class="cursorPoint" @click="$router.replace('/resetPassword')">비밀번호 찾기</span>
+                            <span class="cursorPoint non-selectable" @click="$router.replace('/resetPassword')">비밀번호 찾기</span>
                         </div>
 
                         <div class="q-mt-lg"></div>
                         <q-btn color="positive" class="width100p height50" @click="emailLogin">로그인</q-btn>
-                        <div class="q-mt-md">
+                        <div class="q-mt-md non-selectable">
                             처음이신가요? <span @click="$router.replace('/joinEmail')" class="text-bold cursorPoint">회원가입</span>
                         </div>
 

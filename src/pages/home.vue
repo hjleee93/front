@@ -4,9 +4,9 @@
     >
         <main-carousel></main-carousel>
         <div class="maxWidth">
-            <genre-category></genre-category>
-            <q-separator inset/>
-            <sort-category></sort-category>
+<!--            <genre-category></genre-category>-->
+<!--            <q-separator inset/>-->
+<!--            <sort-category></sort-category>-->
             <div class="q-pt-none">
                 <div class="cardContainer">
                     <game-card v-for="game in $store.getters.officialGames" :data="game"></game-card>

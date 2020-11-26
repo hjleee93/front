@@ -116,6 +116,16 @@ export default class AccountPopupMobile extends Vue {
 
     async logout() {
         this.active = false;
+
+
+        try {
+            if( this.$store.getters.user )
+                await Vue.$api.signOut();
+        }
+        catch (e) {
+
+        }
+
         await Login.logout();
 
         // await this.$store.dispatch( 'logout' );
