@@ -23,12 +23,13 @@
 <!--                </q-toolbar>-->
                 <div>
                     <div class="row flex-center">
-                        <q-avatar size="60px" class="q-my-lg">
-                            <img src="favicon.ico">
-                        </q-avatar>
-                        <div class="q-ml-sm" style="font-size: 40px;">
-                            Zempie
-                        </div>
+<!--                        <q-avatar size="60px" class="q-my-lg">-->
+<!--                            <img src="favicon.ico">-->
+<!--                        </q-avatar>-->
+<!--                        <div class="q-ml-sm" style="font-size: 40px;">-->
+<!--                            Zempie-->
+<!--                        </div>-->
+                        <q-img src="img/zempie-logo.png" width="300px" class="q-my-xl cursor-pointer" @click="$router.push('/')"></q-img>
                     </div>
                 </div>
 
@@ -95,7 +96,7 @@
 
                         <div class="q-my-md"></div>
 
-                        <div class="text-uppercase cursorPoint underline" @click="$router.replace('/')">접속에 문제가 있으신가요?</div>
+<!--                        <div class="text-uppercase cursorPoint underline" @click="$router.replace('/')">접속에 문제가 있으신가요?</div>-->
 
                         <div class="q-my-md"></div>
                     </div>
@@ -137,7 +138,7 @@
 
             </q-page>
         </q-page-container>
-        <q-footer class="footer q-py-lg bg-dark text-grey-5">
+        <q-footer class="footer q-py-lg text-grey-5">
             Copyright 2020. zempie. All rights reserved.
         </q-footer>
     </q-layout>
@@ -326,6 +327,7 @@ export default class Login extends Vue {
 </script>
 <style lang="scss" scoped>
     .footer {
-        background-color: #292929;
+        //background-color: ;
+        background-color: #121212;
     }
 </style>

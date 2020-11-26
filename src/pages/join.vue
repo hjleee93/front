@@ -181,6 +181,6 @@ export default class JoinEmail extends Vue {
 </script>
 <style lang="scss" scoped>
 .footer {
-    background-color: #292929;
+    background-color: #121212;
 }
 </style>

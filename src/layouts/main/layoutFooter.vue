@@ -18,7 +18,7 @@
                 class="text-grey-5"
             >
                 <q-tab class="min-height50" name="best" icon="star" label="베스트"  @click="goTo('/')" />
-                <q-tab class="min-height50" name="challenge" icon="emoji_events" label="챌리지" @click="goTo('/challenge')"/>
+                <q-tab class="min-height50" name="challenge" icon="emoji_events" label="챌린지" @click="goTo('/challenge')"/>
                 <q-tab v-if="$store.getters.user" class="min-height50" name="channel" icon="far fa-id-card" label="내 채널" @click="goTo(`/channel/${$store.getters.user.channel_id}`)"/>
             </q-tabs>
         </q-footer>

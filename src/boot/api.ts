@@ -95,13 +95,22 @@ class Api {
         }) );
         return response.result || response;
     }
-    async updateUser( name : string, state_msg : string, file : File, channel_id : string ) {
+
+    async signOut() {
+        const response = await this.request( Vue.$axios.post(`/user/sign-out`, {
+        }, {
+            withCredentials : true,
+        }) );
+        return response.result || response;
+    }
+
+    async updateUser( name : string, state_msg : string, file : File, channel_id : string, description : string ) {
         const formData = new FormData();
         if( name ) { formData.append( 'name', name ); }
         if( state_msg ) { formData.append( 'state_msg', state_msg ); }
         if( file ) { formData.append( 'file', file ); }
         if( channel_id ) { formData.append( 'channel_id', channel_id ); }
-
+        if( description ) { formData.append( 'description', description ); }
 
         const response = await this.request( Vue.$axios.post(`/user/update/info`, formData) );
         return response.result || response;

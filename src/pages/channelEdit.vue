@@ -1,6 +1,6 @@
 <template>
     <q-page>
-        <div class="maxWidth">
+        <div class="maxWidth q-pa-md">
             <div class="">
 
                 <div class="q-pt-lg"></div>
@@ -57,7 +57,7 @@
                     <content-item label="채널명" label-style="q-mt-md">
                         <template>
                             <div class="width100p">
-                                <q-input class="width100p maxWidth400px" v-model="channelName" filled>
+                                <q-input maxlength="50" class="width100p maxWidth400px" v-model="channelName" filled>
                                 </q-input>
                                 <div class="q-my-sm fontSize12 text-grey-5">
                                     자신의 콘텐츠를 잘 표현할 수 있는 채널 이름을 지어주세요.
@@ -71,10 +71,24 @@
                     <content-item label="상태 메세지" label-style="q-mt-md">
                         <template>
                             <div class="width100p">
-                                <q-input class="width100p maxWidth400px" v-model="stateMsg" filled>
+                                <q-input maxlength="100" class="width100p maxWidth400px" v-model="stateMsg" filled>
                                 </q-input>
                                 <div class="q-my-sm fontSize12 text-grey-5">
-                                    채널에 대해 설명해주세요. 이 설명은 채널의 상단에 표시되며 누구나 볼 수 있습니다.
+                                    현재 자신의 기분을 표현해보세요.
+                                </div>
+                            </div>
+                        </template>
+                    </content-item>
+
+                    <div class="q-mt-sm"></div>
+
+                    <content-item label="채널 설명" label-style="q-mt-md">
+                        <template>
+                            <div class="width100p">
+                                <q-input maxlength="500" type="textarea" class="width100p maxWidth400px"  v-model="description" filled>
+                                </q-input>
+                                <div class="q-my-sm fontSize12 text-grey-5">
+                                    채널에 대해 설명해주세요. 이 설명은 채널 정보에 표시되며 누구나 볼 수 있습니다.
                                 </div>
                             </div>
                         </template>
@@ -91,7 +105,7 @@
                     <content-item label="채널 ID" label-style="q-mt-md">
                         <template>
                             <div class="width100p">
-                                <q-input class="width100p maxWidth400px" filled v-model="channelId">
+                                <q-input maxlength="20" class="width100p maxWidth400px" filled v-model="channelId">
                                     <template v-slot:append>
                                         <q-btn :loading="loading" v-if="!confirmChannelId" color="grey-9" @click="verifyChannelId">
                                             확인 요청
@@ -124,17 +138,17 @@
                 </div>
 
 
-                <div class="q-my-md"></div>
+<!--                <div class="q-my-md"></div>-->
 
-                <div class="text-h6">링크</div>
-                <div class="q-my-sm text-grey-5">
-                    공유할 사이트의 링크를 추가하세요.
-                </div>
-                <div class="contentBox">
-                    <div>
-                        <q-btn :loading="loading" color="grey-9" class="">링크 추가</q-btn>
-                    </div>
-                </div>
+<!--                <div class="text-h6">링크</div>-->
+<!--                <div class="q-my-sm text-grey-5">-->
+<!--                    공유할 사이트의 링크를 추가하세요.-->
+<!--                </div>-->
+<!--                <div class="contentBox">-->
+<!--                    <div>-->
+<!--                        <q-btn :loading="loading" color="grey-9" class="">링크 추가</q-btn>-->
+<!--                    </div>-->
+<!--                </div>-->
 
                 <div class="text-right q-mt-lg q-mr-md">
                     <q-btn :loading="loading" color="grey-9" @click="save">저장</q-btn>
@@ -177,6 +191,7 @@ export default class ChannelEdit extends Vue {
 
     private channelName : string = '';
     private stateMsg : string = '';
+    private description : string = '';
 
 
 
@@ -251,12 +266,13 @@ export default class ChannelEdit extends Vue {
         const name = this.channelName !== this.$store.getters.user.name ? this.channelName : undefined;
         const picture = this.file || undefined;
         const state_msg = this.stateMsg !== this.$store.getters.user.profile.state_msg ? this.stateMsg : undefined;
+        const description = this.description !== this.$store.getters.user.profile.description ? this.description : undefined;
         const channel_id = this.channelId !== this.$store.getters.user.channel_idg ? this.channelId : undefined;
         const banner = this.file2 || undefined;
         let isError = false;
 
-        if( name || picture || state_msg || channel_id ) {
-            const result = await this.$api.updateUser( name, state_msg, picture, channel_id );
+        if( name || picture || state_msg || channel_id || description) {
+            const result = await this.$api.updateUser( name, state_msg, picture, channel_id, description );
 
             if( result.error ) {
                 alert( result.error );
@@ -268,6 +284,7 @@ export default class ChannelEdit extends Vue {
                     picture : this.pictureUrl,
                     state_msg,
                     channel_id,
+                    description
                 });
             }
         }

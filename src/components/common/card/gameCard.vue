@@ -2,8 +2,10 @@
     <div class="card" @click="$router.push( `/play/${data.pathname}` )">
 
         <div class="thumbBox">
-            <q-img class="thumb" :src=data.url_thumb alt="">
-            </q-img>
+            <img class="base" src="img/default.png">
+            <div class="thumb" :style="`background-image: url(${data.url_thumb || 'img/default.png'})`"></div>
+<!--            <q-img class="thumb" :src="data.url_thumb || 'img/default.png'"  alt="">-->
+<!--            </q-img>-->
         </div>
 
 
@@ -17,13 +19,13 @@
                     {{data.title}}
                 </strong>
                 <span
-                    class="ellipsis block">
+                    class="ellipsis block userName">
                         {{data.user.name}}
                 </span>
             </div>
 
-            <div class="more">
-                <q-btn @click.stop="more">
+            <div class="more" :class="$q.platform.is.desktop ? 'desktop' : ''">
+                <q-btn @click.stop="more" flat dense color="bg-transparent" class="" key="btn_size_dense_rd_md" size="md">
                     <q-icon color="grey-5" name="more_vert"></q-icon>
 
 
@@ -120,6 +122,15 @@ export default class GameCard extends Vue {
     cursor: pointer;
     padding: 10px;
 
+    &:hover {
+        .detail {
+            .more.desktop {
+                visibility: visible;
+            }
+        }
+
+    }
+
     .detail {
         .developerLogo {
             border-radius: 32px;
@@ -129,16 +140,25 @@ export default class GameCard extends Vue {
 
         .text {
             //40 + 32 + 8(마진)
-            width: calc(100% - 72px);
+            width: calc(100% - 60px);
             display: inline-block;
             //margin-left: 10px
+            .userName {
+                color: #d0d0d0;
+            }
         }
 
         .more {
-            width: 32px;
+
+            width: 20px;
             button {
-                width: 100%;
+                //width: 100%;
+                width: 20px;
             }
+        }
+
+        .more.desktop {
+            visibility: hidden;
         }
     }
 
@@ -150,7 +170,7 @@ export default class GameCard extends Vue {
                 display: none;
             }
             .text {
-                width: calc(100% - 40px);
+                width: calc(100% - 28px);
                 font-size: 12px;
             }
         }
@@ -164,10 +184,30 @@ export default class GameCard extends Vue {
 
 
     .thumbBox {
+        position: relative;
         overflow: hidden;
         border-radius: 6px;
+        display: flex;
+
+        .base {
+            width: 100%;
+            visibility: hidden;
+        }
 
         .thumb {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            //transform: translate(-50%, -50%);
+            //transform: ;
+            background-size: cover;
+            background-repeat: no-repeat;
+            //background-origin: content-box;
+
+
+            //width: 100%;
             transition: transform 0.15s linear;
             &:hover {
                 //transition: tra;

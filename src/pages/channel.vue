@@ -1,7 +1,7 @@
 <template>
     <q-page>
         <div>
-            <q-img :src="user && user.profile.url_banner || ''">
+            <q-img v-if="user && user.profile.url_banner" :src="user && user.profile.url_banner || ''">
             </q-img>
         </div>
         <div class="head  q-pt-lg bg-grey-10">
@@ -63,6 +63,15 @@
                     </q-tab-panel>
                     <q-tab-panel name="info" class="bgColor-1 no-scroll">
                         <div class="maxWidth">
+
+                            <div v-if="description">
+                                <div class="text-h7 q-ml-sm">설명</div>
+                                <div class="contentBox text-left">
+                                    {{ description }}
+                                </div>
+                            </div>
+
+                            <div class="q-my-lg"></div>
                             <div class="contentBox">
                                 <content-item label="비지니스 문의" label-style="">
                                     <a :href="'mailto:' + email" style="color: #30a6d8">
@@ -70,12 +79,12 @@
                                     </a>
                                 </content-item>
                             </div>
-                            <div class="q-my-lg"></div>
-                            <div class="contentBox">
-                                <content-item label="링크" label-style="">
-                                    없음
-                                </content-item>
-                            </div>
+<!--                            <div class="q-my-lg"></div>-->
+<!--                            <div class="contentBox">-->
+<!--                                <content-item label="링크" label-style="">-->
+<!--                                    없음-->
+<!--                                </content-item>-->
+<!--                            </div>-->
                         </div>
                     </q-tab-panel>
                 </q-tab-panels>
@@ -85,8 +94,10 @@
 
         </div>
         <div style="padding-top: 100px"></div>
-
-        <main-footer></main-footer>
+        <footer class="footer text-center q-py-lg text-grey-5">
+            Copyright 2020. zempie. All rights reserved.
+        </footer>
+<!--        <main-footer></main-footer>-->
     </q-page>
 </template>
 
@@ -110,6 +121,7 @@ export default class Channel extends Vue {
     private url : string = '';
     private user : any = null;
     private games : any[] = [];
+    private description : string = '';
 
     private email : string = '';
 
@@ -129,6 +141,7 @@ export default class Channel extends Vue {
         }
 
         this.email = this.user.email;
+        this.description = this.user.profile.description;
     }
 
 }

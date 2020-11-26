@@ -4,7 +4,7 @@ import {_store} from "src/store";
 import Cookie from "src/scripts/cookie";
 import Vue from "vue";
 
-const cookieName = 'ZempieCookie';
+const cookieName = process.env.VUE_APP_COOKIE_NAME;
 
 class Login {
 
@@ -12,6 +12,8 @@ class Login {
         if( _store.getters.loginState === LoginState.none ) {
             const currentUser = firebase.auth().currentUser;
             if ( currentUser ) {
+                console.log(currentUser);
+
                 const idToken = await currentUser.getIdToken(true);
 
                 _store.commit('idToken', idToken);
@@ -75,6 +77,15 @@ class Login {
     }
 
     static async logout() {
+
+        try {
+            if( _store.getters.user )
+            await Vue.$api.signOut();
+        }
+        catch (e) {
+
+        }
+
         await firebase.auth().signOut();
         await _store.dispatch('logout');
         Cookie.delete( cookieName, process.env.VUE_APP_COOKIE_DOMAIN );

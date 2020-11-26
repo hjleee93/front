@@ -80,7 +80,7 @@ export default class AccountPopupDesktop extends Vue {
     }
 
     async serviceCenter() {
-        window.open(process.env.VUE_APP_SERVICE_CENTER_URL);
+        location.href = (process.env.VUE_APP_SERVICE_CENTER_URL);
     }
 
     async goToChannel() {

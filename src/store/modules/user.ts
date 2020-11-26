@@ -100,6 +100,9 @@ export default {
             if( payload.url_banner ) {
                 state.user.profile.url_banner = payload.url_banner;
             }
+            if( payload.description ) {
+                state.user.profile.description = payload.description;
+            }
         },
     },
 

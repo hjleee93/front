@@ -61,6 +61,7 @@
 import {Vue, Component, Watch} from 'vue-property-decorator';
 import {LoginState} from "src/store/modules/user";
 import ContentItem from "components/common/contentItem.vue";
+import Login from "src/scripts/login";
 
 
 @Component({
@@ -86,6 +87,7 @@ export default class Leave extends Vue {
         if ( ok ) {
             const result = await this.$api.leave( this.reason  );
             console.log(result);
+            await Login.logout();
         }
     }
 }

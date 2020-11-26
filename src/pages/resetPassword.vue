@@ -95,6 +95,6 @@ export default class ResetPassword extends Vue {
 </script>
 <style lang="scss" scoped>
 .footer {
-    background-color: #292929;
+    //background-color: #292929;
 }
 </style>

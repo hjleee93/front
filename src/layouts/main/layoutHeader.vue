@@ -15,17 +15,17 @@
 <!--                    @click="$store.commit('leftDrawerOpen', !$store.getters.leftDrawerOpen )"-->
 <!--                />-->
 
-                <q-avatar @click="goTo('/')">
-                    <img draggable="false" src="favicon.ico" style="width: 34px; height: 34px;">
-                </q-avatar>
+<!--                <q-avatar @click="goTo('/')">-->
+<!--                    <img draggable="false" src="favicon.ico" style="width: 34px; height: 34px;">-->
+<!--                </q-avatar>-->
 
-                <q-toolbar-title class="non-selectable" @click="goTo('/')">
-                    Zempie
+                <q-toolbar-title class="non-selectable cursor-pointer" @click="goTo('/')">
+                    <q-img src="img/zempie-logo.png" width="130px"></q-img>
                 </q-toolbar-title>
 
                 <q-tabs v-model="tab" v-if="$q.platform.is.desktop">
                     <q-tab name="Major" label="베스트" @click="goTo('/')" />
-                    <q-tab name="Minor" label="챌리지" @click="goTo('/challenge')" />
+                    <q-tab name="Minor" label="챌린지" @click="goTo('/challenge')" />
                     <q-tab name="G-Studio" label="게임 스튜디오" @click="studio" />
                 </q-tabs>
 
@@ -87,7 +87,7 @@ export default class LayoutHeader extends Vue {
     }
 
     async studio() {
-        window.open(process.env.VUE_APP_STUDIO_URL);
+        location.href = process.env.VUE_APP_STUDIO_URL;
     }
 }
 </script>

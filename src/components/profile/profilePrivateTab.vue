@@ -11,12 +11,12 @@
                 </template>
             </content-item>
             <div class="q-mt-sm"></div>
-            <content-item label="전화번호" label-style="q-mt-md">
-                <template>
-                    <q-input class="width100p maxWidth400px" filled readonly v-model="phoneNum">
-                    </q-input>
-                </template>
-            </content-item>
+<!--            <content-item label="전화번호" label-style="q-mt-md">-->
+<!--                <template>-->
+<!--                    <q-input class="width100p maxWidth400px" filled readonly v-model="phoneNum">-->
+<!--                    </q-input>-->
+<!--                </template>-->
+<!--            </content-item>-->
         </div>
 
 
