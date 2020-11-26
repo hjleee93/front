@@ -5,12 +5,13 @@
 
                 <div>
                     <div class="row flex-center">
-                        <q-avatar size="60px" class="q-my-lg">
-                            <img src="favicon.ico">
-                        </q-avatar>
-                        <div class="q-ml-sm" style="font-size: 40px;">
-                            Zempie
-                        </div>
+<!--                        <q-avatar size="60px" class="q-my-lg">-->
+<!--                            <img src="favicon.ico">-->
+<!--                        </q-avatar>-->
+<!--                        <div class="q-ml-sm" style="font-size: 40px;">-->
+<!--                            Zempie-->
+<!--                        </div>-->
+                        <q-img src="img/zempie-logo.png" width="300px" class="q-my-xl cursor-pointer" @click="$router.push('/')"></q-img>
                     </div>
                 </div>
 

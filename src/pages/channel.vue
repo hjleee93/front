@@ -54,8 +54,8 @@
                                 <game-card v-for="game in games" :data="game"></game-card>
                             </div>
 
-                            <div v-else>
-                                등록된 게임이 없습니다.
+                            <div v-else class="text-center q-mt-xl">
+                                <q-img width="200px" src="img/img-blank.png"></q-img>
                             </div>
                         </div>
 
@@ -73,7 +73,7 @@
 
                             <div class="q-my-lg"></div>
                             <div class="contentBox">
-                                <content-item label="비지니스 문의" label-style="">
+                                <content-item label="비즈니스 문의" label-style="">
                                     <a :href="'mailto:' + email" style="color: #30a6d8">
                                         {{ email }}
                                     </a>
