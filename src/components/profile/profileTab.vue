@@ -37,7 +37,7 @@
                 </template>
             </content-item>
             <div class="q-mt-sm"></div>
-            <content-item label="닉네임" label-style="q-mt-md">
+            <content-item label="이름" label-style="q-mt-md">
                 <template>
                     <q-input class="width100p maxWidth400px" filled v-model="nickname">
                     </q-input>

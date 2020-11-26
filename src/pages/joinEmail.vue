@@ -84,7 +84,7 @@
                                  :error="!!nicknameError"
                                  :error-message="nicknameError"
                                  v-model="nickname"
-                                 label="닉네임"
+                                 label="이름"
                                  ref="nickname"
                                  lazy-rules
                                  :rules="[
