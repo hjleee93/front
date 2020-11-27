@@ -88,6 +88,7 @@ export default class Leave extends Vue {
             const result = await this.$api.leave( this.reason  );
             console.log(result);
             await Login.logout();
+            await this.$router.replace('/');
         }
     }
 }

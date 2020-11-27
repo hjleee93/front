@@ -24,9 +24,9 @@
                 </q-toolbar-title>
 
                 <q-tabs v-model="tab" v-if="$q.platform.is.desktop">
-                    <q-tab name="Major" label="베스트" @click="goTo('/')" />
-                    <q-tab name="Minor" label="챌린지" @click="goTo('/challenge')" />
-                    <q-tab name="G-Studio" label="게임 스튜디오" @click="studio" />
+                    <q-tab name="Major" label="게임" @click="goTo('/')" />
+                    <q-tab name="Minor" label="도전 게임" @click="goTo('/challenge')" />
+                    <q-tab name="G-Studio" label="개발 스튜디오" @click="studio" />
                 </q-tabs>
 
 <!--                <q-btn-->
