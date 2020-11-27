@@ -201,7 +201,7 @@ export default class ChannelEdit extends Vue {
         this.$store.commit('navTab', 'ChannelEdit');
         this.loading = true;
 
-
+        //const regExp = /[{}[]/?.,;:|)*~`!^+<>@#$%&\=('"]/gi;
         await this.$store.dispatch('loginState');
         this.channelId = this.$store.getters.user.channel_id;
         this.channelUrl = `${process.env.VUE_APP_ZEMPIE_URL}channel/${decodeURI( this.channelId )}`;
@@ -315,6 +315,18 @@ export default class ChannelEdit extends Vue {
     }
 
     async verifyChannelId() {
+
+        const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\+<>@\#$%&\\\=\(\'\"]/gi;
+        if ( regExp.test(this.channelId) ) {
+            alert( '_, - 를 제외한 특수 문자는 사용할수 없습니다.' );
+            return;
+        }
+        else if ( this.channelId.search(/\s/) !== -1 ) {
+            alert( '아이디에 빈칸을 포함할수 없습니다.' );
+            return;
+        }
+
+
         this.loading = true;
         this.$store.commit('ajaxBar', true);
 
