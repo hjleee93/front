@@ -101,7 +101,7 @@ export default class AccountPopupMobile extends Vue {
     }
 
     beforeDestroy() {
-        console.log(1234);
+        // console.log(1234);
     }
 
     @Watch( 'active' )

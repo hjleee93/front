@@ -130,6 +130,8 @@ export default class Channel extends Vue {
         const loginState = await this.$store.dispatch('loginState');
 
         const result = await this.$api.channel( this.channelId );
+        console.log(result);
+
         const { target } = result;
         this.user = target;
         const {dev_games} = this.user;
@@ -142,6 +144,7 @@ export default class Channel extends Vue {
 
         this.email = this.user.email;
         this.description = this.user.profile.description;
+
     }
 
 }

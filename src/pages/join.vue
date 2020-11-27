@@ -142,7 +142,7 @@ export default class JoinEmail extends Vue {
     async signup() {
         this.loading = true;
         const result = await this.$api.signUp( this.nickname );
-        console.log(result);
+        // console.log(result);
         const { user } = result;
         this.$store.commit('user', user);
         await LoginManager.login();

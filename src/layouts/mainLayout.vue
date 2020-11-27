@@ -32,7 +32,7 @@ export default class MainLayout extends Vue {
     this.$store.commit( 'scrollMovePos', 0 );
     this.$store.commit( 'scrollHeight', (this.$refs.scroll as Vue).$el.scrollHeight );
 
-    console.log( this.$q );
+    // console.log( this.$q );
 
   }
 

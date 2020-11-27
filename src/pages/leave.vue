@@ -86,7 +86,7 @@ export default class Leave extends Vue {
         const ok = confirm( '정말로 탈퇴하시겠습니까?' );
         if ( ok ) {
             const result = await this.$api.leave( this.reason  );
-            console.log(result);
+            // console.log(result);
             await Login.logout();
             await this.$router.replace('/');
         }

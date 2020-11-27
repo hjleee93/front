@@ -15,9 +15,15 @@ declare module 'vue/types/vue' {
 
 
 class Api {
-    async request( promise : Promise<any>, errorCallback : Function | null = null, retryCount : number = 0 ) : Promise<any> {
+
+    async request( method : string, url : string, data : any, withCredentials : boolean = false, errorCallback : Function | null = null, retryCount : number = 0 ): Promise<any> {
         try {
-            const result = await promise;
+            const result = await Vue.$axios({
+                method : method,
+                url,
+                data,
+                withCredentials
+            }  );
             return result.data;
         }
         catch (error) {
@@ -25,9 +31,9 @@ class Api {
                 const currentUser = firebase.auth().currentUser;
                 if (currentUser) {
                     const idToken = await currentUser.getIdToken(true);
-                    _store.$store.commit('idToken', idToken);
+                    _store.commit('idToken', idToken);
                     if ( retryCount < 3 ) {
-                        return await this.request(promise, errorCallback, ++retryCount);
+                        return await this.request(method, url, data, withCredentials, errorCallback, ++retryCount );
                     }
                     else {
                         //3번 초과
@@ -48,59 +54,92 @@ class Api {
     }
 
 
+    // async request( promise : Promise<any>, errorCallback : Function | null = null, retryCount : number = 0 ) : Promise<any> {
+    //     try {
+    //         const result = await promise;
+    //         return result.data;
+    //     }
+    //     catch (error) {
+    //         console.log(error);
+    //         if ( error.response.data && error.response.data.error === 'Unauthorized' ) {
+    //             const currentUser = firebase.auth().currentUser;
+    //             if (currentUser) {
+    //                 const idToken = await currentUser.getIdToken(true);
+    //                 _store.commit('idToken', idToken);
+    //                 if ( retryCount < 3 ) {
+    //                     console.log(1234);
+    //                     return await this.request(promise, errorCallback, ++retryCount);
+    //                 }
+    //                 else {
+    //                     //3번 초과
+    //                     errorCallback && errorCallback(error);
+    //                     throw new Error(error);
+    //                 }
+    //             }
+    //             else {
+    //                 //로그인 안됨.
+    //                 errorCallback && errorCallback(error);
+    //                 throw new Error(error)
+    //                 // return error;
+    //             }
+    //         }
+    //         // throw error;
+    //         return error.response.data;
+    //     }
+    // }
+
+
     //GAME
     async games() {
-        const response = await this.request( Vue.$axios.get('/games') );
+        const response = await this.request( 'get', '/games', undefined, false );
         return response.result || response;
     }
 
 
     //USER
     async session() {
-        const response = await this.request( Vue.$axios.get(`/user/verify-session`, {
-            withCredentials : true,
-        }) );
+        const response = await this.request( 'get', '/user/verify-session', undefined, true );
         return response.result || response;
     }
 
     async user() {
-        const response = await this.request( Vue.$axios.get(`/user/info`, {
-            withCredentials : true,
-        }) );
+        const response = await this.request( 'get', '/user/info', undefined, true );
         return response.result || response;
     }
 
     async verifyEmail() {
-        const response = await this.request( Vue.$axios.post(`/user/verify-email`) );
+        const response = await this.request( 'post', '/user/verify-email', undefined, false );
         return response.result || response;
     }
 
     async channel(channel_id) {
-        const response = await this.request( Vue.$axios.get(`/channel/${channel_id}`) );
+        const response = await this.request( 'get', `/channel/${channel_id}`, undefined, false );
         return response.result || response;
     }
 
     async verifyChannelId(channel_id) {
-        const response = await this.request( Vue.$axios.post(`/user/verify-channel`, {
+
+        const response = await this.request( 'post', `/user/verify-channel`, {
             channel_id
-        }) );
+        }, false );
+
+        // const response = await this.request( Vue.$axios.post(`/user/verify-channel`, {
+        //     channel_id
+        // }) );
         return response.result || response;
     }
 
     async signUp(name : string) {
-        const response = await this.request( Vue.$axios.post(`/user/sign-up`, {
-            name,
-        }, {
-            withCredentials : true,
-        }) );
+
+        const response = await this.request( 'post', `/user/sign-up`, {
+            name
+        }, true );
+
         return response.result || response;
     }
 
     async signOut() {
-        const response = await this.request( Vue.$axios.post(`/user/sign-out`, {
-        }, {
-            withCredentials : true,
-        }) );
+        const response = await this.request( 'post', `/user/sign-out`, undefined, true );
         return response.result || response;
     }
 
@@ -112,7 +151,7 @@ class Api {
         if( channel_id ) { formData.append( 'channel_id', channel_id ); }
         if( description ) { formData.append( 'description', description ); }
 
-        const response = await this.request( Vue.$axios.post(`/user/update/info`, formData) );
+        const response = await this.request( 'post', `/user/update/info`, formData, false );
         return response.result || response;
     }
 
@@ -120,15 +159,17 @@ class Api {
         const formData = new FormData();
         if( file ) { formData.append( 'file', file ); }
 
-        const response = await this.request( Vue.$axios.post(`/user/update/banner`, formData) );
+        const response = await this.request( 'post', `/user/update/banner`, formData, false );
         return response.result || response;
     }
 
     async leave( text : string, num : string = '0' ) {
-        const response = await this.request( Vue.$axios.post(`/user/leave-zempie`, {
+
+        const response = await this.request( 'post', `/user/leave-zempie`, {
             num,
             text,
-        }) );
+        }, false );
+
         return response.result || response;
     }
 }

@@ -273,10 +273,10 @@ export default class JoinEmail extends Vue {
                 }
             }
             catch (e) {
-                console.log(e);
+                // console.log(e);
 
                 const code = e.code;
-                console.log(code);
+                // console.log(code);
                 if( code ) {
                     switch (code) {
                         case 'auth/wrong-password' :

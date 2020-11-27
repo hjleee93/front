@@ -177,7 +177,7 @@ export default class Login extends Vue {
         }
 
         if( this.redirect ) {
-            console.log(this.redirect);
+            // console.log(this.redirect);
             this.$store.commit('redirectUrl', this.redirect);
         }
     }
@@ -245,10 +245,10 @@ export default class Login extends Vue {
 
             }
             catch (e) {
-                console.log(e);
+                // console.log(e);
 
                 const code = e.code;
-                console.log(code);
+                // console.log(code);
                 if( code ) {
                     switch (code) {
                         case 'auth/wrong-password' :
