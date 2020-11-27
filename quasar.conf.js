@@ -25,6 +25,7 @@ module.exports = configure(function (/* ctx */) {
             'axios',
             'firebase',
             'api',
+            'analytics',
         ],
 
         // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css

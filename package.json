@@ -25,7 +25,8 @@
     "@quasar/app": "^2.0.0",
     "@quasar/quasar-app-extension-qenv": "^1.0.3",
     "@types/node": "^10.17.15",
-    "cross-env": "^7.0.2"
+    "cross-env": "^7.0.2",
+    "vue-analytics": "^5.22.1"
   },
   "browserslist": [
     "ie >= 11",
