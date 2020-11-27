@@ -20,7 +20,7 @@ class Login {
                 console.log(idToken);
 
                 const cookie = Cookie.read( cookieName );
-                if( cookie ) {
+                if( cookie && cookie === currentUser.uid ) {
                     const result = await Vue.$api.user();
                     if( !result || result.error ) {
                         await Login.logout();
@@ -30,6 +30,10 @@ class Login {
                         _store.commit('user', user);
                         await Login.login();
                     }
+                }
+                else if( cookie ) {
+                    //쿠키는 있지만 기존 사용자랑 다른 상태
+                    await firebase.auth().signOut();
                 }
                 else {
                     await Login.logout();
@@ -73,7 +77,7 @@ class Login {
 
     static async login() {
         _store.commit('loginState', LoginState.login );
-        Cookie.write( cookieName, 'true', 30, process.env.VUE_APP_COOKIE_DOMAIN );
+        Cookie.write( cookieName, _store.getters.user.uid, 30, process.env.VUE_APP_COOKIE_DOMAIN );
     }
 
     static async logout() {
