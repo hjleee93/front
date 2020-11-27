@@ -204,7 +204,7 @@ export default class ChannelEdit extends Vue {
 
         await this.$store.dispatch('loginState');
         this.channelId = this.$store.getters.user.channel_id;
-        this.channelUrl = `${process.env.VUE_APP_ZEMPIE_URL}${this.channelId}`;
+        this.channelUrl = `${process.env.VUE_APP_ZEMPIE_URL}channel/${this.channelId}`;
 
         this.channelName = this.$store.getters.user.name;
         this.stateMsg = this.$store.getters.user.profile.state_msg;
