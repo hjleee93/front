@@ -1,6 +1,6 @@
 <template>
     <div style="position: relative">
-        <iframe class="tosBox" src="http://gtest.fromthered.com/lhs/zempieTos/dark/tos/">
+        <iframe class="tosBox" src="https://zempie-rsc.s3.ap-northeast-2.amazonaws.com/static/tos/dark/tos/index.html">
         </iframe>
     </div>
 </template>
