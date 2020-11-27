@@ -1,5 +1,5 @@
 <template>
-    <q-page>
+    <q-page v-if="$store.getters.isLoginComplete">
         <div class="maxWidth">
             <q-tabs
                 v-model="tab"
@@ -48,9 +48,16 @@ import {LoginState} from "src/store/modules/user";
 })
 export default class Profile extends Vue {
     private  tab : string = 'profile';
+    private loading : boolean = true;
+
     async mounted() {
         this.$store.commit('navTab', 'Profile');
+
+
         const loginState = await this.$store.dispatch('loginState');
+
+
+        this.loading = false;
         if( loginState !== LoginState.login ) {
             await this.$router.replace('/');
         }

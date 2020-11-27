@@ -24,7 +24,7 @@
         <div class="contentBox">
             <content-item label="이메일" label-style="q-mt-md">
                 <template>
-                    <q-input class="width100p maxWidth400px" filled :readonly="!emailNull" v-model="email">
+                    <q-input class="width100p maxWidth400px" maxlength="50" filled :readonly="!emailNull" v-model="email">
                         <template v-slot:append>
                             <div v-if="emailVerified" class="q-ml-md bg-grey-9 q-px-md appendBox text-no-wrap">
                                 인증 완료
@@ -39,7 +39,7 @@
             <div class="q-mt-sm"></div>
             <content-item label="이름" label-style="q-mt-md">
                 <template>
-                    <q-input class="width100p maxWidth400px" filled v-model="nickname">
+                    <q-input class="width100p maxWidth400px" maxlength="50" filled v-model="nickname">
                     </q-input>
                 </template>
             </content-item>
@@ -90,7 +90,7 @@ export default class ProfileTab extends Vue {
 
     onLoadFile( data, file ) {
 
-        if( file.size <= mbToByte( 4 ) ) {
+        if( file.size <= mbToByte( 1 ) ) {
             this.url = data;
             this.file = file;
             this.$emit('@file', this.file);

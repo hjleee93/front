@@ -5,7 +5,7 @@
         <footer class="mainFooter bgColor-0 q-mt-lg q-pb-lg">
             <div class="maxWidth text-left q-px-md">
                 <div class="q-pt-xl q-mb-xl">
-                    <div class="text-h7 text-weight-bold row q-mb-md cursor-pointer" @click="goToSupport">
+                    <div class="text-h7 text-weight-bold row q-mb-md cursor-pointer" @click="goToSupport()">
                         고객센터
                     </div>
                     <div class="row">

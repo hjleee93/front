@@ -83,15 +83,20 @@
 
                         <q-separator class="q-my-lg"></q-separator>
 
-                        <q-btn color="primary" class="width100p height50" @click="facebook">
-                            <div></div>
-                            <q-icon name="facebook"></q-icon> <span class="q-ml-md">Facebook 로그인</span>
-                        </q-btn>
+<!--                        <q-btn color="primary" class="width100p height50" @click="facebook">-->
+<!--                            <div></div>-->
+<!--                            <q-icon name="facebook"></q-icon> <span class="q-ml-md">Facebook 로그인</span>-->
+<!--                        </q-btn>-->
 
                         <div class="q-my-md"></div>
 
-                        <q-btn color="negative" class="width100p height50" @click="google">
-                            <q-icon name="fab fa-google"></q-icon> <span class="q-ml-md">Google 로그인</span>
+<!--                        <q-btn color="negative" class="width100p height50" @click="google">-->
+<!--                            <q-icon name="fab fa-google"></q-icon> <span class="q-ml-md">Google 로그인</span>-->
+<!--                        </q-btn>-->
+
+                        <q-btn color="white" class="width100p height50 googleButton"  @click="google">
+                            <q-img height="24px" width="24px" src="img/google-logo.png"></q-img>
+                            <span class="q-ml-md googleText" >Google 계정으로 로그인</span>
                         </q-btn>
 
                         <div class="q-my-md"></div>
@@ -329,5 +334,13 @@ export default class Login extends Vue {
     .footer {
         //background-color: ;
         background-color: #121212;
+    }
+
+    .googleButton {
+        .googleText {
+            color: black !important;
+            font-family: 'Roboto', '-apple-system', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            text-transform: none;
+        }
     }
 </style>

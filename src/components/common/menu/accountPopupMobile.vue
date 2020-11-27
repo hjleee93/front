@@ -63,16 +63,16 @@
                     </div>
                 </q-item-section>
             </q-item>
-            <q-item class="menuItem" clickable>
-                <q-item-section>
-                    <div class="row">
-                        <q-avatar class="icon q-mr-md">
-                            <q-icon name="fas fa-cog" class="q-mr-md"></q-icon>
-                        </q-avatar>
-                        <div class="menuText">설정</div>
-                    </div>
-                </q-item-section>
-            </q-item>
+<!--            <q-item class="menuItem" clickable>-->
+<!--                <q-item-section>-->
+<!--                    <div class="row">-->
+<!--                        <q-avatar class="icon q-mr-md">-->
+<!--                            <q-icon name="fas fa-cog" class="q-mr-md"></q-icon>-->
+<!--                        </q-avatar>-->
+<!--                        <div class="menuText">설정</div>-->
+<!--                    </div>-->
+<!--                </q-item-section>-->
+<!--            </q-item>-->
             <q-item class="menuItem" clickable @click="logout">
                 <q-item-section>
                     <div class="row">
