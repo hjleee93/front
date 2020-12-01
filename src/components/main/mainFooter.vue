@@ -28,7 +28,7 @@
                     <div>(주)프롬더레드</div>
                     <div>대표자 : 서상욱</div>
                     <div>사업자번호 : 178-88-00617</div>
-                    <div>주소 : 서울특별시 서대문구 충현동 북아현로 105, 3층</div>
+                    <div>주소 : 서울특별시 서대문구 북아현로 105, 3층</div>
 <!--                    <div>전화 : 02-0000-0000</div>-->
 <!--                    <div>E-Mail : help@fromthred.com</div>-->
 <!--                    <div>SNS : @zempie_help</div>-->

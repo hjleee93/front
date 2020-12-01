@@ -10,7 +10,7 @@
 
 
         <div class="row detail text-left q-mt-sm">
-            <q-img class="developerLogo self-center" :src="data.user.picture" @click.stop="$router.push( `/channel/${$store.getters.user.channel_id}` )">
+            <q-img class="developerLogo self-center" :src="data.user.picture" @click.stop="$router.push(`/channel/${data.user.channel_id}` )">
             </q-img>
 
             <div class="text q-ml-sm">
