@@ -1,7 +1,7 @@
 {
   "name": "zempie-front",
   "version": "0.0.1",
-  "description": "A Quasar Framework app",
+  "description": "게임 공유 플랫폼",
   "productName": "ZEMPIE",
   "author": "hg.park <hg.park@fromthered.com>",
   "private": true,

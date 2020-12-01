@@ -274,7 +274,7 @@ export default class ChannelEdit extends Vue {
         if( name || picture || state_msg || channel_id || description) {
             const result = await this.$api.updateUser( name, state_msg, picture, channel_id, description );
 
-            if( result.error ) {
+            if( !result || result.error ) {
                 alert( result.error );
                 isError = true;
             }
@@ -291,7 +291,7 @@ export default class ChannelEdit extends Vue {
 
         if( banner ) {
             const result = await this.$api.updateBanner( banner );
-            if( result.error ) {
+            if( !result || result.error ) {
                 alert( result.error );
                 isError = true;
             }
@@ -304,11 +304,20 @@ export default class ChannelEdit extends Vue {
 
         this.loading = false;
         this.$store.commit('ajaxBar', false);
+
         if( !isError ) {
             this.$q.notify({
                 message : '저장 되었습니다.',
                 position : 'top',
                 color : 'primary',
+                timeout: 2000
+            });
+        }
+        else {
+            this.$q.notify({
+                message : '실패 하였습니다.',
+                position : 'top',
+                color : 'negative',
                 timeout: 2000
             });
         }

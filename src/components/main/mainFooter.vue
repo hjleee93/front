@@ -31,7 +31,7 @@
                     <div>주소 : 서울특별시 서대문구 충현동 북아현로 105, 3층</div>
 <!--                    <div>전화 : 02-0000-0000</div>-->
 <!--                    <div>E-Mail : help@fromthred.com</div>-->
-                    <div>SNS : @zempie_help</div>
+<!--                    <div>SNS : @zempie_help</div>-->
                 </div>
                 <div class="copyright">
                     Copyright 2020. zempie. All rights reserved.

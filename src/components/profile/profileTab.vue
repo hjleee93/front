@@ -138,8 +138,18 @@ export default class ProfileTab extends Vue {
         this.$store.commit('ajaxBar', true);
         this.loading = true;
         const result = await this.$api.updateUser( this.nickname, undefined, this.file, undefined, undefined );
-        if( !result.error ) {
+        if( !result || result.error ) {
 
+            this.$q.notify({
+                message : '실패 하였습니다.',
+                position : 'top',
+                color : 'negative',
+                timeout: 2000
+            });
+
+
+        }
+        else {
             this.$store.commit('userInfoUpdate', {
                 name : this.nickname,
                 picture : this.url
@@ -152,6 +162,7 @@ export default class ProfileTab extends Vue {
                 timeout: 2000
             });
         }
+
         this.loading = false;
         this.$store.commit('ajaxBar', false);
 
