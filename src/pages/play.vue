@@ -4,7 +4,7 @@
             <q-page>
                 <iframe ref="game" class="iframe"
                     :src="url"></iframe>
-                <button class="exitButton" @click="exit">
+                <button v-if="initLauncher" class="exitButton" @click="exit">
                     <q-icon name="clear"></q-icon>
                 </button>
             </q-page>
@@ -27,6 +27,7 @@ export default class Play extends Vue {
 
     private gameData: any;
     private url: string = '';
+    private initLauncher : boolean = false;
 
     async mounted() {
 
@@ -55,6 +56,7 @@ export default class Play extends Vue {
 
         switch (type) {
             case '@initLauncher': {
+                this.initLauncher = true;
                 this.toMessage({type: '@initParent'});
                 const loginState = await this.$store.dispatch('loginState');
                 this.onChangedToken();
@@ -83,6 +85,8 @@ export default class Play extends Vue {
     }
 
     exit() {
+
+        // console.log( this.$router, history.length, window.history.state );
         this.$router.back();
     }
 

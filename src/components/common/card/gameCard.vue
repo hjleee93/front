@@ -3,7 +3,10 @@
 
         <div class="thumbBox">
             <img class="base" src="img/default.png">
-            <div class="thumb" :style="`background-image: url(${data.url_thumb || 'img/default.png'})`"></div>
+            <q-img class="thumb" :src="`${data.url_thumb || 'img/default.png'}`">
+
+            </q-img>
+<!--            <div class="thumb" :style="`background-image: url(${data.url_thumb || 'img/default.png'})`"></div>-->
 <!--            <q-img class="thumb" :src="data.url_thumb || 'img/default.png'"  alt="">-->
 <!--            </q-img>-->
         </div>
@@ -191,6 +194,7 @@ export default class GameCard extends Vue {
 
         .base {
             width: 100%;
+            height: 100%;
             visibility: hidden;
         }
 
@@ -215,11 +219,5 @@ export default class GameCard extends Vue {
             }
         }
     }
-
-
-
-
-
-
 }
 </style>
