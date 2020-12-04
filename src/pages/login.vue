@@ -172,6 +172,14 @@ export default class Login extends Vue {
         const loginState =  await this.$store.dispatch('loginState');
         switch (loginState) {
             case LoginState.login:
+                // if(this.redirect) {
+                //     window.location.href = this.redirect;
+                // }
+                // else {
+                //     await this.$router.replace('/');
+                // }
+
+
                 await this.$router.replace('/');
                 break;
         }

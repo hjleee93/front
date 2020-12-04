@@ -19,14 +19,23 @@
 <!--                    <img draggable="false" src="favicon.ico" style="width: 34px; height: 34px;">-->
 <!--                </q-avatar>-->
 
-                <q-toolbar-title class="non-selectable cursor-pointer" @click="goTo('/')">
-                    <q-img src="img/zempie-logo.png" width="130px"></q-img>
-                </q-toolbar-title>
+
+                    <q-toolbar-title class="non-selectable cursor-pointer">
+                        <a href="/">
+                            <q-img src="img/zempie-logo.png" width="130px"></q-img>
+                        </a>
+                    </q-toolbar-title>
+
+
 
                 <q-tabs v-model="tab" v-if="$q.platform.is.desktop">
-                    <q-tab name="Major" label="게임" @click="goTo('/')" />
-                    <q-tab name="Minor" label="도전 게임" @click="goTo('/challenge')" />
-                    <q-tab name="G-Studio" label="개발 스튜디오" @click="studio" />
+                    <q-route-tab to="/" name="Major" label="게임"></q-route-tab>
+                    <q-route-tab to="challenge" name="Minor" label="도전 게임"></q-route-tab>
+                    <a :href="studioUrl" class="aTab">
+                        <q-tab name="G-Studio" label="개발 스튜디오">
+                        </q-tab>
+                    </a>
+
                 </q-tabs>
 
 <!--                <q-btn-->
@@ -44,10 +53,11 @@
                     <account-popup-desktop v-if="$q.platform.is.desktop"></account-popup-desktop>
                     <account-popup-mobile v-if="$q.platform.is.mobile"></account-popup-mobile>
                 </q-avatar>
-                <q-btn v-else color="positive" @click="goTo('/login')">
-                    로그인
-                </q-btn>
-
+                <router-link to="/login" v-else >
+                    <q-btn color="positive">
+                        로그인
+                    </q-btn>
+                </router-link>
             </q-toolbar>
         </q-header>
     </div>
@@ -62,9 +72,11 @@ import AccountPopupDesktop from "components/common/menu/accountPopupDesktop.vue"
 })
 export default class LayoutHeader extends Vue {
     private tab = '';
+    private studioUrl : string = '';
 
     mounted() {
         this.tab = this.$store.getters.navTab;
+        this.studioUrl = process.env.VUE_APP_STUDIO_URL;
     }
 
     @Watch( 'tab' )
@@ -76,22 +88,18 @@ export default class LayoutHeader extends Vue {
     private onChangedNavTab() {
         this.tab = this.$store.getters.navTab;
     }
-
-    async goTo( path : string ) {
-        try {
-            await this.$router.push( path );
-        }
-        catch (e) {
-
-        }
-    }
-
-    async studio() {
-        location.href = process.env.VUE_APP_STUDIO_URL;
-    }
 }
 </script>
 
 
 <style lang="scss" scoped>
+    .aTab {
+        color: white;
+        text-decoration: none;
+    }
+
+    a {
+        color: inherit;
+        text-decoration: inherit;
+    }
 </style>

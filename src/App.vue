@@ -19,8 +19,6 @@ let app: App;
 @Component
 export default class App extends Vue {
     async mounted() {
-
-        console.log(process.env.NODE_ENV);
         // console.log( this.$t('failed'));
         this.$i18n.locale = 'ko';
         // console.log( this.$i18n.t('failed'));
