@@ -32,9 +32,12 @@ import SearchGame from "components/common/searchGame.vue";
 })
 export default class Home extends Vue {
 
-    mounted() {
+    async mounted() {
         this.$store.commit('headerBgTransparent', true );
         this.$store.commit('navTab', 'Minor');
+
+        await this.$store.dispatch( 'loadingGame' );
+
         this.$store.commit('crtOriginGames', this.$store.getters.noneOfficialGames );
         this.$store.commit('searchGames', this.$store.getters.noneOfficialGames );
     }

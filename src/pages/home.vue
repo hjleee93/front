@@ -11,7 +11,7 @@
 
             <div class="q-pt-none">
                 <div class="cardContainer">
-                    <game-card v-for="game in $store.getters.searchGames" :data="game"></game-card>
+                    <game-card v-for="game in $store.getters.officialGames" :data="game"></game-card>
                 </div>
             </div>
         </div>
@@ -34,9 +34,12 @@ import SearchGame from "components/common/searchGame.vue";
 export default class Home extends Vue {
 
 
-    mounted() {
+    async mounted() {
         this.$store.commit('headerBgTransparent', true );
         this.$store.commit('navTab', 'Major');
+
+        await this.$store.dispatch( 'loadingGame' );
+
         this.$store.commit('crtOriginGames', this.$store.getters.officialGames );
         this.$store.commit('searchGames', this.$store.getters.officialGames );
     }

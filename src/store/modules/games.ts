@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import {LoginState} from "src/store/modules/user";
 
 export default {
     state: {
@@ -75,6 +76,19 @@ export default {
                 return games
             }
             return context.state.games;
+        },
+
+        loadingGame : async (context : any) => {
+            return new Promise((resolve, reject) => {
+                function wait() {
+                    if ( !context.state.loadedGames ) {
+                        setTimeout(wait, 500);
+                    } else {
+                        return resolve(context.getters.loginState);
+                    }
+                }
+                wait();
+            })
         }
     }
 }
