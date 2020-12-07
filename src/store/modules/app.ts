@@ -3,6 +3,10 @@ export default {
         navTab: '',
         accountPopupMobile : false,
         ajaxBar : false,
+        homeUrl : process.env.VUE_APP_ZEMPIE_URL,
+        studioUrl : process.env.VUE_APP_STUDIO_URL,
+        supportUrl : process.env.VUE_APP_SERVICE_CENTER_URL,
+        launcherUrl : process.env.VUE_APP_LAUNCHER_URL,
     },
     getters: {
         navTab(state: any) {
@@ -14,6 +18,19 @@ export default {
         ajaxBar(state) {
             return state.ajaxBar;
         },
+        homeUrl(state) {
+            return state.homeUrl;
+        },
+        studioUrl(state) {
+            return state.studioUrl;
+        },
+        supportUrl(state) {
+            return state.supportUrl;
+        },
+        launcherUrl(state) {
+            return state.supportUrl;
+        },
+
     },
 
     mutations: {

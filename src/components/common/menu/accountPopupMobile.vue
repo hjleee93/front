@@ -33,36 +33,47 @@
                 </q-item-section>
             </q-item>
             <q-separator />
-            <q-item class="menuItem" clickable @click="$router.push('/profile')">
-                <q-item-section>
-                    <div class="row">
-                        <q-avatar class="icon q-mr-md">
-                            <q-icon name="fas fa-user" class="q-mr-md"></q-icon>
-                        </q-avatar>
-                        <div class="menuText">내 프로필</div>
-                    </div>
-                </q-item-section>
-            </q-item>
-            <q-item class="menuItem" clickable @click="$router.push(`/channel/${$store.getters.user.channel_id}`)">
-                <q-item-section>
-                    <div class="row">
-                        <q-avatar class="icon q-mr-md">
-                            <q-icon name="far fa-id-card" class="q-mr-md"></q-icon>
-                        </q-avatar>
-                        <div class="menuText">내 채널</div>
-                    </div>
-                </q-item-section>
-            </q-item>
-            <q-item class="menuItem" clickable @click="serviceCenter">
-                <q-item-section>
-                    <div class="row">
-                        <q-avatar class="icon q-mr-md">
-                            <q-icon name="far fa-question-circle" class="q-mr-md"></q-icon>
-                        </q-avatar>
-                        <div class="menuText">고객센터</div>
-                    </div>
-                </q-item-section>
-            </q-item>
+            <router-link to="/profile">
+                <q-item class="menuItem" clickable>
+                    <q-item-section>
+                        <div class="row">
+                            <q-avatar class="icon q-mr-md">
+                                <q-icon name="fas fa-user" class="q-mr-md"></q-icon>
+                            </q-avatar>
+                            <div class="menuText">내 프로필</div>
+                        </div>
+                    </q-item-section>
+                </q-item>
+            </router-link>
+
+            <router-link :to="`/channel/${$store.getters.user.channel_id}`">
+                <q-item class="menuItem" clickable>
+                    <q-item-section>
+                        <div class="row">
+                            <q-avatar class="icon q-mr-md">
+                                <q-icon name="far fa-id-card" class="q-mr-md"></q-icon>
+                            </q-avatar>
+                            <div class="menuText">내 채널</div>
+                        </div>
+                    </q-item-section>
+                </q-item>
+            </router-link>
+
+            <a :href="$store.getters.supportUrl">
+                <q-item class="menuItem" clickable>
+                    <q-item-section>
+                        <div class="row">
+                            <q-avatar class="icon q-mr-md">
+                                <q-icon name="far fa-question-circle" class="q-mr-md"></q-icon>
+                            </q-avatar>
+                            <div class="menuText">고객센터</div>
+                        </div>
+                    </q-item-section>
+                </q-item>
+            </a>
+
+
+
 <!--            <q-item class="menuItem" clickable>-->
 <!--                <q-item-section>-->
 <!--                    <div class="row">-->
@@ -138,6 +149,10 @@ export default class AccountPopupMobile extends Vue {
 }
 </script>
 <style lang="scss" scoped>
+    a {
+        text-decoration: none;
+    }
+
     .root {
         background-color: #282828;
         .menuItem {

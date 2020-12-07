@@ -11,7 +11,10 @@
 <!--                        <div class="q-ml-sm" style="font-size: 40px;">-->
 <!--                            Zempie-->
 <!--                        </div>-->
-                        <q-img src="img/zempie-logo.png" width="300px" class="q-my-xl cursor-pointer" @click="$router.push('/')"></q-img>
+                        <a :href="process.env.VUE_APP_ZEMPIE_URL">
+                            <q-img src="img/zempie-logo.png" width="300px" class="q-my-xl cursor-pointer"></q-img>
+                        </a>
+
                     </div>
                 </div>
 

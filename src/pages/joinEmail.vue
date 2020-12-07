@@ -5,13 +5,9 @@
 
                 <div>
                     <div class="row flex-center">
-<!--                        <q-avatar size="60px" class="q-my-lg">-->
-<!--                            <img src="favicon.ico">-->
-<!--                        </q-avatar>-->
-<!--                        <div class="q-ml-sm" style="font-size: 40px;">-->
-<!--                            Zempie-->
-<!--                        </div>-->
-                        <q-img src="img/zempie-logo.png" width="300px" class="q-my-xl cursor-pointer" @click="$router.push('/')"></q-img>
+                        <a :href="$store.getters.homeUrl">
+                            <q-img src="img/zempie-logo.png" width="300px" class="q-my-xl cursor-pointer"></q-img>
+                        </a>
                     </div>
                 </div>
 
@@ -264,7 +260,7 @@ export default class JoinEmail extends Vue {
 
                 if( !result2 || result2.error ) {
                     console.error( result2 && result2.error || 'error' );
-                    result && result.error && alert( result.error );
+                    result2 && result2.error && alert( result2.error );
                 }
                 else {
                     const {user} = result2;

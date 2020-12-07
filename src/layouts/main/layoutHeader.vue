@@ -21,21 +21,18 @@
 
 
                     <q-toolbar-title class="non-selectable cursor-pointer">
-                        <a href="/">
+                        <a :href="$store.getters.homeUrl">
                             <q-img src="img/zempie-logo.png" width="130px"></q-img>
                         </a>
                     </q-toolbar-title>
 
-
-
                 <q-tabs v-model="tab" v-if="$q.platform.is.desktop">
                     <q-route-tab to="/" name="Major" label="게임"></q-route-tab>
-                    <q-route-tab to="challenge" name="Minor" label="도전 게임"></q-route-tab>
-                    <a :href="studioUrl" class="aTab">
+                    <q-route-tab to="/challenge" name="Minor" label="도전 게임"></q-route-tab>
+                    <a :href="$store.getters.studioUrl" class="aTab">
                         <q-tab name="G-Studio" label="개발 스튜디오">
                         </q-tab>
                     </a>
-
                 </q-tabs>
 
 <!--                <q-btn-->
@@ -72,11 +69,9 @@ import AccountPopupDesktop from "components/common/menu/accountPopupDesktop.vue"
 })
 export default class LayoutHeader extends Vue {
     private tab = '';
-    private studioUrl : string = '';
 
     mounted() {
         this.tab = this.$store.getters.navTab;
-        this.studioUrl = process.env.VUE_APP_STUDIO_URL;
     }
 
     @Watch( 'tab' )

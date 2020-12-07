@@ -45,7 +45,8 @@ export default {
             if ( !context.state.loadedGames ) {
                 const result = await Vue.$api.games();
 
-                if( result.error ) {
+                if( !result || result.error ) {
+                    result && result.error && console.error( result.error );
                     context.commit('games', []);
                     context.commit( 'loadedGames', true );
                     return [];

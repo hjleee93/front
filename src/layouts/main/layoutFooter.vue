@@ -17,9 +17,9 @@
                 active-color="white"
                 class="text-grey-5"
             >
-                <q-tab class="min-height50" name="best" icon="star" label="게임"  @click="goTo('/')" />
-                <q-tab class="min-height50" name="challenge" icon="emoji_events" label="도전 게임" @click="goTo('/challenge')"/>
-                <q-tab v-if="$store.getters.user" class="min-height50" name="channel" icon="far fa-id-card" label="내 채널" @click="goTo(`/channel/${$store.getters.user.channel_id}`)"/>
+                <q-route-tab to="/" class="min-height50" name="best" icon="star" label="게임"/>
+                <q-route-tab to="/challenge" class="min-height50" name="challenge" icon="emoji_events" label="도전 게임"/>
+                <q-route-tab :to="`/channel/${$store.getters.user.channel_id}`" v-if="$store.getters.user" class="min-height50" name="channel" icon="far fa-id-card" label="내 채널"/>
             </q-tabs>
         </q-footer>
     </div>
@@ -46,20 +46,9 @@ export default class LayoutFooter extends Vue {
         this.tab = this.$store.getters.navTab;
     }
 
-    async goTo( path : string ) {
-        try {
-            await this.$router.push( path );
-        }
-        catch (e) {
-
-        }
-    }
-
     // async studio() {
     //     window.open(process.env.VUE_APP_STUDIO_URL);
     // }
-
-
 
 }
 </script>

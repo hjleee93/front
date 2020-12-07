@@ -20,7 +20,9 @@
                     </div>
                 </div>
                 <div class="self-center" v-if="$store.getters.user && $store.getters.user.channel_id === channelId">
-                    <q-btn color="grey-9" @click="$router.push(`/channel/${$store.getters.user.channel_id}/editing`)">채널 설정</q-btn>
+                    <router-link :to="`/channel/${$store.getters.user.channel_id}/editing`">
+                        <q-btn color="grey-9">채널 설정</q-btn>
+                    </router-link>
                 </div>
             </div>
         </div>
@@ -153,6 +155,12 @@ export default class Channel extends Vue {
 }
 </script>
 <style lang="scss" scoped>
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
 
 .head {
     background-color: #181818;

@@ -29,7 +29,9 @@
 <!--                        <div class="q-ml-sm" style="font-size: 40px;">-->
 <!--                            Zempie-->
 <!--                        </div>-->
-                        <q-img src="img/zempie-logo.png" width="300px" class="q-my-xl cursor-pointer" @click="$router.push('/')"></q-img>
+                        <a :href="$store.getters.homeUrl">
+                            <q-img src="img/zempie-logo.png" width="300px" class="q-my-xl cursor-pointer"></q-img>
+                        </a>
                     </div>
                 </div>
 
@@ -72,13 +74,15 @@
                         </q-input>
 
                         <div  class="text-right">
-                            <span class="cursorPoint non-selectable" @click="$router.replace('/resetPassword')">비밀번호 찾기</span>
+                            <router-link to="/resetPassword">
+                                <span class="cursorPoint non-selectable">비밀번호 찾기</span>
+                            </router-link>
                         </div>
 
                         <div class="q-mt-lg"></div>
                         <q-btn color="positive" class="width100p height50" @click="emailLogin">로그인</q-btn>
                         <div class="q-mt-md non-selectable">
-                            처음이신가요? <span @click="$router.replace('/joinEmail')" class="text-bold cursorPoint">회원가입</span>
+                            처음이신가요? <router-link to="/joinEmail"><span class="text-bold cursorPoint">회원가입</span></router-link>
                         </div>
 
                         <q-separator class="q-my-lg"></q-separator>
@@ -339,6 +343,11 @@ export default class Login extends Vue {
 }
 </script>
 <style lang="scss" scoped>
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+
     .footer {
         //background-color: ;
         background-color: #121212;

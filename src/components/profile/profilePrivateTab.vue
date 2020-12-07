@@ -75,7 +75,6 @@ export default class ProfilePrivateTab extends Vue {
         const result = await firebase.auth().sendPasswordResetEmail(this.email);
         // console.log(result);
         alert('재설정 메일을 보냈습니다. 메일을 확인해 주세요.');
-        // await this.$router.replace('/login');
         this.loading = false;
         this.$store.commit('ajaxBar', false);
     }
