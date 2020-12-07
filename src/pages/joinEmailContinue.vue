@@ -143,7 +143,11 @@ export default class JoinEmailContinue extends Vue {
         this.loading = true;
         const result = await this.$api.signUp( this.nickname );
 
-        if( !result.error ) {
+        if( !result || result.error ) {
+            console.error( result && result.error || 'error' );
+            result && result.error && alert( result.error );
+        }
+        else {
             const { user } = result;
             this.$store.commit('user', user);
             await LoginManager.login();
@@ -154,9 +158,6 @@ export default class JoinEmailContinue extends Vue {
             else {
                 await this.$router.replace('/');
             }
-        }
-        else {
-            alert(result.error);
         }
 
         this.loading = false;

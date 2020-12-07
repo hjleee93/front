@@ -130,21 +130,24 @@ export default class Channel extends Vue {
         const loginState = await this.$store.dispatch('loginState');
 
         const result = await this.$api.channel( this.channelId );
-        console.log(result);
 
-        const { target } = result;
-        this.user = target;
-        const {dev_games} = this.user;
-        if( dev_games ) {
-            for( let i = 0; i < dev_games.length; i++ ) {
-                dev_games[i].user = this.user;
-            }
-            this.games = dev_games;
+        if( !result || result.error ) {
+            console.error(result);
         }
+        else {
+            const { target } = result;
+            this.user = target;
+            const {dev_games} = this.user;
+            if( dev_games ) {
+                for( let i = 0; i < dev_games.length; i++ ) {
+                    dev_games[i].user = this.user;
+                }
+                this.games = dev_games;
+            }
 
-        this.email = this.user.email;
-        this.description = this.user.profile.description;
-
+            this.email = this.user.email;
+            this.description = this.user.profile.description;
+        }
     }
 
 }

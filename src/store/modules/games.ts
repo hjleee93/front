@@ -44,6 +44,13 @@ export default {
         loadedGames : async (context : any) => {
             if ( !context.state.loadedGames ) {
                 const result = await Vue.$api.games();
+
+                if( result.error ) {
+                    context.commit('games', []);
+                    context.commit( 'loadedGames', true );
+                    return [];
+                }
+
                 let { games } = result;
                 games = games.sort( ( a : any, b : any ) =>  a.game_id > b.game_id ? 1 : -1 );
                 context.commit('games', games);

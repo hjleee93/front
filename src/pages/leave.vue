@@ -85,10 +85,17 @@ export default class Leave extends Vue {
     async leave() {
         const ok = confirm( '정말로 탈퇴하시겠습니까?' );
         if ( ok ) {
-            const result = await this.$api.leave( this.reason  );
+            const result = await this.$api.leave( this.reason );
+
+            if( !result || result.error ) {
+                result && result.error && alert( result.error );
+                console.error( result && result.error || 'error' );
+            }
+            else  {
+                await Login.logout();
+                await this.$router.replace('/');
+            }
             // console.log(result);
-            await Login.logout();
-            await this.$router.replace('/');
         }
     }
 }

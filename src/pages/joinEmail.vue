@@ -261,16 +261,25 @@ export default class JoinEmail extends Vue {
 
 
                 const result2 = await this.$api.signUp( this.nickname );
-                const {user} = result2;
-                this.$store.commit('user', user);
-                await LoginManager.login();
 
-                if( this.$store.getters.redirectUrl ) {
-                    window.location.href = this.$store.getters.redirectUrl;
+                if( !result2 || result2.error ) {
+                    console.error( result2 && result2.error || 'error' );
+                    result && result.error && alert( result.error );
                 }
                 else {
-                    await this.$router.replace('/');
+                    const {user} = result2;
+                    this.$store.commit('user', user);
+                    await LoginManager.login();
+
+                    if( this.$store.getters.redirectUrl ) {
+                        window.location.href = this.$store.getters.redirectUrl;
+                    }
+                    else {
+                        await this.$router.replace('/');
+                    }
                 }
+
+
             }
             catch (e) {
                 // console.log(e);

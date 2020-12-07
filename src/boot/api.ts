@@ -27,7 +27,7 @@ class Api {
             return result.data;
         }
         catch (error) {
-            if ( error.response.data && error.response.data.error === 'Unauthorized' ) {
+            if ( error && error.response && error.response.data && error.response.data.error === 'Unauthorized' ) {
                 const currentUser = firebase.auth().currentUser;
                 if (currentUser) {
                     const idToken = await currentUser.getIdToken(true);
@@ -38,18 +38,24 @@ class Api {
                     else {
                         //3번 초과
                         errorCallback && errorCallback(error);
-                        throw new Error(error);
+                        // throw new Error(error);
                     }
                 }
                 else {
                     //로그인 안됨.
                     errorCallback && errorCallback(error);
-                    throw new Error(error)
+                    // throw new Error(error)
                     // return error;
                 }
             }
+            // console.log(error, error.message);
             // throw error;
-            return error.response.data;
+            //error && error.response && error.response.data || error
+
+            const result = error && error.response && error.response.data || {
+                    error : error.message || error,
+                };
+            return result;
         }
     }
 

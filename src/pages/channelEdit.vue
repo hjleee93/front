@@ -275,7 +275,7 @@ export default class ChannelEdit extends Vue {
             const result = await this.$api.updateUser( name, state_msg, picture, channel_id, description );
 
             if( !result || result.error ) {
-                alert( result.error );
+                result && result.error && alert( result.error );
                 isError = true;
             }
             else {
@@ -289,10 +289,10 @@ export default class ChannelEdit extends Vue {
             }
         }
 
-        if( banner ) {
+        if( !isError && banner ) {
             const result = await this.$api.updateBanner( banner );
             if( !result || result.error ) {
-                alert( result.error );
+                result && result.error && alert( result.error );
                 isError = true;
             }
             else {
@@ -341,7 +341,12 @@ export default class ChannelEdit extends Vue {
 
         const result = await this.$api.verifyChannelId( this.channelId );
         if( result.error ) {
-            alert( '사용할수 없는 아이디 입니다.' );
+            this.$q.notify({
+                message : '사용할 수 없는 아이디 입니다.',
+                position : 'top',
+                color : 'primary',
+                timeout: 2000
+            });
         }
         else {
             this.confirmChannelId = true;
