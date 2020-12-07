@@ -42,8 +42,9 @@ export default class SearchGame extends Vue {
                     }
                     const tags = hashtags.split(',');
                     const found = tags.find(( str )=>{
-                        str.includes( search );
+                        return str.indexOf( search ) > -1;
                     });
+
                     if( found ) {
                         arr.push( games[i] );
                     }
