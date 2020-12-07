@@ -1,7 +1,7 @@
 <template>
     <q-carousel
         v-if="$q.platform.is.desktop"
-        class="text-white shadow-1 q-mb-xl"
+        class="text-white shadow-1"
         v-model="slide"
 
         transition-prev="jump-right"

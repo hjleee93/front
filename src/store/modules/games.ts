@@ -4,6 +4,9 @@ export default {
     state: {
         games : [],
 
+        crtOriginGames : [],
+        searchGames : [],
+
         loadedGames : false,
     },
     getters: {
@@ -29,7 +32,14 @@ export default {
 
         gameByPathname : ( state : any ) => (pathname : string) => {
             return state.games.find( (game:any) => game.pathname === pathname );
-        }
+        },
+
+        crtOriginGames : ( state : any ) => {
+            return state.crtOriginGames;
+        },
+        searchGames : ( state : any ) => {
+            return state.searchGames;
+        },
     },
 
     mutations: {
@@ -38,7 +48,13 @@ export default {
         },
         loadedGames : ( state : any, payload : any ) => {
             state.loadedGames = payload;
-        }
+        },
+        crtOriginGames :  ( state : any, payload : any ) => {
+            state.crtOriginGames = payload;
+        },
+        searchGames :  ( state : any, payload : any ) => {
+            state.searchGames = payload;
+        },
     },
     actions: {
         loadedGames : async (context : any) => {

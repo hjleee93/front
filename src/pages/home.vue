@@ -7,9 +7,11 @@
 <!--            <genre-category></genre-category>-->
 <!--            <q-separator inset/>-->
 <!--            <sort-category></sort-category>-->
+            <search-game></search-game>
+
             <div class="q-pt-none">
                 <div class="cardContainer">
-                    <game-card v-for="game in $store.getters.officialGames" :data="game"></game-card>
+                    <game-card v-for="game in $store.getters.searchGames" :data="game"></game-card>
                 </div>
             </div>
         </div>
@@ -24,15 +26,19 @@ import GameCard from "components/common/card/gameCard.vue";
 import GenreCategory from "components/main/genreCategory.vue";
 import SortCategory from "components/main/sortCategory.vue";
 import MainFooter from "components/main/mainFooter.vue";
+import SearchGame from "components/common/searchGame.vue";
 
 @Component({
-    components: {MainFooter, SortCategory, GenreCategory, GameCard, MainCarousel}
+    components: {SearchGame, MainFooter, SortCategory, GenreCategory, GameCard, MainCarousel}
 })
 export default class Home extends Vue {
+
 
     mounted() {
         this.$store.commit('headerBgTransparent', true );
         this.$store.commit('navTab', 'Major');
+        this.$store.commit('crtOriginGames', this.$store.getters.officialGames );
+        this.$store.commit('searchGames', this.$store.getters.officialGames );
     }
 
     beforeDestroy() {
