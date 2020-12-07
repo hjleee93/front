@@ -141,10 +141,14 @@ export default class Channel extends Vue {
             this.user = target;
             const {dev_games} = this.user;
             if( dev_games ) {
+                const arr = [];
                 for( let i = 0; i < dev_games.length; i++ ) {
                     dev_games[i].user = this.user;
+                    if( dev_games[i].activated ) {
+                        arr.push( dev_games[i] );
+                    }
                 }
-                this.games = dev_games;
+                this.games = arr;
             }
 
             this.email = this.user.email;
