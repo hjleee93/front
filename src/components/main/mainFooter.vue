@@ -5,23 +5,25 @@
         <footer class="mainFooter bgColor-0 q-mt-lg q-pb-lg">
             <div class="maxWidth text-left q-px-md">
                 <div class="q-pt-xl q-mb-xl">
-                    <div class="text-h7 text-weight-bold row q-mb-md cursor-pointer" @click="goToSupport()">
-                        고객센터
+                    <div class="text-h7 text-weight-bold row q-mb-md cursor-pointer">
+                        <a class="text-h7" :href="$store.getters.supportUrl">
+                            고객센터
+                        </a>
                     </div>
                     <div class="row">
-                        <div class="q-mr-md"><a class="cursor-pointer" @click="goToSupport('notice')">공지사항</a></div>
+                        <div class="q-mr-md"><a class="cursor-pointer smallFont" :href="`${$store.getters.supportUrl}notice`">공지사항</a></div>
                         <q-separator vertical class="q-mr-md"></q-separator>
-<!--                        <div class="q-mr-md"><a class="cursor-pointer" @click="goToSupport">이벤트</a></div>-->
+<!--                        <div class="q-mr-md"><a class="cursor-pointer" >이벤트</a></div>-->
 <!--                        <q-separator vertical class="q-mr-md"></q-separator>-->
-                        <div class="q-mr-md"><a class="cursor-pointer" @click="goToSupport('faq')">FAQ</a></div>
+                        <div class="q-mr-md"><a class="cursor-pointer smallFont" :href="`${$store.getters.supportUrl}faq`">FAQ</a></div>
                         <q-separator vertical class="q-mr-md"></q-separator>
-                        <div class="q-mr-md"><a class="cursor-pointer" @click="goToSupport('inquiry')">1:1 문의</a></div>
+                        <div class="q-mr-md"><a class="cursor-pointer smallFont" :href="`${$store.getters.supportUrl}inquiry`">1:1 문의</a></div>
                         <q-separator vertical class="q-mr-md"></q-separator>
-                        <div class="q-mr-md"><a class="cursor-pointer" @click="goToSupport('guide')">게임등록가이드</a></div>
+                        <div class="q-mr-md"><a class="cursor-pointer smallFont" :href="`${$store.getters.supportUrl}guide`">게임등록가이드</a></div>
                         <q-separator vertical class="q-mr-md"></q-separator>
-                        <div class="q-mr-md"><a class="cursor-pointer" @click="goToSupport('tos')">이용약관</a></div>
+                        <div class="q-mr-md"><a class="cursor-pointer smallFont" :href="`${$store.getters.supportUrl}tos`">이용약관</a></div>
                         <q-separator vertical class="q-mr-md"></q-separator>
-                        <div class="q-mr-md"><a class="cursor-pointer" @click="goToSupport('policy')">개인정보취급방침</a></div>
+                        <div class="q-mr-md"><a class="cursor-pointer smallFont" :href="`${$store.getters.supportUrl}policy`">개인정보취급방침</a></div>
                     </div>
                 </div>
                 <div class="company q-mb-xl">
@@ -46,9 +48,6 @@ import { Vue, Component, Prop } from 'vue-property-decorator';
 
 @Component
 export default class MainFooter extends Vue {
-    goToSupport( path : string = '') {
-        location.href = `${process.env.VUE_APP_SERVICE_CENTER_URL}${path}`;
-    }
 }
 </script>
 <style lang="scss" scoped>
@@ -67,10 +66,12 @@ export default class MainFooter extends Vue {
 
         a {
             color: #959595;
-            font-size: 12px;
             text-decoration: none;
         }
 
+        .smallFont {
+            font-size: 12px;
+        }
 
         .company {
             font-size: 12px;

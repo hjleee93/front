@@ -142,10 +142,6 @@ export default class AccountPopupMobile extends Vue {
         // await this.$store.dispatch( 'logout' );
         // this.active = false;
     }
-
-    async serviceCenter() {
-        location.href = (process.env.VUE_APP_SERVICE_CENTER_URL);
-    }
 }
 </script>
 <style lang="scss" scoped>
