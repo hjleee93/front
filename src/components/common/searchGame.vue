@@ -18,9 +18,9 @@ export default class SearchGame extends Vue {
 
     onChanged() {
         if(this.timer) {
-            clearTimeout( this.timer );
+            window.clearTimeout( this.timer );
         }
-        this.timer = setTimeout( this.onSearch, 500 );
+        this.timer = window.setTimeout( this.onSearch, 500 );
     }
 
     onSearch() {
