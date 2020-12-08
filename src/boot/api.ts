@@ -96,8 +96,11 @@ class Api {
 
 
     //GAME
-    async games() {
-        const response = await this.request( 'get', '/games', undefined, false );
+    async games(limit : number = 100, offset : number = 0) {
+        const response = await this.request( 'get', '/games', {
+            limit,
+            offset
+        }, false );
         return response.result || response;
     }
 
