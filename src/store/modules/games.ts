@@ -77,7 +77,7 @@ export default {
                 }
 
                 let { games } = result;
-                games = games.sort( ( a : any, b : any ) =>  a.game_id < b.game_id ? 1 : -1 );
+                // games = games.sort( ( a : any, b : any ) =>  a.game_id < b.game_id ? 1 : -1 );
                 context.commit('games', games);
                 context.commit( 'loadedGames', true );
                 return games
