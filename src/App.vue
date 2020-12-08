@@ -13,6 +13,7 @@
 <script lang="ts">
 import {Vue, Component, Watch} from 'vue-property-decorator';
 import {i18n} from "boot/i18n";
+import {firebaseInitStartTime} from "boot/firebase";
 
 let app: App;
 
@@ -26,6 +27,10 @@ export default class App extends Vue {
         app = this;
 
         await this.$store.dispatch('loadedGames');
+
+        await this.$store.dispatch('loginState');
+
+        console.log('로그인완료 : ' + (Date.now() - firebaseInitStartTime) / 1000 );
 
         // const a = await this.$axios.get('/__cookie', {
         //     withCredentials: true

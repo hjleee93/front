@@ -101,6 +101,11 @@ class Api {
         return response.result || response;
     }
 
+    async searchGame( tag ) {
+        const response = await this.request( 'get', `/games/s/${tag}`, undefined, false );
+        return response.result || response;
+    }
+
 
     //USER
     async session() {

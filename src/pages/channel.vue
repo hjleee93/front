@@ -1,5 +1,5 @@
 <template>
-    <q-page>
+    <q-page v-if="user">
         <div>
             <q-img v-if="user && user.profile.url_banner" :src="user && user.profile.url_banner || ''">
             </q-img>

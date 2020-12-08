@@ -23,7 +23,7 @@ export default class SearchGame extends Vue {
         this.timer = window.setTimeout( this.onSearch, 500 );
     }
 
-    onSearch() {
+    async onSearch() {
 
         this.timer = 0;
 
@@ -31,36 +31,54 @@ export default class SearchGame extends Vue {
             this.$store.commit('searchGames', this.$store.getters.crtOriginGames );
         }
         else {
-            const games = this.$store.getters.crtOriginGames;
-            const search = this.search.trim();
-            if( search[0] === '#' ) {
-                const arr = [];
-                for( let i = 0; i < games.length; i++ ) {
-                    const hashtags = games[i].hashtags;
-                    if( !hashtags ) {
-                        continue;
-                    }
-                    const tags = hashtags.split(',');
-                    const found = tags.find(( str )=>{
-                        return str.indexOf( search ) > -1;
-                    });
 
-                    if( found ) {
-                        arr.push( games[i] );
-                    }
-                }
-                this.$store.commit('searchGames', arr);
+            const result = await this.$api.searchGame( this.search );
+
+            if( !result || result.error ) {
+
             }
             else {
+                const { games } = result;
                 const arr = [];
+                const isOfficial = this.$store.getters.isOfficialPage;
                 for( let i = 0; i < games.length; i++ ) {
-                    const title : string = games[i].title;
-                    if( title.indexOf( search ) > -1 ) {
+                    if( games[i].official === isOfficial ) {
                         arr.push( games[i] );
                     }
                 }
                 this.$store.commit('searchGames', arr);
             }
+
+            // const games = this.$store.getters.crtOriginGames;
+            // const search = this.search.trim();
+            // if( search[0] === '#' ) {
+            //     const arr = [];
+            //     for( let i = 0; i < games.length; i++ ) {
+            //         const hashtags = games[i].hashtags;
+            //         if( !hashtags ) {
+            //             continue;
+            //         }
+            //         const tags = hashtags.split(',');
+            //         const found = tags.find(( str )=>{
+            //             return str.indexOf( search ) > -1;
+            //         });
+            //
+            //         if( found ) {
+            //             arr.push( games[i] );
+            //         }
+            //     }
+            //     this.$store.commit('searchGames', arr);
+            // }
+            // else {
+            //     const arr = [];
+            //     for( let i = 0; i < games.length; i++ ) {
+            //         const title : string = games[i].title;
+            //         if( title.indexOf( search ) > -1 ) {
+            //             arr.push( games[i] );
+            //         }
+            //     }
+            //     this.$store.commit('searchGames', arr);
+            // }
         }
     }
 

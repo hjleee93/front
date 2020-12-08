@@ -45,16 +45,19 @@
 
                 <div class="q-mr-xl"></div>
 
-                <q-avatar class="cursorPoint" v-if="$store.getters.user" size="30px" @click="$store.commit('accountPopupMobile', true)">
-                    <img :src="$store.getters.user && $store.getters.user.picture || 'img/icon_pic_empty_01.png'">
-                    <account-popup-desktop v-if="$q.platform.is.desktop"></account-popup-desktop>
-                    <account-popup-mobile v-if="$q.platform.is.mobile"></account-popup-mobile>
-                </q-avatar>
-                <router-link to="/login" v-else >
-                    <q-btn color="positive">
-                        로그인
-                    </q-btn>
-                </router-link>
+                <div v-if="$store.getters.isLoginComplete">
+                    <q-avatar class="cursorPoint" v-if="$store.getters.user" size="30px" @click="$store.commit('accountPopupMobile', true)">
+                        <img :src="$store.getters.user && $store.getters.user.picture || 'img/icon_pic_empty_01.png'">
+                        <account-popup-desktop v-if="$q.platform.is.desktop"></account-popup-desktop>
+                        <account-popup-mobile v-if="$q.platform.is.mobile"></account-popup-mobile>
+                    </q-avatar>
+                    <router-link to="/login" v-else >
+                        <q-btn color="positive">
+                            로그인
+                        </q-btn>
+                    </router-link>
+                </div>
+
             </q-toolbar>
         </q-header>
     </div>

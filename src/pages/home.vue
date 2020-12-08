@@ -11,7 +11,7 @@
 
             <div class="q-pt-none">
                 <div class="cardContainer">
-                    <game-card v-for="game in $store.getters.officialGames" :data="game"></game-card>
+                    <game-card v-for="game in $store.getters.searchGames" :data="game"></game-card>
                 </div>
             </div>
         </div>
@@ -40,6 +40,7 @@ export default class Home extends Vue {
 
         await this.$store.dispatch( 'loadingGame' );
 
+        this.$store.commit('isOfficialPage', true);
         this.$store.commit('crtOriginGames', this.$store.getters.officialGames );
         this.$store.commit('searchGames', this.$store.getters.officialGames );
     }

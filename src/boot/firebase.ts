@@ -27,9 +27,13 @@ const dev_firebaseConfig = {
     measurementId: "G-NFY628EX60"
 };
 
+let firebaseInitStartTime = Date.now();
 firebase.initializeApp(process.env.VUE_APP_FIRESTORE_CONFIG === 'development' ? dev_firebaseConfig : firebaseConfig);
 firebase.auth().onAuthStateChanged( Login.autoLogin );
 
+export {
+    firebaseInitStartTime
+}
 
 // async function onAuthStateChanged() {
 //

@@ -5,6 +5,7 @@ export default {
     state: {
         games : [],
 
+        isOfficialPage : true,
         crtOriginGames : [],
         searchGames : [],
 
@@ -41,6 +42,9 @@ export default {
         searchGames : ( state : any ) => {
             return state.searchGames;
         },
+        isOfficialPage : ( state : any ) => {
+            return state.isOfficialPage;
+        },
     },
 
     mutations: {
@@ -55,6 +59,9 @@ export default {
         },
         searchGames :  ( state : any, payload : any ) => {
             state.searchGames = payload;
+        },
+        isOfficialPage :  ( state : any, payload : any ) => {
+            state.isOfficialPage = payload;
         },
     },
     actions: {

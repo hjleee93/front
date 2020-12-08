@@ -38,6 +38,7 @@ export default class Home extends Vue {
 
         await this.$store.dispatch( 'loadingGame' );
 
+        this.$store.commit('isOfficialPage', false);
         this.$store.commit('crtOriginGames', this.$store.getters.noneOfficialGames );
         this.$store.commit('searchGames', this.$store.getters.noneOfficialGames );
     }

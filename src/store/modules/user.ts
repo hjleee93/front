@@ -114,7 +114,7 @@ export default {
                 function wait() {
                     if (context.state.loginState === LoginState.none
                         || context.state.loginState === LoginState.customToken ) {
-                        setTimeout(wait, 500);
+                        setTimeout(wait, 100);
                     } else {
                         return resolve(context.getters.loginState);
                     }
