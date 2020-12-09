@@ -27,45 +27,10 @@ const dev_firebaseConfig = {
     measurementId: "G-NFY628EX60"
 };
 
-let firebaseInitStartTime = Date.now();
+// let firebaseInitStartTime = Date.now();
 firebase.initializeApp(process.env.VUE_APP_FIRESTORE_CONFIG === 'development' ? dev_firebaseConfig : firebaseConfig);
 firebase.auth().onAuthStateChanged( Login.autoLogin );
 
-export {
-    firebaseInitStartTime
-}
-
-// async function onAuthStateChanged() {
-//
-//     if( _store.getters.loginState === LoginState.none ) {
-//         //자동 로그인일때만 실행.
-//
-//         const currentUser = firebase.auth().currentUser;
-//         if ( currentUser ) {
-//
-//             console.log( currentUser );
-//
-//             const idToken = await currentUser.getIdToken(true);
-//             _store.commit('idToken', idToken);
-//
-//             if( _store.getters.loginState === LoginState.none ) {
-//                 const result = await Vue.$api.user();
-//
-//                 if( !result || result.error /*&& zempieUser.error === '잘 못 된 유저 아이디입니다'*/ ) {
-//                     await _store.dispatch('logout');
-//                 }
-//                 else {
-//                     const { user } = result;
-//                     _store.commit('user', user);
-//                     _store.commit('loginState', LoginState.login );
-//                 }
-//             }
-//         }
-//         else {
-//             await _store.dispatch('logout');
-//             // _store.commit('loginState', LoginState.logout );
-//         }
-//     }
+// export {
+//     firebaseInitStartTime
 // }
-
-//await firebase.auth().signOut();

@@ -3,21 +3,21 @@ import {LoginState} from "src/store/modules/user";
 import {_store} from "src/store";
 import Cookie from "src/scripts/cookie";
 import Vue from "vue";
-import {firebaseInitStartTime} from "boot/firebase";
+// import {firebaseInitStartTime} from "boot/firebase";
 
 const cookieName = process.env.VUE_APP_COOKIE_NAME;
 
 class Login {
 
     static async autoLogin() {
-        console.log('파이어베이스 초기화 : ' +  (Date.now() - firebaseInitStartTime) / 1000 );
+        // console.log('파이어베이스 초기화 : ' +  (Date.now() - firebaseInitStartTime) / 1000 );
         if( _store.getters.loginState === LoginState.none ) {
             const currentUser = firebase.auth().currentUser;
             if ( currentUser ) {
                 // console.log(currentUser);
 
                 const idToken = await currentUser.getIdToken();
-                console.log('아이디 토큰 갱신 : ' +  (Date.now() - firebaseInitStartTime) / 1000 );
+                // console.log('아이디 토큰 갱신 : ' +  (Date.now() - firebaseInitStartTime) / 1000 );
 
                 _store.commit('idToken', idToken);
                 // console.log(idToken);
@@ -26,7 +26,7 @@ class Login {
                 console.log( cookie, currentUser.uid, cookie === currentUser.uid );
                 if( cookie && cookie === currentUser.uid ) {
                     const result = await Vue.$api.user();
-                    console.log('유저정보 세팅 : ' +  (Date.now() - firebaseInitStartTime) / 1000 );
+                    // console.log('유저정보 세팅 : ' +  (Date.now() - firebaseInitStartTime) / 1000 );
                     if( !result || result.error ) {
                         await Login.logout();
                     }
@@ -38,11 +38,11 @@ class Login {
                 }
                 else if( cookie ) {
                     //쿠키는 있지만 기존 사용자랑 다른 상태
-                    console.log('로그아웃(쿠키다름) : ' +  (Date.now() - firebaseInitStartTime) / 1000 );
+                    // console.log('로그아웃(쿠키다름) : ' +  (Date.now() - firebaseInitStartTime) / 1000 );
                     await firebase.auth().signOut();
                 }
                 else {
-                    console.log('로그아웃(쿠키없음) : ' +  (Date.now() - firebaseInitStartTime) / 1000 );
+                    // console.log('로그아웃(쿠키없음) : ' +  (Date.now() - firebaseInitStartTime) / 1000 );
                     await Login.logout();
                 }
             }
@@ -50,7 +50,7 @@ class Login {
                 const cookie = Cookie.read(cookieName);
                 if( cookie ) {
                     const result = await Vue.$api.session();
-                    console.log('세션 확인 : ' +  (Date.now() - firebaseInitStartTime) / 1000 );
+                    // console.log('세션 확인 : ' +  (Date.now() - firebaseInitStartTime) / 1000 );
                     // console.log(result);
                     if( !result || result.error ) {
                         await Login.logout();
@@ -59,7 +59,7 @@ class Login {
                         const { customToken } = result;
                         _store.commit('loginState', LoginState.customToken );
                         await firebase.auth().signInWithCustomToken( customToken );
-                        console.log('커스텀토큰 로그인 : ' +  (Date.now() - firebaseInitStartTime) / 1000 );
+                        // console.log('커스텀토큰 로그인 : ' +  (Date.now() - firebaseInitStartTime) / 1000 );
                     }
                 }
                 else {
@@ -70,11 +70,11 @@ class Login {
         else if( _store.getters.loginState === LoginState.customToken ) {
             const currentUser = firebase.auth().currentUser;
             const idToken = await currentUser.getIdToken();
-            console.log('커스텀토큰 로그인 - 토큰갱신 : ' +  (Date.now() - firebaseInitStartTime) / 1000 );
+            // console.log('커스텀토큰 로그인 - 토큰갱신 : ' +  (Date.now() - firebaseInitStartTime) / 1000 );
             _store.commit('idToken', idToken);
             // console.log(idToken);
             const result = await Vue.$api.user();
-            console.log('커스텀토큰 로그인 - 유저 정보 갱신 : ' +  (Date.now() - firebaseInitStartTime) / 1000 );
+            // console.log('커스텀토큰 로그인 - 유저 정보 갱신 : ' +  (Date.now() - firebaseInitStartTime) / 1000 );
             if( !result || result.error ) {
                 await Login.logout();
             }

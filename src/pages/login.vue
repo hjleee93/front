@@ -47,6 +47,7 @@
                                  label="이메일"
                                  ref="email"
                                  lazy-rules
+                                 @keypress.enter="emailLogin"
                                  :rules="[val=>val.match(/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/) || '올바른 이메일을 입력해 주세요.']"
                         >
                             <template v-slot:prepend>
@@ -63,6 +64,7 @@
                                  label="비밀번호"
                                  ref="password"
                                  :onchange="passwordError = ''"
+                                 @keypress.enter="emailLogin"
                                  lazy-rules
                                  :rules="[
                                      val=>val.match(/^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{6,20}$/) || '영문과 최소 1개의 숫자 혹은 특수 문자를 포함한 6~20자리 비밀번호를 입력해주세요.',
