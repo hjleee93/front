@@ -140,7 +140,6 @@ export default {
                 arr = arr.concat( games );
 
                 context.commit(gameKey, arr);
-                console.log(gameKey, arr);
 
                 if( games.length < limit ) {
                     context.commit( stateKey, GameLoadState.complete );

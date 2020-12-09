@@ -27,11 +27,12 @@ export default class SearchGame extends Vue {
 
         this.timer = 0;
 
-        if( this.search === '' ) {
+        if( this.search === '' || this.search[0] === '#' ) {
             this.$store.commit('isSearchGame', false );
         }
         else {
             const result = await this.$api.searchGame( this.search );
+
             if( !result || result.error ) {
 
             }

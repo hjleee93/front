@@ -57,15 +57,18 @@ export default class Home extends Vue {
     }
 
     onIntersection( index, entry ) {
-        const isVisible = entry.isVisible;
-        if( !isVisible ) {
+
+        const isIntersecting = entry.isIntersecting;
+        if( !isIntersecting ) {
             return;
         }
 
+
         const games = this.$store.getters.officialGames;
-        if( index < games.length ) {
+        if( index < games.length - 1) {
             return;
         }
+
 
         if( this.$store.getters.officialLoadState === GameLoadState.loaded ) {
             this.$store.dispatch('loadGames', 1);
