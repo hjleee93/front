@@ -26,7 +26,7 @@ export default class App extends Vue {
         // console.log( i18n.t('failed') );
         app = this;
 
-        await this.$store.dispatch('loadedGames');
+        // await this.$store.dispatch('loadedGames');
 
         await this.$store.dispatch('loginState');
 

@@ -9,8 +9,11 @@
 <!--            <sort-category></sort-category>-->
             <search-game></search-game>
             <div class="q-pt-none">
-                <div class="cardContainer">
+                <div class="cardContainer" v-if="$store.getters.isSearchGame">
                     <game-card v-for="game in $store.getters.searchGames" :data="game"></game-card>
+                </div>
+                <div class="cardContainer" v-else>
+                    <game-card v-intersection="entry => onIntersection(index, entry)" v-for="(game,index) in $store.getters.noneOfficialGames" :data="game"></game-card>
                 </div>
             </div>
         </div>
@@ -26,6 +29,7 @@ import SortCategory from "components/main/sortCategory.vue";
 import MainFooter from "components/main/mainFooter.vue";
 import ChallengeCarousel from "components/challenge/challengeCarousel.vue";
 import SearchGame from "components/common/searchGame.vue";
+import {GameLoadState} from "src/store/modules/games";
 
 @Component({
     components: {SearchGame, ChallengeCarousel, MainFooter, SortCategory, GenreCategory, GameCard}
@@ -36,17 +40,35 @@ export default class Home extends Vue {
         this.$store.commit('headerBgTransparent', true );
         this.$store.commit('navTab', 'Minor');
 
-        await this.$store.dispatch( 'loadingGame' );
+        // await this.$store.dispatch( 'loadingGame' );
 
         this.$store.commit('isOfficialPage', false);
-        this.$store.commit('crtOriginGames', this.$store.getters.noneOfficialGames );
-        this.$store.commit('searchGames', this.$store.getters.noneOfficialGames );
+
+
+        await this.$store.dispatch('loadGames', 0);
+        // this.$store.commit('crtOriginGames', this.$store.getters.noneOfficialGames );
+        // this.$store.commit('searchGames', this.$store.getters.noneOfficialGames );
     }
 
     beforeDestroy() {
         this.$store.commit('headerBgTransparent', false );
     }
 
+    onIntersection( index, entry ) {
+        const isVisible = entry.isVisible;
+        if( !isVisible ) {
+            return;
+        }
+
+        const games = this.$store.getters.noneOfficialGames;
+        if( index < games.length ) {
+            return;
+        }
+
+        if( this.$store.getters.noneOfficialLoadState === GameLoadState.loaded ) {
+            this.$store.dispatch('loadGames', 0);
+        }
+    }
 
 
 };

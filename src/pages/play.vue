@@ -31,8 +31,16 @@ export default class Play extends Vue {
 
     async mounted() {
 
-        await this.$store.dispatch('loadedGames');
+        // await this.$store.dispatch('loadedGames');
         this.gameData = this.$store.getters.gameByPathname(this.pathname);
+        if( !this.gameData ) {
+            //todo 게임 요청
+            const result = await this.$api.game( this.pathname );
+            if( !result && result.error ) {
+                console.error( result && result.error || 'error' );
+            }
+            this.gameData = result;
+        }
 
         // const game_uid = this.gameData.game_uid;
         // this.url = `${process.env.VUE_APP_LAUNCHER_URL}game/${game_uid}`;

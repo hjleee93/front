@@ -1,43 +1,79 @@
 import Vue from 'vue';
 import {LoginState} from "src/store/modules/user";
 
+
+enum GameLoadState {
+    none,       //로드전
+    loading,    //로드중
+    loaded,     //로드완료
+    complete,   //모든게임 로드완료
+}
+
+export {
+    GameLoadState,
+}
+
 export default {
     state: {
-        games : [],
 
-        isOfficialPage : true,
+        limit : 10,
+
+        officialGames : [],
+        noneOfficialGames : [],
+
         crtOriginGames : [],
         searchGames : [],
+        isSearchGame : false,
 
-        loadedGames : false,
+        isOfficialPage : true,
+        officialLoadState : GameLoadState.none,
+        noneOfficialLoadState : GameLoadState.none,
     },
     getters: {
-        loadedGames : (state : any) => {
-            return state.loadedGames;
-        },
+        // loadedGames : (state : any) => {
+        //     return state.loadedGames;
+        // },
 
-        games : ( state : any ) => {
-            return state.games;
-        },
+        // games : ( state : any ) => {
+        //     return state.games;
+        // },
 
         officialGames : ( state : any ) =>{
-            return state.games.filter( game => game.official );
+            return state.officialGames;
         },
 
         noneOfficialGames : ( state : any ) =>{
-            return state.games.filter( game => !game.official );
+            return state.noneOfficialGames;
+        },
+
+        officialLoadState : ( state : any ) =>{
+            return state.officialLoadState;
+        },
+
+        noneOfficialLoadState : ( state : any ) =>{
+            return state.noneOfficialLoadState;
         },
 
         gameByTitle : ( state : any ) => (title : string) => {
-            return state.games.find( (game:any) => game.title === title );
+            let game = state.officialGames.find( (game:any) => game.title === title );
+            if( !game ) {
+                game = state.noneOfficialGames.find( (game:any) => game.title === title );
+            }
+
+            return game;
         },
 
         gameByPathname : ( state : any ) => (pathname : string) => {
-            return state.games.find( (game:any) => game.pathname === pathname );
+            let game = state.officialGames.find( (game:any) => game.pathname === pathname );
+            if( !game ) {
+                game = state.noneOfficialGames.find( (game:any) => game.pathname === pathname );
+            }
+
+            return game;
         },
 
-        crtOriginGames : ( state : any ) => {
-            return state.crtOriginGames;
+        isSearchGame : ( state : any ) => {
+            return state.isSearchGame;
         },
         searchGames : ( state : any ) => {
             return state.searchGames;
@@ -48,14 +84,28 @@ export default {
     },
 
     mutations: {
-        games : ( state : any, payload : any ) => {
-            state.games = payload;
+        // games : ( state : any, payload : any ) => {
+        //     state.games = payload;
+        // },
+        // loadedGames : ( state : any, payload : any ) => {
+        //     state.loadedGames = payload;
+        // },
+
+        officialGames : ( state : any, payload : any ) => {
+            state.officialGames = payload;
         },
-        loadedGames : ( state : any, payload : any ) => {
-            state.loadedGames = payload;
+        noneOfficialGames : ( state : any, payload : any ) => {
+            state.noneOfficialGames = payload;
         },
-        crtOriginGames :  ( state : any, payload : any ) => {
-            state.crtOriginGames = payload;
+        officialLoadState : ( state : any, payload : any ) => {
+            state.officialLoadState = payload;
+        },
+        noneOfficialLoadState : ( state : any, payload : any ) => {
+            state.noneOfficialLoadState = payload;
+        },
+
+        isSearchGame : ( state : any, payload : any ) => {
+            state.isSearchGame = payload;
         },
         searchGames :  ( state : any, payload : any ) => {
             state.searchGames = payload;
@@ -65,38 +115,71 @@ export default {
         },
     },
     actions: {
-        loadedGames : async (context : any) => {
-            if ( !context.state.loadedGames ) {
-                const result = await Vue.$api.games();
+        loadGames : async (context : any, official : number = 1) => {
 
+            const gameKey = official === 1 ? 'officialGames' : 'noneOfficialGames';
+            const stateKey = official === 1 ? 'officialLoadState' : 'noneOfficialLoadState';
+
+            if ( context.state[stateKey] === GameLoadState.none ||
+                context.state[stateKey] === GameLoadState.loaded) {
+
+                const limit = context.state.limit;
+                const offset = context.state[gameKey].length;
+                context.commit( stateKey, GameLoadState.loading );
+
+                const result = await Vue.$api.games(limit, offset, official);
                 if( !result || result.error ) {
                     result && result.error && console.error( result.error );
-                    context.commit('games', []);
-                    context.commit( 'loadedGames', true );
+                    context.commit(gameKey, []);
+                    context.commit( stateKey, GameLoadState.complete );
                     return [];
                 }
 
                 let { games } = result;
-                // games = games.sort( ( a : any, b : any ) =>  a.game_id < b.game_id ? 1 : -1 );
-                context.commit('games', games);
-                context.commit( 'loadedGames', true );
-                return games
+                let arr = context.state[gameKey].slice();
+                arr = arr.concat( games );
+
+                context.commit(gameKey, arr);
+                console.log(gameKey, arr);
+
+                if( games.length < limit ) {
+                    context.commit( stateKey, GameLoadState.complete );
+                }
+                else {
+                    context.commit( stateKey, GameLoadState.loaded );
+                }
+
+                return arr;
             }
-            return context.state.games;
+            else if( context.state[stateKey] === GameLoadState.loading ) {
+                await function () {
+                    return new Promise((resolve, reject) => {
+                        function wait() {
+                            if ( context.state[stateKey] === GameLoadState.loading ) {
+                                setTimeout(wait, 500);
+                            } else {
+                                return resolve();
+                            }
+                        }
+                        wait();
+                    })
+                }
+            }
+            return context.state[gameKey];
         },
 
-        loadingGame : async (context : any) => {
-            return new Promise((resolve, reject) => {
-                function wait() {
-                    if ( !context.state.loadedGames ) {
-                        setTimeout(wait, 500);
-                    } else {
-                        return resolve(context.getters.loginState);
-                    }
-                }
-                wait();
-            })
-        }
+        // loadingGame : async (context : any) => {
+        //     return new Promise((resolve, reject) => {
+        //         function wait() {
+        //             if ( !context.state.loadedGames ) {
+        //                 setTimeout(wait, 500);
+        //             } else {
+        //                 return resolve(context.getters.loginState);
+        //             }
+        //         }
+        //         wait();
+        //     })
+        // }
     }
 }
 
