@@ -39,7 +39,10 @@ export default class Play extends Vue {
             if( !result && result.error ) {
                 console.error( result && result.error || 'error' );
             }
-            this.gameData = result;
+            else {
+                this.gameData = result.game;
+            }
+
         }
 
         // const game_uid = this.gameData.game_uid;
