@@ -169,7 +169,6 @@ export default class Channel extends Vue {
     }
 
     onIntersection( index, entry ) {
-        console.log(entry);
         const isIntersecting = entry.isIntersecting;
         this.$set( this.view, index,  isIntersecting);
     }

@@ -23,7 +23,7 @@ class Login {
                 // console.log(idToken);
 
                 const cookie = Cookie.read( cookieName );
-                console.log( cookie, currentUser.uid, cookie === currentUser.uid );
+                // console.log( cookie, currentUser.uid, cookie === currentUser.uid );
                 if( cookie && cookie === currentUser.uid ) {
                     const result = await Vue.$api.user();
                     // console.log('유저정보 세팅 : ' +  (Date.now() - firebaseInitStartTime) / 1000 );

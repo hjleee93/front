@@ -11,7 +11,7 @@
 <!--                        <div class="q-ml-sm" style="font-size: 40px;">-->
 <!--                            Zempie-->
 <!--                        </div>-->
-                        <a :href="process.env.VUE_APP_ZEMPIE_URL">
+                        <a :href="$store.getters.homeUrl">
                             <q-img src="img/zempie-logo.png" width="300px" class="q-my-xl cursor-pointer"></q-img>
                         </a>
 
