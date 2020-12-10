@@ -11,10 +11,22 @@
 
             <div class="q-pt-none">
                 <div class="cardContainer" v-if="$store.getters.isSearchGame">
-                    <game-card v-for="game in $store.getters.searchGames" :data="game"></game-card>
+                    <game-card v-for="(game, index) in $store.getters.searchGames"
+                               :key="index"
+                               class="card"
+                               :class="view[index] ? 'visible':''"
+                               v-intersection="entry => onIntersection(index, entry, false)"
+                               :data="game">
+                    </game-card>
                 </div>
                 <div class="cardContainer" v-else>
-                    <game-card v-intersection="entry => onIntersection(index, entry)" v-for="(game, index) in $store.getters.officialGames" :data="game"></game-card>
+                    <game-card v-for="(game, index) in $store.getters.officialGames"
+                               :key="index"
+                               class="card"
+                               :class="view[index] ? 'visible':''"
+                               v-intersection="entry => onIntersection(index, entry, true)"
+                               :data="game">
+                    </game-card>
                 </div>
             </div>
         </div>
@@ -37,6 +49,7 @@ import {GameLoadState} from "src/store/modules/games";
 })
 export default class Home extends Vue {
 
+    private view : boolean[] = [];
 
     async mounted() {
         this.$store.commit('headerBgTransparent', true );
@@ -56,12 +69,15 @@ export default class Home extends Vue {
         this.$store.commit('headerBgTransparent', false );
     }
 
-    onIntersection( index, entry ) {
+    onIntersection( index, entry, search ) {
 
         const isIntersecting = entry.isIntersecting;
-        if( !isIntersecting ) {
+        this.$set( this.view, index,  entry.isIntersecting);
+
+        if( !isIntersecting || !search) {
             return;
         }
+
 
 
         const games = this.$store.getters.officialGames;
@@ -84,5 +100,15 @@ export default class Home extends Vue {
 .page {
     top: -50px;
 }
+
+.card {
+    transform: scale(0);
+}
+
+.visible {
+    transform: scale(1);
+    transition: transform 0.2s ease-out;
+}
+
 
 </style>

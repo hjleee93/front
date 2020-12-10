@@ -10,10 +10,28 @@
             <search-game></search-game>
             <div class="q-pt-none">
                 <div class="cardContainer" v-if="$store.getters.isSearchGame">
-                    <game-card v-for="game in $store.getters.searchGames" :data="game"></game-card>
+
+                    <game-card v-for="(game, index) in $store.getters.searchGames"
+                               :key="index"
+                               class="card"
+                               :class="view[index]?'visible':''"
+                               v-intersection="entry => onIntersection(index, entry, false)"
+                               :data="game">
+                    </game-card>
+
+<!--                    <game-card v-for="game in $store.getters.searchGames" :data="game"></game-card>-->
                 </div>
                 <div class="cardContainer" v-else>
-                    <game-card v-intersection="entry => onIntersection(index, entry)" v-for="(game,index) in $store.getters.noneOfficialGames" :data="game"></game-card>
+
+                    <game-card v-for="(game, index) in $store.getters.noneOfficialGames"
+                               :key="index"
+                               class="card"
+                               :class="view[index]?'visible':''"
+                               v-intersection="entry => onIntersection(index, entry, true)"
+                               :data="game">
+                    </game-card>
+
+<!--                    <game-card v-intersection="entry => onIntersection(index, entry)" v-for="(game,index) in $store.getters.noneOfficialGames" :data="game"></game-card>-->
                 </div>
             </div>
         </div>
@@ -34,7 +52,9 @@ import {GameLoadState} from "src/store/modules/games";
 @Component({
     components: {SearchGame, ChallengeCarousel, MainFooter, SortCategory, GenreCategory, GameCard}
 })
-export default class Home extends Vue {
+export default class Challenge extends Vue {
+
+    private view : boolean[] = [];
 
     async mounted() {
         this.$store.commit('headerBgTransparent', true );
@@ -54,11 +74,14 @@ export default class Home extends Vue {
         this.$store.commit('headerBgTransparent', false );
     }
 
-    onIntersection( index, entry ) {
-        const isVisible = entry.isVisible;
-        if( !isVisible ) {
+    onIntersection( index, entry, search ) {
+        const isIntersecting = entry.isIntersecting;
+        this.$set( this.view, index,  entry.isIntersecting);
+
+        if( !isIntersecting || !search) {
             return;
         }
+
 
         const games = this.$store.getters.noneOfficialGames;
         if( index < games.length ) {
@@ -79,5 +102,15 @@ export default class Home extends Vue {
 .page {
     top: -50px;
 }
+
+.card {
+    transform: scale(0);
+}
+
+.visible {
+    transform: scale(1);
+    transition: transform 0.2s ease-out;
+}
+
 
 </style>

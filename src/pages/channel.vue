@@ -53,7 +53,16 @@
                     <q-tab-panel name="games" class="bgColor-1 no-scroll">
                         <div class="maxWidth">
                             <div class="cardContainer" v-if="games.length">
-                                <game-card v-for="game in games" :data="game"></game-card>
+<!--                                <game-card v-for="game in games" :data="game"></game-card>-->
+
+                                <game-card v-for="(game, index) in games"
+                                           :key="index"
+                                           class="card"
+                                           :class="view[index]?'visible':''"
+                                           v-intersection="entry => onIntersection(index, entry)"
+                                           :data="game">
+                                </game-card>
+
                             </div>
 
                             <div v-else class="text-center q-mt-xl">
@@ -111,6 +120,7 @@ import GameCard from "components/common/card/gameCard.vue";
 import MainFooter from "components/main/mainFooter.vue";
 import {LoginState} from "src/store/modules/user";
 import ContentItem from "components/common/contentItem.vue";
+import {GameLoadState} from "src/store/modules/games";
 
 @Component({
     components: {ContentItem, MainFooter, GameCard, ProfilePrivateTab, ProfileTab}
@@ -126,6 +136,8 @@ export default class Channel extends Vue {
     private description : string = '';
 
     private email : string = '';
+
+    private view : boolean[] = [];
 
     async mounted() {
         this.$store.commit('navTab', 'Channel');
@@ -156,6 +168,12 @@ export default class Channel extends Vue {
         }
     }
 
+    onIntersection( index, entry ) {
+        console.log(entry);
+        const isIntersecting = entry.isIntersecting;
+        this.$set( this.view, index,  isIntersecting);
+    }
+
 }
 </script>
 <style lang="scss" scoped>
@@ -174,5 +192,14 @@ a {
     position: absolute;
     bottom: 0;
     width: 100%;
+}
+
+.card {
+    transform: scale(0);
+}
+
+.visible {
+    transform: scale(1);
+    transition: transform 0.2s ease-out;
 }
 </style>

@@ -16,7 +16,7 @@ export {
 export default {
     state: {
 
-        limit : 10,
+        limit : 20,
 
         officialGames : [],
         noneOfficialGames : [],

@@ -5,6 +5,9 @@
             <q-img class="thumb" :src="`${data.url_thumb || 'img/default.png'}`">
 
             </q-img>
+            <q-img class="thumb video" :src="`${data.url_thumb_gif || data.url_thumb || 'img/default.png'}`">
+
+            </q-img>
             <!--            <div class="thumb" :style="`background-image: url(${data.url_thumb || 'img/default.png'})`"></div>-->
             <!--            <q-img class="thumb" :src="data.url_thumb || 'img/default.png'"  alt="">-->
             <!--            </q-img>-->
@@ -231,6 +234,18 @@ a {
                 //transition: tra;
                 transform: scale(1.1);
             }
+        }
+
+        .video {
+            position: absolute;
+            display: none;
+        }
+
+        &:hover {
+            .video {
+                display: block;
+            }
+
         }
     }
 }
