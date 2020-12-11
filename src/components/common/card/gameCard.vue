@@ -1,101 +1,104 @@
 <template>
-    <router-link class="card" :to="`/play/${data.pathname}`">
-        <div class="thumbBox">
-            <img class="base" src="img/default.png">
-            <q-img class="thumb" :src="`${data.url_thumb || 'img/default.png'}`">
+    <router-link class="card" :to="`/play/${data.pathname}`" v-intersection="entry => onIntersection(entry)"
+    >
+        <div class="object3d" :class="isVisible?'visible':''">
+            <div class="thumbBox">
+                <img class="base" src="img/default.png">
+                <q-img class="thumb" :src="`${data.url_thumb || 'img/default.png'}`">
 
-            </q-img>
-            <q-img class="thumb video" :src="`${data.url_thumb_gif || data.url_thumb || 'img/default.png'}`">
-
-            </q-img>
-            <!--            <div class="thumb" :style="`background-image: url(${data.url_thumb || 'img/default.png'})`"></div>-->
-            <!--            <q-img class="thumb" :src="data.url_thumb || 'img/default.png'"  alt="">-->
-            <!--            </q-img>-->
-        </div>
-
-
-        <div class="row detail text-left q-mt-sm">
-            <router-link class="self-center" :to="`/channel/${data.user.channel_id}`">
-                <q-img class="developerLogo" :src="data.user.picture">
                 </q-img>
-            </router-link>
+                <q-img class="thumb video" :src="`${data.url_thumb_gif || data.url_thumb || 'img/default.png'}`">
 
-            <div class="text q-ml-sm">
-                <strong
-                    class="ellipsis block">
-                    {{data.title}}
-                </strong>
-                <span
-                    class="ellipsis block userName">
-                    {{data.user.name}}
-            </span>
+                </q-img>
+                <!--            <div class="thumb" :style="`background-image: url(${data.url_thumb || 'img/default.png'})`"></div>-->
+                <!--            <q-img class="thumb" :src="data.url_thumb || 'img/default.png'"  alt="">-->
+                <!--            </q-img>-->
             </div>
 
-            <div class="more" :class="$q.platform.is.desktop ? 'desktop' : ''">
-                <q-btn @click.prevent="more" flat dense color="bg-transparent" class="" key="btn_size_dense_rd_md" size="md">
-                    <q-icon color="grey-5" name="more_vert"></q-icon>
+
+            <div class="row detail text-left q-mt-sm">
+                <router-link class="self-center" :to="`/channel/${data.user.channel_id}`">
+                    <q-img class="developerLogo" :src="data.user.picture">
+                    </q-img>
+                </router-link>
+
+                <div class="text q-ml-sm">
+                    <strong
+                        class="ellipsis block">
+                        {{data.title}}
+                    </strong>
+                    <span
+                        class="ellipsis block userName">
+                    {{data.user.name}}
+            </span>
+                </div>
+
+                <div class="more" :class="$q.platform.is.desktop ? 'desktop' : ''">
+                    <q-btn @click.prevent="more" flat dense color="bg-transparent" class="" key="btn_size_dense_rd_md" size="md">
+                        <q-icon color="grey-5" name="more_vert"></q-icon>
 
 
-                    <q-menu v-if="$q.platform.is.desktop">
-                        <q-list>
-                            <router-link :to="`/channel/${data.user.channel_id}`">
-                                <q-item clickable>
+                        <q-menu v-if="$q.platform.is.desktop">
+                            <q-list>
+                                <router-link :to="`/channel/${data.user.channel_id}`">
+                                    <q-item clickable>
+                                        <q-item-section>
+                                            <div class="row">
+                                                <q-icon name="far fa-id-card" class="self-center q-mr-sm"></q-icon>
+                                                <div class="self-center">개발자 채널 가기</div>
+                                            </div>
+                                        </q-item-section>
+                                    </q-item>
+                                </router-link>
+
+
+                                <!--                            <q-item clickable class="">-->
+                                <!--                                <q-item-section>-->
+                                <!--                                    <div class="row">-->
+                                <!--                                        <q-icon name="report" class="self-center q-mr-sm"></q-icon>-->
+                                <!--                                        <div>게임 신고 하기</div>-->
+                                <!--                                    </div>-->
+                                <!--                                </q-item-section>-->
+                                <!--                            </q-item>-->
+                            </q-list>
+                        </q-menu>
+
+
+                        <q-dialog v-else v-model="popup">
+                            <q-list class="bg-dark width90p maxWidth400px">
+                                <router-link :to="`/channel/${data.user.channel_id}`">
+                                    <q-item clickable class="">
+                                        <q-item-section>
+                                            <div class="row">
+                                                <!--                                            <q-icon name="far fa-id-card" class="self-center q-mr-sm"></q-icon>-->
+                                                <div class="self-center">개발자 채널 가기</div>
+                                            </div>
+                                        </q-item-section>
+                                    </q-item>
+                                </router-link>
+
+                                <!--                            <q-item clickable class="">-->
+                                <!--                                <q-item-section>-->
+                                <!--                                    <div class="row">-->
+                                <!--                                        &lt;!&ndash;                                            <q-icon name="report" class="self-center q-mr-sm"></q-icon>&ndash;&gt;-->
+                                <!--                                        <div>게임 신고 하기</div>-->
+                                <!--                                    </div>-->
+                                <!--                                </q-item-section>-->
+                                <!--                            </q-item>-->
+                                <q-item clickable class="" @click="popup = !popup">
                                     <q-item-section>
                                         <div class="row">
-                                            <q-icon name="far fa-id-card" class="self-center q-mr-sm"></q-icon>
-                                            <div class="self-center">개발자 채널 가기</div>
+                                            <!--                                            <q-icon name="report" class="self-center q-mr-sm"></q-icon>-->
+                                            <div>취소</div>
                                         </div>
                                     </q-item-section>
                                 </q-item>
-                            </router-link>
+                            </q-list>
+                        </q-dialog>
 
 
-                            <!--                            <q-item clickable class="">-->
-                            <!--                                <q-item-section>-->
-                            <!--                                    <div class="row">-->
-                            <!--                                        <q-icon name="report" class="self-center q-mr-sm"></q-icon>-->
-                            <!--                                        <div>게임 신고 하기</div>-->
-                            <!--                                    </div>-->
-                            <!--                                </q-item-section>-->
-                            <!--                            </q-item>-->
-                        </q-list>
-                    </q-menu>
-
-
-                    <q-dialog v-else v-model="popup">
-                        <q-list class="bg-dark width90p maxWidth400px">
-                            <router-link :to="`/channel/${data.user.channel_id}`">
-                                <q-item clickable class="">
-                                    <q-item-section>
-                                        <div class="row">
-                                            <!--                                            <q-icon name="far fa-id-card" class="self-center q-mr-sm"></q-icon>-->
-                                            <div class="self-center">개발자 채널 가기</div>
-                                        </div>
-                                    </q-item-section>
-                                </q-item>
-                            </router-link>
-
-                            <!--                            <q-item clickable class="">-->
-                            <!--                                <q-item-section>-->
-                            <!--                                    <div class="row">-->
-                            <!--                                        &lt;!&ndash;                                            <q-icon name="report" class="self-center q-mr-sm"></q-icon>&ndash;&gt;-->
-                            <!--                                        <div>게임 신고 하기</div>-->
-                            <!--                                    </div>-->
-                            <!--                                </q-item-section>-->
-                            <!--                            </q-item>-->
-                            <q-item clickable class="" @click="popup = !popup">
-                                <q-item-section>
-                                    <div class="row">
-                                        <!--                                            <q-icon name="report" class="self-center q-mr-sm"></q-icon>-->
-                                        <div>취소</div>
-                                    </div>
-                                </q-item-section>
-                            </q-item>
-                        </q-list>
-                    </q-dialog>
-
-
-                </q-btn>
+                    </q-btn>
+                </div>
             </div>
         </div>
     </router-link>
@@ -107,17 +110,10 @@ import { Vue, Component, Prop } from 'vue-property-decorator';
 @Component
 export default class GameCard extends Vue {
     @Prop() private data : any;
+    @Prop() private index : number;
 
+    private isVisible : boolean = false;
     private popup : boolean = false;
-
-    //     {
-    //     thumb : 'https://s3.ap-northeast-2.amazonaws.com/zeminiplay.com/games/imgs/4owsAkv8S.png',
-    //     title : 'Shark Frenzy',
-    //     developer : {
-    //         name : 'fromTheRed',
-    //         thumb : 'https://zemini.s3.ap-northeast-2.amazonaws.com/companies/FTR_Symbol.png',
-    //     },
-    // };
 
     mounted() {
     }
@@ -125,6 +121,14 @@ export default class GameCard extends Vue {
     more() {
         if( this.$q.platform.is.mobile ) {
             this.popup = !this.popup;
+        }
+    }
+
+    onIntersection( entry ) {
+        const isIntersecting = entry.isIntersecting;
+        this.isVisible = isIntersecting;
+        if( this.isVisible ) {
+            this.$emit( 'onVisible', this.index );
         }
     }
 }
@@ -137,6 +141,14 @@ a {
     text-decoration: none;
 }
 
+.object3d {
+    transform : perspective( 1000px ) rotateY( 45deg );
+    transition : transform 0.5s ease;
+    &.visible {
+        transform: perspective( 0 ) rotateY( 0 );
+
+    }
+}
 .card {
 
     cursor: pointer;
@@ -248,5 +260,16 @@ a {
 
         }
     }
+
+
+    //.card {
+    //
+    //    //transform: rotateY( 45deg );
+    //}
+    //
+    //.visible {
+    //    //transform:  rotateY( 0 );
+    //    //transition: transform 1s ease-out;
+    //}
 }
 </style>

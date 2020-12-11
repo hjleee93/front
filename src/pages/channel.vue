@@ -57,9 +57,8 @@
 
                                 <game-card v-for="(game, index) in games"
                                            :key="index"
+                                           :index="index"
                                            class="card"
-                                           :class="view[index]?'visible':''"
-                                           v-intersection="entry => onIntersection(index, entry)"
                                            :data="game">
                                 </game-card>
 
@@ -137,8 +136,6 @@ export default class Channel extends Vue {
 
     private email : string = '';
 
-    private view : boolean[] = [];
-
     async mounted() {
         this.$store.commit('navTab', 'Channel');
         const loginState = await this.$store.dispatch('loginState');
@@ -167,12 +164,6 @@ export default class Channel extends Vue {
             this.description = this.user.profile.description;
         }
     }
-
-    onIntersection( index, entry ) {
-        const isIntersecting = entry.isIntersecting;
-        this.$set( this.view, index,  isIntersecting);
-    }
-
 }
 </script>
 <style lang="scss" scoped>

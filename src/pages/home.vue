@@ -13,18 +13,17 @@
                 <div class="cardContainer" v-if="$store.getters.isSearchGame">
                     <game-card v-for="(game, index) in $store.getters.searchGames"
                                :key="index"
+                               :index="index"
                                class="card"
-                               :class="view[index] ? 'visible':''"
-                               v-intersection="entry => onIntersection(index, entry, false)"
                                :data="game">
                     </game-card>
                 </div>
                 <div class="cardContainer" v-else>
                     <game-card v-for="(game, index) in $store.getters.officialGames"
                                :key="index"
+                               :index="index"
                                class="card"
-                               :class="view[index] ? 'visible':''"
-                               v-intersection="entry => onIntersection(index, entry, true)"
+                               v-on:onVisible="onVisibleItem"
                                :data="game">
                     </game-card>
                 </div>
@@ -49,49 +48,30 @@ import {GameLoadState} from "src/store/modules/games";
 })
 export default class Home extends Vue {
 
-    private view : boolean[] = [];
+    //private view : boolean[] = [];
 
     async mounted() {
         this.$store.commit('headerBgTransparent', true );
         this.$store.commit('navTab', 'Major');
 
-        // await this.$store.dispatch( 'loadingGame' );
-
         this.$store.commit('isOfficialPage', true);
 
         await this.$store.dispatch('loadGames', 1);
-
-        // this.$store.commit('crtOriginGames', this.$store.getters.officialGames );
-        // this.$store.commit('searchGames', this.$store.getters.officialGames );
     }
 
     beforeDestroy() {
         this.$store.commit('headerBgTransparent', false );
     }
 
-    onIntersection( index, entry, search ) {
-
-        const isIntersecting = entry.isIntersecting;
-        this.$set( this.view, index,  entry.isIntersecting);
-
-        if( !isIntersecting || !search) {
-            return;
-        }
-
-
-
+    onVisibleItem( index :  number ) {
         const games = this.$store.getters.officialGames;
         if( index < games.length - 1) {
             return;
         }
-
-
         if( this.$store.getters.officialLoadState === GameLoadState.loaded ) {
             this.$store.dispatch('loadGames', 1);
         }
     }
-
-
 };
 </script>
 <style scoped lang="scss">
@@ -99,15 +79,6 @@ export default class Home extends Vue {
 
 .page {
     top: -50px;
-}
-
-.card {
-    transform: scale(0);
-}
-
-.visible {
-    transform: scale(1);
-    transition: transform 0.2s ease-out;
 }
 
 

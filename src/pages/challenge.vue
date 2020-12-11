@@ -13,9 +13,8 @@
 
                     <game-card v-for="(game, index) in $store.getters.searchGames"
                                :key="index"
+                               :index="index"
                                class="card"
-                               :class="view[index]?'visible':''"
-                               v-intersection="entry => onIntersection(index, entry, false)"
                                :data="game">
                     </game-card>
 
@@ -25,9 +24,9 @@
 
                     <game-card v-for="(game, index) in $store.getters.noneOfficialGames"
                                :key="index"
+                               :index="index"
                                class="card"
-                               :class="view[index]?'visible':''"
-                               v-intersection="entry => onIntersection(index, entry, true)"
+                               v-on:onVisible="onVisibleItem"
                                :data="game">
                     </game-card>
 
@@ -60,40 +59,25 @@ export default class Challenge extends Vue {
         this.$store.commit('headerBgTransparent', true );
         this.$store.commit('navTab', 'Minor');
 
-        // await this.$store.dispatch( 'loadingGame' );
-
         this.$store.commit('isOfficialPage', false);
 
 
         await this.$store.dispatch('loadGames', 0);
-        // this.$store.commit('crtOriginGames', this.$store.getters.noneOfficialGames );
-        // this.$store.commit('searchGames', this.$store.getters.noneOfficialGames );
     }
 
     beforeDestroy() {
         this.$store.commit('headerBgTransparent', false );
     }
 
-    onIntersection( index, entry, search ) {
-        const isIntersecting = entry.isIntersecting;
-        this.$set( this.view, index,  entry.isIntersecting);
-
-        if( !isIntersecting || !search) {
-            return;
-        }
-
-
+    onVisibleItem( index :  number ) {
         const games = this.$store.getters.noneOfficialGames;
-        if( index < games.length ) {
+        if( index < games.length - 1) {
             return;
         }
-
         if( this.$store.getters.noneOfficialLoadState === GameLoadState.loaded ) {
-            this.$store.dispatch('loadGames', 0);
+            this.$store.dispatch('loadGames', 1);
         }
     }
-
-
 };
 </script>
 <style scoped lang="scss">
@@ -101,15 +85,6 @@ export default class Challenge extends Vue {
 
 .page {
     top: -50px;
-}
-
-.card {
-    transform: scale(0);
-}
-
-.visible {
-    transform: scale(1);
-    transition: transform 0.2s ease-out;
 }
 
 
