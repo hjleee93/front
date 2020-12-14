@@ -183,13 +183,4 @@ a {
     bottom: 0;
     width: 100%;
 }
-
-.card {
-    transform: scale(0);
-}
-
-.visible {
-    transform: scale(1);
-    transition: transform 0.2s ease-out;
-}
 </style>

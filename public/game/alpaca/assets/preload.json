@@ -1,0 +1,41 @@
+{
+  "atlas": [],
+  "csv": [],
+  "data": [],
+  "font": [],
+  "image": [
+    {
+      "key": "bg_00",
+      "path": "assets/image/bg_00.png?vs=0.0.0"
+    },
+    {
+      "key": "bg_01",
+      "path": "assets/image/bg_01.png?vs=0.0.0"
+    },
+    {
+      "key": "bg_02",
+      "path": "assets/image/bg_02.png?vs=0.0.0"
+    },
+    {
+      "key": "bg_03",
+      "path": "assets/image/bg_03.png?vs=0.0.0"
+    },
+    {
+      "key": "bg_moon",
+      "path": "assets/image/bg_moon.png?vs=0.0.0"
+    }
+  ],
+  "json": [
+    {
+      "key": "scene",
+      "path": "assets/json/scene.json?vs=0.0.0"
+    }
+  ],
+  "sound": [],
+  "spine": [
+    {
+      "key": "player",
+      "path": "assets/spine/player/player.json?vs=0.0.0"
+    }
+  ]
+}

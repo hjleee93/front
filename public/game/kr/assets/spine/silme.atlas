@@ -1,0 +1,62 @@
+
+silme.png
+size: 512,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+blue
+  rotate: false
+  xy: 2, 50
+  size: 74, 76
+  orig: 74, 76
+  offset: 0, 0
+  index: -1
+blue_hit
+  rotate: false
+  xy: 78, 50
+  size: 74, 76
+  orig: 74, 76
+  offset: 0, 0
+  index: -1
+blue_parts0
+  rotate: false
+  xy: 230, 58
+  size: 58, 68
+  orig: 58, 68
+  offset: 0, 0
+  index: -1
+blue_parts1
+  rotate: true
+  xy: 298, 2
+  size: 54, 66
+  orig: 54, 66
+  offset: 0, 0
+  index: -1
+dragon
+  rotate: false
+  xy: 154, 50
+  size: 74, 76
+  orig: 74, 76
+  offset: 0, 0
+  index: -1
+dragon_parts0
+  rotate: false
+  xy: 290, 58
+  size: 58, 68
+  orig: 58, 68
+  offset: 0, 0
+  index: -1
+dragon_parts1
+  rotate: true
+  xy: 230, 2
+  size: 54, 66
+  orig: 54, 66
+  offset: 0, 0
+  index: -1
+shadow
+  rotate: false
+  xy: 2, 8
+  size: 86, 40
+  orig: 86, 40
+  offset: 0, 0
+  index: -1

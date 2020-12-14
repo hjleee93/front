@@ -1,0 +1,64 @@
+{
+  "atlas": [
+    {
+      "key": "inagme_atlas",
+      "path": "assets/atlas/inagme_atlas.json"
+    }
+  ],
+  "csv": [],
+  "data": [
+    {
+      "key": "stages",
+      "path": "assets/data/stages.csv"
+    },
+    {
+      "key": "words",
+      "path": "assets/data/words.csv"
+    }
+  ],
+  "font": [
+    {
+      "key": "Adumu",
+      "path": "assets/font/Adumu.fnt"
+    },
+    {
+      "key": "Arial",
+      "path": "assets/font/Arial.fnt"
+    }
+  ],
+  "image": [
+    {
+      "key": "background0",
+      "path": "assets/image/background0.png"
+    }
+  ],
+  "layout": [
+    {
+      "key": "balloonLayout",
+      "path": "assets/layout/balloonLayout.json"
+    },
+    {
+      "key": "stagebarLayout",
+      "path": "assets/layout/stagebarLayout.json"
+    },
+    {
+      "key": "stageSelectLayout",
+      "path": "assets/layout/stageSelectLayout.json"
+    },
+    {
+      "key": "titleLayout",
+      "path": "assets/layout/titleLayout.json"
+    }
+  ],
+  "sound": [],
+  "spine": [
+    {
+      "key": "knights",
+      "path": "assets/spine/knights.json"
+    },
+    {
+      "key": "silme",
+      "path": "assets/spine/silme.json"
+    }
+  ]
+}

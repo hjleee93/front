@@ -6,8 +6,14 @@ function randomString( count : number = 11 ) {
     return str.substr( 0, count );
 }
 
+function randomInt (min : number, max : number)
+{
+    return Math.floor( min + Math.random() * (max - min));
+}
+
 
 
 export {
     randomString,
+    randomInt
 }

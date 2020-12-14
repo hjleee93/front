@@ -4,15 +4,12 @@
         <div class="object3d" :class="isVisible?'visible':''">
             <div class="thumbBox">
                 <img class="base" src="img/default.png">
-                <q-img class="thumb" :src="`${data.url_thumb || 'img/default.png'}`">
-
-                </q-img>
                 <q-img class="thumb video" :src="`${data.url_thumb_gif || data.url_thumb || 'img/default.png'}`">
 
                 </q-img>
-                <!--            <div class="thumb" :style="`background-image: url(${data.url_thumb || 'img/default.png'})`"></div>-->
-                <!--            <q-img class="thumb" :src="data.url_thumb || 'img/default.png'"  alt="">-->
-                <!--            </q-img>-->
+                <q-img class="thumb img" :src="`${data.url_thumb || 'img/default.png'}`">
+
+                </q-img>
             </div>
 
 
@@ -239,25 +236,26 @@ a {
             background-repeat: no-repeat;
             //background-origin: content-box;
 
+        }
 
-            //width: 100%;
-            transition: transform 0.15s linear;
-            &:hover {
-                //transition: tra;
-                transform: scale(1.1);
-            }
+        .img {
+            transition: transform 0.15s linear, opacity 0.15s ease-out;
         }
 
         .video {
             position: absolute;
-            display: none;
+            transition: transform 0.15s linear;
         }
 
         &:hover {
             .video {
-                display: block;
-            }
+                transform: scale(1.1);
 
+            }
+            .img {
+                transform: scale(1.1);
+                opacity: 0;
+            }
         }
     }
 

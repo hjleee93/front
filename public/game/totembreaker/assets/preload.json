@@ -1,0 +1,33 @@
+{
+  "atlas": [],
+  "csv": [],
+  "data": [],
+  "font": [],
+  "image": [
+    {
+      "key": "background0",
+      "path": "assets/image/background0.png?vs=0.0.0"
+    },
+    {
+      "key": "background1",
+      "path": "assets/image/background1.png?vs=0.0.0"
+    },
+    {
+      "key": "totem0",
+      "path": "assets/image/totem0.png?vs=0.0.0"
+    }
+  ],
+  "json": [
+    {
+      "key": "scene",
+      "path": "assets/json/scene.json?vs=0.0.0"
+    }
+  ],
+  "sound": [],
+  "spine": [
+    {
+      "key": "characters",
+      "path": "assets/spine/characters/characters.json?vs=0.0.0"
+    }
+  ]
+}

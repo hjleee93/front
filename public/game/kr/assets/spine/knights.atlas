@@ -1,0 +1,216 @@
+
+knights.png
+size: 512,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+body
+  rotate: false
+  xy: 140, 20
+  size: 24, 22
+  orig: 26, 24
+  offset: 1, 1
+  index: -1
+cloak
+  rotate: true
+  xy: 32, 16
+  size: 48, 24
+  orig: 50, 26
+  offset: 1, 1
+  index: -1
+fire_sword
+  rotate: false
+  xy: 416, 102
+  size: 42, 24
+  orig: 44, 26
+  offset: 1, 1
+  index: -1
+fire_sword1
+  rotate: true
+  xy: 58, 44
+  size: 44, 26
+  orig: 46, 28
+  offset: 1, 1
+  index: -1
+fire_sword2
+  rotate: false
+  xy: 240, 100
+  size: 42, 26
+  orig: 44, 28
+  offset: 1, 1
+  index: -1
+fire_sword3
+  rotate: true
+  xy: 58, 2
+  size: 40, 26
+  orig: 42, 28
+  offset: 1, 1
+  index: -1
+foot0
+  rotate: true
+  xy: 46, 2
+  size: 12, 8
+  orig: 14, 10
+  offset: 1, 1
+  index: -1
+foot1
+  rotate: true
+  xy: 46, 2
+  size: 12, 8
+  orig: 14, 10
+  offset: 1, 1
+  index: -1
+fx0
+  rotate: false
+  xy: 140, 4
+  size: 24, 14
+  orig: 30, 22
+  offset: 2, 2
+  index: -1
+fx1
+  rotate: false
+  xy: 184, 78
+  size: 26, 20
+  orig: 30, 22
+  offset: 2, 0
+  index: -1
+fx2
+  rotate: false
+  xy: 154, 76
+  size: 28, 22
+  orig: 30, 22
+  offset: 0, 0
+  index: -1
+fx3
+  rotate: true
+  xy: 154, 44
+  size: 30, 20
+  orig: 30, 22
+  offset: 0, 2
+  index: -1
+fx4
+  rotate: false
+  xy: 212, 84
+  size: 26, 14
+  orig: 30, 22
+  offset: 4, 4
+  index: -1
+helm0
+  rotate: false
+  xy: 2, 66
+  size: 54, 60
+  orig: 56, 62
+  offset: 1, 1
+  index: -1
+helm1
+  rotate: false
+  xy: 58, 90
+  size: 42, 36
+  orig: 44, 38
+  offset: 1, 1
+  index: -1
+ice_sword
+  rotate: false
+  xy: 460, 102
+  size: 42, 24
+  orig: 44, 26
+  offset: 1, 1
+  index: -1
+ice_sword1
+  rotate: false
+  xy: 102, 100
+  size: 44, 26
+  orig: 46, 28
+  offset: 1, 1
+  index: -1
+ice_sword2
+  rotate: false
+  xy: 284, 100
+  size: 42, 26
+  orig: 44, 28
+  offset: 1, 1
+  index: -1
+ice_sword3
+  rotate: false
+  xy: 112, 72
+  size: 40, 26
+  orig: 42, 28
+  offset: 1, 1
+  index: -1
+light_sword
+  rotate: true
+  xy: 86, 46
+  size: 42, 24
+  orig: 44, 26
+  offset: 1, 1
+  index: -1
+light_sword1
+  rotate: false
+  xy: 148, 100
+  size: 44, 26
+  orig: 46, 28
+  offset: 1, 1
+  index: -1
+light_sword2
+  rotate: false
+  xy: 328, 100
+  size: 42, 26
+  orig: 44, 28
+  offset: 1, 1
+  index: -1
+light_sword3
+  rotate: false
+  xy: 112, 44
+  size: 40, 26
+  orig: 42, 28
+  offset: 1, 1
+  index: -1
+shadow
+  rotate: true
+  xy: 2, 8
+  size: 56, 28
+  orig: 58, 30
+  offset: 1, 1
+  index: -1
+shoulder0
+  rotate: false
+  xy: 32, 2
+  size: 12, 12
+  orig: 14, 14
+  offset: 1, 1
+  index: -1
+shoulder1
+  rotate: false
+  xy: 240, 86
+  size: 12, 12
+  orig: 14, 14
+  offset: 1, 1
+  index: -1
+sword
+  rotate: true
+  xy: 86, 2
+  size: 42, 24
+  orig: 44, 26
+  offset: 1, 1
+  index: -1
+sword1
+  rotate: false
+  xy: 194, 100
+  size: 44, 26
+  orig: 46, 28
+  offset: 1, 1
+  index: -1
+sword2
+  rotate: false
+  xy: 372, 100
+  size: 42, 26
+  orig: 44, 28
+  offset: 1, 1
+  index: -1
+sword3
+  rotate: true
+  xy: 112, 2
+  size: 40, 26
+  orig: 42, 28
+  offset: 1, 1
+  index: -1
