@@ -272,6 +272,9 @@ export default class Login extends Vue {
                         case 'auth/user-not-found' :
                             alert('등록된 이메일이 아닙니다. 회원가입 후 이용해 주세요.');
                             break;
+                        default:
+                            // alert('잠시 후 다시 시도해주세요.');
+                            break;
                     }
                 }
             }
