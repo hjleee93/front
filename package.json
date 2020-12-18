@@ -6,7 +6,7 @@
   "author": "hg.park <hg.park@fromthered.com>",
   "private": true,
   "scripts": {
-    "serve": "cross-env QENV=local quasar dev" ,
+    "serve": "cross-env QENV=local quasar dev",
     "build-dev": "cross-env QENV=development quasar build",
     "build": "cross-env QENV=production quasar build",
     "build:pwa": "quasar build -m pwa"
@@ -18,6 +18,7 @@
     "firebase": "^8.0.0",
     "quasar": "^1.0.0",
     "vue-class-component": "^7.2.2",
+    "vue-gtag": "^1.10.0",
     "vue-i18n": "^8.0.0",
     "vue-property-decorator": "^8.3.0"
   },
@@ -25,8 +26,7 @@
     "@quasar/app": "^2.0.0",
     "@quasar/quasar-app-extension-qenv": "^1.0.3",
     "@types/node": "^10.17.15",
-    "cross-env": "^7.0.2",
-    "vue-analytics": "^5.22.1"
+    "cross-env": "^7.0.2"
   },
   "browserslist": [
     "ie >= 11",

@@ -146,6 +146,8 @@ export default class JoinEmailContinue extends Vue {
         const result = await this.$api.signUp( this.nickname );
 
         if( !result || result.error ) {
+            //todo 닉네임 필터 에러 처리
+
             console.error( result && result.error || 'error' );
             result && result.error && alert( result.error );
         }

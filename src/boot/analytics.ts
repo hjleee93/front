@@ -1,8 +1,11 @@
 import Vue from 'vue';
-import router from './../router/routes';
-import VueAnalytics from 'vue-analytics'
+import {router} from 'src/router';
+import VueGtag from "vue-gtag";
 
-Vue.use(VueAnalytics,{
-    id: 'G-0F9TV2H9X5', // 콘솔에서 본인의 키를 확인하세요!
-    router // 원활한 트래킹을 위해 router를 꼭 바인드 해 주어야 합니다!
-})
+const id = process.env.VUE_APP_GTAG_ID;
+
+Vue.use(VueGtag,{
+    config :{
+        id,
+    },
+}, router );

@@ -141,6 +141,11 @@ export default class ProfileTab extends Vue {
 
 
         if( !result || result.error ) {
+            //todo 닉네임 필터 에러 처리
+            // if( result && result.error === '필터 에러' ) {
+            //
+            // }
+
             this.$q.notify({
                 message : '실패 하였습니다.',
                 position : 'top',
