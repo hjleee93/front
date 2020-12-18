@@ -51,6 +51,7 @@ export default class Play extends Vue {
         this.url = `${process.env.VUE_APP_LAUNCHER_URL}game/${this.gameData.pathname}`;
 
         window.addEventListener('message', this.onMessage);
+        this.tagEvent();
     }
 
     beforeDestroy() {
@@ -101,6 +102,14 @@ export default class Play extends Vue {
         this.$router.back();
     }
 
+    tagEvent() {
+        this.$gtag.event(
+            'play', {
+                'event_category': 'game',
+                'event_label': 'title',
+                'value': this.gameData.title,
+            });
+    }
 }
 </script>
 <style lang="scss" scoped>
