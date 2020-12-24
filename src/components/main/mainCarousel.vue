@@ -12,14 +12,14 @@
         ref="parent"
     >
 
-        <q-carousel-slide name="game" class="column no-wrap flex-center relative-position" img-src="">
+        <q-carousel-slide name="game" class="column no-wrap flex-center relative-position no-padding" img-src="">
             <img src="game/gamebg.png" class="gameBg">
-            <div class="width100p maxWidth text-left q-pt-lg">
+            <div class="width100p maxWidth text-left">
                 <div>
                     <iframe class="game" src="game/kr/index.html"></iframe>
                 </div>
                 <div class="info">
-                    <div class="text">
+                    <div class="text  q-pl-lg">
                         <div class="text-h4 text-weight-bold">
                             고퀄리티 캐주얼 게임
                         </div>
@@ -31,14 +31,14 @@
             </div>
         </q-carousel-slide>
 
-        <q-carousel-slide name="game2" class="column no-wrap flex-center relative-position" img-src="">
+        <q-carousel-slide name="game2" class="column no-wrap flex-center relative-position no-padding" img-src="">
             <img src="game/gamebg.png" class="gameBg">
-            <div class="width100p maxWidth text-left q-pt-lg">
+            <div class="width100p maxWidth text-left">
                 <div>
                     <iframe class="game" src="game/alpaca/index.html"></iframe>
                 </div>
                 <div class="info">
-                    <div class="text">
+                    <div class="text  q-pl-lg">
                         <div class="text-h4 text-weight-bold">
                             고퀄리티 캐주얼 게임
                         </div>
@@ -50,14 +50,14 @@
             </div>
         </q-carousel-slide>
 
-        <q-carousel-slide name="game3" class="column no-wrap flex-center relative-position" img-src="">
+        <q-carousel-slide name="game3" class="column no-wrap flex-center relative-position no-padding" img-src="">
             <img src="game/gamebg.png" class="gameBg">
-            <div class="width100p maxWidth text-left q-pt-lg">
+            <div class="width100p maxWidth text-left">
                 <div>
                     <iframe class="game" src="game/totembreaker/index.html"></iframe>
                 </div>
                 <div class="info">
-                    <div class="text">
+                    <div class="text  q-pl-lg">
                         <div class="text-h4 text-weight-bold">
                             고퀄리티 캐주얼 게임
                         </div>
