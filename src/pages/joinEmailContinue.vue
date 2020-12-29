@@ -146,10 +146,14 @@ export default class JoinEmailContinue extends Vue {
         const result = await this.$api.signUp( this.nickname );
 
         if( !result || result.error ) {
-            //todo 닉네임 필터 에러 처리
-
-            console.error( result && result.error || 'error' );
-            result && result.error && alert( result.error );
+            if( result && result.error === '사용할 수 없는 단어' ) {
+                //todo 닉네임 필터 에러 처리
+                alert( '사용할 수 없는 이름입니다.' );
+            }
+            else {
+                console.error( result && result.error || 'error' );
+                result && result.error && alert( result.error );
+            }
         }
         else {
             const { user } = result;

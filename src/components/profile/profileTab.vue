@@ -142,16 +142,24 @@ export default class ProfileTab extends Vue {
 
         if( !result || result.error ) {
             //todo 닉네임 필터 에러 처리
-            // if( result && result.error === '필터 에러' ) {
-            //
-            // }
+            if( result && result.error === '사용할 수 없는 단어' ) {
+                this.$q.notify({
+                    message : '사용할 수 없는 이름입니다.',
+                    position : 'top',
+                    color : 'negative',
+                    timeout: 2000
+                });
+            }
+            else {
+                this.$q.notify({
+                    message : '실패 하였습니다.',
+                    position : 'top',
+                    color : 'negative',
+                    timeout: 2000
+                });
+            }
 
-            this.$q.notify({
-                message : '실패 하였습니다.',
-                position : 'top',
-                color : 'negative',
-                timeout: 2000
-            });
+
             console.error( result && result.error || 'error' );
         }
         else {
