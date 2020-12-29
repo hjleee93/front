@@ -260,7 +260,7 @@ export default class JoinEmail extends Vue {
 
                 if( !result2 || result2.error ) {
 
-                    if( result && result.error === '사용할 수 없는 단어' ) {
+                    if( result2 && result2.error === '사용할 수 없는 단어' ) {
                         //todo 닉네임 필터 에러 처리
                         alert( '사용할 수 없는 이름입니다.' );
                     }
