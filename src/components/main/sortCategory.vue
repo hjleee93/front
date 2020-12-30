@@ -1,23 +1,25 @@
 <template>
     <div class="sortCategory q-mr-sm">
-        <ul class="desktop">
-            <div v-for="item in list" class="sortItem" :class="tab===item.name && 'select'">
-                <li>
-                    <q-btn class="button" @click="tab=item.name">{{ item.text }}</q-btn>
-                </li>
-            </div>
-        </ul>
-        <div class="mobile">
-            <q-tabs
-                v-model="tab"
-                class="q-pb-lg"
-                indicator-color="orange-10"
-                dense
-            >
-                <q-tab v-for="item in list" :name="item.name" :label="item.text" />
-            </q-tabs>
-        </div>
-
+<!--        <ul class="desktop">-->
+<!--            <div v-for="item in list" class="sortItem" :class="tab===item.name && 'select'">-->
+<!--                <li>-->
+<!--                    <q-btn class="button" @click="onClickTab(item.name)">{{ item.text }}</q-btn>-->
+<!--                </li>-->
+<!--            </div>-->
+<!--        </ul>-->
+<!--        <div class="mobile">-->
+<!--            <q-tabs-->
+<!--                v-model="tab"-->
+<!--                class="q-pb-lg"-->
+<!--                indicator-color="orange-10"-->
+<!--                dense-->
+<!--            >-->
+<!--                <q-tab v-for="item in list" :name="item.name" :label="item.text" />-->
+<!--            </q-tabs>-->
+<!--        </div>-->
+        <select class="selectBox q-mb-sm" @change="onClickTab" v-model="tab">
+            <option v-for="item in list" :value="item.name">{{ item.text }}</option>
+        </select>
     </div>
 </template>
 
@@ -29,21 +31,32 @@ export default class SortCategory extends Vue {
 
     private list : any[] = [
         {
-            name : 'count',
-            text : '조회수',
-        },
-        {
             name : 'new',
             text : '최신순',
-        },{
+        },
+        {
+            name : 'create',
+            text : '오래된순',
+        },
+        {
             name : 'name',
             text : '이름순',
-        }
+        },
+        // {
+        //     name : 'update',
+        //     text : '업데이트순',
+        // },
+        // {
+        //     name : 'count',
+        //     text : '조회수',
+        // },
     ]
 
-    private tab : string = 'count';
+    private tab : string = 'create';
 
-
+    onClickTab( tab ) {
+        this.$emit('@sortChange', this.tab);
+    }
 
 }
 </script>
@@ -51,6 +64,15 @@ export default class SortCategory extends Vue {
 
 .sortCategory {
     text-align: right;
+
+    .selectBox {
+        color: white;
+        background-color: #1D1D1D;
+        width: 100px;
+        height: 40px;
+        padding-left: 10px;
+        margin-right: 5px;
+    }
 
     .sortItem {
         position: relative;
@@ -111,7 +133,7 @@ export default class SortCategory extends Vue {
             display: initial;
         }
 
-        text-align: center;
+        //text-align: center;
 
         .sortItem {
             li {

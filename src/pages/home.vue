@@ -6,8 +6,9 @@
         <div class="maxWidth">
 <!--            <genre-category></genre-category>-->
 <!--            <q-separator inset/>-->
-<!--            <sort-category></sort-category>-->
             <search-game></search-game>
+            <sort-category v-on:@sortChange="sortChange"></sort-category>
+
 
             <div class="q-pt-none">
                 <div class="cardContainer" v-if="$store.getters.isSearchGame">
@@ -48,7 +49,17 @@ import {GameLoadState} from "src/store/modules/games";
 })
 export default class Home extends Vue {
 
-    //private view : boolean[] = [];
+    private sort : string = 'create';
+    private sortData : {
+        [ name:string ] : {
+            sort : string,
+            dir : string
+        }
+    } = {
+        new : { sort : 'u', dir : 'desc' },
+        create : { sort : 'c', dir : 'asc' },
+        name : { sort : 't', dir : 'asc' },
+    };
 
     async mounted() {
         this.$store.commit('headerBgTransparent', true );
@@ -56,7 +67,12 @@ export default class Home extends Vue {
 
         this.$store.commit('isOfficialPage', true);
 
-        await this.$store.dispatch('loadGames', 1);
+        await this.$store.dispatch('clearGames', 1);
+        await this.$store.dispatch('loadGames', {
+            official : 1,
+            sort : this.sortData[ this.sort ].sort,
+            dir : this.sortData[ this.sort ].dir
+        });
     }
 
     beforeDestroy() {
@@ -69,8 +85,23 @@ export default class Home extends Vue {
             return;
         }
         if( this.$store.getters.officialLoadState === GameLoadState.loaded ) {
-            this.$store.dispatch('loadGames', 1);
+            this.$store.dispatch('loadGames', {
+                official : 1,
+                sort : this.sortData[ this.sort ].sort,
+                dir : this.sortData[ this.sort ].dir
+            });
         }
+    }
+
+    async sortChange( sort ) {
+        this.sort = sort;
+
+        await this.$store.dispatch('clearGames', 1);
+        await this.$store.dispatch('loadGames', {
+            official : 1,
+            sort : this.sortData[ this.sort ].sort,
+            dir : this.sortData[ this.sort ].dir
+        });
     }
 };
 </script>

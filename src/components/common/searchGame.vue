@@ -2,7 +2,7 @@
     <div class="searchRoot q-py-md">
         <div class="box float-right">
             <q-icon class="icon q-mr-sm" name="fa fa-search"></q-icon>
-            <input v-model="search" placeholder='검색' type="search" @keyup="onChanged">
+            <input v-model="search" placeholder='게임 검색하기' type="search" @keyup="onChanged">
         </div>
         <div class="clear"></div>
     </div>
@@ -61,7 +61,6 @@ export default class SearchGame extends Vue {
         .box {
             width: 100%;
             //max-width: 250px;
-            padding: 0 10px;
 
             color: #737373;
 

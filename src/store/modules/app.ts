@@ -7,6 +7,8 @@ export default {
         studioUrl : process.env.VUE_APP_STUDIO_URL,
         supportUrl : process.env.VUE_APP_SERVICE_CENTER_URL,
         launcherUrl : process.env.VUE_APP_LAUNCHER_URL,
+        tosUrl : process.env.VUE_APP_TOS_URL,
+        policyUrl : process.env.VUE_APP_POLICY_URL,
     },
     getters: {
         navTab(state: any) {
@@ -30,7 +32,12 @@ export default {
         launcherUrl(state) {
             return state.supportUrl;
         },
-
+        tosUrl(state) {
+            return state.tosUrl;
+        },
+        policyUrl(state) {
+            return state.policyUrl;
+        },
     },
 
     mutations: {

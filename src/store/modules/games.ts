@@ -115,7 +115,17 @@ export default {
         },
     },
     actions: {
-        loadGames : async (context : any, official : number = 1) => {
+        clearGames : async (context : any, official : number = 1) => {
+            const gameKey = official === 1 ? 'officialGames' : 'noneOfficialGames';
+            const stateKey = official === 1 ? 'officialLoadState' : 'noneOfficialLoadState';
+
+            context.commit(gameKey, []);
+            context.commit( stateKey, GameLoadState.none );
+        },
+
+        loadGames : async (context : any, {official, sort, dir} ) => {
+
+            //dir = asc, desc
 
             const gameKey = official === 1 ? 'officialGames' : 'noneOfficialGames';
             const stateKey = official === 1 ? 'officialLoadState' : 'noneOfficialLoadState';
@@ -127,7 +137,7 @@ export default {
                 const offset = context.state[gameKey].length;
                 context.commit( stateKey, GameLoadState.loading );
 
-                const result = await Vue.$api.games(limit, offset, official);
+                const result = await Vue.$api.games(limit, offset, official, sort, dir);
                 if( !result || result.error ) {
                     result && result.error && console.error( result.error );
                     context.commit(gameKey, []);

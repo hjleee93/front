@@ -96,17 +96,25 @@ class Api {
 
 
     //GAME
-    async games(limit : number = 100, offset : number = 0, official : number = undefined) {
+    async games(limit : number = 100, offset : number = 0, official : number = undefined, sort : string = undefined, dir : string = undefined ) {
 
         let url = `/games?limit=${limit}&offset=${offset}`;
         if( official !== undefined ) {
             url += `&official=${official}`;
         }
+        if( sort !== undefined ) {
+            url += `&sort=${sort}`;
+        }
+        if( dir !== undefined ) {
+            url += `&dir=${dir}`;
+        }
 
         const response = await this.request( 'get', url, {
             limit,
             offset,
-            official
+            official,
+            sort,
+            dir,
         }, false );
         return response.result || response;
     }
