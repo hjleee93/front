@@ -1,6 +1,6 @@
 <template>
     <div style="position: relative">
-        <iframe class="tosBox" src="https://zempie-rsc.s3.ap-northeast-2.amazonaws.com/static/tos/dark/tos/index.html">
+        <iframe class="tosBox" :src="$store.getters.tosUrl">
         </iframe>
     </div>
 </template>
@@ -12,6 +12,7 @@ import {Component, Prop, Vue, Watch} from 'vue-property-decorator';
     components: {}
 })
 export default class Tos extends Vue {
+
 
 
 }

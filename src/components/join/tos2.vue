@@ -1,6 +1,6 @@
 <template>
     <div style="position: relative">
-        <iframe class="tosBox" src="https://zempie-rsc.s3.ap-northeast-2.amazonaws.com/static/tos/dark/policy/index.html">
+        <iframe class="tosBox" :src="$store.getters.policyUrl">
         </iframe>
     </div>
 </template>
