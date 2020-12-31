@@ -17,7 +17,8 @@
                 active-color="white"
                 class="text-grey-5"
             >
-                <q-route-tab to="/" class="min-height50" name="best" icon="star" label="게임"/>
+                <q-route-tab to="/" class="min-height50" name="home" icon="home" label="홈"/>
+                <q-route-tab to="/official" class="min-height50" name="best" icon="star" label="공식 게임"/>
                 <q-route-tab to="/challenge" class="min-height50" name="challenge" icon="emoji_events" label="도전 게임"/>
                 <q-route-tab :to="`/channel/${$store.getters.user.channel_id}`" v-if="$store.getters.user" class="min-height50" name="channel" icon="far fa-id-card" label="내 채널"/>
             </q-tabs>

@@ -2,35 +2,31 @@
     <q-page class="items-center justify-evenly text-center"
             :class="$q.platform.is.desktop ? 'page' : ''"
     >
-        <challenge-carousel></challenge-carousel>
+        <main-carousel></main-carousel>
         <div class="maxWidth">
-<!--            <genre-category></genre-category>-->
-<!--            <q-separator inset/>-->
+            <!--            <genre-category></genre-category>-->
+            <!--            <q-separator inset/>-->
             <search-game></search-game>
 <!--            <sort-category v-on:@sortChange="sortChange"></sort-category>-->
+
+
             <div class="q-pt-none">
                 <div class="cardContainer" v-if="$store.getters.isSearchGame">
-
                     <game-card v-for="(game, index) in $store.getters.searchGames"
                                :key="index"
                                :index="index"
                                class="card"
                                :data="game">
                     </game-card>
-
-<!--                    <game-card v-for="game in $store.getters.searchGames" :data="game"></game-card>-->
                 </div>
                 <div class="cardContainer" v-else>
-
-                    <game-card v-for="(game, index) in $store.getters.noneOfficialGames"
+                    <game-card v-for="(game, index) in $store.getters.officialGames"
                                :key="index"
                                :index="index"
                                class="card"
                                v-on:onVisible="onVisibleItem"
                                :data="game">
                     </game-card>
-
-<!--                    <game-card v-intersection="entry => onIntersection(index, entry)" v-for="(game,index) in $store.getters.noneOfficialGames" :data="game"></game-card>-->
                 </div>
             </div>
         </div>
@@ -40,18 +36,18 @@
 
 <script lang="ts">
 import {Vue, Component} from 'vue-property-decorator';
+import MainCarousel from "components/main/mainCarousel.vue";
 import GameCard from "components/common/card/gameCard.vue";
 import GenreCategory from "components/main/genreCategory.vue";
 import SortCategory from "components/main/sortCategory.vue";
 import MainFooter from "components/main/mainFooter.vue";
-import ChallengeCarousel from "components/challenge/challengeCarousel.vue";
 import SearchGame from "components/common/searchGame.vue";
 import {GameLoadState} from "src/store/modules/games";
 
 @Component({
-    components: {SearchGame, ChallengeCarousel, MainFooter, SortCategory, GenreCategory, GameCard}
+    components: {SearchGame, MainFooter, SortCategory, GenreCategory, GameCard, MainCarousel}
 })
-export default class Challenge extends Vue {
+export default class Official extends Vue {
 
     private sort : string = 'create';
     private sortData : {
@@ -67,13 +63,13 @@ export default class Challenge extends Vue {
 
     async mounted() {
         this.$store.commit('headerBgTransparent', true );
-        this.$store.commit('navTab', 'Minor');
+        this.$store.commit('navTab', 'Major');
 
-        this.$store.commit('isOfficialPage', false);
+        this.$store.commit('isOfficialPage', true);
 
-        await this.$store.dispatch('clearGames', 0);
+        await this.$store.dispatch('clearGames', 1);
         await this.$store.dispatch('loadGames', {
-            official : 0,
+            official : 1,
             sort : this.sortData[ this.sort ].sort,
             dir : this.sortData[ this.sort ].dir
         });
@@ -84,13 +80,13 @@ export default class Challenge extends Vue {
     }
 
     onVisibleItem( index :  number ) {
-        const games = this.$store.getters.noneOfficialGames;
+        const games = this.$store.getters.officialGames;
         if( index < games.length - 1) {
             return;
         }
-        if( this.$store.getters.noneOfficialLoadState === GameLoadState.loaded ) {
+        if( this.$store.getters.officialLoadState === GameLoadState.loaded ) {
             this.$store.dispatch('loadGames', {
-                official : 0,
+                official : 1,
                 sort : this.sortData[ this.sort ].sort,
                 dir : this.sortData[ this.sort ].dir
             });
@@ -100,9 +96,9 @@ export default class Challenge extends Vue {
     async sortChange( sort ) {
         this.sort = sort;
 
-        await this.$store.dispatch('clearGames', 0);
+        await this.$store.dispatch('clearGames', 1);
         await this.$store.dispatch('loadGames', {
-            official : 0,
+            official : 1,
             sort : this.sortData[ this.sort ].sort,
             dir : this.sortData[ this.sort ].dir
         });

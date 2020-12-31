@@ -10,6 +10,11 @@ const routes: RouteConfig[] = [
                 component: () => import('pages/home.vue')
             },
             {
+                name: 'official',
+                path: '/official',
+                component: () => import('pages/official.vue')
+            },
+            {
                 name: 'challenge',
                 path: '/challenge',
                 component: () => import('pages/challenge.vue')

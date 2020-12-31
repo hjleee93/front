@@ -129,6 +129,11 @@ class Api {
         return response.result || response;
     }
 
+    async featured() {
+        const response = await this.request( 'get', `/featured`, undefined, false );
+        return response.result || response;
+    }
+
 
     //USER
     async session() {
