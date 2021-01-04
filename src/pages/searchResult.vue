@@ -11,7 +11,7 @@
 
             <div class="q-pt-none">
                 <div class="tagName">
-                    {{tag}}
+                    # {{tag}}
                 </div>
                 <div class="cardContainer">
                     <game-card v-for="(game, index) in games"

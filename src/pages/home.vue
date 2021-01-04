@@ -7,7 +7,7 @@
             <search-game></search-game>
 
             <div class="q-pt-none">
-                <template v-for="featured in featuredList">
+                <template v-for="featured in featuredList" v-if="featured.games.length">
                     <home-category :data="featured"
                                    :game-list="featured.games">
                     </home-category>
