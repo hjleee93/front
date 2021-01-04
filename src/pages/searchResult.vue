@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, Prop} from 'vue-property-decorator';
+import {Vue, Component, Prop, Watch} from 'vue-property-decorator';
 import MainCarousel from "components/main/mainCarousel.vue";
 import GameCard from "components/common/card/gameCard.vue";
 import GenreCategory from "components/main/genreCategory.vue";
@@ -60,8 +60,17 @@ export default class SearchResult extends Vue {
         if( result.games ) {
             this.games = result.games;
         }
+    }
 
-        console.log(result);
+    @Watch('tagId')
+    async onChangedTagId() {
+        const result = await this.$api.tagged( this.tagId );
+        if( result.tag ) {
+            this.tag = result.tag;
+        }
+        if( result.games ) {
+            this.games = result.games;
+        }
     }
 
     beforeDestroy() {
@@ -76,16 +85,24 @@ export default class SearchResult extends Vue {
 <style scoped lang="scss">
 @import "./../css/quasar.variables";
 
+.tagName {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
 .page {
     top: -50px;
 
     .tagName {
         text-align: left;
         padding-left: 10px;
-        font-size: 30px;
+        font-size: 24px;
         font-weight: bold;
     }
+
 }
+
 
 
 </style>

@@ -31,6 +31,7 @@
 
 <script lang="ts">
 import {Vue, Component, Prop} from 'vue-property-decorator';
+import {consoleLog} from "src/scripts/consoleLog";
 
 @Component
 export default class SearchGame extends Vue {
@@ -63,7 +64,7 @@ export default class SearchGame extends Vue {
 
     onClickSearchItem(index : number) {
         const tagData = this.tags[index];
-        console.log(tagData);
+        consoleLog.log(tagData);
         this.onBlur();
     }
 
@@ -76,7 +77,7 @@ export default class SearchGame extends Vue {
 
         this.timer = 0;
         const result = await this.$api.hashtags( this.search );
-        console.log( result );
+        consoleLog.log( result );
 
         if( result.tags ) {
             this.tags = result.tags;
