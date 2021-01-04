@@ -16,7 +16,7 @@
                                     </q-item-section>
                                     <q-item-section>
                                         <q-item-label> {{ `${tag.tag}` }} </q-item-label>
-                                        <q-item-label overline>게임 145,000 </q-item-label>
+<!--                                        <q-item-label overline>게임 145,000 </q-item-label>-->
                                     </q-item-section>
                                 </q-item>
                             </router-link>
