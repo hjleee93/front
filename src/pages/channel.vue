@@ -139,7 +139,10 @@ export default class Channel extends Vue {
     async mounted() {
         this.$store.commit('navTab', 'Channel');
         const loginState = await this.$store.dispatch('loginState');
+        await this.init();
+    }
 
+    async init() {
         const result = await this.$api.channel( this.channelId );
 
         if( !result || result.error ) {
@@ -163,6 +166,11 @@ export default class Channel extends Vue {
             this.email = this.user.email;
             this.description = this.user.profile.description;
         }
+    }
+
+    @Watch('channelId')
+    async onChangedChannelId() {
+        await this.init();
     }
 }
 </script>
