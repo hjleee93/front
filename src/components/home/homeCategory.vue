@@ -3,7 +3,7 @@
         <div class="top row justify-between">
             <div class="title">{{ data && data.name }}</div>
             <router-link v-if="data.key === 'official'" to="/official" class="q-mr-lg self-center"> 더 보기 </router-link>
-            <router-link v-else-if="data.key === 'unofficial'" to="/official" class="q-mr-lg self-center"> 더 보기 </router-link>
+            <router-link v-else-if="data.key === 'unofficial'" to="/challenge" class="q-mr-lg self-center"> 더 보기 </router-link>
             <router-link v-else-if="data.key === 'puzzle'" to="/official" class="q-mr-lg self-center"> 더 보기 </router-link>
             <router-link v-else-if="data.key === 'sports'" to="/official" class="q-mr-lg self-center"> 더 보기 </router-link>
         </div>
@@ -215,11 +215,14 @@ export default class HomeCategory extends Vue {
 
     resize() {
         const node = this.scrollArea.childNodes[0] as HTMLElement;
+        if( node ) {
+            const idx = this.scrollArea.scrollLeft / this.cardWidth;
+            this.scrollArea.scrollLeft = idx * node.offsetWidth;
+            this.cardWidth = node.offsetWidth;
+            this.updateButton();
+        }
 
-        const idx = this.scrollArea.scrollLeft / this.cardWidth;
-        this.scrollArea.scrollLeft = idx * node.offsetWidth;
-        this.cardWidth = node.offsetWidth;
-        this.updateButton();
+
         // this.scrollArea.scrollLeft = this.startIdx * rect.width;
     }
 

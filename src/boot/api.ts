@@ -134,6 +134,15 @@ class Api {
         return response.result || response;
     }
 
+    async hashtags( tag ) {
+        const response = await this.request( 'get', `/games/hashtags/${tag}`, undefined, false );
+        return response.result || response;
+    }
+
+    async tagged( id ) {
+        const response = await this.request( 'get', `/games/tagged/${id}`, undefined, false );
+        return response.result || response;
+    }
 
     //USER
     async session() {

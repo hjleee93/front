@@ -20,6 +20,12 @@ const routes: RouteConfig[] = [
                 component: () => import('pages/challenge.vue')
             },
             {
+                name: 'searchResult',
+                path: '/searchresult/:tagId',
+                component: () => import('pages/searchResult.vue'),
+                props : true,
+            },
+            {
                 name: 'profile',
                 path: '/profile',
                 component: () => import('pages/profile.vue')
