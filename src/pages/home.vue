@@ -30,6 +30,7 @@ import MainFooter from "components/main/mainFooter.vue";
 import SearchGame from "components/common/searchGame.vue";
 import {GameLoadState} from "src/store/modules/games";
 import HomeCategory from "components/home/homeCategory.vue";
+import {consoleLog} from "src/scripts/consoleLog";
 
 @Component({
     components: {HomeCategory, SearchGame, MainFooter, SortCategory, GenreCategory, GameCard, MainCarousel}
@@ -44,7 +45,7 @@ export default class Home extends Vue {
 
         const result = await this.$api.featured();
         this.featuredList = result;
-        console.log(result);
+        consoleLog.log(result);
 
         // this.$store.commit('isOfficialPage', true);
         // await this.$store.dispatch('clearGames', 1);

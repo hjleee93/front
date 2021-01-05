@@ -26,12 +26,12 @@
                         </a>
                     </q-toolbar-title>
 
-                <q-tabs v-model="tab" v-if="$q.platform.is.desktop">
-                    <q-route-tab to="/" name="Home" label="홈"></q-route-tab>
-                    <q-route-tab to="/official" name="Major" label="공식 게임"></q-route-tab>
-                    <q-route-tab to="/challenge" name="Minor" label="도전 게임"></q-route-tab>
+                <q-tabs v-model="tab" v-if="$q.platform.is.desktop" inline-label shrink stretch>
+                    <q-route-tab to="/home" name="home" label="홈"></q-route-tab>
+                    <q-route-tab to="/official" name="major" label="공식 게임"></q-route-tab>
+                    <q-route-tab to="/challenge" name="minor" label="도전 게임"></q-route-tab>
                     <a :href="$store.getters.studioUrl" class="aTab">
-                        <q-tab name="G-Studio" label="개발 스튜디오">
+                        <q-tab name="g-studio" label="개발 스튜디오">
                         </q-tab>
                     </a>
                 </q-tabs>
@@ -68,6 +68,7 @@
 import {Vue, Component, Watch} from 'vue-property-decorator';
 import AccountPopupMobile from "components/common/menu/accountPopupMobile.vue";
 import AccountPopupDesktop from "components/common/menu/accountPopupDesktop.vue";
+import {consoleLog} from "src/scripts/consoleLog";
 @Component({
     components: {AccountPopupDesktop, AccountPopupMobile}
 })
@@ -81,7 +82,6 @@ export default class LayoutHeader extends Vue {
     @Watch( 'tab' )
     private onChangedTab() {
         this.$store.commit('navTab', this.tab);
-
     }
 
     @Watch( '$store.getters.navTab' )

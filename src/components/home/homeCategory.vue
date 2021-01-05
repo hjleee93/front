@@ -28,6 +28,12 @@
 .homeCategory {
     text-align: left;
 
+    a {
+        text-decoration: none;
+        color: inherit;
+        font-weight: bold;
+    }
+
     .top {
         .title {
             font-size: 28px;
