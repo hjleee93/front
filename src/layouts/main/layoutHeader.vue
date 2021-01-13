@@ -48,7 +48,7 @@
 
                 <div v-if="$store.getters.isLoginComplete">
                     <q-avatar class="cursorPoint" v-if="$store.getters.user" size="30px" @click="$store.commit('accountPopupMobile', true)">
-                        <img :src="$store.getters.user && $store.getters.user.picture || 'img/icon_pic_empty_01.png'">
+                        <q-img :src="$store.getters.user && $store.getters.user.picture || 'img/icon_pic_empty_01.png'"></q-img>
                         <account-popup-desktop v-if="$q.platform.is.desktop"></account-popup-desktop>
                         <account-popup-mobile v-if="$q.platform.is.mobile"></account-popup-mobile>
                     </q-avatar>

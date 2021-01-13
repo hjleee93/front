@@ -13,7 +13,7 @@
     >
 
         <q-carousel-slide name="game" class="column no-wrap flex-center relative-position no-padding" img-src="">
-            <img src="game/gamebg.png" class="gameBg">
+            <q-img src="game/gamebg.png" class="gameBg"></q-img>
             <div class="width100p maxWidth text-left">
                 <div>
                     <iframe class="game" src="game/kr/index.html"></iframe>
@@ -32,7 +32,7 @@
         </q-carousel-slide>
 
         <q-carousel-slide name="game2" class="column no-wrap flex-center relative-position no-padding" img-src="">
-            <img src="game/gamebg.png" class="gameBg">
+            <q-img src="game/gamebg.png" class="gameBg"></q-img>
             <div class="width100p maxWidth text-left">
                 <div>
                     <iframe class="game" src="game/alpaca/index.html"></iframe>
@@ -51,7 +51,7 @@
         </q-carousel-slide>
 
         <q-carousel-slide name="game3" class="column no-wrap flex-center relative-position no-padding" img-src="">
-            <img src="game/gamebg.png" class="gameBg">
+            <q-img src="game/gamebg.png" class="gameBg"></q-img>
             <div class="width100p maxWidth text-left">
                 <div>
                     <iframe class="game" src="game/totembreaker/index.html"></iframe>

@@ -4,7 +4,7 @@
 <!--        <div class="object3d" :class="isVisible?'visible':''">-->
         <div :class="isVisible?'visible':''">
             <div class="thumbBox">
-                <img class="base" src="img/default.png">
+                <q-img class="base" :src="'img/default.png'"></q-img>
                 <q-img class="thumb video" :src="`${data.url_thumb_gif || data.url_thumb || 'img/default.png'}`">
 
                 </q-img>

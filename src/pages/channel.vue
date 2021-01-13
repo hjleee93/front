@@ -8,7 +8,7 @@
             <div class="maxWidth row q-px-lg justify-between">
                 <div class="row">
                     <q-avatar size="80px">
-                        <img :src="user && user.picture || 'img/icon_pic_empty_01.png'">
+                        <q-img :src="user && user.picture || 'img/icon_pic_empty_01.png'"></q-img>
                     </q-avatar>
                     <div class="q-ml-lg self-center">
                         <div class="text-h5">

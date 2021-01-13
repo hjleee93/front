@@ -13,7 +13,7 @@
                     <div>
                         <div class="row no-wrap">
                             <q-avatar size="100px">
-                                <img :src="pictureUrl || $store.getters.user && $store.getters.user.picture || 'img/icon_pic_empty_01.png'">
+                                <q-img :src="pictureUrl || $store.getters.user && $store.getters.user.picture || 'img/icon_pic_empty_01.png'"></q-img>
                             </q-avatar>
                             <div class="q-ml-lg self-center">
                                 <div class="row q-mb-sm">
