@@ -70,13 +70,17 @@ export default class SearchGame extends Vue {
 
     async onSearch() {
 
-        if( this.search === '' ) {
+        const search = this.$refs.input as HTMLInputElement;
+        const value = search.value;
+
+        if( value === '' ) {
             this.tags = [];
             return;
         }
 
         this.timer = 0;
-        const result = await this.$api.hashtags( this.search );
+
+        const result = await this.$api.hashtags( value );
         consoleLog.log( result );
 
         if( result.tags ) {

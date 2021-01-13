@@ -49,7 +49,7 @@ module.exports = configure(function (/* ctx */) {
 
         // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
         build: {
-            vueRouterMode: process.env.VUE_ROUTER_MODE, // available values: 'hash', 'history'
+            vueRouterMode: process.env.QENV === 'development' ? 'hash' : 'history', // available values: 'hash', 'history'
 
             // transpile: false,
 
