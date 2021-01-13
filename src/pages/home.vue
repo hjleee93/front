@@ -7,13 +7,18 @@
             <search-game></search-game>
 
             <div class="q-pt-none">
-                <template v-for="featured in featuredList" v-if="featured.games.length">
+                <template v-for="(featured, index) in featuredList" v-if="featured.games.length">
                     <home-category :data="featured"
                                    :game-list="featured.games">
                     </home-category>
                     <div class="q-mb-xl"></div>
+                    <div v-if="banners[index]">
+                        <router-link :to="banners[index].link">
+                            <q-img :src="banners[index].src"></q-img>
+                        </router-link>
+                        <div class="q-mb-xl"></div>
+                    </div>
                 </template>
-
             </div>
         </div>
         <main-footer></main-footer>
@@ -38,6 +43,15 @@ import {consoleLog} from "src/scripts/consoleLog";
 export default class Home extends Vue {
 
     private featuredList : any[] = [];
+    private banners : {
+        src : string,
+        link : string,
+    }[] = [
+        null,
+        { src : 'banner/banner1.png', link : '' },
+        null,
+        { src : 'banner/banner2.png', link : '' },
+    ]
 
     async mounted() {
         this.$store.commit('headerBgTransparent', true );

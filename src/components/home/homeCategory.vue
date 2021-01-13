@@ -4,8 +4,8 @@
             <div class="title">{{ data && data.name }}</div>
             <router-link v-if="data.key === 'official'" to="/official" class="q-mr-lg self-center"> 더 보기 </router-link>
             <router-link v-else-if="data.key === 'unofficial'" to="/challenge" class="q-mr-lg self-center"> 더 보기 </router-link>
-            <router-link v-else-if="data.key === 'puzzle'" to="/official" class="q-mr-lg self-center"> 더 보기 </router-link>
-            <router-link v-else-if="data.key === 'sports'" to="/official" class="q-mr-lg self-center"> 더 보기 </router-link>
+<!--            <router-link v-else-if="data.key === 'puzzle'" to="/official" class="q-mr-lg self-center"> 더 보기 </router-link>-->
+<!--            <router-link v-else-if="data.key === 'sports'" to="/official" class="q-mr-lg self-center"> 더 보기 </router-link>-->
         </div>
         <div class="body">
             <div class="gameList" ref="scrollArea">
@@ -111,6 +111,7 @@
 <script lang="ts">
 import {Vue, Component, Prop, Watch} from 'vue-property-decorator';
 import GameCard from "components/common/card/gameCard.vue";
+
 @Component({
     components: {GameCard}
 })
