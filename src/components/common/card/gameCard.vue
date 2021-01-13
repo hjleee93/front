@@ -48,14 +48,14 @@
                                         </q-item-section>
                                     </q-item>
                                 </router-link>
-                                <q-item clickable class="" @click="popupReport = true; popup = false;">
-                                    <q-item-section>
-                                        <div class="row">
-                                            <q-icon name="report" class="self-center q-mr-sm"></q-icon>
-                                            <div>게임 신고 하기</div>
-                                        </div>
-                                    </q-item-section>
-                                </q-item>
+<!--                                <q-item clickable class="" @click="popupReport = true; popup = false;">-->
+<!--                                    <q-item-section>-->
+<!--                                        <div class="row">-->
+<!--                                            <q-icon name="report" class="self-center q-mr-sm"></q-icon>-->
+<!--                                            <div>게임 신고 하기</div>-->
+<!--                                        </div>-->
+<!--                                    </q-item-section>-->
+<!--                                </q-item>-->
                             </q-list>
                         </q-menu>
 
@@ -72,14 +72,14 @@
                                         </q-item-section>
                                     </q-item>
                                 </router-link>
-                                <q-item clickable class="" @click="popupReport = true; popup = false;">
-                                    <q-item-section>
-                                        <div class="row">
-                                            <!--                                            <q-icon name="report" class="self-center q-mr-sm"></q-icon>-->
-                                            <div>게임 신고 하기</div>
-                                        </div>
-                                    </q-item-section>
-                                </q-item>
+<!--                                <q-item clickable class="" @click="popupReport = true; popup = false;">-->
+<!--                                    <q-item-section>-->
+<!--                                        <div class="row">-->
+<!--                                            &lt;!&ndash;                                            <q-icon name="report" class="self-center q-mr-sm"></q-icon>&ndash;&gt;-->
+<!--                                            <div>게임 신고 하기</div>-->
+<!--                                        </div>-->
+<!--                                    </q-item-section>-->
+<!--                                </q-item>-->
                                 <q-item clickable class="" @click="popup = !popup">
                                     <q-item-section>
                                         <div class="row">
