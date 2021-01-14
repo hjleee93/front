@@ -49,8 +49,23 @@ import {GameLoadState} from "src/store/modules/games";
 import HomeCategory from "components/home/homeCategory.vue";
 import {consoleLog} from "src/scripts/consoleLog";
 
-@Component({
-    components: {HomeCategory, SearchGame, MainFooter, SortCategory, GenreCategory, GameCard, MainCarousel}
+@Component<Home>({
+    components: {HomeCategory, SearchGame, MainFooter, SortCategory, GenreCategory, GameCard, MainCarousel},
+    metaInfo() {
+        return {
+            // titleTemplate: '%s ← My Site',
+            meta: [
+                { name: 'description', content: '상상하는 모든 게임! 챌린지는 누구나 업로드 할 수 있는 창작 게임 게시판입니다.', vmid: 'description' },
+
+                { property: 'og:url', content: `${this.$store.getters.VUE_APP_ZEMPIE_URL}`, vmid: 'og:url' },
+                { property: 'og:site_name', content: 'Zempie - 웹 게임 공유 플랫폼', vmid: 'og:site_name' },
+                { property: 'og:title', content: '창작자들이 만든 웹 게임을 다운로드 없이 즐기자!',  template: chunk => `${chunk} - My page`, vmid: 'og:title' },
+                { property: 'og:description', content: '직접 만든 게임을 업로드하고, 플레이하고, 주변에 공유해 보세요. 개발 방법을 모르는 분들을 위한 템플릿도 준비되어 있습니다.', vmid: 'og:description' },
+                { property: 'og:image', content: '', vmid: 'og:image' },
+                { property: 'og:type', content: 'website', vmid: 'og:type' },
+            ]
+        }
+    }
 })
 export default class Home extends Vue {
 

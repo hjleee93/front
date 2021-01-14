@@ -61,7 +61,22 @@ import SearchGame from "components/common/searchGame.vue";
 import {GameLoadState} from "src/store/modules/games";
 
 @Component({
-    components: {SearchGame, ChallengeCarousel, MainFooter, SortCategory, GenreCategory, GameCard}
+    components: {SearchGame, ChallengeCarousel, MainFooter, SortCategory, GenreCategory, GameCard},
+    metaInfo() {
+        return {
+            // titleTemplate: '%s ← My Site',
+            meta: [
+                {name: 'description', content: '상상하는 모든 게임! 챌린지는 누구나 업로드 할 수 있는 창작 게임 게시판입니다.' },
+
+                {name: 'og:url', content: `${this.$store.getters.VUE_APP_ZEMPIE_URL}challenge` },
+                {name: 'og:site_name', content: 'Zempie Challenge - 웹 게임 공유 플랫폼' },
+                {name: 'og:title', content: '창작자들이 만든 웹 게임을 다운로드 없이 즐기자!' },
+                {name: 'og:description', content: '상상하는 모든 게임! 챌린지는 누구나 업로드 할 수 있는 창작 게임 게시판입니다.' },
+                {name: 'og:image', content: '' },
+                {name: 'og:type', content: 'website' },
+            ]
+        }
+    }
 })
 export default class Challenge extends Vue {
 
