@@ -3,6 +3,12 @@
             :class="$q.platform.is.desktop ? 'page' : ''"
     >
         <challenge-carousel></challenge-carousel>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-2187650629390403"
+             data-ad-slot="8292832492"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
         <div class="maxWidth">
 <!--            <genre-category></genre-category>-->
 <!--            <q-separator inset/>-->
@@ -34,6 +40,12 @@
                 </div>
             </div>
         </div>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-2187650629390403"
+             data-ad-slot="8292832492"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
         <main-footer></main-footer>
     </q-page>
 </template>

@@ -3,6 +3,12 @@
             :class="$q.platform.is.desktop ? 'page' : ''"
     >
         <main-carousel></main-carousel>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-2187650629390403"
+             data-ad-slot="4609464706"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
         <div class="maxWidth">
             <search-game></search-game>
 
@@ -13,9 +19,15 @@
                     </home-category>
                     <div class="q-mb-xl"></div>
                     <div v-if="banners[index]">
-                        <router-link :to="banners[index].link">
-                            <q-img :src="banners[index].src"></q-img>
-                        </router-link>
+<!--                        <router-link :to="banners[index].link">-->
+<!--                            <q-img :src="banners[index].src"></q-img>-->
+<!--                        </router-link>-->
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-client="ca-pub-2187650629390403"
+                             data-ad-slot="4609464706"
+                             data-ad-format="auto"
+                             data-full-width-responsive="true"></ins>
                         <div class="q-mb-xl"></div>
                     </div>
                 </template>
