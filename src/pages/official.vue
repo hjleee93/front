@@ -6,7 +6,7 @@
         <ins class="adsbygoogle"
              style="display:block"
              data-ad-client="ca-pub-2187650629390403"
-             data-ad-slot="4609464706"
+             data-ad-slot="8292832492"
              data-ad-format="auto"
              data-full-width-responsive="true"></ins>
         <div class="maxWidth">
@@ -36,12 +36,6 @@
                 </div>
             </div>
         </div>
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-2187650629390403"
-             data-ad-slot="4609464706"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
         <div class="q-mb-xl"></div>
         <main-footer></main-footer>
     </q-page>
@@ -75,6 +69,7 @@ export default class Official extends Vue {
     };
 
     async mounted() {
+
         this.$store.commit('headerBgTransparent', true );
         this.$store.commit('navTab', 'Major');
 
@@ -86,6 +81,13 @@ export default class Official extends Vue {
             sort : this.sortData[ this.sort ].sort,
             dir : this.sortData[ this.sort ].dir
         });
+
+        document.querySelectorAll('.adsbygoogle').forEach(  (element : Element) => {
+            if(element.getAttribute('data-ad-slot')) {
+                //@ts-ignore
+                (window.adsbygoogle || []).push({});
+            }
+        } )
     }
 
     beforeDestroy() {

@@ -3,12 +3,6 @@
             :class="$q.platform.is.desktop ? 'page' : ''"
     >
         <main-carousel></main-carousel>
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-2187650629390403"
-             data-ad-slot="4609464706"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
         <div class="maxWidth">
             <search-game></search-game>
 
@@ -28,7 +22,6 @@
                              data-ad-slot="4609464706"
                              data-ad-format="auto"
                              data-full-width-responsive="true"></ins>
-                        <div class="q-mb-xl"></div>
                     </div>
                 </template>
             </div>
@@ -56,8 +49,9 @@ import {consoleLog} from "src/scripts/consoleLog";
             // titleTemplate: '%s ← My Site',
             meta: [
                 { name: 'description', content: '상상하는 모든 게임! 챌린지는 누구나 업로드 할 수 있는 창작 게임 게시판입니다.', vmid: 'description' },
-
-                { property: 'og:url', content: `${this.$store.getters.VUE_APP_ZEMPIE_URL}`, vmid: 'og:url' },
+                { name: 'keywords', content: '젬파이, zempie, 게임, game, html5 game, html5 게임, 웹게임, 게임공유, 게임 플랫폼' },
+                { name: 'author', content: 'FromTheRed' },
+                { property: 'og:url', content: `${this.$store.getters.VUE_APP_ZEMPIE_URL}/home`, vmid: 'og:url' },
                 { property: 'og:site_name', content: 'Zempie - 웹 게임 공유 플랫폼', vmid: 'og:site_name' },
                 { property: 'og:title', content: '창작자들이 만든 웹 게임을 다운로드 없이 즐기자!',  template: chunk => `${chunk} - My page`, vmid: 'og:title' },
                 { property: 'og:description', content: '직접 만든 게임을 업로드하고, 플레이하고, 주변에 공유해 보세요. 개발 방법을 모르는 분들을 위한 템플릿도 준비되어 있습니다.', vmid: 'og:description' },
@@ -87,6 +81,17 @@ export default class Home extends Vue {
         const result = await this.$api.featured();
         this.featuredList = result;
         consoleLog.log(result);
+
+        this.$nextTick(()=>{
+            document.querySelectorAll('.adsbygoogle').forEach(  (element : Element) => {
+                if(element.getAttribute('data-ad-slot')) {
+                    //@ts-ignore
+                    (window.adsbygoogle || []).push({});
+                }
+            } )
+        })
+
+
 
         // this.$store.commit('isOfficialPage', true);
         // await this.$store.dispatch('clearGames', 1);

@@ -40,12 +40,6 @@
                 </div>
             </div>
         </div>
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-2187650629390403"
-             data-ad-slot="8292832492"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
         <main-footer></main-footer>
     </q-page>
 </template>
@@ -93,6 +87,8 @@ export default class Challenge extends Vue {
     };
 
     async mounted() {
+
+
         this.$store.commit('headerBgTransparent', true );
         this.$store.commit('navTab', 'Minor');
 
@@ -104,6 +100,13 @@ export default class Challenge extends Vue {
             sort : this.sortData[ this.sort ].sort,
             dir : this.sortData[ this.sort ].dir
         });
+
+        document.querySelectorAll('.adsbygoogle').forEach(  (element : Element) => {
+            if(element.getAttribute('data-ad-slot')) {
+                //@ts-ignore
+                (window.adsbygoogle || []).push({});
+            }
+        } )
     }
 
     beforeDestroy() {
