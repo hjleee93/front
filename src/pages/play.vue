@@ -2,11 +2,11 @@
     <q-layout>
         <q-page-container>
             <q-page>
-                <iframe ref="game" class="iframe"
+                <iframe ref="game" class="iframe" :style="`height:${iframeHeight};`"
                     :src="url"></iframe>
-                <button v-if="initLauncher" class="exitButton" @click="exit">
-                    <q-icon name="clear"></q-icon>
-                </button>
+<!--                <button v-if="initLauncher" class="exitButton" @click="exit">-->
+<!--                    <q-icon name="clear"></q-icon>-->
+<!--                </button>-->
             </q-page>
         </q-page-container>
     </q-layout>
@@ -28,6 +28,8 @@ export default class Play extends Vue {
     private gameData: any;
     private url: string = '';
     private initLauncher : boolean = false;
+    private iframeHeight : number = 0;
+
 
     async mounted() {
 
@@ -51,11 +53,21 @@ export default class Play extends Vue {
         this.url = `${process.env.VUE_APP_LAUNCHER_URL}game/${this.gameData.pathname}`;
 
         window.addEventListener('message', this.onMessage);
+        window.addEventListener('resize', this.onResize);
+        this.onResize();
+
         this.tagEvent();
     }
 
     beforeDestroy() {
         window.removeEventListener('message', this.onMessage);
+        window.removeEventListener('resize', this.onResize);
+    }
+
+    onResize() {
+        console.log( window.innerWidth );
+        // this.iframeWidth = `${window.innerWidth}px`;
+        this.iframeHeight = `${window.innerHeight}px`;
     }
 
     @Watch('$store.getters.idToken')
@@ -72,7 +84,6 @@ export default class Play extends Vue {
                 this.toMessage({type: '@initParent'});
                 const loginState = await this.$store.dispatch('loginState');
                 this.onChangedToken();
-
                 break;
             }
             case '@refreshToken': {
@@ -85,6 +96,11 @@ export default class Play extends Vue {
             }
             case '@requestLogin': {
                 await this.$router.push('/login');
+                break;
+            }
+            case '@exit': {
+                this.exit();
+                break;
             }
         }
     }
@@ -97,7 +113,6 @@ export default class Play extends Vue {
     }
 
     exit() {
-
         // console.log( this.$router, history.length, window.history.state );
         this.$router.back();
     }
