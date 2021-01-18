@@ -48,7 +48,7 @@ import {consoleLog} from "src/scripts/consoleLog";
         return {
             // titleTemplate: '%s ← My Site',
             meta: [
-                { name: 'description', content: '상상하는 모든 게임! 챌린지는 누구나 업로드 할 수 있는 창작 게임 게시판입니다.', vmid: 'description' },
+                { name: 'description', content: '직접 만든 게임을 업로드하고, 플레이하고, 주변에 공유해 보세요. 개발 방법을 모르는 분들을 위한 템플릿도 준비되어 있습니다.', vmid: 'description' },
                 { name: 'keywords', content: '젬파이, zempie, 게임, game, html5 game, html5 게임, 웹게임, 게임공유, 게임 플랫폼' },
                 { name: 'author', content: 'FromTheRed' },
                 { property: 'og:url', content: `${this.$store.getters.VUE_APP_ZEMPIE_URL}/home`, vmid: 'og:url' },
