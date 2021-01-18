@@ -28,7 +28,7 @@ export default class Play extends Vue {
     private gameData: any;
     private url: string = '';
     private initLauncher : boolean = false;
-    private iframeHeight : number = 0;
+    private iframeHeight : string = '';
 
 
     async mounted() {
@@ -65,7 +65,6 @@ export default class Play extends Vue {
     }
 
     onResize() {
-        console.log( window.innerWidth );
         // this.iframeWidth = `${window.innerWidth}px`;
         this.iframeHeight = `${window.innerHeight}px`;
     }
