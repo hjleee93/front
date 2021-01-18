@@ -52,6 +52,8 @@ module.exports = configure(function (/* ctx */) {
         build: {
             vueRouterMode: process.env.QENV === 'development' ? 'hash' : 'history', // available values: 'hash', 'history'
 
+            // publicPath: './',
+
             // transpile: false,
 
             // Add dependencies for transpiling with Babel (Array of string/regex)

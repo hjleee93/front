@@ -3,12 +3,6 @@
             :class="$q.platform.is.desktop ? 'page' : ''"
     >
         <main-carousel></main-carousel>
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-2187650629390403"
-             data-ad-slot="8292832492"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
         <div class="maxWidth">
             <!--            <genre-category></genre-category>-->
             <!--            <q-separator inset/>-->
@@ -66,13 +60,6 @@ export default class SearchResult extends Vue {
         if( result.games ) {
             this.games = result.games;
         }
-
-        document.querySelectorAll('.adsbygoogle').forEach(  (element : Element) => {
-            if(element.getAttribute('data-ad-slot')) {
-                //@ts-ignore
-                (window.adsbygoogle || []).push({});
-            }
-        } )
     }
 
     @Watch('tagId')
