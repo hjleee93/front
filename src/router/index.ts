@@ -2,7 +2,7 @@ import Vue from 'vue';
 import { route } from 'quasar/wrappers';
 import VueRouter from 'vue-router';
 import { Store } from "vuex";
-import { StateInterface } from '../store';
+import {_store, StateInterface} from '../store';
 import routes from './routes';
 
 /*
@@ -21,6 +21,11 @@ const router = new VueRouter({
     // quasar.conf.js -> build -> publicPath
     mode: process.env.VUE_ROUTER_MODE,
     base: process.env.VUE_ROUTER_BASE
+});
+
+router.beforeEach((to, from, next) => {
+    _store.commit('fromRouterName', from.name);
+    next();
 });
 
 export default route<Store<StateInterface>>(function ({ Vue }) {

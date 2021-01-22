@@ -1,5 +1,6 @@
 export default {
     state: {
+        fromRouterName : '',
         navTab: '',
         accountPopupMobile : false,
         ajaxBar : false,
@@ -38,6 +39,9 @@ export default {
         policyUrl(state) {
             return state.policyUrl;
         },
+        fromRouterName(state) {
+            return state.fromRouterName;
+        },
     },
 
     mutations: {
@@ -49,6 +53,9 @@ export default {
         },
         ajaxBar( state, payload ) {
             state.ajaxBar = payload;
+        },
+        fromRouterName( state, payload ) {
+            state.fromRouterName = payload;
         },
     },
     actions: {}

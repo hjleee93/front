@@ -112,8 +112,12 @@ export default class Play extends Vue {
     }
 
     exit() {
-        // console.log( this.$router, history.length, window.history.state );
-        this.$router.back();
+        if( this.$store.getters.fromRouterName ) {
+            this.$router.back();
+        }
+        else {
+            this.$router.push('/home');
+        }
     }
 
     tagEvent() {
