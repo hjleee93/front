@@ -161,11 +161,12 @@ import firebase from "firebase";
 import {LoginState} from "src/store/modules/user";
 import {_store} from "src/store";
 import LoginManager from "src/scripts/login";
+import {UrlHelper} from "src/scripts/util";
 
 @Component
 export default class Login extends Vue {
 
-    @Prop() private redirect! : string;
+    private redirect : string = '';
 
     private email : string = '';
     private password : string = '';
@@ -189,6 +190,8 @@ export default class Login extends Vue {
                 await this.$router.replace('/');
                 break;
         }
+
+        this.redirect = UrlHelper.getParameterByName('z_redirect_url');
 
         if( this.redirect ) {
             // console.log(this.redirect);

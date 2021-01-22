@@ -56,12 +56,12 @@ const routes: RouteConfig[] = [
         component: () => import( 'pages/play.vue' ),
         props : true
     },
-    {
-        name : 'loginRedirect',
-        path : '/login/:redirect',
-        component: () => import( 'pages/login.vue' ),
-        props : true,
-    },
+    // {
+    //     name : 'loginRedirect',
+    //     path : '/login/:redirect',
+    //     component: () => import( 'pages/login.vue' ),
+    //     props : true,
+    // },
     {
         name : 'login',
         path : '/login',
