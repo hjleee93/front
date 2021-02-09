@@ -1,9 +1,14 @@
 <template>
     <div class="homeCategory">
         <div class="top row justify-between">
-            <div class="title">{{ data && data.name }}</div>
-            <router-link v-if="data.key === 'official'" to="/official" class="q-mr-lg self-center"> 더 보기 </router-link>
-            <router-link v-else-if="data.key === 'unofficial'" to="/challenge" class="q-mr-lg self-center"> 더 보기 </router-link>
+            <div class="title">
+                {{ data && data.name.split(" ").filter((text, idx) => idx < 2).join(" ") }}
+                <span class="subTitle">
+                    {{ data && data.name.split(" ").filter((text, idx) => idx >= 2).join(" ") }}
+                </span>
+            </div>
+<!--            <router-link v-if="data.key === 'official'" to="/official" class="q-mr-lg self-center"> 더 보기 </router-link>-->
+<!--            <router-link v-else-if="data.key === 'unofficial'" to="/challenge" class="q-mr-lg self-center"> 더 보기 </router-link>-->
 <!--            <router-link v-else-if="data.key === 'puzzle'" to="/official" class="q-mr-lg self-center"> 더 보기 </router-link>-->
 <!--            <router-link v-else-if="data.key === 'sports'" to="/official" class="q-mr-lg self-center"> 더 보기 </router-link>-->
         </div>
@@ -20,6 +25,10 @@
                 <q-btn class="button prev" @click="prev" v-show="isPrev"><q-icon name="arrow_back_ios"></q-icon></q-btn>
                 <q-btn class="button next" @click="next" v-show="isNext"><q-icon name="arrow_forward_ios"></q-icon></q-btn>
             </div>
+        </div>
+        <div class="more">
+            <router-link v-if="data.key === 'official'" to="/official" class="q-mr-lg self-center moreGameBtn"> 더 보기 </router-link>
+            <router-link v-else-if="data.key === 'unofficial'" to="/challenge" class="q-mr-lg self-center moreGameBtn"> 더 보기 </router-link>
         </div>
     </div>
 </template>
@@ -41,13 +50,26 @@
             margin-left: 10px;
 
             @media (max-width: $breakpoint-xs) {
-                margin-left: 10px;
-                font-size: 16px;
+                //margin-left: 10px;
+                font-size: 20px;
             }
 
             @media (min-width: $breakpoint-xs) and (max-width: $breakpoint-sm) {
-                margin-left: 10px;
+                //margin-left: 10px;
+                font-size: 24px;
+            }
+
+            .subTitle {
                 font-size: 22px;
+                color: rgba(255, 255, 255, 0.5);
+
+                @media (max-width: $breakpoint-xs) {
+                    font-size: 12px;
+                }
+
+                @media (min-width: $breakpoint-xs) and (max-width: $breakpoint-sm) {
+                    font-size: 18px;
+                }
             }
         }
     }
@@ -103,7 +125,22 @@
         }
     }
 
+    .more {
+        width: 100%;
+        display: flex;
+        justify-content: center;
 
+        .moreGameBtn {
+            display: block;
+            width: 160px;
+            height: 40px;
+            margin: 10px 0;
+            border-radius: 20px;
+            border: 2px solid white;
+            text-align: center;
+            line-height: 40px;
+        }
+    }
 
 }
 </style>

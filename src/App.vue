@@ -27,6 +27,10 @@ export default class App extends Vue {
         app = this;
 
         await this.$store.dispatch('loginState');
+        await this.$store.dispatch('loadMails');
+        console.log( this.$store.getters.mails );
+        // todo: is_read 1이 읽은 거면 mails의 길이랑 촐합이 같으면 다 읽은거
+        console.log(await this.$api.readMail(this.$store.getters.mails[0].id));
 
         // console.log('로그인완료 : ' + (Date.now() - firebaseInitStartTime) / 1000 );
 

@@ -11,34 +11,44 @@
                 <q-img class="thumb img" :src="`${data.url_thumb_webp || data.url_thumb || 'img/default.png'}`">
 
                 </q-img>
+
+                <div class="heartBox">
+                    🧡 {{ data.count_heart.toLocaleString() }}
+                </div>
             </div>
 
 
             <div class="row detail text-left q-mt-sm">
-                <router-link class="self-center" :to="`/channel/${data.user.channel_id}`">
+                <router-link class="q-mt-xs" :to="`/channel/${data.user.channel_id}`" v-if="data.user !== undefined">
                     <q-img class="developerLogo" :src="data.user.picture">
                     </q-img>
                 </router-link>
 
                 <div class="text q-ml-sm">
                     <strong
-                        class="ellipsis block">
-                        {{data.title}}
+                        class="ellipsis block title">
+                        {{ data.title }}
                     </strong>
                     <span
-                        class="ellipsis block userName">
-                        {{data.user.name}}
+                        class="ellipsis block userName"
+                        v-if="data.user !== undefined">
+                        {{ data.user.name }}
+                    </span>
+                    <span
+                        class="ellipsis block playCount"
+                        v-if="data.category !== 2">
+                        {{ countOverFormat(data.count_over)}} 플레이
                     </span>
                 </div>
 
-                <div class="more" :class="$q.platform.is.desktop ? 'desktop' : ''">
+                <div class="more" :class="$q.platform.is.desktop ? 'desktop' : ''" v-if="data.user !== undefined">
                     <q-btn @click.prevent="more" flat dense color="bg-transparent" class="" key="btn_size_dense_rd_md" size="md">
                         <q-icon color="grey-5" name="more_vert"></q-icon>
 
 
                         <q-menu v-if="$q.platform.is.desktop">
                             <q-list>
-                                <router-link :to="`/channel/${data.user.channel_id}`">
+                                <router-link :to="`/channel/${data.user.channel_id}`" v-if="data.user !== undefined">
                                     <q-item clickable>
                                         <q-item-section>
                                             <div class="row">
@@ -62,7 +72,7 @@
 
                         <q-dialog v-else v-model="popup">
                             <q-list class="bg-dark width90p maxWidth400px">
-                                <router-link :to="`/channel/${data.user.channel_id}`">
+                                <router-link :to="`/channel/${data.user.channel_id}`" v-if="data.user !== undefined">
                                     <q-item clickable class="">
                                         <q-item-section>
                                             <div class="row">
@@ -121,6 +131,10 @@ export default class GameCard extends Vue {
         }
     }
 
+    countOverFormat( countOver : number ) {
+        return countOver >= 10000 ? Math.floor( countOver / 10000 ) + '만회' : countOver + '회'
+    }
+
     onIntersection( entry ) {
         const isIntersecting = entry.isIntersecting;
         this.isVisible = isIntersecting;
@@ -161,6 +175,8 @@ a {
     }
 
     .detail {
+        display: flex;
+        justify-content: space-between;
         .developerLogo {
             border-radius: 32px;
             width: 32px;
@@ -172,8 +188,15 @@ a {
             width: calc(100% - 60px);
             display: inline-block;
             //margin-left: 10px
+            .title {
+                font-size: 1.2em;
+            }
             .userName {
                 color: #d0d0d0;
+            }
+            .playCount {
+                color: #d0d0d0;
+                font-size: 0.9em;
             }
         }
 
@@ -256,6 +279,19 @@ a {
                 transform: scale(1.1);
                 opacity: 0;
             }
+        }
+
+        .heartBox {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.7);
+            //min-width: 80px;
+            height: 26px;
+            padding: 0 8px;
+            text-align: left;
+            line-height: 26px;
+            border-radius: 6px;
+            bottom: 10px;
+            right: 10px;
         }
     }
 

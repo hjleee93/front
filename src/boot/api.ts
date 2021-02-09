@@ -18,6 +18,7 @@ class Api {
 
     async request( method : string, url : string, data : any, withCredentials : boolean = false, errorCallback : Function | null = null, retryCount : number = 0 ): Promise<any> {
         try {
+            // @ts-ignore
             const result = await Vue.$axios({
                 method : method,
                 url,
@@ -96,11 +97,11 @@ class Api {
 
 
     //GAME
-    async games(limit : number = 100, offset : number = 0, official : number = undefined, sort : string = undefined, dir : string = undefined ) {
+    async games(limit : number = 100, offset : number = 0, category : number = undefined, sort : string = undefined, dir : string = undefined ) {
 
         let url = `/games?limit=${limit}&offset=${offset}`;
-        if( official !== undefined ) {
-            url += `&official=${official}`;
+        if( category !== undefined ) {
+            url += `&category=${category}`;
         }
         if( sort !== undefined ) {
             url += `&sort=${sort}`;
@@ -112,7 +113,7 @@ class Api {
         const response = await this.request( 'get', url, {
             limit,
             offset,
-            official,
+            category,
             sort,
             dir,
         }, false );
@@ -218,6 +219,16 @@ class Api {
             text,
         }, false );
 
+        return response.result || response;
+    }
+
+    async mails() {
+        const response = await this.request('get', '/user/mails', undefined, false);
+        return response.result || response;
+    }
+
+    async readMail( mail_id : number ) {
+        const response = await this.request('get', `/user/mail/${mail_id}`, undefined, false);
         return response.result || response;
     }
 }

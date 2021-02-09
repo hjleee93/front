@@ -3,6 +3,7 @@ export default {
         fromRouterName : '',
         navTab: '',
         accountPopupMobile : false,
+        mailPopupMobile : false,
         ajaxBar : false,
         homeUrl : process.env.VUE_APP_ZEMPIE_URL,
         studioUrl : process.env.VUE_APP_STUDIO_URL,
@@ -17,6 +18,9 @@ export default {
         },
         accountPopupMobile(state: any) {
             return state.accountPopupMobile;
+        },
+        mailPopupMobile(state: any) {
+            return state.mailPopupMobile;
         },
         ajaxBar(state) {
             return state.ajaxBar;
@@ -50,6 +54,9 @@ export default {
         },
         accountPopupMobile(state: any, payload: boolean) {
             state.accountPopupMobile = payload;
+        },
+        mailPopupMobile(state: any, payload: boolean) {
+            state.mailPopupMobile = payload;
         },
         ajaxBar( state, payload ) {
             state.ajaxBar = payload;

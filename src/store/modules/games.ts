@@ -19,15 +19,19 @@ export default {
         limit : 20,
 
         officialGames : [],
-        noneOfficialGames : [],
+        challengeGames : [],
+        affiliateGames : [],
+
 
         crtOriginGames : [],
         searchGames : [],
         isSearchGame : false,
 
         isOfficialPage : true,
+
         officialLoadState : GameLoadState.none,
-        noneOfficialLoadState : GameLoadState.none,
+        challengeLoadState : GameLoadState.none,
+        affiliateLoadState : GameLoadState.none,
     },
     getters: {
         // loadedGames : (state : any) => {
@@ -42,22 +46,33 @@ export default {
             return state.officialGames;
         },
 
-        noneOfficialGames : ( state : any ) =>{
-            return state.noneOfficialGames;
+        challengeGames : ( state : any ) =>{
+            return state.challengeGames;
+        },
+
+        affiliateGames : ( state : any ) =>{
+            return state.affiliateGames;
         },
 
         officialLoadState : ( state : any ) =>{
             return state.officialLoadState;
         },
 
-        noneOfficialLoadState : ( state : any ) =>{
-            return state.noneOfficialLoadState;
+        challengeLoadState : ( state : any ) =>{
+            return state.challengeLoadState;
+        },
+
+        affiliateLoadState : ( state : any ) =>{
+            return state.affiliateLoadState;
         },
 
         gameByTitle : ( state : any ) => (title : string) => {
             let game = state.officialGames.find( (game:any) => game.title === title );
             if( !game ) {
-                game = state.noneOfficialGames.find( (game:any) => game.title === title );
+                game = state.challengeGames.find( (game:any) => game.title === title );
+            }
+            if( !game ) {
+                game = state.affiliateGames.find( (game:any) => game.title === title );
             }
 
             return game;
@@ -66,7 +81,10 @@ export default {
         gameByPathname : ( state : any ) => (pathname : string) => {
             let game = state.officialGames.find( (game:any) => game.pathname === pathname );
             if( !game ) {
-                game = state.noneOfficialGames.find( (game:any) => game.pathname === pathname );
+                game = state.challengeGames.find( (game:any) => game.pathname === pathname );
+            }
+            if( !game ) {
+                game = state.affiliateGames.find( (game:any) => game.pathname === pathname );
             }
 
             return game;
@@ -94,14 +112,20 @@ export default {
         officialGames : ( state : any, payload : any ) => {
             state.officialGames = payload;
         },
-        noneOfficialGames : ( state : any, payload : any ) => {
-            state.noneOfficialGames = payload;
+        challengeGames : ( state : any, payload : any ) => {
+            state.challengeGames = payload;
+        },
+        affiliateGames : ( state : any, payload : any ) => {
+            state.affiliateGames = payload;
         },
         officialLoadState : ( state : any, payload : any ) => {
             state.officialLoadState = payload;
         },
-        noneOfficialLoadState : ( state : any, payload : any ) => {
-            state.noneOfficialLoadState = payload;
+        challengeLoadState : ( state : any, payload : any ) => {
+            state.challengeLoadState = payload;
+        },
+        affiliateLoadState : ( state : any, payload : any ) => {
+            state.affiliateLoadState = payload;
         },
 
         isSearchGame : ( state : any, payload : any ) => {
@@ -115,20 +139,24 @@ export default {
         },
     },
     actions: {
-        clearGames : async (context : any, official : number = 1) => {
-            const gameKey = official === 1 ? 'officialGames' : 'noneOfficialGames';
-            const stateKey = official === 1 ? 'officialLoadState' : 'noneOfficialLoadState';
+        clearGames : async (context : any, category : number = 1) => {
+            const gameKeys = [ 'challengeGames', 'officialGames', 'affiliateGames' ];
+            const stateKeys = [ 'challengeLoadState', 'officialLoadState', 'affiliateLoadState' ];
+            const gameKey = gameKeys[category];
+            const stateKey = stateKeys[category];
 
             context.commit(gameKey, []);
             context.commit( stateKey, GameLoadState.none );
         },
 
-        loadGames : async (context : any, {official, sort, dir} ) => {
+        loadGames : async (context : any, {category, sort, dir} ) => {
 
             //dir = asc, desc
 
-            const gameKey = official === 1 ? 'officialGames' : 'noneOfficialGames';
-            const stateKey = official === 1 ? 'officialLoadState' : 'noneOfficialLoadState';
+            const gameKeys = [ 'challengeGames', 'officialGames', 'affiliateGames' ];
+            const stateKeys = [ 'challengeLoadState', 'officialLoadState', 'affiliateLoadState' ];
+            const gameKey = gameKeys[category];
+            const stateKey = stateKeys[category];
 
             if ( context.state[stateKey] === GameLoadState.none ||
                 context.state[stateKey] === GameLoadState.loaded) {
@@ -137,7 +165,7 @@ export default {
                 const offset = context.state[gameKey].length;
                 context.commit( stateKey, GameLoadState.loading );
 
-                const result = await Vue.$api.games(limit, offset, official, sort, dir);
+                const result = await Vue.$api.games(limit, offset, category, sort, dir);
                 if( !result || result.error ) {
                     result && result.error && console.error( result.error );
                     context.commit(gameKey, []);
@@ -167,7 +195,7 @@ export default {
                             if ( context.state[stateKey] === GameLoadState.loading ) {
                                 setTimeout(wait, 500);
                             } else {
-                                return resolve();
+                                return resolve(null);
                             }
                         }
                         wait();
