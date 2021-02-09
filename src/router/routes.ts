@@ -22,6 +22,11 @@ const routes: RouteConfig[] = [
                 component: () => import('pages/challenge.vue')
             },
             {
+                name: 'affiliate',
+                path: '/affiliate',
+                component: () => import('pages/affiliate.vue')
+            },
+            {
                 name: 'searchResult',
                 path: '/searchresult/:tagId',
                 component: () => import('pages/searchResult.vue'),

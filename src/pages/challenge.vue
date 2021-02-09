@@ -28,7 +28,7 @@
                 </div>
                 <div class="cardContainer" v-else>
 
-                    <game-card v-for="(game, index) in $store.getters.noneOfficialGames"
+                    <game-card v-for="(game, index) in $store.getters.challengeGames"
                                :key="index"
                                :index="index"
                                class="card"
@@ -96,7 +96,7 @@ export default class Challenge extends Vue {
 
         await this.$store.dispatch('clearGames', 0);
         await this.$store.dispatch('loadGames', {
-            official : 0,
+            category : 0,
             sort : this.sortData[ this.sort ].sort,
             dir : this.sortData[ this.sort ].dir
         });
@@ -114,13 +114,13 @@ export default class Challenge extends Vue {
     }
 
     onVisibleItem( index :  number ) {
-        const games = this.$store.getters.noneOfficialGames;
+        const games = this.$store.getters.challengeGames;
         if( index < games.length - 1) {
             return;
         }
-        if( this.$store.getters.noneOfficialLoadState === GameLoadState.loaded ) {
+        if( this.$store.getters.challengeLoadState === GameLoadState.loaded ) {
             this.$store.dispatch('loadGames', {
-                official : 0,
+                category : 0,
                 sort : this.sortData[ this.sort ].sort,
                 dir : this.sortData[ this.sort ].dir
             });
@@ -132,7 +132,7 @@ export default class Challenge extends Vue {
 
         await this.$store.dispatch('clearGames', 0);
         await this.$store.dispatch('loadGames', {
-            official : 0,
+            category : 0,
             sort : this.sortData[ this.sort ].sort,
             dir : this.sortData[ this.sort ].dir
         });

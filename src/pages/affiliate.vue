@@ -2,59 +2,77 @@
     <q-page class="items-center justify-evenly text-center"
             :class="$q.platform.is.desktop ? 'page' : ''"
     >
-        <main-carousel></main-carousel>
+        <challenge-carousel></challenge-carousel>
         <ins class="adsbygoogle"
              style="display:block"
              data-ad-client="ca-pub-2187650629390403"
-             data-ad-slot="8292832492"
+             data-ad-slot="9014988850"
              data-ad-format="auto"
              data-full-width-responsive="true"></ins>
         <div class="maxWidth">
             <!--            <genre-category></genre-category>-->
             <!--            <q-separator inset/>-->
             <search-game></search-game>
-<!--            <sort-category v-on:@sortChange="sortChange"></sort-category>-->
-
-
+            <!--            <sort-category v-on:@sortChange="sortChange"></sort-category>-->
             <div class="q-pt-none">
                 <div class="cardContainer" v-if="$store.getters.isSearchGame">
+
                     <game-card v-for="(game, index) in $store.getters.searchGames"
                                :key="index"
                                :index="index"
                                class="card"
                                :data="game">
                     </game-card>
+
+                    <!--                    <game-card v-for="game in $store.getters.searchGames" :data="game"></game-card>-->
                 </div>
                 <div class="cardContainer" v-else>
-                    <game-card v-for="(game, index) in $store.getters.officialGames"
+
+                    <game-card v-for="(game, index) in $store.getters.affiliateGames"
                                :key="index"
                                :index="index"
                                class="card"
                                v-on:onVisible="onVisibleItem"
                                :data="game">
                     </game-card>
+
+                    <!--                    <game-card v-intersection="entry => onIntersection(index, entry)" v-for="(game,index) in $store.getters.noneOfficialGames" :data="game"></game-card>-->
                 </div>
             </div>
         </div>
-        <div class="q-mb-xl"></div>
         <main-footer></main-footer>
     </q-page>
 </template>
 
 <script lang="ts">
 import {Vue, Component} from 'vue-property-decorator';
-import MainCarousel from "components/main/mainCarousel.vue";
 import GameCard from "components/common/card/gameCard.vue";
 import GenreCategory from "components/main/genreCategory.vue";
 import SortCategory from "components/main/sortCategory.vue";
 import MainFooter from "components/main/mainFooter.vue";
+import ChallengeCarousel from "components/challenge/challengeCarousel.vue";
 import SearchGame from "components/common/searchGame.vue";
 import {GameLoadState} from "src/store/modules/games";
 
 @Component({
-    components: {SearchGame, MainFooter, SortCategory, GenreCategory, GameCard, MainCarousel}
+    components: {SearchGame, ChallengeCarousel, MainFooter, SortCategory, GenreCategory, GameCard},
+    metaInfo() {
+        return {
+            // titleTemplate: '%s ← My Site',
+            meta: [
+                {name: 'description', content: '상상하는 모든 게임! 챌린지는 누구나 업로드 할 수 있는 창작 게임 게시판입니다.' },
+
+                {name: 'og:url', content: `${this.$store.getters.VUE_APP_ZEMPIE_URL}challenge` },
+                {name: 'og:site_name', content: 'Zempie Challenge - 웹 게임 공유 플랫폼' },
+                {name: 'og:title', content: '창작자들이 만든 웹 게임을 다운로드 없이 즐기자!' },
+                {name: 'og:description', content: '상상하는 모든 게임! 챌린지는 누구나 업로드 할 수 있는 창작 게임 게시판입니다.' },
+                {name: 'og:image', content: '' },
+                {name: 'og:type', content: 'website' },
+            ]
+        }
+    }
 })
-export default class Official extends Vue {
+export default class Affiliate extends Vue {
 
     private sort : string = 'create';
     private sortData : {
@@ -70,14 +88,15 @@ export default class Official extends Vue {
 
     async mounted() {
 
+
         this.$store.commit('headerBgTransparent', true );
-        this.$store.commit('navTab', 'Major');
+        this.$store.commit('navTab', 'Affiliate');
 
-        this.$store.commit('isOfficialPage', true);
+        this.$store.commit('isOfficialPage', false);
 
-        await this.$store.dispatch('clearGames', 1);
+        await this.$store.dispatch('clearGames', 0);
         await this.$store.dispatch('loadGames', {
-            category : 1,
+            category : 2,
             sort : this.sortData[ this.sort ].sort,
             dir : this.sortData[ this.sort ].dir
         });
@@ -95,13 +114,13 @@ export default class Official extends Vue {
     }
 
     onVisibleItem( index :  number ) {
-        const games = this.$store.getters.officialGames;
+        const games = this.$store.getters.affiliateGames;
         if( index < games.length - 1) {
             return;
         }
-        if( this.$store.getters.officialLoadState === GameLoadState.loaded ) {
+        if( this.$store.getters.affiliateLoadState === GameLoadState.loaded ) {
             this.$store.dispatch('loadGames', {
-                category : 1,
+                category : 2,
                 sort : this.sortData[ this.sort ].sort,
                 dir : this.sortData[ this.sort ].dir
             });
@@ -111,9 +130,9 @@ export default class Official extends Vue {
     async sortChange( sort ) {
         this.sort = sort;
 
-        await this.$store.dispatch('clearGames', 1);
+        await this.$store.dispatch('clearGames', 0);
         await this.$store.dispatch('loadGames', {
-            category : 1,
+            category : 2,
             sort : this.sortData[ this.sort ].sort,
             dir : this.sortData[ this.sort ].dir
         });

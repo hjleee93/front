@@ -4,14 +4,16 @@
     >
         <main-carousel></main-carousel>
 
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-2187650629390403"
-             data-ad-slot="4609464706"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-
         <div class="maxWidth">
+<!--            <div>-->
+<!--                <div class="text-h3 text-weight-bold q-mt-xl q-mb-md">-->
+<!--                    HTML5 GAMES-->
+<!--                </div>-->
+<!--                <div class="text-h5 q-mt-md q-mb-xl">-->
+<!--                    고품질의 검증된 게임만을 유통하는 수익화 플랫폼!-->
+<!--                </div>-->
+<!--            </div>-->
+
             <search-game></search-game>
 
             <div class="q-pt-none">
@@ -28,6 +30,13 @@
                 </template>
             </div>
         </div>
+
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-2187650629390403"
+             data-ad-slot="4609464706"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
         <main-footer></main-footer>
     </q-page>
 </template>
@@ -92,7 +101,6 @@ export default class Home extends Vue {
                 }
             } )
         })
-
 
 
         // this.$store.commit('isOfficialPage', true);

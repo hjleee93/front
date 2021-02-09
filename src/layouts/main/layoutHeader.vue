@@ -2,7 +2,7 @@
     <div class="headerRoot">
         <q-header
             class="transitionBg bg-dark"
-                  :class="$q.platform.is.desktop && $store.getters.headerBgTransparent && $store.getters.scrollPos < 100 ? 'bg-transparent' : ''"
+                  :class="$q.platform.is.desktop && $store.getters.headerBgTransparent && $store.getters.scrollPos < 100 ? 'headerBg' : ''"
                   :reveal="$q.platform.is.mobile"
         >
             <q-toolbar class="maxWidth">
@@ -30,6 +30,7 @@
                     <q-route-tab to="/home" name="home" label="홈"></q-route-tab>
                     <q-route-tab to="/official" name="major" label="공식 게임"></q-route-tab>
                     <q-route-tab to="/challenge" name="minor" label="도전 게임"></q-route-tab>
+                    <q-route-tab to="/affiliate" name="affiliate" label="제휴 게임"></q-route-tab>
                     <a :href="$store.getters.studioUrl" class="aTab">
                         <q-tab name="g-studio" label="개발 스튜디오">
                         </q-tab>
@@ -47,6 +48,11 @@
                 <div class="q-mr-xl"></div>
 
                 <div v-if="$store.getters.isLoginComplete">
+<!--                    <q-avatar class="cursorPoint" v-if="$store.getters.isLogin" size="30px" @click="$store.commit('mailPopupMobile', true)">-->
+<!--                        <q-icon name="fas fa-bullhorn" class="q-mr-md self-center"></q-icon>-->
+<!--                        <mail-popup-desktop v-if="$q.platform.is.desktop"></mail-popup-desktop>-->
+<!--                        <mail-popup-mobile v-if="$q.platform.is.mobile"></mail-popup-mobile>-->
+<!--                    </q-avatar>-->
                     <q-avatar class="cursorPoint" v-if="$store.getters.user" size="30px" @click="$store.commit('accountPopupMobile', true)">
                         <q-img :src="$store.getters.user && $store.getters.user.picture || 'img/icon_pic_empty_01.png'"></q-img>
                         <account-popup-desktop v-if="$q.platform.is.desktop"></account-popup-desktop>
@@ -68,9 +74,11 @@
 import {Vue, Component, Watch} from 'vue-property-decorator';
 import AccountPopupMobile from "components/common/menu/accountPopupMobile.vue";
 import AccountPopupDesktop from "components/common/menu/accountPopupDesktop.vue";
+import MailPopupDesktop from "components/common/menu/mailPopupDesktop.vue";
+import MailPopupMobile from "components/common/menu/mailPopupMobile.vue";
 import {consoleLog} from "src/scripts/consoleLog";
 @Component({
-    components: {AccountPopupDesktop, AccountPopupMobile}
+    components: {AccountPopupDesktop, AccountPopupMobile, MailPopupDesktop, MailPopupMobile}
 })
 export default class LayoutHeader extends Vue {
     private tab = '';
@@ -93,6 +101,9 @@ export default class LayoutHeader extends Vue {
 
 
 <style lang="scss" scoped>
+    .headerBg {
+        background-color: rgba(0, 0, 0, 0.7) !important;
+    }
     .aTab {
         color: white;
         text-decoration: none;

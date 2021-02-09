@@ -1,8 +1,14 @@
 <template>
-    <div class="searchRoot q-py-md">
-        <div class="box float-right">
-            <q-icon class="icon q-mr-sm" name="fa fa-search"></q-icon>
-            <input ref="input" v-model="search" placeholder='게임 검색하기' type="search" @keyup="onChanged">
+    <div class="searchRoot q-py-md flex justify-end items-center">
+        <div class="box">
+            <div class="searchForm flex items-center justify-around">
+                <div class="icon">
+                    <q-icon class="q-ml-sm q-mr-sm" name="fa fa-search"></q-icon>
+                </div>
+                <div class="inputArea">
+                    <input ref="input" v-model="search" placeholder='게임 검색하기' type="search" @keyup="onChanged">
+                </div>
+            </div>
             <div class="popup" v-if="this.tags && this.tags.length && this.isFocus">
                 <div class="searchListBox">
                     <div class="fade" @click="onBlur">
@@ -25,7 +31,7 @@
                 </div>
             </div>
         </div>
-        <div class="clear"></div>
+<!--        <div class="clear"></div>-->
     </div>
 </template>
 
@@ -121,32 +127,45 @@ export default class SearchGame extends Vue {
 
     .searchRoot {
         width: 99%;
+
         .box {
             width: 100%;
             //max-width: 250px;
 
             color: #737373;
 
-            .icon {
-                font-size: 18px;
+            .searchForm {
+                border: 1px solid #737373;
             }
 
-            input {
-                color: white;
-                height: 35px;
-                border: 1px solid #737373;
-                background-color: transparent;
-                width: calc(100% - 50px);
+            .icon {
+                font-size: 18px;
+                width: 38px;
             }
+
+            .inputArea {
+                width: calc(100% - 38px);
+
+                input {
+                    color: white;
+                    height: 40px;
+                    border: none;
+                    background-color: transparent;
+                    width: 100%;
+                    outline: none;
+                }
+            }
+
+
 
 
             @media (min-width: $breakpoint-xs) {
                 max-width: 250px;
             }
         }
-        .clear {
-            clear: both;
-        }
+        //.clear {
+        //    clear: both;
+        //}
 
         .popup {
             text-align: left;

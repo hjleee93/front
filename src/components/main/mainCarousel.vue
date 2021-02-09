@@ -154,7 +154,7 @@ export default class mainCarousel extends Vue {
         }
 
         .gameBg {
-            max-height: 250px;
+            max-height: 300px;
             width: 100%;
         }
 
