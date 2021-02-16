@@ -4,7 +4,8 @@
 <!--        <div class="object3d" :class="isVisible?'visible':''">-->
         <div :class="isVisible?'visible':''">
             <div class="thumbBox">
-                <q-img class="base" :src="'img/default.png'"></q-img>
+<!--                <q-img class="base" :src="'img/default.png'"></q-img>-->
+                <q-img class="base" src="http://placehold.it/150x100"></q-img>
                 <q-img class="thumb video" :src="`${data.url_thumb_gif || data.url_thumb || 'img/default.png'}`">
 
                 </q-img>
@@ -12,11 +13,10 @@
 
                 </q-img>
 
-                <div class="heartBox">
+                <div class="heartBox" v-if="data.category !== 2">
                     🧡 {{ data.count_heart.toLocaleString() }}
                 </div>
             </div>
-
 
             <div class="row detail text-left q-mt-sm">
                 <router-link class="q-mt-xs" :to="`/channel/${data.user.channel_id}`" v-if="data.user !== undefined">
@@ -93,7 +93,7 @@
                                 <q-item clickable class="" @click="popup = !popup">
                                     <q-item-section>
                                         <div class="row">
-                                            <!--                                            <q-icon name="report" class="self-center q-mr-sm"></q-icon>-->
+<!--                                            <q-icon name="report" class="self-center q-mr-sm"></q-icon>-->
                                             <div>취소</div>
                                         </div>
                                     </q-item-section>
@@ -164,6 +164,8 @@ a {
 
     cursor: pointer;
     padding: 10px;
+    //position: relative;
+    //overflow: hidden;
 
     &:hover {
         .detail {
@@ -177,6 +179,14 @@ a {
     .detail {
         display: flex;
         justify-content: space-between;
+        //position: absolute;
+        //left: 0;
+        //bottom : 0;
+        //background-color: rgba(0, 0, 0, 0.7);
+        //width: 100%;
+        //padding: 6px;
+        //border-radius: 0 0 6px 6px;
+
         .developerLogo {
             border-radius: 32px;
             width: 32px;

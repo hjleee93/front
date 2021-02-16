@@ -48,11 +48,11 @@
                 <div class="q-mr-xl"></div>
 
                 <div v-if="$store.getters.isLoginComplete">
-<!--                    <q-avatar class="cursorPoint" v-if="$store.getters.isLogin" size="30px" @click="$store.commit('mailPopupMobile', true)">-->
-<!--                        <q-icon name="fas fa-bullhorn" class="q-mr-md self-center"></q-icon>-->
-<!--                        <mail-popup-desktop v-if="$q.platform.is.desktop"></mail-popup-desktop>-->
-<!--                        <mail-popup-mobile v-if="$q.platform.is.mobile"></mail-popup-mobile>-->
-<!--                    </q-avatar>-->
+                    <q-avatar class="cursorPoint mailIcon q-mr-md" v-if="$store.getters.isLogin" size="30px" @click="$store.commit('mailPopupMobile', true)">
+                        <q-icon name="fas fa-bullhorn" class="q-mr-md self-center"></q-icon>
+                        <mail-popup-desktop v-if="$q.platform.is.desktop"></mail-popup-desktop>
+                        <mail-popup-mobile v-if="$q.platform.is.mobile"></mail-popup-mobile>
+                    </q-avatar>
                     <q-avatar class="cursorPoint" v-if="$store.getters.user" size="30px" @click="$store.commit('accountPopupMobile', true)">
                         <q-img :src="$store.getters.user && $store.getters.user.picture || 'img/icon_pic_empty_01.png'"></q-img>
                         <account-popup-desktop v-if="$q.platform.is.desktop"></account-popup-desktop>
@@ -112,5 +112,26 @@ export default class LayoutHeader extends Vue {
     a {
         color: inherit;
         text-decoration: inherit;
+    }
+
+    .mailIcon {
+        position: relative;
+        text-align: center;
+        width: 30px;
+        height: 30px;
+        i {
+            margin: 0 auto;
+        }
+        &::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid white;
+            left: 0;
+            top: 0;
+            border-radius: 50%;
+            z-index: -1;
+        }
     }
 </style>

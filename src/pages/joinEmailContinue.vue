@@ -31,6 +31,7 @@
                                  :rules="[
                                      val=>val.length >= 2 && val.length <= 12 || '2글자 이상 12글자 이하로 입력 해주세요.',
                                  ]"
+                                 @input="onNicknameChange"
                         >
                             <template v-slot:prepend>
                                 <q-icon name="account_box" />
@@ -79,7 +80,7 @@
 
                         <div class="q-my-xl"></div>
 
-                        <q-btn color="positive" :loading="loading" :disable="!check1 || !check2" class="width100p height50" @click="signup">회원가입</q-btn>
+                        <q-btn color="positive" :loading="loading" :disable="joinCheck" class="width100p height50" @click="signup">회원가입</q-btn>
 
 
 
@@ -169,6 +170,19 @@ export default class JoinEmailContinue extends Vue {
         }
 
         this.loading = false;
+    }
+
+    get joinCheck() {
+        return !this.check1 || !this.check2 || !!this.nicknameError || ( this.nickname.length < 2 || this.nickname.length > 12);
+    }
+
+    async onNicknameChange( word ) {
+        const result = await this.$api.testBadWord( word );
+        if( result && result.error ) {
+            this.nicknameError = '사용할 수 없는 단어가 포함되어 있습니다.';
+        } else {
+            this.nicknameError = '';
+        }
     }
 
     // async signup() {

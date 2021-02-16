@@ -21,16 +21,16 @@ let app: App;
 export default class App extends Vue {
     async mounted() {
         // console.log( this.$t('failed'));
-        this.$i18n.locale = 'ko';
+        // this.$i18n.locale = 'ko';
         // console.log( this.$i18n.t('failed'));
         // console.log( i18n.t('failed') );
         app = this;
 
         await this.$store.dispatch('loginState');
-        await this.$store.dispatch('loadMails');
-        console.log( this.$store.getters.mails );
-        // todo: is_read 1이 읽은 거면 mails의 길이랑 촐합이 같으면 다 읽은거
-        console.log(await this.$api.readMail(this.$store.getters.mails[0].id));
+        if( this.$store.getters.isLogin ) {
+            await this.$store.dispatch('loadMails');
+            console.log(this.$store.getters.mails);
+        }
 
         // console.log('로그인완료 : ' + (Date.now() - firebaseInitStartTime) / 1000 );
 
