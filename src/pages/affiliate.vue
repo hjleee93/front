@@ -2,7 +2,7 @@
     <q-page class="items-center justify-evenly text-center"
             :class="$q.platform.is.desktop ? 'page' : ''"
     >
-        <challenge-carousel></challenge-carousel>
+        <affiliate-carousel></affiliate-carousel>
 <!--        <ins class="adsbygoogle"-->
 <!--             style="display:block"-->
 <!--             data-ad-client="ca-pub-2187650629390403"-->
@@ -50,22 +50,22 @@ import GameCard from "components/common/card/gameCard.vue";
 import GenreCategory from "components/main/genreCategory.vue";
 import SortCategory from "components/main/sortCategory.vue";
 import MainFooter from "components/main/mainFooter.vue";
-import ChallengeCarousel from "components/challenge/challengeCarousel.vue";
 import SearchGame from "components/common/searchGame.vue";
 import {GameLoadState} from "src/store/modules/games";
+import AffiliateCarousel from "components/affiliate/affiliateCarousel.vue";
 
 @Component({
-    components: {SearchGame, ChallengeCarousel, MainFooter, SortCategory, GenreCategory, GameCard},
+    components: {AffiliateCarousel, SearchGame, MainFooter, SortCategory, GenreCategory, GameCard},
     metaInfo() {
         return {
             // titleTemplate: '%s ← My Site',
             meta: [
-                {name: 'description', content: '상상하는 모든 게임! 챌린지는 누구나 업로드 할 수 있는 창작 게임 게시판입니다.' },
+                {name: 'description', content: '더 다양한 게임들을 원하시나요? ZEMPIE를 통해 모두 플레이해보세요.' },
 
-                {name: 'og:url', content: `${this.$store.getters.VUE_APP_ZEMPIE_URL}challenge` },
-                {name: 'og:site_name', content: 'Zempie Challenge - 웹 게임 공유 플랫폼' },
-                {name: 'og:title', content: '누구나 업로드할 수 있는 게임공유플랫폼 ZEMPIE' },
-                {name: 'og:description', content: '상상하는 모든 게임! 챌린지는 누구나 업로드 할 수 있는 창작 게임 게시판입니다.' },
+                {name: 'og:url', content: `${this.$store.getters.VUE_APP_ZEMPIE_URL}affiliate` },
+                {name: 'og:site_name', content: 'Zempie Affiliate - 웹 게임 공유 플랫폼' },
+                {name: 'og:title', content: '어디서든 모두 즐길 수 있는 게임공유플랫폼 ZEMPIE' },
+                {name: 'og:description', content: '더 다양한 게임들을 원하시나요? ZEMPIE를 통해 모두 플레이해보세요.' },
                 {name: 'og:image', content: '' },
                 {name: 'og:type', content: 'website' },
             ]
