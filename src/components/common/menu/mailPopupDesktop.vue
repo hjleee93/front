@@ -1,7 +1,7 @@
 <template>
     <q-menu>
         <q-list style="border-radius: 4px; border: 1px solid rgba(255, 255, 255, 0.28)" separator>
-            <q-item v-for="(item, idx) in $store.getters.mails" :key="idx" clickable>
+            <q-item v-for="(item, idx) in $store.getters.mails" :key="idx" clickable @click="loadMailContent(item.id)">
                 <q-item-section>
                     <div class="flex">
                         <div class="category flex column items-center q-mr-sm">
@@ -10,19 +10,23 @@
                                 new
                             </q-badge>
                         </div>
-                        <div class="text q-mt-xs">
-                            <div class="text-weight-bold">
+                        <div class="text">
+                            <div class="text-weight-bold q-mb-xs">
                                 {{ item.title }}
                             </div>
 
-<!--                            <div class="content">-->
-<!--                                {{ item.content }}-->
-<!--                            </div>-->
+                            <div class="content" v-if="item.content !== null && item.content !== undefined">
+                                {{ item.content }}
+                            </div>
 
 <!--                            <div class="date">-->
 <!--                                {{ item.date }}-->
 <!--                            </div>-->
                         </div>
+
+<!--                        <div class="delete" @click.prevent="deleteMail(item.id)">-->
+<!--                            ❌-->
+<!--                        </div>-->
                     </div>
                 </q-item-section>
             </q-item>
@@ -74,6 +78,30 @@ export default class MailPopupDesktop extends Vue {
             },
         ];
     }
+
+    async loadMailContent( mail_id : number ) {
+        let mail = this.$store.getters.mails.find(mail => mail.id == mail_id)
+        if( mail.content !== null && mail.content !== undefined ) {
+            return;
+        }
+        const result = await this.$api.readMail(mail_id);
+        if( !result || result.error ) {
+            console.error(result);
+        }
+        else {
+            this.$store.commit('setMailContent', { id : mail_id, content : result.content });
+        }
+    }
+
+    async deleteMail( mail_id : number ) {
+        const result = await this.$api.deleteMail(mail_id);
+        if( !result || result.error ) {
+            console.error(result);
+        }
+        else {
+            this.$store.commit('deleteMail', { id : mail_id });
+        }
+    }
 }
 </script>
 <style lang="scss" scoped>
@@ -87,12 +115,15 @@ a {
 }
 
 .text {
-    width: 292px;
+    margin-top: 6px;
+    width: 280px;
+    margin-right: 6px;
 
     .title {
     }
     .content {
-
+        word-wrap: break-word;
+        color: #d0d0d0;
     }
     .date {
         color: #d0d0d0;

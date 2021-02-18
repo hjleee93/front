@@ -39,7 +39,7 @@
             <div class="q-mt-sm"></div>
             <content-item label="이름" label-style="q-mt-md">
                 <template>
-                    <q-input class="width100p maxWidth400px" maxlength="50" filled v-model="nickname">
+                    <q-input class="width100p maxWidth400px" maxlength="12" filled v-model="nickname">
                     </q-input>
                 </template>
             </content-item>

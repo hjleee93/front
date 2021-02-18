@@ -1,6 +1,6 @@
 <template>
     <q-dialog :maximized="true" v-model="active" transition-show="slide-right" transition-hide="slide-left">
-        <q-list class="root">
+        <q-list class="root" separator>
             <q-item>
                 <q-item-section>
                     <div class="row">
@@ -11,28 +11,33 @@
                     </div>
                 </q-item-section>
             </q-item>
-            <q-item v-for="(item, idx) in mails" :key="idx">
+            <q-item v-for="(item, idx) in $store.getters.mails" :key="idx" clickable @click="loadMailContent(item.id)">
                 <q-item-section>
-                    <div class="flex">
-                        <q-icon :name="item.icon" class="q-mr-md q-mt-sm"></q-icon>
-                        <div class="self-center text">
+                    <div class="flex full-width">
+                        <div class="category flex column items-center q-mr-sm">
+                            <q-icon name="fas fa-bullhorn" class="q-mt-sm q-mb-sm block"></q-icon>
+                            <q-badge color="red" v-if="!item.is_read" class="block">
+                                new
+                            </q-badge>
+                        </div>
+                        <div class="text">
                             <div class="text-weight-bold">
                                 {{ item.title }}
                             </div>
 
-                            <div class="content">
+                            <div class="content" v-if="item.content !== null && item.content !== undefined">
                                 {{ item.content }}
                             </div>
 
-                            <div class="date">
-                                {{ item.date }}
-                            </div>
+<!--                            <div class="date">-->
+<!--                                {{ item.date }}-->
+<!--                            </div>-->
                         </div>
                     </div>
                 </q-item-section>
             </q-item>
 
-            <q-item v-if="mails.length === 0">
+            <q-item v-if="$store.getters.mails.length === 0">
                 <q-item-section>
                     <div class="flex">
                         <div class="text text-center">
@@ -97,6 +102,20 @@ export default class AccountPopupMobile extends Vue {
     private onChangedMailPopupMobile() {
         this.active = this.$store.getters.mailPopupMobile;
     }
+
+    async loadMailContent( mail_id : number ) {
+        let mail = this.$store.getters.mails.find(mail => mail.id == mail_id)
+        if( mail.content !== null && mail.content !== undefined ) {
+            return;
+        }
+        const result = await this.$api.readMail(mail_id);
+        if( !result || result.error ) {
+            console.error(result);
+        }
+        else {
+            this.$store.commit('setMailContent', { id : mail_id, content : result.content });
+        }
+    }
 }
 </script>
 <style lang="scss" scoped>
@@ -113,6 +132,20 @@ a {
     .menuText {
         line-height: 48px;
         font-size: 18px;
+    }
+
+    .category {
+        width: 34px;
+    }
+
+    .text {
+        margin-top: 6px;
+        width: calc(100% - 42px);
+
+        .content {
+            word-wrap: break-word;
+            color: #d0d0d0;
+        }
     }
 }
 </style>

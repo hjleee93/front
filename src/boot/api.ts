@@ -28,7 +28,8 @@ class Api {
             return result.data;
         }
         catch (error) {
-            if ( error && error.response && error.response.data && error.response.data.error === 'Unauthorized' ) {
+            console.log(error);
+            if ( error && error.response && error.response.data && error.response.data.error && error.response.data.error.message === 'Unauthorized' ) {
                 const currentUser = firebase.auth().currentUser;
                 if (currentUser) {
                     const idToken = await currentUser.getIdToken(true);
@@ -229,6 +230,16 @@ class Api {
 
     async readMail( mail_id : number ) {
         const response = await this.request('get', `/user/mail/${mail_id}`, undefined, false);
+        return response.result || response;
+    }
+
+    async deleteMail( mail_id : number ) {
+        const response = await this.request('post', '/user/mail/d', { mail_id }, false);
+        return response.result || response;
+    }
+
+    async testBadWord( word : string ) {
+        const response = await this.request('post', '/user/filter/bad-word', { word }, false);
         return response.result || response;
     }
 }

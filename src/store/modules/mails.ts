@@ -13,9 +13,17 @@ export default {
     },
 
     mutations: {
-        mails :  ( state : any, payload : any ) => {
+        mails : ( state : any, payload : any ) => {
             state.mails = payload;
         },
+        setMailContent : ( state : any, payload : any ) => {
+            let mail = state.mails.find((mail) => mail.id == payload.id);
+            mail.content = payload.content;
+            state.mails = state.mails.map(x=>x);
+        },
+        deleteMail : ( state : any, payload : any ) => {
+            state.mails = state.mails.filter( mail => mail.id != payload.id );
+        }
     },
     actions: {
         loadMails : async (context: any) => {
