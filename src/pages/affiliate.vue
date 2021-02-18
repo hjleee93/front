@@ -3,12 +3,12 @@
             :class="$q.platform.is.desktop ? 'page' : ''"
     >
         <challenge-carousel></challenge-carousel>
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-2187650629390403"
-             data-ad-slot="9014988850"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
+<!--        <ins class="adsbygoogle"-->
+<!--             style="display:block"-->
+<!--             data-ad-client="ca-pub-2187650629390403"-->
+<!--             data-ad-slot="9014988850"-->
+<!--             data-ad-format="auto"-->
+<!--             data-full-width-responsive="true"></ins>-->
         <div class="maxWidth">
             <!--            <genre-category></genre-category>-->
             <!--            <q-separator inset/>-->
@@ -64,7 +64,7 @@ import {GameLoadState} from "src/store/modules/games";
 
                 {name: 'og:url', content: `${this.$store.getters.VUE_APP_ZEMPIE_URL}challenge` },
                 {name: 'og:site_name', content: 'Zempie Challenge - 웹 게임 공유 플랫폼' },
-                {name: 'og:title', content: '창작자들이 만든 웹 게임을 다운로드 없이 즐기자!' },
+                {name: 'og:title', content: '누구나 업로드할 수 있는 게임공유플랫폼 ZEMPIE' },
                 {name: 'og:description', content: '상상하는 모든 게임! 챌린지는 누구나 업로드 할 수 있는 창작 게임 게시판입니다.' },
                 {name: 'og:image', content: '' },
                 {name: 'og:type', content: 'website' },
@@ -101,12 +101,12 @@ export default class Affiliate extends Vue {
             dir : this.sortData[ this.sort ].dir
         });
 
-        document.querySelectorAll('.adsbygoogle').forEach(  (element : Element) => {
-            if(element.getAttribute('data-ad-slot')) {
-                //@ts-ignore
-                (window.adsbygoogle || []).push({});
-            }
-        } )
+        // document.querySelectorAll('.adsbygoogle').forEach(  (element : Element) => {
+        //     if(element.getAttribute('data-ad-slot')) {
+        //         //@ts-ignore
+        //         (window.adsbygoogle || []).push({});
+        //     }
+        // } )
     }
 
     beforeDestroy() {

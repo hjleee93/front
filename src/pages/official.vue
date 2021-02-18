@@ -3,12 +3,12 @@
             :class="$q.platform.is.desktop ? 'page' : ''"
     >
         <main-carousel></main-carousel>
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-2187650629390403"
-             data-ad-slot="9768906554"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
+<!--        <ins class="adsbygoogle"-->
+<!--             style="display:block"-->
+<!--             data-ad-client="ca-pub-2187650629390403"-->
+<!--             data-ad-slot="9768906554"-->
+<!--             data-ad-format="auto"-->
+<!--             data-full-width-responsive="true"></ins>-->
         <div class="maxWidth">
             <!--            <genre-category></genre-category>-->
             <!--            <q-separator inset/>-->
@@ -82,12 +82,12 @@ export default class Official extends Vue {
             dir : this.sortData[ this.sort ].dir
         });
 
-        document.querySelectorAll('.adsbygoogle').forEach(  (element : Element) => {
-            if(element.getAttribute('data-ad-slot')) {
-                //@ts-ignore
-                (window.adsbygoogle || []).push({});
-            }
-        } )
+        // document.querySelectorAll('.adsbygoogle').forEach(  (element : Element) => {
+        //     if(element.getAttribute('data-ad-slot')) {
+        //         //@ts-ignore
+        //         (window.adsbygoogle || []).push({});
+        //     }
+        // } )
     }
 
     beforeDestroy() {

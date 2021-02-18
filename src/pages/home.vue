@@ -31,12 +31,12 @@
             </div>
         </div>
 
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-2187650629390403"
-             data-ad-slot="4210825092"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
+<!--        <ins class="adsbygoogle"-->
+<!--             style="display:block"-->
+<!--             data-ad-client="ca-pub-2187650629390403"-->
+<!--             data-ad-slot="4210825092"-->
+<!--             data-ad-format="auto"-->
+<!--             data-full-width-responsive="true"></ins>-->
         <main-footer></main-footer>
     </q-page>
 </template>
@@ -64,7 +64,7 @@ import {consoleLog} from "src/scripts/consoleLog";
                 { name: 'author', content: 'FromTheRed' },
                 { property: 'og:url', content: `${this.$store.getters.VUE_APP_ZEMPIE_URL}/home`, vmid: 'og:url' },
                 { property: 'og:site_name', content: 'Zempie - 웹 게임 공유 플랫폼', vmid: 'og:site_name' },
-                { property: 'og:title', content: '창작자들이 만든 웹 게임을 다운로드 없이 즐기자!',  template: chunk => `${chunk} - My page`, vmid: 'og:title' },
+                { property: 'og:title', content: '누구나 업로드할 수 있는 게임공유플랫폼 ZEMPIE',  template: chunk => `${chunk} - My page`, vmid: 'og:title' },
                 { property: 'og:description', content: '직접 만든 게임을 업로드하고, 플레이하고, 주변에 공유해 보세요. 개발 방법을 모르는 분들을 위한 템플릿도 준비되어 있습니다.', vmid: 'og:description' },
                 { property: 'og:image', content: '', vmid: 'og:image' },
                 { property: 'og:type', content: 'website', vmid: 'og:type' },
@@ -93,14 +93,14 @@ export default class Home extends Vue {
         this.featuredList = result;
         consoleLog.log(result);
 
-        this.$nextTick(()=>{
-            document.querySelectorAll('.adsbygoogle').forEach(  (element : Element) => {
-                if(element.getAttribute('data-ad-slot')) {
-                    //@ts-ignore
-                    (window.adsbygoogle || []).push({});
-                }
-            } )
-        })
+        // this.$nextTick(()=>{
+        //     document.querySelectorAll('.adsbygoogle').forEach(  (element : Element) => {
+        //         if(element.getAttribute('data-ad-slot')) {
+        //             //@ts-ignore
+        //             (window.adsbygoogle || []).push({});
+        //         }
+        //     } )
+        // })
 
 
         // this.$store.commit('isOfficialPage', true);
