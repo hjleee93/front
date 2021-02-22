@@ -12,24 +12,20 @@
 </template>
 <script lang="ts">
 import {Vue, Component, Watch} from 'vue-property-decorator';
-import {i18n} from "boot/i18n";
-// import {firebaseInitStartTime} from "boot/firebase";
 
 let app: App;
 
 @Component
 export default class App extends Vue {
     async mounted() {
-        // console.log( this.$t('failed'));
-        // this.$i18n.locale = 'ko';
-        // console.log( this.$i18n.t('failed'));
-        // console.log( i18n.t('failed') );
+        this.$i18n.locale = navigator.language.toLowerCase();
+        // console.log( this.$i18n.locale );
+        // console.log( this.$i18n.t('failed') );
         app = this;
 
         await this.$store.dispatch('loginState');
         if( this.$store.getters.isLogin ) {
             await this.$store.dispatch('loadMails');
-            console.log(this.$store.getters.mails);
         }
 
         // console.log('로그인완료 : ' + (Date.now() - firebaseInitStartTime) / 1000 );

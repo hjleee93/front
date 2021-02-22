@@ -32,15 +32,15 @@ export default class SortCategory extends Vue {
     private list : any[] = [
         {
             name : 'new',
-            text : '최신순',
+            text : '최신순', /*한국어*/
         },
         {
             name : 'create',
-            text : '오래된순',
+            text : '오래된순', /*한국어*/
         },
         {
             name : 'name',
-            text : '이름순',
+            text : '이름순', /*한국어*/
         },
         // {
         //     name : 'update',

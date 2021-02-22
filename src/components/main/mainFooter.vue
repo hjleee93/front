@@ -7,30 +7,30 @@
                 <div class="q-pt-xl q-mb-xl">
                     <div class="text-h7 text-weight-bold row q-mb-md cursor-pointer">
                         <a class="text-h7" :href="$store.getters.supportUrl">
-                            고객센터
+                            고객센터<!--한국어-->
                         </a>
                     </div>
                     <div class="row">
-                        <div class="q-mr-md"><a class="cursor-pointer smallFont" :href="`${$store.getters.supportUrl}notice`">공지사항</a></div>
+                        <div class="q-mr-md"><a class="cursor-pointer smallFont" :href="`${$store.getters.supportUrl}notice`">공지사항</a></div><!--한국어-->
                         <q-separator vertical class="q-mr-md"></q-separator>
 <!--                        <div class="q-mr-md"><a class="cursor-pointer" >이벤트</a></div>-->
 <!--                        <q-separator vertical class="q-mr-md"></q-separator>-->
-                        <div class="q-mr-md"><a class="cursor-pointer smallFont" :href="`${$store.getters.supportUrl}faq`">FAQ</a></div>
+                        <div class="q-mr-md"><a class="cursor-pointer smallFont" :href="`${$store.getters.supportUrl}faq`">FAQ</a></div><!--한국어-->
                         <q-separator vertical class="q-mr-md"></q-separator>
-                        <div class="q-mr-md"><a class="cursor-pointer smallFont" :href="`${$store.getters.supportUrl}inquiry`">1:1 문의</a></div>
+                        <div class="q-mr-md"><a class="cursor-pointer smallFont" :href="`${$store.getters.supportUrl}inquiry`">1:1 문의</a></div><!--한국어-->
                         <q-separator vertical class="q-mr-md"></q-separator>
-                        <div class="q-mr-md"><a class="cursor-pointer smallFont" :href="`${$store.getters.supportUrl}guide`">게임등록가이드</a></div>
+                        <div class="q-mr-md"><a class="cursor-pointer smallFont" :href="`${$store.getters.supportUrl}guide`">게임등록가이드</a></div><!--한국어-->
                         <q-separator vertical class="q-mr-md"></q-separator>
-                        <div class="q-mr-md"><a class="cursor-pointer smallFont" :href="`${$store.getters.supportUrl}tos`">이용약관</a></div>
+                        <div class="q-mr-md"><a class="cursor-pointer smallFont" :href="`${$store.getters.supportUrl}tos`">이용약관</a></div><!--한국어-->
                         <q-separator vertical class="q-mr-md"></q-separator>
-                        <div class="q-mr-md"><a class="cursor-pointer smallFont" :href="`${$store.getters.supportUrl}policy`">개인정보취급방침</a></div>
+                        <div class="q-mr-md"><a class="cursor-pointer smallFont" :href="`${$store.getters.supportUrl}policy`">개인정보취급방침</a></div><!--한국어-->
                     </div>
                 </div>
                 <div class="company q-mb-xl">
-                    <div>(주)프롬더레드</div>
-                    <div>대표자 : 서상욱</div>
-                    <div>사업자번호 : 178-88-00617</div>
-                    <div>주소 : 서울특별시 서대문구 북아현로 105, 3층</div>
+                    <div>(주)프롬더레드</div><!--한국어-->
+                    <div>대표자 : 서상욱</div><!--한국어-->
+                    <div>사업자번호 : 178-88-00617</div><!--한국어-->
+                    <div>주소 : 서울특별시 서대문구 북아현로 105, 3층</div><!--한국어-->
 <!--                    <div>전화 : 02-0000-0000</div>-->
 <!--                    <div>E-Mail : help@fromthred.com</div>-->
 <!--                    <div>SNS : @zempie_help</div>-->

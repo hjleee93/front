@@ -21,7 +21,7 @@
                 </div>
                 <div class="self-center" v-if="$store.getters.user && $store.getters.user.channel_id === channelId">
                     <router-link :to="`/channel/${$store.getters.user.channel_id}/editing`">
-                        <q-btn color="grey-9">채널 설정</q-btn>
+                        <q-btn color="grey-9">채널 설정</q-btn><!--한국어-->
                     </router-link>
                 </div>
             </div>
@@ -36,9 +36,9 @@
                     indicator-color="color-grey-10"
                     align="left"
                 >
-                    <q-tab name="games" label="등록한 게임" />
+                    <q-tab name="games" label="등록한 게임" /><!--한국어-->
                     <!--                <q-tab name="played" label="플레이한 게임" />-->
-                    <q-tab name="info" label="정보" />
+                    <q-tab name="info" label="정보" /><!--한국어-->
                     <!--                <q-tab name="activity" label="활동" />-->
                     <!--                <q-tab name="publishing" label="퍼블리싱" />-->
                     <!--                <q-tab name="achievement" label="업적" />-->
@@ -75,7 +75,7 @@
                         <div class="maxWidth">
 
                             <div v-if="description">
-                                <div class="text-h7 q-ml-sm">설명</div>
+                                <div class="text-h7 q-ml-sm">설명</div><!--한국어-->
                                 <div class="contentBox text-left">
                                     {{ description }}
                                 </div>
@@ -83,7 +83,7 @@
 
                             <div class="q-my-lg"></div>
                             <div class="contentBox">
-                                <content-item label="비즈니스 문의" label-style="">
+                                <content-item label="비즈니스 문의" label-style=""><!--한국어-->
                                     <a :href="'mailto:' + email" style="color: #30a6d8">
                                         {{ email }}
                                     </a>
@@ -165,6 +165,8 @@ export default class Channel extends Vue {
 
             this.email = this.user.email;
             this.description = this.user.profile.description;
+
+            document.title = this.user.name;
         }
     }
 

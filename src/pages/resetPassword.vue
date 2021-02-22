@@ -24,7 +24,7 @@
                                  ref="email"
                                  lazy-rules
                                  :rules="[val=>val.match(/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/) || '올바른 이메일을 입력해 주세요.']"
-                        >
+                        ><!--한국어-->
                             <template v-slot:prepend>
                                 <q-icon name="email" />
                             </template>
@@ -34,7 +34,7 @@
 
 
                         <div class="q-mt-lg"></div>
-                        <q-btn color="positive" :loading="loading" class="width100p height50" @click="reset">비밀번호 초기화</q-btn>
+                        <q-btn color="positive" :loading="loading" class="width100p height50" @click="reset">비밀번호 초기화</q-btn><!--한국어-->
                         <div class="q-my-md"></div>
                     </div>
 
@@ -73,12 +73,13 @@ export default class ResetPassword extends Vue {
     }
 
     async reset() {
+        document.title = '비밀번호 초기화';
 
         this.$store.commit('ajaxBar', true);
         this.loading = true;
         const result = await firebase.auth().sendPasswordResetEmail(this.email);
         // console.log(result);
-        alert('재설정 메일을 보냈습니다. 메일을 확인해 주세요.');
+        alert('재설정 메일을 보냈습니다. 메일을 확인해 주세요.'); /*한국어*/
         await this.$router.replace('/login');
         this.loading = false;
 

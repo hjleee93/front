@@ -30,7 +30,7 @@
                                  ref="nickname"
                                  lazy-rules
                                  :rules="[
-                                     val=>val.length >= 2 && val.length <= 12 || '2글자 이상 12글자 이하로 입력 해주세요.',
+                                     val=>val.length >= 2 && val.length <= 12 || '2글자 이상 12글자 이하로 입력 해주세요.',<!--한국어-->
                                  ]"
                                  @input="onNicknameChange"
                         >
@@ -49,9 +49,9 @@
                         <div class="q-mt-lg"></div>
 
                         <div class="row relative-position">
-                            <q-checkbox color="grey-9" class="non-selectable" v-model="check1" label="이용약관 동의" />
+                            <q-checkbox color="grey-9" class="non-selectable" v-model="check1" label="이용약관 동의" /><!--한국어-->
                             <div class="absolute-right">
-                                <q-btn color="grey-9" @click="show1 = !show1">전체보기</q-btn>
+                                <q-btn color="grey-9" @click="show1 = !show1">전체보기</q-btn><!--한국어-->
                             </div>
                         </div>
 
@@ -65,9 +65,9 @@
                         <div class="q-my-lg"></div>
 
                         <div class="row relative-position">
-                            <q-checkbox color="grey-9" class="non-selectable" v-model="check2" label="개인정보취급방침 동의" />
+                            <q-checkbox color="grey-9" class="non-selectable" v-model="check2" label="개인정보취급방침 동의" /><!--한국어-->
                             <div class="absolute-right">
-                                <q-btn color="grey-9" @click="show2 = !show2">전체보기</q-btn>
+                                <q-btn color="grey-9" @click="show2 = !show2">전체보기</q-btn><!--한국어-->
                             </div>
                         </div>
 
@@ -81,7 +81,7 @@
 
                         <div class="q-my-xl"></div>
 
-                        <q-btn color="positive" :loading="loading" :disable="joinCheck" class="width100p height50" @click="signup">회원가입</q-btn>
+                        <q-btn color="positive" :loading="loading" :disable="joinCheck" class="width100p height50" @click="signup">회원가입</q-btn><!--한국어-->
 
 
 
@@ -126,6 +126,7 @@ export default class JoinEmail extends Vue {
 
 
     async mounted() {
+        document.title = '회원가입';
         const loginState =  await this.$store.dispatch('loginState');
         switch (loginState) {
             case LoginState.login:
@@ -149,12 +150,12 @@ export default class JoinEmail extends Vue {
 
         if (!result || result.error) {
 
-            if (result && result.error === '사용할 수 없는 단어') {
+            if (result && result.error && result.error.message === '사용할 수 없는 단어') { /*한국어*/
                 // todo 닉네임 필터 에러 처리
-                alert('사용할 수 없는 이름입니다.');
+                alert('사용할 수 없는 이름입니다.'); /*한국어*/
             } else {
                 console.error(result && result.error || 'error');
-                result && result.error && alert(result.error);
+                result && result.error && alert(result.error.message);
             }
 
         } else {
@@ -182,7 +183,7 @@ export default class JoinEmail extends Vue {
     async onNicknameChange( word ) {
         const result = await this.$api.testBadWord( word );
         if( result && result.error ) {
-            this.nicknameError = '사용할 수 없는 단어가 포함되어 있습니다.';
+            this.nicknameError = '사용할 수 없는 단어가 포함되어 있습니다.'; /*한국어*/
         } else {
             this.nicknameError = '';
         }

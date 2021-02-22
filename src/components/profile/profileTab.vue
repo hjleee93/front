@@ -2,35 +2,35 @@
     <div class="">
         <div class="q-mt-lg"></div>
 
-        <div class="text-h6">프로필 사진</div>
+        <div class="text-h6">프로필 사진</div><!--한국어-->
         <div class="contentBox row no-wrap">
             <q-avatar size="100px">
                 <q-img :src="url || $store.getters.user && $store.getters.user.picture || 'img/icon_pic_empty_01.png'"></q-img>
             </q-avatar>
             <div class="q-ml-lg self-center">
                 <div class="row q-mb-sm">
-                    <q-btn color="grey-9 q-mb-sm q-mr-md" @click="fileLoader.addFile()"  :loading="loading">프로필 사진 변경</q-btn>
+                    <q-btn color="grey-9 q-mb-sm q-mr-md" @click="fileLoader.addFile()"  :loading="loading">프로필 사진 변경</q-btn><!--한국어-->
                     <q-btn color="grey-9 q-mb-sm" :disable="!url" @click="reset()"  :loading="loading">
                         <q-icon name="far fa-trash-alt" style="font-size: 16px"></q-icon>
                     </q-btn>
                 </div>
-                <div>1MB 이내의 JPEG, PNG 형식이어야 합니다.</div>
+                <div>1MB 이내의 JPEG, PNG 형식이어야 합니다.</div><!--한국어-->
             </div>
         </div>
 
         <div class="q-my-md"></div>
 
-        <div class="text-h6">정보</div>
+        <div class="text-h6">정보</div><!--한국어-->
         <div class="contentBox">
             <content-item label="이메일" label-style="q-mt-md">
                 <template>
                     <q-input class="width100p maxWidth400px" maxlength="50" filled :readonly="!emailNull" v-model="email">
                         <template v-slot:append>
                             <div v-if="emailVerified" class="q-ml-md bg-grey-9 q-px-md appendBox text-no-wrap">
-                                인증 완료
+                                인증 완료<!--한국어-->
                             </div>
                             <q-btn v-else color="grey-9"  @click="emailVerify" :loading="loading">
-                                인증 요청
+                                인증 요청<!--한국어-->
                             </q-btn>
                         </template>
                     </q-input>
@@ -46,7 +46,7 @@
         </div>
 
         <div class="text-right q-mt-lg q-mr-md">
-            <q-btn color="grey-9" @click="save" :loading="loading">저장</q-btn>
+            <q-btn color="grey-9" @click="save" :loading="loading">저장</q-btn><!--한국어-->
         </div>
     </div>
 </template>
@@ -96,7 +96,7 @@ export default class ProfileTab extends Vue {
             this.$emit('@file', this.file);
         }
         else {
-            alert( '파일 사이즈가 너무 큽니다.' )
+            alert( '파일 사이즈가 너무 큽니다.' ) /*한국어*/
         }
     }
 
@@ -117,7 +117,7 @@ export default class ProfileTab extends Vue {
             const currentUser = firebase.auth().currentUser;
             const result = await currentUser.sendEmailVerification();
             // console.log(result);
-            alert('인증 메일을 보냈습니다. 등록된 메일함을 확인해 주세요.');
+            alert('인증 메일을 보냈습니다. 등록된 메일함을 확인해 주세요.'); /*한국어*/
         }
         catch (e) {
 
@@ -125,7 +125,7 @@ export default class ProfileTab extends Vue {
 
             switch (code) {
                 case 'auth/too-many-requests' :
-                    alert( '요청 횟수가 너무 많습니다. 잠시 후 다시 시도해주세요.' )
+                    alert( '요청 횟수가 너무 많습니다. 잠시 후 다시 시도해주세요.' ) /*한국어*/
                     break;
             }
 
@@ -142,9 +142,9 @@ export default class ProfileTab extends Vue {
 
         if( !result || result.error ) {
             //todo 닉네임 필터 에러 처리
-            if( result && result.error === '사용할 수 없는 단어' ) {
+            if( result && result.error && result.error.message === '사용할 수 없는 단어' ) { /*한국어*/
                 this.$q.notify({
-                    message : '사용할 수 없는 이름입니다.',
+                    message : '사용할 수 없는 이름입니다.', /*한국어*/
                     position : 'top',
                     color : 'negative',
                     timeout: 2000
@@ -152,7 +152,7 @@ export default class ProfileTab extends Vue {
             }
             else {
                 this.$q.notify({
-                    message : '실패 하였습니다.',
+                    message : '실패 하였습니다.', /*한국어*/
                     position : 'top',
                     color : 'negative',
                     timeout: 2000
@@ -170,7 +170,7 @@ export default class ProfileTab extends Vue {
             });
 
             this.$q.notify({
-                message : '저장 되었습니다.',
+                message : '저장 되었습니다.', /*한국어*/
                 position : 'top',
                 color : 'primary',
                 timeout: 2000

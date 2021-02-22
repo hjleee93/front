@@ -48,12 +48,12 @@ export default class ReportPopup extends Vue {
         text : string,
         checked : boolean,
     }[] = [
-        { text : '폭력이 노골적입니다.', checked : false },
-        { text : '콘텐츠가 선정적입니다.', checked : false },
-        { text : '게임 내 비속한 표현(욕설, 비방 등)이 있습니다.', checked : false },
-        { text : '스팸 또는 현혹하는 콘텐츠가 포함되어 있습니다.', checked : false },
-        { text : '저작권 신고', checked : false },
-        { text : '기타', checked : false },
+        { text : '폭력이 노골적입니다.', checked : false }, /*한국어*/
+        { text : '콘텐츠가 선정적입니다.', checked : false }, /*한국어*/
+        { text : '게임 내 비속한 표현(욕설, 비방 등)이 있습니다.', checked : false }, /*한국어*/
+        { text : '스팸 또는 현혹하는 콘텐츠가 포함되어 있습니다.', checked : false }, /*한국어*/
+        { text : '저작권 신고', checked : false }, /*한국어*/
+        { text : '기타', checked : false }, /*한국어*/
     ];
 
     mounted() {

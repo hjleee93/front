@@ -5,9 +5,9 @@
 
                 <div class="q-pt-lg"></div>
 
-                <div class="text-h6">프로필 사진</div>
+                <div class="text-h6">프로필 사진</div><!--한국어-->
                 <div class="text-grey-5 q-mb-xs">
-                    프로필 사진은 Zempie가 제공하는 서비스의 유저를 나타내는 위치에 표시됩니다.
+                    프로필 사진은 Zempie가 제공하는 서비스의 유저를 나타내는 위치에 표시됩니다.<!--한국어-->
                 </div>
                 <div class="contentBox">
                     <div>
@@ -17,12 +17,12 @@
                             </q-avatar>
                             <div class="q-ml-lg self-center">
                                 <div class="row q-mb-sm">
-                                    <q-btn :loading="loading" color="grey-9 q-mb-sm q-mr-md" @click="fileLoader.addFile()">프로필 사진 추가</q-btn>
+                                    <q-btn :loading="loading" color="grey-9 q-mb-sm q-mr-md" @click="fileLoader.addFile()">프로필 사진 추가</q-btn><!--한국어-->
                                     <q-btn :loading="loading" color="grey-9 q-mb-sm" :disable="!pictureUrl" @click="reset()">
                                         <q-icon name="far fa-trash-alt" style="font-size: 16px"></q-icon>
                                     </q-btn>
                                 </div>
-                                <div>1MB 이내의 JPEG, PNG 형식이어야 합니다.</div>
+                                <div>1MB 이내의 JPEG, PNG 형식이어야 합니다.</div><!--한국어-->
                             </div>
                         </div>
                     </div>
@@ -30,9 +30,9 @@
 
                 <div class="q-my-md"></div>
 
-                <div class="text-h6">배너 이미지</div>
+                <div class="text-h6">배너 이미지</div><!--한국어-->
                 <div class="text-grey-5 q-mb-xs">
-                    채널 상단에 표시되는 이미지로 자신만의 채널 특성을 표현해보세요.
+                    채널 상단에 표시되는 이미지로 자신만의 채널 특성을 표현해보세요.<!--한국어-->
                 </div>
                 <div class="contentBox">
                     <div>
@@ -41,8 +41,8 @@
                         </q-img>
                     </div>
                     <div class="q-mt-lg">
-                        <div>파일 형식 : JPEG, PNG (1707*282 픽셀, 최대 15MB 권장)</div>
-                        <q-btn :loading="loading" color="grey-9 q-my-sm q-mr-md" @click="fileLoader2.addFile()">이미지 업로드</q-btn>
+                        <div>파일 형식 : JPEG, PNG (1707*282 픽셀, 최대 15MB 권장)</div><!--한국어-->
+                        <q-btn :loading="loading" color="grey-9 q-my-sm q-mr-md" @click="fileLoader2.addFile()">이미지 업로드</q-btn><!--한국어-->
                         <q-btn :loading="loading" color="grey-9" :disable="!bannerUrl" @click="reset2()">
                             <q-icon name="far fa-trash-alt" style="font-size: 16px"></q-icon>
                         </q-btn>
@@ -51,16 +51,16 @@
 
                 <div class="q-my-md"></div>
 
-                <div class="text-h6">정보</div>
+                <div class="text-h6">정보</div><!--한국어-->
                 <div class="contentBox">
 
-                    <content-item label="채널명" label-style="q-mt-md">
+                    <content-item label="채널명" label-style="q-mt-md"><!--한국어-->
                         <template>
                             <div class="width100p">
                                 <q-input maxlength="50" class="width100p maxWidth400px" v-model="channelName" filled>
                                 </q-input>
                                 <div class="q-my-sm fontSize12 text-grey-5">
-                                    자신의 콘텐츠를 잘 표현할 수 있는 채널 이름을 지어주세요.
+                                    자신의 콘텐츠를 잘 표현할 수 있는 채널 이름을 지어주세요.<!--한국어-->
                                 </div>
                             </div>
                         </template>
@@ -68,13 +68,13 @@
 
                     <div class="q-mt-sm"></div>
 
-                    <content-item label="상태 메세지" label-style="q-mt-md">
+                    <content-item label="상태 메세지" label-style="q-mt-md"><!--한국어-->
                         <template>
                             <div class="width100p">
                                 <q-input maxlength="100" class="width100p maxWidth400px" v-model="stateMsg" filled>
                                 </q-input>
                                 <div class="q-my-sm fontSize12 text-grey-5">
-                                    현재 자신의 기분을 표현해보세요.
+                                    현재 자신의 기분을 표현해보세요.<!--한국어-->
                                 </div>
                             </div>
                         </template>
@@ -88,7 +88,7 @@
                                 <q-input maxlength="500" type="textarea" class="width100p maxWidth400px"  v-model="description" filled>
                                 </q-input>
                                 <div class="q-my-sm fontSize12 text-grey-5">
-                                    채널에 대해 설명해주세요. 이 설명은 채널 정보에 표시되며 누구나 볼 수 있습니다.
+                                    채널에 대해 설명해주세요. 이 설명은 채널 정보에 표시되며 누구나 볼 수 있습니다.<!--한국어-->
                                 </div>
                             </div>
                         </template>
@@ -99,7 +99,7 @@
 
                 <div class="q-my-md"></div>
 
-                <div class="text-h6">채널 URL</div>
+                <div class="text-h6">채널 URL</div><!--한국어-->
                 <div class="contentBox">
 
                     <content-item label="채널 ID" label-style="q-mt-md">
@@ -108,15 +108,15 @@
                                 <q-input maxlength="20" class="width100p maxWidth400px" filled v-model="channelId">
                                     <template v-slot:append>
                                         <q-btn :loading="loading" v-if="!confirmChannelId" color="grey-9" @click="verifyChannelId">
-                                            확인 요청
+                                            확인 요청<!--한국어-->
                                         </q-btn>
                                         <div v-else class="q-ml-md bg-grey-9 q-px-md appendBox text-no-wrap">
-                                            확인 완료
+                                            확인 완료<!--한국어-->
                                         </div>
                                     </template>
                                 </q-input>
                                 <div class="q-my-sm fontSize12 text-grey-5">
-                                    ID를 만들어 자신만의 접속 URL을 만들어 보세요.
+                                    ID를 만들어 자신만의 접속 URL을 만들어 보세요.<!--한국어-->
                                 </div>
                             </div>
                         </template>
@@ -124,13 +124,13 @@
 
                     <div class="q-mt-sm"></div>
 
-                    <content-item label="채널 URL" label-style="q-mt-md">
+                    <content-item label="채널 URL" label-style="q-mt-md"><!--한국어-->
                         <template>
                             <div class="width100p">
                                 <q-input class="width100p maxWidth400px" readonly filled v-model="channelUrl">
                                 </q-input>
                                 <div class="q-my-sm fontSize12 text-grey-5">
-                                    채널의 표준 웹 주소입니다. 여기에는 URL 끝에 있는 숫자와 문자 조합인 고유 채널 ID가 포함되어 있습니다.
+                                    채널의 표준 웹 주소입니다. 여기에는 URL 끝에 있는 숫자와 문자 조합인 고유 채널 ID가 포함되어 있습니다.<!--한국어-->
                                 </div>
                             </div>
                         </template>
@@ -151,7 +151,7 @@
 <!--                </div>-->
 
                 <div class="text-right q-mt-lg q-mr-md">
-                    <q-btn :loading="loading" color="grey-9" @click="save">저장</q-btn>
+                    <q-btn :loading="loading" color="grey-9" @click="save">저장</q-btn><!--한국어-->
                 </div>
             </div>
 
@@ -223,7 +223,7 @@ export default class ChannelEdit extends Vue {
             this.file = file;
         }
         else {
-            alert( '파일 사이즈가 너무 큽니다.' )
+            alert( '파일 사이즈가 너무 큽니다.' ) /*한국어*/
         }
     }
 
@@ -234,7 +234,7 @@ export default class ChannelEdit extends Vue {
             this.file2 = file;
         }
         else {
-            alert( '파일 사이즈가 너무 큽니다.' )
+            alert( '파일 사이즈가 너무 큽니다.' ) /*한국어*/
         }
     }
 
@@ -275,7 +275,7 @@ export default class ChannelEdit extends Vue {
             const result = await this.$api.updateUser( name, state_msg, picture, channel_id, description );
 
             if( !result || result.error ) {
-                result && result.error && alert( result.error );
+                result && result.error && alert( result.error.message );
                 isError = true;
             }
             else {
@@ -292,7 +292,7 @@ export default class ChannelEdit extends Vue {
         if( !isError && banner ) {
             const result = await this.$api.updateBanner( banner );
             if( !result || result.error ) {
-                result && result.error && alert( result.error );
+                result && result.error && alert( result.error.message );
                 isError = true;
             }
             else {
@@ -307,7 +307,7 @@ export default class ChannelEdit extends Vue {
 
         if( !isError ) {
             this.$q.notify({
-                message : '저장 되었습니다.',
+                message : '저장 되었습니다.', /*한국어*/
                 position : 'top',
                 color : 'primary',
                 timeout: 2000
@@ -315,7 +315,7 @@ export default class ChannelEdit extends Vue {
         }
         else {
             this.$q.notify({
-                message : '실패 하였습니다.',
+                message : '실패 하였습니다.', /*한국어*/
                 position : 'top',
                 color : 'negative',
                 timeout: 2000
@@ -327,11 +327,11 @@ export default class ChannelEdit extends Vue {
 
         const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\+<>@\#$%&\\\=\(\'\"]/gi;
         if ( regExp.test(this.channelId) ) {
-            alert( '_, - 를 제외한 특수 문자는 사용할수 없습니다.' );
+            alert( '_, - 를 제외한 특수 문자는 사용할수 없습니다.' ); /*한국어*/
             return;
         }
         else if ( this.channelId.search(/\s/) !== -1 ) {
-            alert( '아이디에 빈칸을 포함할수 없습니다.' );
+            alert( '아이디에 빈칸을 포함할수 없습니다.' ); /*한국어*/
             return;
         }
 
@@ -342,7 +342,7 @@ export default class ChannelEdit extends Vue {
         const result = await this.$api.verifyChannelId( this.channelId );
         if( result.error ) {
             this.$q.notify({
-                message : '사용할 수 없는 아이디 입니다.',
+                message : '사용할 수 없는 아이디 입니다.', /*한국어*/
                 position : 'top',
                 color : 'primary',
                 timeout: 2000
@@ -352,7 +352,7 @@ export default class ChannelEdit extends Vue {
             this.confirmChannelId = true;
             this.channelUrl = `${process.env.VUE_APP_ZEMPIE_URL}${this.channelId}`;
             this.$q.notify({
-                message : '사용할 수 있습니다.',
+                message : '사용할 수 있습니다.', /*한국어*/
                 position : 'top',
                 color : 'primary',
                 timeout: 2000

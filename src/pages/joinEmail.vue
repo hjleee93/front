@@ -24,7 +24,7 @@
                                  ref="email"
                                  lazy-rules
                                  :rules="[val=>val.match(/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/) || '올바른 이메일을 입력해 주세요.']"
-                        >
+                        ><!--한국어-->
                             <template v-slot:prepend>
                                 <q-icon name="email" />
                             </template>
@@ -49,7 +49,7 @@
                                  :rules="[
                                      val=>val.match(/^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{6,20}$/) || '영문과 최소 1개의 숫자 혹은 특수 문자를 포함한 6~20자리 비밀번호를 입력해주세요.',
                                  ]"
-                        >
+                        ><!--한국어-->
                             <template v-slot:prepend>
                                 <q-icon name="lock" />
                             </template>
@@ -68,7 +68,7 @@
                                  :rules="[
                                      val=>val === password || '비밀번호가 다릅니다.',
                                  ]"
-                        >
+                        ><!--한국어-->
                             <template v-slot:prepend>
                                 <q-icon name="lock" />
                             </template>
@@ -86,7 +86,7 @@
                                  :rules="[
                                      val=>val.length >= 2 && val.length <= 12 || '2글자 이상 12글자 이하로 입력 해주세요.',
                                  ]"
-                        >
+                        ><!--한국어-->
                             <template v-slot:prepend>
                                 <q-icon name="account_box" />
                             </template>
@@ -102,9 +102,9 @@
                         <div class="q-mt-lg"></div>
 
                         <div class="row relative-position">
-                            <q-checkbox color="grey-9" class="non-selectable" v-model="check1" label="이용약관 동의" />
+                            <q-checkbox color="grey-9" class="non-selectable" v-model="check1" label="이용약관 동의" /><!--한국어-->
                             <div class="absolute-right">
-                                <q-btn color="grey-9" @click="show1 = !show1">전체보기</q-btn>
+                                <q-btn color="grey-9" @click="show1 = !show1">전체보기</q-btn><!--한국어-->
                             </div>
                         </div>
 
@@ -118,9 +118,9 @@
                         <div class="q-my-md"></div>
 
                         <div class="row relative-position">
-                            <q-checkbox color="grey-9" class="non-selectable" v-model="check2" label="개인정보취급방침 동의" />
+                            <q-checkbox color="grey-9" class="non-selectable" v-model="check2" label="개인정보취급방침 동의" /><!--한국어-->
                             <div class="absolute-right">
-                                <q-btn color="grey-9" @click="show2 = !show2">전체보기</q-btn>
+                                <q-btn color="grey-9" @click="show2 = !show2">전체보기</q-btn><!--한국어-->
                             </div>
                         </div>
 
@@ -134,7 +134,7 @@
 
                         <div class="q-my-xl"></div>
 
-                        <q-btn color="positive" :loading="loading" :disable="!check1 || !check2" class="width100p height50" @click="emailLogin">회원가입</q-btn>
+                        <q-btn color="positive" :loading="loading" :disable="!check1 || !check2" class="width100p height50" @click="emailLogin">회원가입</q-btn><!--한국어-->
 
 
 
@@ -186,6 +186,7 @@ export default class JoinEmail extends Vue {
 
 
     async mounted() {
+        document.title = '회원가입';
         const loginState =  await this.$store.dispatch('loginState');
         switch (loginState) {
             case LoginState.login:
@@ -233,14 +234,13 @@ export default class JoinEmail extends Vue {
     async emailLogin() {
 
         if( !this.email ) {
-            this.emailError = '이메일을 입력해주세요.';
-            // alert('이메일을 입력해주세요.');
+            this.emailError = '이메일을 입력해주세요.'; /*한국어*/
             return;
         }
 
         if( !this.password ) {
             // alert('비밀번호를 입력해주세요.');
-            this.passwordError = '비밀번호를 입력해주세요.'
+            this.passwordError = '비밀번호를 입력해주세요.' /*한국어*/
             return;
         }
 
@@ -260,9 +260,9 @@ export default class JoinEmail extends Vue {
 
                 if( !result2 || result2.error ) {
 
-                    if( result2 && result2.error === '사용할 수 없는 단어' ) {
+                    if( result2 && result2.error === '사용할 수 없는 단어' ) { /*한국어*/
                         //todo 닉네임 필터 에러 처리
-                        alert( '사용할 수 없는 이름입니다.' );
+                        alert( '사용할 수 없는 이름입니다.' ); /*한국어*/
                     }
                     else {
                         console.error( result2 && result2.error || 'error' );
@@ -292,14 +292,14 @@ export default class JoinEmail extends Vue {
                 if( code ) {
                     switch (code) {
                         case 'auth/wrong-password' :
-                            alert('잘못된 비밀번호 입니다. 다시 입력하세요.');
+                            alert('잘못된 비밀번호 입니다. 다시 입력하세요.'); /*한국어*/
                             // this.passwordError = '잘못된 비밀번호 입니다. 다시 입력하세요.'
                             break;
                         case 'auth/user-not-found' :
-                            alert('등록된 이메일이 아닙니다. 회원가입 후 이용해 주세요.');
+                            alert('등록된 이메일이 아닙니다. 회원가입 후 이용해 주세요.'); /*한국어*/
                             break;
                         case 'auth/email-already-in-use':
-                            alert('이미 가입된 이메일 입니다.');
+                            alert('이미 가입된 이메일 입니다.'); /*한국어*/
                             break;
                     }
                 }

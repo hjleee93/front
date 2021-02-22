@@ -27,8 +27,8 @@
             </div>
         </div>
         <div class="more">
-            <router-link v-if="data.key === 'official'" to="/official" class="q-mr-lg self-center moreGameBtn"> 더 보기 </router-link>
-            <router-link v-else-if="data.key === 'unofficial'" to="/challenge" class="q-mr-lg self-center moreGameBtn"> 더 보기 </router-link>
+            <router-link v-if="data.key === 'official'" to="/official" class="q-mr-lg self-center moreGameBtn"> 더 보기 </router-link><!--한국어-->
+            <router-link v-else-if="data.key === 'unofficial'" to="/challenge" class="q-mr-lg self-center moreGameBtn"> 더 보기 </router-link><!--한국어-->
         </div>
     </div>
 </template>

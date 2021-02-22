@@ -2,9 +2,9 @@
     <div>
         <div class="q-mt-lg"></div>
 
-        <div class="text-h6">연락처</div>
+        <div class="text-h6">연락처</div><!--한국어-->
         <div class="contentBox">
-            <content-item label="이메일" label-style="q-mt-md">
+            <content-item label="이메일" label-style="q-mt-md"><!--한국어-->
                 <template>
                     <q-input class="width100p maxWidth400px" filled readonly v-model="email">
                     </q-input>
@@ -23,18 +23,18 @@
         <div class="q-my-md"></div>
 
         <div v-if="providerId === 'password'">
-            <div class="text-h6">보안</div>
+            <div class="text-h6">보안</div><!--한국어-->
             <div class="contentBox">
-                <div class="non-selectable fontSize16">비밀번호 변경은 <span class="underline cursorPoint" @click="reset">여기</span>를 클릭해주세요.</div>
+                <div class="non-selectable fontSize16">비밀번호 변경은 <span class="underline cursorPoint" @click="reset">여기</span>를 클릭해주세요.</div><!--한국어-->
             </div>
         </div>
 
 
         <div class="q-my-md"></div>
 
-        <div class="text-h6">계정 비활성화</div>
+        <div class="text-h6">계정 비활성화</div><!--한국어-->
         <div class="contentBox">
-            <div class="non-selectable fontSize16">계정 비활성화는 <span class="underline cursorPoint" @click="leave">여기</span>를 클릭해주세요.</div>
+            <div class="non-selectable fontSize16">계정 비활성화는 <span class="underline cursorPoint" @click="leave">여기</span>를 클릭해주세요.</div><!--한국어-->
         </div>
     </div>
 </template>
@@ -64,7 +64,7 @@ export default class ProfilePrivateTab extends Vue {
 
     async reset() {
 
-        const ok = confirm( '재설정 메일을 보내시겠습니까?' )
+        const ok = confirm( '재설정 메일을 보내시겠습니까?' ) /*한국어*/
 
         if( !ok ) {
             return;
@@ -74,7 +74,7 @@ export default class ProfilePrivateTab extends Vue {
         this.loading = true;
         const result = await firebase.auth().sendPasswordResetEmail(this.email);
         // console.log(result);
-        alert('재설정 메일을 보냈습니다. 메일을 확인해 주세요.');
+        alert('재설정 메일을 보냈습니다. 메일을 확인해 주세요.'); /*한국어*/
         this.loading = false;
         this.$store.commit('ajaxBar', false);
     }

@@ -45,10 +45,10 @@
 <!--                    class="q-mr-md"-->
 <!--                />-->
 
-                <div class="q-mr-xl"></div>
+                <div class="q-mr-md"></div>
 
-                <div v-if="$store.getters.isLoginComplete">
-                    <q-avatar class="cursorPoint mailIcon q-mr-md" v-if="$store.getters.isLogin" size="30px" @click="$store.commit('mailPopupMobile', true)">
+                <div v-if="$store.getters.isLoginComplete" class="flex no-wrap">
+                    <q-avatar class="cursorPoint mailIcon q-mr-md" v-if="$store.getters.isLogin" size="30px" @click="openMailPopup">
                         <q-icon name="fas fa-bullhorn" class="q-mr-md self-center"></q-icon>
                         <mail-popup-desktop v-if="$q.platform.is.desktop"></mail-popup-desktop>
                         <mail-popup-mobile v-if="$q.platform.is.mobile"></mail-popup-mobile>
@@ -59,7 +59,7 @@
                         <account-popup-mobile v-if="$q.platform.is.mobile"></account-popup-mobile>
                     </q-avatar>
                     <router-link to="/login" v-else >
-                        <q-btn color="positive">
+                        <q-btn color="positive" class="text-no-wrap">
                             로그인
                         </q-btn>
                     </router-link>
@@ -95,6 +95,11 @@ export default class LayoutHeader extends Vue {
     @Watch( '$store.getters.navTab' )
     private onChangedNavTab() {
         this.tab = this.$store.getters.navTab;
+    }
+
+    async openMailPopup() {
+        await this.$store.dispatch('loadMails');
+        this.$store.commit('mailPopupMobile', true);
     }
 }
 </script>

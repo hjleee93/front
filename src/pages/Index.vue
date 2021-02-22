@@ -43,5 +43,9 @@ export default class PageIndex extends Vue {
   meta: Meta = {
     totalCount: 1200
   };
+
+  mounted() {
+      document.title = '젬파이';
+  }
 };
 </script>

@@ -6,7 +6,7 @@
       </div>
 
       <div class="text-h2" style="opacity:.4">
-          존재하지 않는 페이지
+          존재하지 않는 페이지<!--한국어-->
       </div>
 
       <q-btn

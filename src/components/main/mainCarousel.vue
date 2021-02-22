@@ -21,10 +21,10 @@
                 <div class="info">
                     <div class="text  q-pl-lg">
                         <div class="text-h4 text-weight-bold">
-                            고퀄리티 캐주얼 게임
+                            고퀄리티 캐주얼 게임<!--한국어-->
                         </div>
                         <div class="text-h6">
-                            누구나 무료로 게임을 즐겨 보세요!
+                            누구나 무료로 게임을 즐겨 보세요!<!--한국어-->
                         </div>
                     </div>
                 </div>
@@ -40,10 +40,10 @@
                 <div class="info">
                     <div class="text  q-pl-lg">
                         <div class="text-h4 text-weight-bold">
-                            고퀄리티 캐주얼 게임
+                            고퀄리티 캐주얼 게임<!--한국어-->
                         </div>
                         <div class="text-h6">
-                            누구나 무료로 게임을 즐겨 보세요!
+                            누구나 무료로 게임을 즐겨 보세요!<!--한국어-->
                         </div>
                     </div>
                 </div>
@@ -59,10 +59,10 @@
                 <div class="info">
                     <div class="text  q-pl-lg">
                         <div class="text-h4 text-weight-bold">
-                            고퀄리티 캐주얼 게임
+                            고퀄리티 캐주얼 게임<!--한국어-->
                         </div>
                         <div class="text-h6">
-                            누구나 무료로 게임을 즐겨 보세요!
+                            누구나 무료로 게임을 즐겨 보세요!<!--한국어-->
                         </div>
                     </div>
                 </div>

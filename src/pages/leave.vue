@@ -24,31 +24,31 @@
                 <div>
                     5. 회원 탈퇴 진행 시 해당 아이디는 영구적으로 삭제되어 재가입이 불가능합니다.
                 </div>
-            </div>
+            </div><!--한국어-->
 
             <div class="q-my-lg"></div>
 
-            <div class="text-h6">탈퇴 사유</div>
+            <div class="text-h6">탈퇴 사유</div><!--한국어-->
             <div class="contentBox">
-                <q-input maxlength="200" v-model="reason" placeholder="탈퇴 사유를 입력해주세요."></q-input>
+                <q-input maxlength="200" v-model="reason" placeholder="탈퇴 사유를 입력해주세요."></q-input><!--한국어-->
             </div>
 
             <div class="q-my-lg"></div>
 
             <div>
-                <q-checkbox color="grey-9" v-model="check1" label="미결 거래로 인한 수익금을 지급받을 수 없다는 사실을 이해합니다." />
+                <q-checkbox color="grey-9" v-model="check1" label="미결 거래로 인한 수익금을 지급받을 수 없다는 사실을 이해합니다." /><!--한국어-->
             </div>
 
 
 
             <div class="q-mt-sm">
-                <q-checkbox color="grey-9" v-model="check2" label="해당 내용을 모두 확인했으며, 회원 탈퇴에 동의합니다." />
+                <q-checkbox color="grey-9" v-model="check2" label="해당 내용을 모두 확인했으며, 회원 탈퇴에 동의합니다." /><!--한국어-->
             </div>
 
             <div class="q-my-lg"></div>
 
             <div class="text-center">
-                <q-btn color="positive" :disable="!check1 || !check2" class="width100p maxWidth400px height50" @click="leave">회원 탈퇴</q-btn>
+                <q-btn color="positive" :disable="!check1 || !check2" class="width100p maxWidth400px height50" @click="leave">회원 탈퇴</q-btn><!--한국어-->
             </div>
 
 
@@ -75,6 +75,7 @@ export default class Leave extends Vue {
 
 
     async mounted() {
+        document.title = '회원 탈퇴';
         const loginState =  await this.$store.dispatch('loginState');
         switch (loginState) {
             case LoginState.login:
@@ -83,12 +84,12 @@ export default class Leave extends Vue {
     }
 
     async leave() {
-        const ok = confirm( '정말로 탈퇴하시겠습니까?' );
+        const ok = confirm( '정말로 탈퇴하시겠습니까?' ); /*한국어*/
         if ( ok ) {
             const result = await this.$api.leave( this.reason );
 
             if( !result || result.error ) {
-                result && result.error && alert( result.error );
+                result && result.error && alert( result.error.message );
                 console.error( result && result.error || 'error' );
             }
             else  {
