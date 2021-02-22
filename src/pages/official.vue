@@ -69,7 +69,7 @@ export default class Official extends Vue {
     };
 
     async mounted() {
-        document.title = '공식게임';
+        document.title = this.$i18n.t('pageOfficialTitle');
 
         this.$store.commit('headerBgTransparent', true );
         this.$store.commit('navTab', 'Major');

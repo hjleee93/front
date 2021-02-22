@@ -26,5 +26,9 @@
 import { Vue, Component } from 'vue-property-decorator';
 
 @Component
-export default class Error404 extends Vue {}
+export default class Error404 extends Vue {
+    mounted() {
+        document.title = this.$i18n.t('pageError404Title');
+    }
+}
 </script>

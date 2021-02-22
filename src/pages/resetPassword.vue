@@ -73,7 +73,7 @@ export default class ResetPassword extends Vue {
     }
 
     async reset() {
-        document.title = '비밀번호 초기화';
+        document.title = this.$i18n.t('pageResetPasswordTitle');
 
         this.$store.commit('ajaxBar', true);
         this.loading = true;

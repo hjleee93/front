@@ -89,7 +89,6 @@ class Login {
     static async login() {
         _store.commit('loginState', LoginState.login );
         Cookie.write( cookieName, _store.getters.user.uid, 30, process.env.VUE_APP_COOKIE_DOMAIN );
-        await _store.dispatch('loadMails');
     }
 
     static async logout() {

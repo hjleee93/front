@@ -75,7 +75,7 @@ export default class Leave extends Vue {
 
 
     async mounted() {
-        document.title = '회원 탈퇴';
+        document.title = this.$i18n.t('pageLeaveTitle');
         const loginState =  await this.$store.dispatch('loginState');
         switch (loginState) {
             case LoginState.login:

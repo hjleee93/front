@@ -20,13 +20,11 @@ export default class App extends Vue {
     async mounted() {
         this.$i18n.locale = navigator.language.toLowerCase();
         // console.log( this.$i18n.locale );
-        // console.log( this.$i18n.t('failed') );
+        // this.$i18n.locale = 'en-us';
+        // console.log( this.$i18n.t('pageHomeTitle') );
         app = this;
 
         await this.$store.dispatch('loginState');
-        if( this.$store.getters.isLogin ) {
-            await this.$store.dispatch('loadMails');
-        }
 
         // console.log('로그인완료 : ' + (Date.now() - firebaseInitStartTime) / 1000 );
 

@@ -51,7 +51,7 @@ export default class Profile extends Vue {
     private loading : boolean = true;
 
     async mounted() {
-        document.title = '프로필';
+        document.title = this.$i18n.t('pageProfileTitle');
 
         this.$store.commit('navTab', 'Profile');
 

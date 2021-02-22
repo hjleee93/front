@@ -125,6 +125,7 @@ export default class JoinEmailContinue extends Vue {
 
 
     async mounted() {
+        document.title = this.$i18n.t('pageJoinEmailContinueTitle');
         const loginState =  await this.$store.dispatch('loginState');
         switch (loginState) {
             case LoginState.login:

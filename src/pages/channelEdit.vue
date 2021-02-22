@@ -198,6 +198,7 @@ export default class ChannelEdit extends Vue {
     private loading : boolean = false;
 
     async mounted() {
+        document.title = this.$i18n.t('pageChannelEditTitle');
         this.$store.commit('navTab', 'ChannelEdit');
         this.loading = true;
 

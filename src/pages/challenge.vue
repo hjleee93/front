@@ -87,7 +87,7 @@ export default class Challenge extends Vue {
     };
 
     async mounted() {
-        document.title = '도전게임';
+        document.title = this.$i18n.t('pageChallengeTitle');
 
         this.$store.commit('headerBgTransparent', true );
         this.$store.commit('navTab', 'Minor');

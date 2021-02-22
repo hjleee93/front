@@ -86,7 +86,7 @@ export default class Home extends Vue {
     ]
 
     async mounted() {
-        document.title = '젬파이';
+        document.title = this.$i18n.t('pageHomeTitle');
         this.$store.commit('headerBgTransparent', true );
         this.$store.commit('navTab', 'Home');
 

@@ -176,7 +176,7 @@ export default class Login extends Vue {
 
 
     async mounted() {
-        document.title = '로그인';
+        document.title = this.$i18n.t('pageLoginTitle');
         const loginState =  await this.$store.dispatch('loginState');
         switch (loginState) {
             case LoginState.login:

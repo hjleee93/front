@@ -87,7 +87,7 @@ export default class Affiliate extends Vue {
     };
 
     async mounted() {
-        document.title = '제휴게임';
+        document.title = this.$i18n.t('pageAffiliateTitle');
 
         this.$store.commit('headerBgTransparent', true );
         this.$store.commit('navTab', 'Affiliate');
