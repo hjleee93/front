@@ -28,6 +28,13 @@ router.beforeEach((to, from, next) => {
     next();
 });
 
+router.afterEach((to, from) => {
+    Vue.$gtag.event('page_router', {
+        from: from.name,
+        to: from.name,
+    });
+})
+
 export default route<Store<StateInterface>>(function ({ Vue }) {
   return router;
 })

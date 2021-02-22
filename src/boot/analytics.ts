@@ -1,10 +1,16 @@
 import Vue from 'vue';
 import {router} from 'src/router';
-import VueGtag from "vue-gtag";
+import VueGtagPlugin, { VueGtag } from "vue-gtag";
 
 const id = process.env.VUE_APP_GTAG_ID;
 
-Vue.use(VueGtag,{
+declare module 'vue/types/vue' {
+    interface VueConstructor {
+        $gtag: VueGtag
+    }
+}
+
+Vue.use(VueGtagPlugin,{
     config :{
         id,
     },

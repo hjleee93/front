@@ -71,6 +71,9 @@ export default class SearchGame extends Vue {
     onClickSearchItem(index : number) {
         const tagData = this.tags[index];
         consoleLog.log(tagData);
+        this.$gtag.event('search_tag', {
+            tag: tagData.tag,
+        })
         this.onBlur();
     }
 
