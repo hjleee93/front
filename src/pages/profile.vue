@@ -8,8 +8,8 @@
                 indicator-color="color-grey-10"
                 align="left"
             >
-                <q-tab name="profile" label="프로필" /><!--한국어-->
-                <q-tab name="private" label="보안 및 개인 정보" /><!--한국어-->
+                <q-tab name="profile" :label="$t('profile.tab.profile')" />
+                <q-tab name="private" :label="$t('profile.tab.private')" />
             </q-tabs>
 
             <q-separator />
@@ -51,7 +51,7 @@ export default class Profile extends Vue {
     private loading : boolean = true;
 
     async mounted() {
-        document.title = this.$i18n.t('pageProfileTitle');
+        document.title = this.$t('pageTitle.profile') as string;
 
         this.$store.commit('navTab', 'Profile');
 

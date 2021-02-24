@@ -17,10 +17,10 @@
         <q-carousel-slide name="game" class="column no-wrap flex-center" img-src="banner/img-main-banner-03.png">
             <div class="width100p maxWidth text-left q-pt-lg">
                 <div class="text-h4 text-weight-bold">
-                    더 다양한 게임
+                    {{ $t('affiliateCarousel.main') }}
                 </div>
                 <div class="text-h6">
-                    간편하게 인기 게임들을 마음껏 즐겨보세요.
+                    {{ $t('affiliateCarousel.sub') }}
                 </div>
             </div>
         </q-carousel-slide>

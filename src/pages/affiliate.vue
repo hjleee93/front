@@ -87,7 +87,7 @@ export default class Affiliate extends Vue {
     };
 
     async mounted() {
-        document.title = this.$i18n.t('pageAffiliateTitle');
+        document.title = this.$t('pageTitle.affiliate') as string;
 
         this.$store.commit('headerBgTransparent', true );
         this.$store.commit('navTab', 'Affiliate');

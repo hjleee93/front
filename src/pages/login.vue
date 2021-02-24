@@ -44,12 +44,12 @@
                                  :error-message="emailError"
                                  type="email"
                                  v-model="email"
-                                 label="이메일"
+                                 :label="$t('login.emailInput.label')"
                                  ref="email"
                                  lazy-rules
                                  @keypress.enter="emailLogin"
-                                 :rules="[val=>val.match(/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/) || '올바른 이메일을 입력해 주세요.']"
-                        ><!--한국어-->
+                                 :rules="[val=>val.match(/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/) || $t('login.emailInput.rule')]"
+                        >
                             <template v-slot:prepend>
                                 <q-icon name="email" />
                             </template>
@@ -61,15 +61,15 @@
                                  :error-message="passwordError"
                                  type="password"
                                  v-model="password"
-                                 label="비밀번호"
+                                 :label="$t('login.passwordInput.label')"
                                  ref="password"
                                  :onchange="passwordError = ''"
                                  @keypress.enter="emailLogin"
                                  lazy-rules
                                  :rules="[
-                                     val=>val.match(/^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{6,20}$/) || '영문과 최소 1개의 숫자 혹은 특수 문자를 포함한 6~20자리 비밀번호를 입력해주세요.',
+                                     val=>val.match(/^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{6,20}$/) || $t('login.passwordInput.rule'),
                                  ]"
-                        ><!--한국어-->
+                        >
                             <template v-slot:prepend>
                                 <q-icon name="lock" />
                             </template>
@@ -77,14 +77,14 @@
 
                         <div  class="text-right">
                             <router-link to="/resetPassword">
-                                <span class="cursorPoint non-selectable">비밀번호 찾기</span><!--한국어-->
+                                <span class="cursorPoint non-selectable">{{ $t('login.resetPasswordBtn') }}</span>
                             </router-link>
                         </div>
 
                         <div class="q-mt-lg"></div>
-                        <q-btn color="positive" class="width100p height50" @click="emailLogin">로그인</q-btn><!--한국어-->
+                        <q-btn color="positive" class="width100p height50" @click="emailLogin">{{ $t('login.loginBtn') }}</q-btn>
                         <div class="q-mt-md non-selectable">
-                            처음이신가요? <router-link to="/joinEmail"><span class="text-bold cursorPoint">회원가입</span></router-link><!--한국어-->
+                            {{ $t('login.firstMessage') }} <router-link to="/joinEmail"><span class="text-bold cursorPoint">{{ $t('login.joinBtn') }}</span></router-link>
                         </div>
 
                         <q-separator class="q-my-lg"></q-separator>
@@ -102,7 +102,7 @@
 
                         <q-btn color="white" class="width100p height50 googleButton"  @click="google">
                             <q-img height="24px" width="24px" src="img/google-logo.png"></q-img>
-                            <span class="q-ml-md googleText" >Google 계정으로 로그인</span><!--한국어-->
+                            <span class="q-ml-md googleText" >{{ $t('login.googleLoginBtn') }}</span>
                         </q-btn>
 
                         <div class="q-my-md"></div>
@@ -176,7 +176,7 @@ export default class Login extends Vue {
 
 
     async mounted() {
-        document.title = this.$i18n.t('pageLoginTitle');
+        document.title = this.$t('pageTitle.login') as string;
         const loginState =  await this.$store.dispatch('loginState');
         switch (loginState) {
             case LoginState.login:
@@ -218,14 +218,14 @@ export default class Login extends Vue {
     async emailLogin() {
 
         if( !this.email ) {
-            this.emailError = '이메일을 입력해주세요.'; /*한국어*/
+            this.emailError = this.$t('login.emailBlankError') as string;
             // alert('이메일을 입력해주세요.');
             return;
         }
 
         if( !this.password ) {
             // alert('비밀번호를 입력해주세요.');
-            this.passwordError = '비밀번호를 입력해주세요.' /*한국어*/
+            this.passwordError = this.$t('login.passwordBlankError') as string
             return;
         }
 
@@ -241,8 +241,8 @@ export default class Login extends Vue {
                     this.$store.commit('idToken', token);
 
                     const result = await Vue.$api.user();
-                    if( result.error && result.error === '잘 못 된 유저 아이디입니다' ) { /*한국어*/
-                        alert( '진행중인 회원가입이 절차가 남아 있습니다. 이어서 진행 해주세요.' ); /*한국어*/
+                    if( result.error && result.error && result.error.message === '잘 못 된 유저 아이디입니다' ) {
+                        alert( this.$t('login.joinError') as string );
                         this.$store.commit('loginState', LoginState.no_user );
                         await this.$router.replace('/joinEmailContinue');
                         return;
@@ -270,11 +270,11 @@ export default class Login extends Vue {
                 if( code ) {
                     switch (code) {
                         case 'auth/wrong-password' :
-                            alert('잘못된 비밀번호 입니다. 다시 입력하세요.'); /*한국어*/
+                            alert(this.$t('login.firebaseError.password') as string);
                             // this.passwordError = '잘못된 비밀번호 입니다. 다시 입력하세요.'
                             break;
                         case 'auth/user-not-found' :
-                            alert('등록된 이메일이 아닙니다. 회원가입 후 이용해 주세요.'); /*한국어*/
+                            alert(this.$t('login.firebaseError.userNotFound') as string);
                             break;
                         default:
                             // alert('잠시 후 다시 시도해주세요.');
@@ -296,8 +296,8 @@ export default class Login extends Vue {
             this.$store.commit('idToken', token);
 
             const result = await Vue.$api.user();
-            if( result.error && result.error && result.error.message === '잘 못 된 유저 아이디입니다' ) { /*한국어*/
-                alert( '회원가입 후 이용하세요.' ); /*한국어*/
+            if( result.error && result.error && result.error.message === '잘 못 된 유저 아이디입니다' ) {
+                alert( this.$t('login.googleJoinError') as string );
                 this.$store.commit('loginState', LoginState.no_user );
                 await this.$router.replace('/join');
                 return;
@@ -329,8 +329,8 @@ export default class Login extends Vue {
             this.$store.commit('idToken', token);
 
             const result = await Vue.$api.user();
-            if( result.error && result.error === '잘 못 된 유저 아이디입니다' ) { /*한국어*/
-                alert( '회원가입 후 이용하세요.' ); /*한국어*/
+            if( result.error && result.error && result.error.message === '잘 못 된 유저 아이디입니다' ) {
+                alert( this.$t('login.facebookJoinError') as string );
                 this.$store.commit('loginState', LoginState.no_user );
                 await this.$router.replace('/join');
                 return;

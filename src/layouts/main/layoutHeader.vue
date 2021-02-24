@@ -2,7 +2,9 @@
     <div class="headerRoot">
         <q-header
             class="transitionBg bg-dark"
-                  :class="$q.platform.is.desktop && $store.getters.headerBgTransparent && $store.getters.scrollPos < 100 ? 'headerBg' : ''"
+                  :class="$q.platform.is.desktop &&
+                          $store.getters.headerBgTransparent &&
+                          $store.getters.scrollPos < 100 ? 'headerBg' : ''"
                   :reveal="$q.platform.is.mobile"
         >
             <q-toolbar class="maxWidth">
@@ -27,12 +29,12 @@
                     </q-toolbar-title>
 
                 <q-tabs v-model="tab" v-if="$q.platform.is.desktop" inline-label shrink stretch>
-                    <q-route-tab to="/home" name="home" label="홈"></q-route-tab>
-                    <q-route-tab to="/official" name="major" label="공식 게임"></q-route-tab>
-                    <q-route-tab to="/challenge" name="minor" label="도전 게임"></q-route-tab>
-                    <q-route-tab to="/affiliate" name="affiliate" label="제휴 게임"></q-route-tab>
+                    <q-route-tab to="/home" name="home" :label="$t('layoutHeader.routeTab.home')"></q-route-tab>
+                    <q-route-tab to="/official" name="major" :label="$t('layoutHeader.routeTab.official')"></q-route-tab>
+                    <q-route-tab to="/challenge" name="minor" :label="$t('layoutHeader.routeTab.challenge')"></q-route-tab>
+                    <q-route-tab to="/affiliate" name="affiliate" :label="$t('layoutHeader.routeTab.affiliate')"></q-route-tab>
                     <a :href="$store.getters.studioUrl" class="aTab">
-                        <q-tab name="g-studio" label="개발 스튜디오">
+                        <q-tab name="g-studio" :label="$t('layoutHeader.routeTab.studio')">
                         </q-tab>
                     </a>
                 </q-tabs>
@@ -60,7 +62,7 @@
                     </q-avatar>
                     <router-link to="/login" v-else >
                         <q-btn color="positive" class="text-no-wrap">
-                            로그인
+                            {{ $t('layoutHeader.loginBtn') }}
                         </q-btn>
                     </router-link>
                 </div>

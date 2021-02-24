@@ -45,7 +45,7 @@ export default class PageIndex extends Vue {
   };
 
   mounted() {
-      document.title = '젬파이';
+      document.title = this.$t('pageTitle.home') as string;
   }
 };
 </script>

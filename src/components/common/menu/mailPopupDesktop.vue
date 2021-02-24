@@ -20,7 +20,7 @@
                             </div>
 
                             <div class="date">
-                                {{ dateFormat( item.created_at ) }} 전
+                                {{ dateFormat( item.created_at ) }}{{ $t('mailPopup.date.before') }}
                             </div>
                         </div>
 
@@ -35,7 +35,7 @@
                 <q-item-section>
                     <div class="flex">
                         <div class="text text-center">
-                            알림이 없습니다.<!--한국어-->
+                            {{ $t('mailPopup.noMail') }}
                         </div>
                     </div>
                 </q-item-section>
@@ -87,9 +87,15 @@ export default class MailPopupDesktop extends Vue {
 
     dateFormat( createdAt ) {
         let minute = Math.ceil((new Date().getTime() - new Date(createdAt).getTime()) / (1000 * 60));
-        const timeUnit = [60, 24, 30, 12]; // 분 -> 시간 부터 시작
-        let time = [minute < 0 ? 0 : minute]; // minute 부터 시작
-        const timeLabel = ['분', '시간', '일', '개월', '년'];
+        const timeUnit = [60, 24, 30, 12];
+        let time = [minute < 0 ? 0 : minute];
+        const timeLabel = [
+            this.$t('mailPopup.date.minute') as string,
+            this.$t('mailPopup.date.hour') as string,
+            this.$t('mailPopup.date.day') as string,
+            this.$t('mailPopup.date.month') as string,
+            this.$t('mailPopup.date.year') as string,
+        ];
         for( let i = 0; i < timeUnit.length; i++ ) {
             time[i + 1] = Math.floor(time[i] / timeUnit[i]);
             if( time[i + 1] == 0 ) {

@@ -6,7 +6,7 @@
       </div>
 
       <div class="text-h2" style="opacity:.4">
-          존재하지 않는 페이지<!--한국어-->
+          {{ $t('error404.mainText') }}
       </div>
 
       <q-btn
@@ -15,7 +15,7 @@
         text-color="black"
         unelevated
         to="/"
-        label="홈으로 이동"
+        :label="$t('error404.moveHome')"
         no-caps
       />
     </div>
@@ -28,7 +28,7 @@ import { Vue, Component } from 'vue-property-decorator';
 @Component
 export default class Error404 extends Vue {
     mounted() {
-        document.title = this.$i18n.t('pageError404Title');
+        document.title = this.$t('pageTitle.error404') as string;
     }
 }
 </script>

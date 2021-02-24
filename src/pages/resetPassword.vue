@@ -20,11 +20,11 @@
                                  :error-message="emailError"
                                  type="email"
                                  v-model="email"
-                                 label="이메일"
+                                 :label="$t('resetPassword.emailInput.label')"
                                  ref="email"
                                  lazy-rules
-                                 :rules="[val=>val.match(/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/) || '올바른 이메일을 입력해 주세요.']"
-                        ><!--한국어-->
+                                 :rules="[val=>val.match(/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/) || $t('resetPassword.emailInput.rule')]"
+                        >
                             <template v-slot:prepend>
                                 <q-icon name="email" />
                             </template>
@@ -34,7 +34,7 @@
 
 
                         <div class="q-mt-lg"></div>
-                        <q-btn color="positive" :loading="loading" class="width100p height50" @click="reset">비밀번호 초기화</q-btn><!--한국어-->
+                        <q-btn color="positive" :loading="loading" class="width100p height50" @click="reset">{{ $t('resetPassword.btnLabel') }}</q-btn>
                         <div class="q-my-md"></div>
                     </div>
 
@@ -73,13 +73,13 @@ export default class ResetPassword extends Vue {
     }
 
     async reset() {
-        document.title = this.$i18n.t('pageResetPasswordTitle');
+        document.title = this.$t('pageTitle.resetPassword') as string;
 
         this.$store.commit('ajaxBar', true);
         this.loading = true;
         const result = await firebase.auth().sendPasswordResetEmail(this.email);
         // console.log(result);
-        alert('재설정 메일을 보냈습니다. 메일을 확인해 주세요.'); /*한국어*/
+        alert(this.$t('resetPassword.checkAlertMessage'));
         await this.$router.replace('/login');
         this.loading = false;
 

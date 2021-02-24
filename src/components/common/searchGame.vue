@@ -6,7 +6,7 @@
                     <q-icon class="q-ml-sm q-mr-sm" name="fa fa-search"></q-icon>
                 </div>
                 <div class="inputArea">
-                    <input ref="input" v-model="search" placeholder='게임 검색하기' type="search" @keyup="onChanged"><!--한국어-->
+                    <input ref="input" v-model="search" :placeholder="$t('searchGame.inputLabel')" type="search" @keyup="onChanged">
                 </div>
             </div>
             <div class="popup" v-if="this.tags && this.tags.length && this.isFocus">

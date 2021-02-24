@@ -3,13 +3,13 @@
         <q-card class="reportPopup">
             <q-card-section>
                 <div>
-                    게임 신고하기
+                    {{ $t('reportPopup.label') }}
                 </div>
             </q-card-section>
             <q-separator inset color="gray" size="1px"></q-separator>
             <q-card-section>
                 <div class="box">
-                    <div class="text-h7">카테고리</div>
+                    <div class="text-h7">{{ $t('reportPopup.category.label') }}</div>
                     <template v-for="checkItem in checkList">
                         <div class="checkItem">
                             <q-checkbox v-model="checkItem.checked" :label="checkItem.text" />
@@ -17,17 +17,17 @@
                     </template>
 
 
-                    <div class="desLabel">게임을 신고하는 이유를 간단히 설명해 주세요.</div>
+                    <div class="desLabel">{{ $t('reportPopup.description') }}</div>
                     <q-input class="desInput" type="textarea" outlined dense />
-                    <div class="q-mt-md">첨부 파일</div>
+                    <div class="q-mt-md">{{ $t('reportPopup.file') }}</div>
                     <input type="file" accept="image/png, image/jpg" />
                 </div>
 
             </q-card-section>
 
             <q-card-actions align="right" class="text-primary">
-                <q-btn flat label="취소" @click="$emit('@close')" />
-                <q-btn flat label="등록" @click="$emit('@close')" />
+                <q-btn flat :label="$t('reportPopup.cancelBtn')" @click="$emit('@close')" />
+                <q-btn flat :label="$t('reportPopup.submitBtn')" @click="$emit('@close')" />
             </q-card-actions>
         </q-card>
     </q-dialog>
@@ -48,12 +48,12 @@ export default class ReportPopup extends Vue {
         text : string,
         checked : boolean,
     }[] = [
-        { text : '폭력이 노골적입니다.', checked : false }, /*한국어*/
-        { text : '콘텐츠가 선정적입니다.', checked : false }, /*한국어*/
-        { text : '게임 내 비속한 표현(욕설, 비방 등)이 있습니다.', checked : false }, /*한국어*/
-        { text : '스팸 또는 현혹하는 콘텐츠가 포함되어 있습니다.', checked : false }, /*한국어*/
-        { text : '저작권 신고', checked : false }, /*한국어*/
-        { text : '기타', checked : false }, /*한국어*/
+        { text : this.$t('reportPopup.category.text1') as string, checked : false },
+        { text : this.$t('reportPopup.category.text2') as string, checked : false },
+        { text : this.$t('reportPopup.category.text3') as string, checked : false },
+        { text : this.$t('reportPopup.category.text4') as string, checked : false },
+        { text : this.$t('reportPopup.category.text5') as string, checked : false },
+        { text : this.$t('reportPopup.category.text6') as string, checked : false },
     ];
 
     mounted() {

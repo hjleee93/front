@@ -37,7 +37,7 @@
                     <span
                         class="ellipsis block playCount"
                         v-if="data.category !== 2">
-                        {{ countOverFormat(data.count_over)}} 플레이
+                        {{ countOverFormat(data.count_over)}}{{ $t('gameCard.playLabel') }}
                     </span>
                 </div>
 
@@ -53,7 +53,7 @@
                                         <q-item-section>
                                             <div class="row">
                                                 <q-icon name="far fa-id-card" class="self-center q-mr-sm"></q-icon>
-                                                <div class="self-center">개발자 채널 가기</div>
+                                                <div class="self-center">{{ $t('gameCard.moveChannel') }}</div>
                                             </div>
                                         </q-item-section>
                                     </q-item>
@@ -62,7 +62,7 @@
                                     <q-item-section>
                                         <div class="row">
                                             <q-icon name="report" class="self-center q-mr-sm"></q-icon>
-                                            <div>게임 신고 하기</div>
+                                            <div>{{ $t('gameCard.reportGame') }}</div>
                                         </div>
                                     </q-item-section>
                                 </q-item>
@@ -77,7 +77,7 @@
                                         <q-item-section>
                                             <div class="row">
                                                 <!--                                            <q-icon name="far fa-id-card" class="self-center q-mr-sm"></q-icon>-->
-                                                <div class="self-center">개발자 채널 가기</div>
+                                                <div class="self-center">{{ $t('gameCard.moveChannel') }}</div>
                                             </div>
                                         </q-item-section>
                                     </q-item>
@@ -86,7 +86,7 @@
                                     <q-item-section>
                                         <div class="row">
                                             <!--                                            <q-icon name="report" class="self-center q-mr-sm"></q-icon>-->
-                                            <div>게임 신고 하기</div>
+                                            <div>{{ $t('gameCard.reportGame') }}</div>
                                         </div>
                                     </q-item-section>
                                 </q-item>
@@ -94,7 +94,7 @@
                                     <q-item-section>
                                         <div class="row">
 <!--                                            <q-icon name="report" class="self-center q-mr-sm"></q-icon>-->
-                                            <div>취소</div>
+                                            <div>{{ $t('gameCard.cancelLabel') }}</div>
                                         </div>
                                     </q-item-section>
                                 </q-item>
@@ -132,7 +132,9 @@ export default class GameCard extends Vue {
     }
 
     countOverFormat( countOver : number ) {
-        return countOver >= 10000 ? Math.floor( countOver / 10000 ) + '만회' : countOver + '회'
+        const tenThousand = this.$t('gameCard.tenThousand') as string;
+        const playCountLabel = this.$t('gameCard.playCountLabel') as string;
+        return countOver >= 10000 ? Math.floor( countOver / 10000 ) + tenThousand + playCountLabel : countOver + playCountLabel;
     }
 
     onIntersection( entry ) {
