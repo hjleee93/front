@@ -37,7 +37,8 @@
                     <span
                         class="ellipsis block playCount"
                         v-if="data.category !== 2">
-                        {{ countOverFormat(data.count_over)}}{{ $t('gameCard.playLabel') }}
+                        {{ data.count_over.toLocaleString() }}{{ $t('gameCard.playLabel') }}
+<!--                        {{ countOverFormat(data.count_over)}}{{ $t('gameCard.playLabel') }}-->
                     </span>
                 </div>
 

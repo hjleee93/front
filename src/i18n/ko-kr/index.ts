@@ -397,7 +397,7 @@ export default {
     },
 
     gameCard : {
-        playLabel : ' 플레이',
+        playLabel : ' plays',
         tenThousand : '만',
         playCountLabel : '회',
         moveChannel : '개발자 채널 가기',

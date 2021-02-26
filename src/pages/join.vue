@@ -67,7 +67,7 @@
                         <div class="row relative-position">
                             <q-checkbox color="grey-9" class="non-selectable" v-model="check2" :label="$t('join.policy.label')" />
                             <div class="absolute-right">
-                                <q-btn color="grey-9" @click="show2 = !show2">$t('join.policy.showAll')</q-btn>
+                                <q-btn color="grey-9" @click="show2 = !show2">{{ $t('join.policy.showAll') }}</q-btn>
                             </div>
                         </div>
 
