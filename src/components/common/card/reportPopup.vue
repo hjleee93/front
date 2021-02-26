@@ -18,16 +18,20 @@
 
 
                     <div class="desLabel">{{ $t('reportPopup.description') }}</div>
-                    <q-input class="desInput" type="textarea" outlined dense />
-                    <div class="q-mt-md">{{ $t('reportPopup.file') }}</div>
-                    <input type="file" accept="image/png, image/jpg" />
+                    <q-input class="desInput" type="textarea" outlined dense v-model="reason" />
+<!--                    <div class="q-mt-md">{{ $t('reportPopup.file') }}</div>-->
+<!--                    <input type="file" accept="image/png, image/jpg" />-->
+                    <q-btn color="grey-9 q-mt-md q-mb-sm q-mr-md" @click="fileLoader.addFile()">{{ $t('reportPopup.fileBtn') }}</q-btn>
+                    <div>
+                        {{pictureUrl}}
+                    </div>
                 </div>
 
             </q-card-section>
 
             <q-card-actions align="right" class="text-primary">
                 <q-btn flat :label="$t('reportPopup.cancelBtn')" @click="$emit('@close')" />
-                <q-btn flat :label="$t('reportPopup.submitBtn')" @click="$emit('@close')" />
+                <q-btn flat :label="$t('reportPopup.submitBtn')" @click="reportGame" />
             </q-card-actions>
         </q-card>
     </q-dialog>
@@ -37,12 +41,19 @@
 
 <script lang="ts">
 import {Vue, Component, Prop, Watch} from 'vue-property-decorator';
+import {FileLoader, mbToByte} from "src/scripts/fileLoader";
 
 @Component({
     components: {}
 })
 export default class ReportPopup extends Vue {
+    @Prop() private data : any;
     @Prop() visible : boolean;
+
+    private fileLoader : FileLoader = new FileLoader();
+    private file : File = undefined;
+    private reason : string = '';
+    private pictureUrl : string = '';
 
     private checkList : {
         text : string,
@@ -57,8 +68,59 @@ export default class ReportPopup extends Vue {
     ];
 
     mounted() {
+        this.fileLoader.on( 'onLoadFile', this.onLoadFile );
     }
 
+
+    onLoadFile( data, file ) {
+        if( file.size <= mbToByte( 1 ) ) {
+            if( file.type.includes('image/') ) {
+                this.pictureUrl = file.name;
+                this.file = file;
+            }
+            else {
+                alert( this.$t('reportPopup.fileTypeError') )
+            }
+        }
+        else {
+            alert( this.$t('reportPopup.fileSizeError') )
+        }
+    }
+
+    async reportGame() {
+        if( !this.$store.getters.isLogin ) {
+            this.$emit('@close');
+            return;
+        }
+
+        const reason_num = this.checkList
+                               .map( (checkData : { text : string, checked : boolean }, index : number) => checkData.checked ? index : -1 )
+                               .filter( (num : number) => num != -1 );
+
+        if( reason_num.length == 0 ) {
+            alert( this.$t('reportPopup.reasonError') )
+            return;
+        }
+
+        const result = await this.$api.reportGame( this.data.id, reason_num, this.reason, this.file );
+
+        if( !result || result.error ) {
+            console.error(result);
+        }
+        else {
+            alert( this.$t('reportPopup.successAlert') );
+            this.resetForm();
+        }
+
+        this.$emit('@close');
+    }
+
+    resetForm() {
+        this.file = undefined;
+        this.reason = '';
+        this.checkList.forEach( (checkData : { text : string, checked : boolean }) => checkData.checked = false);
+        this.pictureUrl = '';
+    }
 }
 </script>
 

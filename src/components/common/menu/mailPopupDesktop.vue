@@ -5,7 +5,7 @@
                 <q-item-section>
                     <div class="flex">
                         <div class="category flex column items-center q-mr-sm">
-                            <q-icon name="fas fa-bullhorn" class="q-mt-sm q-mb-sm block"></q-icon>
+                            <q-icon :name="categoryList[item.category]" class="q-mt-sm q-mb-sm block"></q-icon>
                             <q-badge color="red" v-if="!item.is_read" class="block">
                                 new
                             </q-badge>
@@ -49,6 +49,20 @@ import {Vue, Component} from 'vue-property-decorator';
 
 @Component
 export default class MailPopupDesktop extends Vue {
+
+    categoryList = [
+        'fas fa-bullhorn', // 일반 알림
+        'fas fa-bullhorn', // 일반 알림
+        'fas fa-check-circle', // 심사 완료
+        'fas fa-exclamation-circle', // 제재
+        'fas fa-exclamation-circle', // 제재
+        'fas fa-exclamation-circle', // 제재
+        'fas fa-exclamation-circle', // 제재
+        'fas fa-gratipay', // 하트
+        'fas fa-bullhorn',
+        'fas fa-bullhorn',
+    ]
+
     async onClickMail( mail ) {
         if( !mail.content ) {
             await this.loadMailContent( mail.id );

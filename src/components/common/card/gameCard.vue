@@ -58,10 +58,10 @@
                                         </q-item-section>
                                     </q-item>
                                 </router-link>
-                                <q-item clickable class="" @click="popupReport = true; popup = false;">
+                                <q-item clickable class="" @click="popupReport = true; popup = false;" v-if="$store.getters.isLogin">
                                     <q-item-section>
                                         <div class="row">
-                                            <q-icon name="report" class="self-center q-mr-sm"></q-icon>
+                                            <q-icon name="fas fa-exclamation-circle" class="self-center q-mr-sm"></q-icon>
                                             <div>{{ $t('gameCard.reportGame') }}</div>
                                         </div>
                                     </q-item-section>
@@ -82,7 +82,7 @@
                                         </q-item-section>
                                     </q-item>
                                 </router-link>
-                                <q-item clickable class="" @click="popupReport = true; popup = false;">
+                                <q-item clickable class="" @click="popupReport = true; popup = false;" v-if="$store.getters.isLogin">
                                     <q-item-section>
                                         <div class="row">
                                             <!--                                            <q-icon name="report" class="self-center q-mr-sm"></q-icon>-->
@@ -104,7 +104,7 @@
                 </div>
             </div>
         </div>
-        <report-popup :visible="popupReport" v-on:@close="popupReport=false;"></report-popup>
+        <report-popup :visible="popupReport" v-on:@close="popupReport=false;" :data="data"></report-popup>
     </router-link>
 </template>
 

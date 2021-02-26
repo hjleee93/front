@@ -222,6 +222,8 @@ class Api {
         return response.result || response;
     }
 
+    // MAIL
+
     async mails() {
         const response = await this.request('get', '/user/mails', undefined, false);
         return response.result || response;
@@ -240,6 +242,16 @@ class Api {
     async testBadWord( word : string ) {
         const response = await this.request('post', '/user/filter/bad-word', { word }, false);
         return response.result || response;
+    }
+
+    async reportGame( target_id : number, reason_num : number[], reason : string, file : File | null = null ) {
+        const formData = new FormData();
+        formData.append( 'target_id', target_id.toString() );
+        formData.append( 'reason_num', reason_num.toString() );
+        formData.append( 'reason', reason );
+        if( file ) { formData.append( 'file', file ); }
+        const response = await this.request('post', '/report/game', formData, false);
+        return response.result ||response;
     }
 }
 

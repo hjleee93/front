@@ -159,9 +159,14 @@ export default {
             text6 : '기타',
         },
         description : '게임을 신고하는 이유를 간단히 설명해 주세요.',
-        file : '첨부 파일',
+        file : '이미지 첨부',
         cancelBtn : '취소',
         submitBtn : '등록',
+        successAlert : '성공적으로 신고가 접수되었습니다.',
+        fileBtn : '이미지 첨부',
+        fileTypeError : '이미지 파일이 아닙니다.',
+        fileSizeError : '파일 사이즈가 너무 큽니다.',
+        reasonError : '신고 사유가 있어야 합니다.',
     },
 
     searchGame : {
@@ -271,7 +276,7 @@ export default {
         editBtn : '채널 설정',
         tab : {
             game : '등록한 게임',
-            indo : '정보',
+            info : '정보',
         },
         descriptionLabel : '설명',
         businessLabel : '비즈니스 문의',

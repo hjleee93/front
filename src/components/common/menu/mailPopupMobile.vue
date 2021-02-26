@@ -64,11 +64,16 @@ export default class AccountPopupMobile extends Vue {
     private active : boolean = false;
 
     categoryList = [
+        'fas fa-bullhorn', // 일반 알림
+        'fas fa-bullhorn', // 일반 알림
+        'fas fa-check-circle', // 심사 완료
+        'fas fa-exclamation-circle', // 제재
+        'fas fa-exclamation-circle', // 제재
+        'fas fa-exclamation-circle', // 제재
+        'fas fa-exclamation-circle', // 제재
+        'fas fa-gratipay', // 하트
         'fas fa-bullhorn',
-        'fas fa-gratipay',
-        'fas fa-exclamation-circle',
-        '',
-        '',
+        'fas fa-bullhorn',
     ]
 
     async onClickMail( mail ) {
