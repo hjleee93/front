@@ -19,7 +19,7 @@
     "quasar": "^1.0.0",
     "vue-class-component": "^7.2.2",
     "vue-gtag": "^1.10.0",
-    "vue-gtm": "^3.4.0",
+    "vue-gtm": "^3.4.0-vue2",
     "vue-i18n": "^8.0.0",
     "vue-meta": "^2.4.0",
     "vue-property-decorator": "^8.3.0"
