@@ -122,7 +122,7 @@ export default class Play extends Vue {
     }
 
     tagEvent() {
-        this.$gtag.event(
+        this.$gtag && this.$gtag.event(
             'play', {
                 'event_category': 'game',
                 'event_label': 'title',

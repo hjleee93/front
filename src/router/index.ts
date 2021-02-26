@@ -29,7 +29,7 @@ router.beforeEach((to, from, next) => {
 });
 
 router.afterEach((to, from) => {
-    Vue.$gtag.event('page_router', {
+    Vue.$gtag && Vue.$gtag.event('page_router', {
         from: from.name,
         to: from.name,
     });
