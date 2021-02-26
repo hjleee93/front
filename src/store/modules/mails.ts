@@ -20,6 +20,7 @@ export default {
             let mail = state.mails.find((mail) => mail.id == payload.id);
             mail.content = payload.content;
             mail.open = true;
+            mail.is_read = true;
             state.mails = state.mails.map(x=>x);
         },
         deleteMail : ( state : any, payload : any ) => {
