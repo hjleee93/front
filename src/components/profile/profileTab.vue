@@ -9,12 +9,12 @@
             </q-avatar>
             <div class="q-ml-lg self-center">
                 <div class="row q-mb-sm">
-                    <q-btn color="grey-9 q-mb-sm q-mr-md" @click="fileLoader.addFile()"  :loading="loading">$t('profileTab.profileImage.btn')</q-btn>
+                    <q-btn color="grey-9 q-mb-sm q-mr-md" @click="fileLoader.addFile()"  :loading="loading">{{ $t('profileTab.profileImage.btn') }}</q-btn>
                     <q-btn color="grey-9 q-mb-sm" :disable="!url" @click="reset()"  :loading="loading">
                         <q-icon name="far fa-trash-alt" style="font-size: 16px"></q-icon>
                     </q-btn>
                 </div>
-                <div>$t('profileTab.profileImage.description')</div>
+                <div>{{ $t('profileTab.profileImage.description') }}</div>
             </div>
         </div>
 
