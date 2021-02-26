@@ -136,7 +136,7 @@ a {
 
 .text {
     margin-top: 6px;
-    width: 262px;
+    width: 256px;
     margin-right: 6px;
 
     .title {
