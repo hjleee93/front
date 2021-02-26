@@ -28,7 +28,6 @@ class Api {
             return result.data;
         }
         catch (error) {
-            console.log(error);
             if ( error && error.response && error.response.data && error.response.data.error && error.response.data.error.message === 'Unauthorized' ) {
                 const currentUser = firebase.auth().currentUser;
                 if (currentUser) {

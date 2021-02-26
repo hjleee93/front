@@ -49,6 +49,7 @@ export default class SearchResult extends Vue {
 
 
     async mounted() {
+        document.title = this.$t('pageTitle.searchResult') as string;
         this.$store.commit('headerBgTransparent', true );
         this.$store.commit('navTab', 'SearchResult');
 

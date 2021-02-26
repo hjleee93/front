@@ -6,7 +6,7 @@
                     <q-icon class="q-ml-sm q-mr-sm" name="fa fa-search"></q-icon>
                 </div>
                 <div class="inputArea">
-                    <input ref="input" v-model="search" placeholder='게임 검색하기' type="search" @keyup="onChanged">
+                    <input ref="input" v-model="search" :placeholder="$t('searchGame.inputLabel')" type="search" @keyup="onChanged">
                 </div>
             </div>
             <div class="popup" v-if="this.tags && this.tags.length && this.isFocus">
@@ -70,7 +70,7 @@ export default class SearchGame extends Vue {
 
     onClickSearchItem(index : number) {
         const tagData = this.tags[index];
-        consoleLog.log(tagData);
+        // consoleLog.log(tagData);
         this.$gtag.event('search_tag', {
             tag: tagData.tag,
         })
@@ -90,7 +90,7 @@ export default class SearchGame extends Vue {
         this.timer = 0;
 
         const result = await this.$api.hashtags( value );
-        consoleLog.log( result );
+        // consoleLog.log( result );
 
         if( result.tags ) {
             this.tags = result.tags;

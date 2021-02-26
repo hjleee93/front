@@ -69,6 +69,7 @@ export default class Official extends Vue {
     };
 
     async mounted() {
+        document.title = this.$t('pageTitle.official') as string;
 
         this.$store.commit('headerBgTransparent', true );
         this.$store.commit('navTab', 'Major');

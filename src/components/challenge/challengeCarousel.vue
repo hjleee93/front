@@ -17,10 +17,10 @@
         <q-carousel-slide name="game" class="column no-wrap flex-center" img-src="banner/img-main-banner-03.png">
             <div class="width100p maxWidth text-left q-pt-lg">
                 <div class="text-h4 text-weight-bold">
-                    상상하는 모든 게임
+                    {{ $t('challengeCarousel.main') }}
                 </div>
                 <div class="text-h6">
-                    챌린지는 누구나 업로드 할 수 있는 창작 게임 게시판 입니다.
+                    {{ $t('challengeCarousel.sub') }}
                 </div>
             </div>
         </q-carousel-slide>

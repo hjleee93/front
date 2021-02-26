@@ -43,5 +43,9 @@ export default class PageIndex extends Vue {
   meta: Meta = {
     totalCount: 1200
   };
+
+  mounted() {
+      document.title = this.$t('pageTitle.home') as string;
+  }
 };
 </script>

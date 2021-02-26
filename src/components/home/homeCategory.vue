@@ -27,8 +27,8 @@
             </div>
         </div>
         <div class="more">
-            <router-link v-if="data.key === 'official'" to="/official" class="q-mr-lg self-center moreGameBtn"> 더 보기 </router-link>
-            <router-link v-else-if="data.key === 'unofficial'" to="/challenge" class="q-mr-lg self-center moreGameBtn"> 더 보기 </router-link>
+            <router-link v-if="data.key === 'official'" to="/official" class="q-mr-lg self-center moreGameBtn">{{ $t('homeCategory.moreGame.official') }}</router-link>
+            <router-link v-else-if="data.key === 'unofficial'" to="/challenge" class="q-mr-lg self-center moreGameBtn">{{ $t('homeCategory.moreGame.challenge') }}</router-link>
         </div>
     </div>
 </template>

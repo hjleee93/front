@@ -7,7 +7,7 @@
                         <q-avatar class="icon q-mr-md" @click="$store.commit('accountPopupMobile', false)">
                             <q-icon name="clear" class="q-mr-md"></q-icon>
                         </q-avatar>
-                        <div class="menuText">계정</div>
+                        <div class="menuText">{{ $t('accountPopup.accountLabel') }}</div>
                     </div>
                 </q-item-section>
             </q-item>
@@ -40,7 +40,7 @@
                             <q-avatar class="icon q-mr-md">
                                 <q-icon name="fas fa-user" class="q-mr-md"></q-icon>
                             </q-avatar>
-                            <div class="menuText">내 프로필</div>
+                            <div class="menuText">{{ $t('accountPopup.profileLabel') }}</div>
                         </div>
                     </q-item-section>
                 </q-item>
@@ -53,7 +53,7 @@
                             <q-avatar class="icon q-mr-md">
                                 <q-icon name="far fa-id-card" class="q-mr-md"></q-icon>
                             </q-avatar>
-                            <div class="menuText">내 채널</div>
+                            <div class="menuText">{{ $t('accountPopup.channelLabel') }}</div>
                         </div>
                     </q-item-section>
                 </q-item>
@@ -66,7 +66,7 @@
                             <q-avatar class="icon q-mr-md">
                                 <q-icon name="far fa-question-circle" class="q-mr-md"></q-icon>
                             </q-avatar>
-                            <div class="menuText">고객센터</div>
+                            <div class="menuText">{{ $t('accountPopup.supportLabel') }}</div>
                         </div>
                     </q-item-section>
                 </q-item>
@@ -90,7 +90,7 @@
                         <q-avatar class="icon q-mr-md">
                             <q-icon name="fas fa-sign-out-alt" class="q-mr-md"></q-icon>
                         </q-avatar>
-                        <div class="menuText">로그아웃</div>
+                        <div class="menuText">{{ $t('accountPopup.logoutLabel') }}</div>
                     </div>
                 </q-item-section>
             </q-item>

@@ -32,34 +32,34 @@ export default class GenreCategory extends Vue {
         {
             name : 'all',
             icon: 'sports_esports',
-            text: '전체보기',
+            text: this.$t('genreCategory.text1'),
 
         },
         {
             name : 'arcade',
             icon: 'sports_esports',
-            text: '아케이드',
+            text: this.$t('genreCategory.text2'),
 
         },
         {
             name : 'sport',
             icon: 'fas fa-baseball-ball',
-            text: '스포츠',
+            text: this.$t('genreCategory.text3'),
         },
         {
             name : 'action',
             icon: 'fas fa-ghost',
-            text: '액션',
+            text: this.$t('genreCategory.text4'),
         },
         {
             name : 'strategy',
             icon: 'fas fa-chess-king',
-            text: '전략',
+            text: this.$t('genreCategory.text5'),
         },
         {
             name : 'puzzle',
             icon: 'fas fa-puzzle-piece',
-            text: '퍼즐',
+            text: this.$t('genreCategory.text6'),
         },
     ];
 

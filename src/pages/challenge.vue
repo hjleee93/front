@@ -87,7 +87,7 @@ export default class Challenge extends Vue {
     };
 
     async mounted() {
-
+        document.title = this.$t('pageTitle.challenge') as string;
 
         this.$store.commit('headerBgTransparent', true );
         this.$store.commit('navTab', 'Minor');

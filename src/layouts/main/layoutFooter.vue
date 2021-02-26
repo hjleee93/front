@@ -21,11 +21,11 @@
                 align="center"
                 :breakpoint="1"
             >
-                <q-route-tab to="/home" class="min-height50" name="home" icon="home" label="홈"/>
-                <q-route-tab to="/official" class="min-height50" name="best" icon="star" label="공식 게임"/>
-                <q-route-tab to="/challenge" class="min-height50" name="challenge" icon="emoji_events" label="도전 게임"/>
-                <q-route-tab to="/affiliate" class="min-height50" name="affiliate" icon="business" label="제휴 게임"/>
-                <q-route-tab v-if="$store.getters.isLogin" :to="`/channel/${$store.getters.user.channel_id}`" class="min-height50" name="channel" icon="far fa-id-card" label="내 채널"/>
+                <q-route-tab to="/home" class="min-height50" name="home" icon="home" :label="$t('layoutFooter.routeTab.home')"/>
+                <q-route-tab to="/official" class="min-height50" name="best" icon="star" :label="$t('layoutFooter.routeTab.official')"/>
+                <q-route-tab to="/challenge" class="min-height50" name="challenge" icon="emoji_events" :label="$t('layoutFooter.routeTab.challenge')"/>
+                <q-route-tab to="/affiliate" class="min-height50" name="affiliate" icon="business" :label="$t('layoutFooter.routeTab.affiliate')"/>
+                <q-route-tab v-if="$store.getters.isLogin" :to="`/channel/${$store.getters.user.channel_id}`" class="min-height50" name="channel" icon="far fa-id-card" :label="$t('layoutFooter.routeTab.channel')"/>
             </q-tabs>
         </q-footer>
     </div>

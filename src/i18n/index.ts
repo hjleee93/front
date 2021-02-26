@@ -1,7 +1,7 @@
 import enUS from './en-us';
-import ko from './ko';
+import koKR from './ko-kr';
 
 export default {
   'en-us': enUS,
-  'ko' : ko,
+  'ko-kr' : koKR,
 };
