@@ -150,7 +150,8 @@ export default class JoinEmail extends Vue {
 
         if (!result || result.error) {
 
-            if (result && result.error && result.error.message === '사용할 수 없는 단어') {
+            // if (result && result.error && result.error.message === '사용할 수 없는 단어') {
+            if( result?.error?.code === 40101 ) {
                 // todo 닉네임 필터 에러 처리
                 alert(this.$t('join.joinNicknameError'));
             } else {

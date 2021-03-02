@@ -28,7 +28,8 @@ class Api {
             return result.data;
         }
         catch (error) {
-            if ( error && error.response && error.response.data && error.response.data.error && error.response.data.error.message === 'Unauthorized' ) {
+            // if ( error && error.response && error.response.data && error.response.data.error && error.response.data.error.message === 'Unauthorized' ) {
+            if ( error?.response?.data?.error?.code === 10001 ) {
                 const currentUser = firebase.auth().currentUser;
                 if (currentUser) {
                     const idToken = await currentUser.getIdToken(true);

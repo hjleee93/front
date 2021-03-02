@@ -241,7 +241,8 @@ export default class Login extends Vue {
                     this.$store.commit('idToken', token);
 
                     const result = await Vue.$api.user();
-                    if( result.error && result.error && result.error.message === '잘 못 된 유저 아이디입니다' ) {
+                    // if( result.error && result.error && result.error.message === '잘 못 된 유저 아이디입니다' ) {
+                    if( result?.error?.code === 20001 ) {
                         alert( this.$t('login.joinError') as string );
                         this.$store.commit('loginState', LoginState.no_user );
                         await this.$router.replace('/joinEmailContinue');
@@ -296,7 +297,8 @@ export default class Login extends Vue {
             this.$store.commit('idToken', token);
 
             const result = await Vue.$api.user();
-            if( result.error && result.error && result.error.message === '잘 못 된 유저 아이디입니다' ) {
+            // if( result.error && result.error && result.error.message === '잘 못 된 유저 아이디입니다' ) {
+            if( result?.error?.code === 20001 ) {
                 alert( this.$t('login.googleJoinError') as string );
                 this.$store.commit('loginState', LoginState.no_user );
                 await this.$router.replace('/join');
@@ -329,7 +331,8 @@ export default class Login extends Vue {
             this.$store.commit('idToken', token);
 
             const result = await Vue.$api.user();
-            if( result.error && result.error && result.error.message === '잘 못 된 유저 아이디입니다' ) {
+            // if( result.error && result.error && result.error.message === '잘 못 된 유저 아이디입니다' ) {
+            if( result?.error?.code === 20001 ) {
                 alert( this.$t('login.facebookJoinError') as string );
                 this.$store.commit('loginState', LoginState.no_user );
                 await this.$router.replace('/join');

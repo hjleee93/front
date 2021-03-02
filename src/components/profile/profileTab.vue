@@ -142,7 +142,8 @@ export default class ProfileTab extends Vue {
 
         if( !result || result.error ) {
             //todo 닉네임 필터 에러 처리
-            if( result && result.error && result.error.message === '사용할 수 없는 단어' ) {
+            // if( result && result.error && result.error.message === '사용할 수 없는 단어' ) {
+            if( result?.error?.code === 40101 ) {
                 this.$q.notify({
                     message : this.$t('profileTab.nicknameError') as string,
                     position : 'top',
