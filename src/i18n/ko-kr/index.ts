@@ -22,6 +22,10 @@ export default {
         error404: '존재하지 않는 페이지',
     },
 
+    pageDescription : {
+        challenge: '상상하는 모든 게임! 챌린지는 누구나 업로드 할 수 있는 창작 게임 게시판입니다.',
+    },
+
     mainFooter : {
         support : {
             home : '고객센터',

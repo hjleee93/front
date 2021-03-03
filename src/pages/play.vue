@@ -20,22 +20,6 @@ import MetaSetting from "src/scripts/metaSetting";
 
 @Component({
     components: { },
-    // metaInfo() {
-    //     return {
-    //         title : this.title,
-    //         titleTemplate: '%s | Zempie.com',
-    //         meta: [
-    //             { name: 'description', content: this.description },
-    //             { name: 'author', content: this.author },
-    //             { property: 'og:url', content: `${document.location.href}`, vmid: 'og:url' },
-    //             { property: 'og:site_name', content: `${ this.title } | Zempie.com`, vmid: 'og:site_name' },
-    //             { property: 'og:title', content: this.title,  template: chunk => `${chunk} | Zempie.com`, vmid: 'og:title' },
-    //             { property: 'og:description', content: this.description, vmid: 'og:description' },
-    //             { property: 'og:image', content: this.thumb, vmid: 'og:image' },
-    //             { property: 'og:type', content: 'website', vmid: 'og:type' },
-    //         ]
-    //     }
-    // }
 })
 export default class Play extends Vue {
 
@@ -74,10 +58,10 @@ export default class Play extends Vue {
                     title : `${title} | Zempie.com`,
                     meta : [
                         { name: 'description', content: description },
-                        { name: 'author', content: author },
+                        // { name: 'author', content: author },
                         { property: 'og:url', content: `${document.location.href}` },
-                        { property: 'og:site_name', content: `${ title } | Zempie.com` },
-                        { property: 'og:title', content: title,  template: chunk => `${chunk} | Zempie.com` },
+                        // { property: 'og:site_name', content: `${ title } | Zempie.com` },
+                        { property: 'og:title', content: `${title} | Zempie.com` },
                         { property: 'og:description', content: description },
                         { property: 'og:image', content: thumb },
                         { property: 'og:type', content: 'website'},
