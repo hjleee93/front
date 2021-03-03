@@ -16,9 +16,26 @@
 import {Vue, Component, Watch, Prop} from 'vue-property-decorator';
 import firebase from "firebase";
 import {LoginState} from "src/store/modules/user";
+import MetaSetting from "src/scripts/metaSetting";
 
 @Component({
-    components: { }
+    components: { },
+    // metaInfo() {
+    //     return {
+    //         title : this.title,
+    //         titleTemplate: '%s | Zempie.com',
+    //         meta: [
+    //             { name: 'description', content: this.description },
+    //             { name: 'author', content: this.author },
+    //             { property: 'og:url', content: `${document.location.href}`, vmid: 'og:url' },
+    //             { property: 'og:site_name', content: `${ this.title } | Zempie.com`, vmid: 'og:site_name' },
+    //             { property: 'og:title', content: this.title,  template: chunk => `${chunk} | Zempie.com`, vmid: 'og:title' },
+    //             { property: 'og:description', content: this.description, vmid: 'og:description' },
+    //             { property: 'og:image', content: this.thumb, vmid: 'og:image' },
+    //             { property: 'og:type', content: 'website', vmid: 'og:type' },
+    //         ]
+    //     }
+    // }
 })
 export default class Play extends Vue {
 
@@ -29,6 +46,9 @@ export default class Play extends Vue {
     private url: string = '';
     private initLauncher : boolean = false;
     private iframeHeight : string = '';
+
+
+    private metaSetting : MetaSetting;
 
 
     async mounted() {
@@ -42,14 +62,34 @@ export default class Play extends Vue {
                 console.error( result && result.error || 'error' );
             }
             else {
+
                 this.gameData = result.game;
+                console.log( this.gameData );
+                const title = this.gameData?.title;
+                const description = this.gameData?.description;
+                const thumb = this.gameData?.url_thumb;
+                const author = this.gameData?.user.name;
+
+                this.metaSetting = new MetaSetting( {
+                    title : `${title} | Zempie.com`,
+                    meta : [
+                        { name: 'description', content: description },
+                        { name: 'author', content: author },
+                        { property: 'og:url', content: `${document.location.href}` },
+                        { property: 'og:site_name', content: `${ title } | Zempie.com` },
+                        { property: 'og:title', content: title,  template: chunk => `${chunk} | Zempie.com` },
+                        { property: 'og:description', content: description },
+                        { property: 'og:image', content: thumb },
+                        { property: 'og:type', content: 'website'},
+                    ]
+                } );
             }
 
         }
 
         // const game_uid = this.gameData.game_uid;
         // this.url = `${process.env.VUE_APP_LAUNCHER_URL}game/${game_uid}`;
-        document.title = this.gameData.title;
+        // document.title = this.gameData.title;
 
         this.url = `${process.env.VUE_APP_LAUNCHER_URL}game/${this.gameData.pathname}`;
 
@@ -63,6 +103,11 @@ export default class Play extends Vue {
     beforeDestroy() {
         window.removeEventListener('message', this.onMessage);
         window.removeEventListener('resize', this.onResize);
+
+        if(this.metaSetting) {
+            this.metaSetting.reset();
+            this.metaSetting = null;
+        }
     }
 
     onResize() {

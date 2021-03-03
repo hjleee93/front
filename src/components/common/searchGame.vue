@@ -106,7 +106,7 @@ export default class SearchGame extends Vue {
             this.tags = [];
             Vue.set( this.tags, 0, {
                 id : 0,
-                tag : '검색된 결과가 없습니다.',
+                tag : '',
             } );
         }
 
