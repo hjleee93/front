@@ -15,7 +15,7 @@
                     </div>
                     <q-list dark bordered>
                         <template v-for="(tag, index) in tags">
-                            <router-link :to="`/searchresult/${tag.id}`">
+                            <router-link v-if="tag.id" :to="`/searchresult/${tag.id}`">
                                 <q-item class="searchItem" clickable v-ripple @click.stop="onClickSearchItem(index)">
                                     <q-item-section avatar>
                                         <q-icon color="grey" name="fas fa-hashtag" />
@@ -26,6 +26,13 @@
                                     </q-item-section>
                                 </q-item>
                             </router-link>
+                            <div v-else>
+                                <q-item class="searchItem">
+                                    <q-item-section>
+                                        <q-item-label style="user-select: none"> {{$t('searchGame.notResultLabel')}} </q-item-label>
+                                    </q-item-section>
+                                </q-item>
+                            </div>
                         </template>
                     </q-list>
                 </div>
@@ -92,10 +99,16 @@ export default class SearchGame extends Vue {
         const result = await this.$api.hashtags( value );
         // consoleLog.log( result );
 
-        if( result.tags ) {
+        if( result.tags?.length  ) {
             this.tags = result.tags;
         }
-
+        else {
+            this.tags = [];
+            Vue.set( this.tags, 0, {
+                id : 0,
+                tag : '검색된 결과가 없습니다.',
+            } );
+        }
 
 
 
