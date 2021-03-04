@@ -8,6 +8,7 @@ export default {
     pageTitle : {
         affiliate: '제휴 게임',
         challenge: '도전 게임',
+        channel: '채널',
         channelEdit: '채널 설정',
         home: '젬파이',
         join: '회원가입',
@@ -23,7 +24,10 @@ export default {
     },
 
     pageDescription : {
+        home: '직접 만든 게임을 업로드하고, 플레이하고, 주변에 공유해 보세요. 개발 방법을 모르는 분들을 위한 템플릿도 준비되어 있습니다.',
         challenge: '상상하는 모든 게임! 챌린지는 누구나 업로드 할 수 있는 창작 게임 게시판입니다.',
+        official: '공식적으로 게임을 심사받고, 수익 창출을 도전해보세요.',
+        affiliate: '더 다양한 게임들을 원하시나요? ZEMPIE를 통해 모두 플레이해보세요.',
     },
 
     mainFooter : {

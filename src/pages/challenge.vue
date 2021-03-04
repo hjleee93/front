@@ -97,11 +97,9 @@ export default class Challenge extends Vue {
             meta : [
                 { name: 'description', content:  `${this.$t('pageDescription.challenge')}` },
                 { property: 'og:url', content: `${this.$store.getters.VUE_APP_ZEMPIE_URL}challenge` },
-                // { property: 'og:site_name', content: `Zempie.com` },
                 { property: 'og:title', content: `${this.$t('pageTitle.challenge')} | Zempie.com` },
                 { property: 'og:description', content: `${this.$t('pageDescription.challenge')}` },
                 // { property: 'og:image', content: '' },
-                { property: 'og:type', content: 'website'},
             ]
         } );
 

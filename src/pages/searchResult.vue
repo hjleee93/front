@@ -36,6 +36,7 @@ import SortCategory from "components/main/sortCategory.vue";
 import MainFooter from "components/main/mainFooter.vue";
 import SearchGame from "components/common/searchGame.vue";
 import {GameLoadState} from "src/store/modules/games";
+import MetaSetting from "src/scripts/metaSetting";
 
 @Component({
     components: {SearchGame, MainFooter, SortCategory, GenreCategory, GameCard, MainCarousel}
@@ -48,8 +49,10 @@ export default class SearchResult extends Vue {
     private games : any[] = [];
 
 
+    private metaSetting : MetaSetting;
+
     async mounted() {
-        document.title = this.$t('pageTitle.searchResult') as string;
+        // document.title = this.$t('pageTitle.searchResult') as string;
         this.$store.commit('headerBgTransparent', true );
         this.$store.commit('navTab', 'SearchResult');
 
@@ -61,6 +64,21 @@ export default class SearchResult extends Vue {
         if( result.games ) {
             this.games = result.games;
         }
+
+
+        this.metaSetting = new MetaSetting( {
+            title : `${this.$t('pageTitle.searchResult')} - ${this.tag} | Zempie.com`,
+            meta : [
+                { name: 'description', content: this.tag },
+                // { name: 'author', content: author },
+                { property: 'og:url', content: `${document.location.href}` },
+                // { property: 'og:site_name', content: `${ title } | Zempie.com` },
+                { property: 'og:title', content: `${this.$t('pageTitle.searchResult')} - ${this.tag} | Zempie.com` },
+                { property: 'og:description', content: this.tag },
+                // { property: 'og:image', content: thumb },
+                { property: 'og:type', content: 'website'},
+            ]
+        } );
     }
 
     @Watch('tagId')
@@ -76,6 +94,11 @@ export default class SearchResult extends Vue {
 
     beforeDestroy() {
         this.$store.commit('headerBgTransparent', false );
+
+        if(this.metaSetting) {
+            this.metaSetting.reset();
+            this.metaSetting = null;
+        }
     }
 
     onVisibleItem( index :  number ) {

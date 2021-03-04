@@ -120,6 +120,7 @@ import MainFooter from "components/main/mainFooter.vue";
 import {LoginState} from "src/store/modules/user";
 import ContentItem from "components/common/contentItem.vue";
 import {GameLoadState} from "src/store/modules/games";
+import MetaSetting from "src/scripts/metaSetting";
 
 @Component({
     components: {ContentItem, MainFooter, GameCard, ProfilePrivateTab, ProfileTab}
@@ -136,10 +137,30 @@ export default class Channel extends Vue {
 
     private email : string = '';
 
+    private metaSetting : MetaSetting;
+
     async mounted() {
         this.$store.commit('navTab', 'Channel');
         const loginState = await this.$store.dispatch('loginState');
         await this.init();
+
+        this.metaSetting = new MetaSetting( {
+            title : `${this.$t('pageTitle.channel')} - ${this.user?.name} | Zempie.com`,
+            meta : [
+                { name: 'description', content: this.user?.profile?.description || '' },
+                { property: 'og:url', content: `${document.location.href}` },
+                { property: 'og:title', content: `${this.$t('pageTitle.channel')} - ${this.user?.name} | Zempie.com` },
+                { property: 'og:description', content: this.user?.profile?.description || '' },
+                { property: 'og:image', content: this.user?.profile?.url_banner || this.user?.picture },
+            ]
+        } );
+    }
+
+    beforeDestroy() {
+        if(this.metaSetting) {
+            this.metaSetting.reset();
+            this.metaSetting = null;
+        }
     }
 
     async init() {

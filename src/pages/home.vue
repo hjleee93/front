@@ -52,25 +52,26 @@ import SearchGame from "components/common/searchGame.vue";
 import {GameLoadState} from "src/store/modules/games";
 import HomeCategory from "components/home/homeCategory.vue";
 import {consoleLog} from "src/scripts/consoleLog";
+import MetaSetting from "src/scripts/metaSetting";
 
 @Component<Home>({
     components: {HomeCategory, SearchGame, MainFooter, SortCategory, GenreCategory, GameCard, MainCarousel},
-    metaInfo() {
-        return {
-            // titleTemplate: '%s ← My Site',
-            meta: [
-                { name: 'description', content: '직접 만든 게임을 업로드하고, 플레이하고, 주변에 공유해 보세요. 개발 방법을 모르는 분들을 위한 템플릿도 준비되어 있습니다.', vmid: 'description' },
-                { name: 'keywords', content: '젬파이, zempie, 게임, game, html5 game, html5 게임, 웹게임, 게임공유, 게임 플랫폼' },
-                { name: 'author', content: 'FromTheRed' },
-                { property: 'og:url', content: `${this.$store.getters.VUE_APP_ZEMPIE_URL}/home`, vmid: 'og:url' },
-                { property: 'og:site_name', content: 'Zempie - 웹 게임 공유 플랫폼', vmid: 'og:site_name' },
-                { property: 'og:title', content: '누구나 업로드할 수 있는 게임공유플랫폼 ZEMPIE',  template: chunk => `${chunk} - My page`, vmid: 'og:title' },
-                { property: 'og:description', content: '직접 만든 게임을 업로드하고, 플레이하고, 주변에 공유해 보세요. 개발 방법을 모르는 분들을 위한 템플릿도 준비되어 있습니다.', vmid: 'og:description' },
-                { property: 'og:image', content: '', vmid: 'og:image' },
-                { property: 'og:type', content: 'website', vmid: 'og:type' },
-            ]
-        }
-    }
+    // metaInfo() {
+    //     return {
+    //         // titleTemplate: '%s ← My Site',
+    //         meta: [
+    //             { name: 'description', content: '직접 만든 게임을 업로드하고, 플레이하고, 주변에 공유해 보세요. 개발 방법을 모르는 분들을 위한 템플릿도 준비되어 있습니다.', vmid: 'description' },
+    //             { name: 'keywords', content: '젬파이, zempie, 게임, game, html5 game, html5 게임, 웹게임, 게임공유, 게임 플랫폼' },
+    //             { name: 'author', content: 'FromTheRed' },
+    //             { property: 'og:url', content: `${this.$store.getters.VUE_APP_ZEMPIE_URL}/home`, vmid: 'og:url' },
+    //             { property: 'og:site_name', content: 'Zempie - 웹 게임 공유 플랫폼', vmid: 'og:site_name' },
+    //             { property: 'og:title', content: '누구나 업로드할 수 있는 게임공유플랫폼 ZEMPIE',  template: chunk => `${chunk} - My page`, vmid: 'og:title' },
+    //             { property: 'og:description', content: '직접 만든 게임을 업로드하고, 플레이하고, 주변에 공유해 보세요. 개발 방법을 모르는 분들을 위한 템플릿도 준비되어 있습니다.', vmid: 'og:description' },
+    //             { property: 'og:image', content: '', vmid: 'og:image' },
+    //             { property: 'og:type', content: 'website', vmid: 'og:type' },
+    //         ]
+    //     }
+    // }
 })
 export default class Home extends Vue {
 
@@ -85,8 +86,23 @@ export default class Home extends Vue {
         { src : 'banner/banner2.png', link : '' },
     ]
 
+    private metaSetting : MetaSetting;
+
     async mounted() {
-        document.title = this.$t('pageTitle.home') as string;
+        // document.title = this.$t('pageTitle.home') as string;
+
+        this.metaSetting = new MetaSetting( {
+            title : `${this.$t('pageTitle.affiliate')} | Zempie.com`,
+            meta : [
+                { name: 'description', content:  `${this.$t('pageDescription.home')}` },
+                { property: 'og:url', content: `${this.$store.getters.VUE_APP_ZEMPIE_URL}home` },
+                { property: 'og:title', content: `${this.$t('pageTitle.home')} | Zempie.com` },
+                { property: 'og:description', content: `${this.$t('pageDescription.home')}` },
+                // { property: 'og:image', content: '' },
+            ]
+        } );
+
+
         this.$store.commit('headerBgTransparent', true );
         this.$store.commit('navTab', 'Home');
 
@@ -115,6 +131,11 @@ export default class Home extends Vue {
 
     beforeDestroy() {
         this.$store.commit('headerBgTransparent', false );
+
+        if(this.metaSetting) {
+            this.metaSetting.reset();
+            this.metaSetting = null;
+        }
     }
 };
 </script>

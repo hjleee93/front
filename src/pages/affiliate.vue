@@ -53,6 +53,7 @@ import MainFooter from "components/main/mainFooter.vue";
 import SearchGame from "components/common/searchGame.vue";
 import {GameLoadState} from "src/store/modules/games";
 import AffiliateCarousel from "components/affiliate/affiliateCarousel.vue";
+import MetaSetting from "src/scripts/metaSetting";
 
 @Component({
     components: {AffiliateCarousel, SearchGame, MainFooter, SortCategory, GenreCategory, GameCard},
@@ -86,8 +87,21 @@ export default class Affiliate extends Vue {
         name : { sort : 't', dir : 'asc' },
     };
 
+    private metaSetting : MetaSetting;
+
     async mounted() {
-        document.title = this.$t('pageTitle.affiliate') as string;
+        // document.title = this.$t('pageTitle.affiliate') as string;
+
+        this.metaSetting = new MetaSetting( {
+            title : `${this.$t('pageTitle.affiliate')} | Zempie.com`,
+            meta : [
+                { name: 'description', content:  `${this.$t('pageDescription.affiliate')}` },
+                { property: 'og:url', content: `${this.$store.getters.VUE_APP_ZEMPIE_URL}affiliate` },
+                { property: 'og:title', content: `${this.$t('pageTitle.affiliate')} | Zempie.com` },
+                { property: 'og:description', content: `${this.$t('pageDescription.affiliate')}` },
+                // { property: 'og:image', content: '' },
+            ]
+        } );
 
         this.$store.commit('headerBgTransparent', true );
         this.$store.commit('navTab', 'Affiliate');
@@ -111,6 +125,11 @@ export default class Affiliate extends Vue {
 
     beforeDestroy() {
         this.$store.commit('headerBgTransparent', false );
+
+        if(this.metaSetting) {
+            this.metaSetting.reset();
+            this.metaSetting = null;
+        }
     }
 
     onVisibleItem( index :  number ) {

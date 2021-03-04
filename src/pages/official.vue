@@ -50,6 +50,7 @@ import SortCategory from "components/main/sortCategory.vue";
 import MainFooter from "components/main/mainFooter.vue";
 import SearchGame from "components/common/searchGame.vue";
 import {GameLoadState} from "src/store/modules/games";
+import MetaSetting from "src/scripts/metaSetting";
 
 @Component({
     components: {SearchGame, MainFooter, SortCategory, GenreCategory, GameCard, MainCarousel}
@@ -68,8 +69,21 @@ export default class Official extends Vue {
         name : { sort : 't', dir : 'asc' },
     };
 
+    private metaSetting : MetaSetting;
+
     async mounted() {
-        document.title = this.$t('pageTitle.official') as string;
+        // document.title = this.$t('pageTitle.official') as string;
+        this.metaSetting = new MetaSetting( {
+            title : `${this.$t('pageTitle.official')} | Zempie.com`,
+            meta : [
+                { name: 'description', content:  `${this.$t('pageDescription.official')}` },
+                { property: 'og:url', content: `${this.$store.getters.VUE_APP_ZEMPIE_URL}official` },
+                { property: 'og:title', content: `${this.$t('pageTitle.official')} | Zempie.com` },
+                { property: 'og:description', content: `${this.$t('pageDescription.official')}` },
+                // { property: 'og:image', content: '' },
+            ]
+        } );
+
 
         this.$store.commit('headerBgTransparent', true );
         this.$store.commit('navTab', 'Major');
@@ -93,6 +107,12 @@ export default class Official extends Vue {
 
     beforeDestroy() {
         this.$store.commit('headerBgTransparent', false );
+
+
+        if(this.metaSetting) {
+            this.metaSetting.reset();
+            this.metaSetting = null;
+        }
     }
 
     onVisibleItem( index :  number ) {
