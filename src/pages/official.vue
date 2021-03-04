@@ -34,6 +34,9 @@
                                :data="game">
                     </game-card>
                 </div>
+                <div v-if="$store.getters.officialGames.length == 0" class="cardContainer">
+                    <game-card-skeleton v-for="(_, index) in 20" :key="index"  />
+                </div>
             </div>
         </div>
         <div class="q-mb-xl"></div>
@@ -45,6 +48,7 @@
 import {Vue, Component} from 'vue-property-decorator';
 import MainCarousel from "components/main/mainCarousel.vue";
 import GameCard from "components/common/card/gameCard.vue";
+import GameCardSkeleton from "components/common/card/GameCardSkeleton.vue";
 import GenreCategory from "components/main/genreCategory.vue";
 import SortCategory from "components/main/sortCategory.vue";
 import MainFooter from "components/main/mainFooter.vue";
@@ -52,7 +56,7 @@ import SearchGame from "components/common/searchGame.vue";
 import {GameLoadState} from "src/store/modules/games";
 
 @Component({
-    components: {SearchGame, MainFooter, SortCategory, GenreCategory, GameCard, MainCarousel}
+    components: {SearchGame, MainFooter, SortCategory, GenreCategory, GameCard, MainCarousel, GameCardSkeleton}
 })
 export default class Official extends Vue {
 
