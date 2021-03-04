@@ -34,7 +34,7 @@
                                :data="game">
                     </game-card>
                 </div>
-                <div v-if="$store.getters.officialGames.length == 0" class="cardContainer">
+                <div v-if="$store.getters.officialGames.length === 0" class="cardContainer">
                     <game-card-skeleton v-for="(_, index) in 20" :key="index"  />
                 </div>
             </div>
@@ -48,7 +48,7 @@
 import {Vue, Component} from 'vue-property-decorator';
 import MainCarousel from "components/main/mainCarousel.vue";
 import GameCard from "components/common/card/gameCard.vue";
-import GameCardSkeleton from "components/common/card/GameCardSkeleton.vue";
+import GameCardSkeleton from "components/common/card/gameCardSkeleton.vue";
 import GenreCategory from "components/main/genreCategory.vue";
 import SortCategory from "components/main/sortCategory.vue";
 import MainFooter from "components/main/mainFooter.vue";

@@ -38,6 +38,9 @@
 
                     <!--                    <game-card v-intersection="entry => onIntersection(index, entry)" v-for="(game,index) in $store.getters.noneOfficialGames" :data="game"></game-card>-->
                 </div>
+                <div v-if="$store.getters.affiliateGames.length === 0" class="cardContainer">
+                    <game-card-skeleton v-for="(_, index) in 20" :key="index" type="affilate" />
+                </div>
             </div>
         </div>
         <main-footer></main-footer>
@@ -47,6 +50,7 @@
 <script lang="ts">
 import {Vue, Component} from 'vue-property-decorator';
 import GameCard from "components/common/card/gameCard.vue";
+import GameCardSkeleton from "components/common/card/gameCardSkeleton.vue";
 import GenreCategory from "components/main/genreCategory.vue";
 import SortCategory from "components/main/sortCategory.vue";
 import MainFooter from "components/main/mainFooter.vue";
@@ -55,7 +59,7 @@ import {GameLoadState} from "src/store/modules/games";
 import AffiliateCarousel from "components/affiliate/affiliateCarousel.vue";
 
 @Component({
-    components: {AffiliateCarousel, SearchGame, MainFooter, SortCategory, GenreCategory, GameCard},
+    components: {AffiliateCarousel, SearchGame, MainFooter, SortCategory, GenreCategory, GameCard, GameCardSkeleton},
     metaInfo() {
         return {
             // titleTemplate: '%s ← My Site',
