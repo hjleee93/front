@@ -1,1 +1,11 @@
+User-agent: *
+Disallow: /profile
+Disallow: /channel/*/editing
+Disallow: /login
+Disallow: /join
+Disallow: /joinEmail
+Disallow: /joinEmailContinue
+Disallow: /resetPassword
+Disallow: /leave
+
 Sitemap: https://zempie.com/sitemap.xml
