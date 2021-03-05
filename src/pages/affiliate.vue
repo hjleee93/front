@@ -13,7 +13,7 @@
             <!--            <genre-category></genre-category>-->
             <!--            <q-separator inset/>-->
             <search-game></search-game>
-            <!--            <sort-category v-on:@sortChange="sortChange"></sort-category>-->
+            <sort-category v-on:@sortChange="sortChange"></sort-category>
             <div class="q-pt-none">
                 <div class="cardContainer" v-if="$store.getters.isSearchGame">
 
@@ -89,6 +89,8 @@ export default class Affiliate extends Vue {
         new : { sort : 'u', dir : 'desc' },
         create : { sort : 'c', dir : 'asc' },
         name : { sort : 't', dir : 'asc' },
+        play : { sort : 'p', dir : 'asc' },
+        heart : { sort : 'h', dir : 'asc' },
     };
 
     private metaSetting : MetaSetting;

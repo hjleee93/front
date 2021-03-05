@@ -336,6 +336,8 @@ export default {
         text1 : '최신순',
         text2 : '오래된순',
         text3 : '이름순',
+        text4 : '플레이순',
+        text5 : '하트순',
     },
 
     mainCarousel : {

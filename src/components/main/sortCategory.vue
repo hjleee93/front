@@ -42,6 +42,14 @@ export default class SortCategory extends Vue {
             name : 'name',
             text : this.$t('sortCategory.text3') as string,
         },
+        {
+            name : 'play',
+            text : this.$t('sortCategory.text4') as string,
+        },
+        {
+            name : 'heart',
+            text : this.$t('sortCategory.text5') as string,
+        },
         // {
         //     name : 'update',
         //     text : '업데이트순',
