@@ -56,6 +56,11 @@ const routes: RouteConfig[] = [
         ]
     },
     {
+        name : 'redirect',
+        path : '/redirect*',
+        component: () => import( 'pages/redirect.vue' ),
+    },
+    {
         name : 'play',
         path : '/play/:pathname',
         component: () => import( 'pages/play.vue' ),

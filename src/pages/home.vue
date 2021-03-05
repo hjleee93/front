@@ -92,7 +92,7 @@ export default class Home extends Vue {
         // document.title = this.$t('pageTitle.home') as string;
 
         this.metaSetting = new MetaSetting( {
-            title : `${this.$t('pageTitle.affiliate')} | Zempie.com`,
+            title : `${this.$t('pageTitle.home')} | Zempie.com`,
             meta : [
                 { name: 'description', content:  `${this.$t('pageDescription.home')}` },
                 { property: 'og:url', content: `${this.$store.getters.VUE_APP_ZEMPIE_URL}home` },
