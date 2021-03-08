@@ -2,10 +2,7 @@
     <div class="homeCategory">
         <div class="top row justify-between">
             <div class="title">
-                {{ data && data.name.split(" ").filter((text, idx) => idx < 2).join(" ") }}
-                <span class="subTitle">
-                    {{ data && data.name.split(" ").filter((text, idx) => idx >= 2).join(" ") }}
-                </span>
+                {{ data.name }}
             </div>
 <!--            <router-link v-if="data.key === 'official'" to="/official" class="q-mr-lg self-center"> 더 보기 </router-link>-->
 <!--            <router-link v-else-if="data.key === 'unofficial'" to="/challenge" class="q-mr-lg self-center"> 더 보기 </router-link>-->

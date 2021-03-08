@@ -68,9 +68,9 @@ export default class Official extends Vue {
             dir : string
         }
     } = {
-        new : { sort : 'u', dir : 'desc' },
+        new : { sort : 'l', dir : 'desc' },
         create : { sort : 'c', dir : 'asc' },
-        name : { sort : 't', dir : 'asc' },
+        name : { sort : 't', dir : 'desc' },
         play : { sort : 'p', dir : 'asc' },
         heart : { sort : 'h', dir : 'asc' },
     };

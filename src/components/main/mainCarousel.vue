@@ -141,7 +141,8 @@ export default class mainCarousel extends Vue {
 
         position: relative;
         width: 100%;
-        height: 300px;
+        height: 100%;
+        max-height: 300px;
         background-color: black;
 
         .game {

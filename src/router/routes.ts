@@ -53,6 +53,11 @@ const routes: RouteConfig[] = [
                 path : '/leave',
                 component: () => import( 'pages/leave.vue' ),
             },
+            {
+                name : 'playlist',
+                path : '/playlist',
+                component: () => import( 'pages/playlist.vue' ),
+            },
         ]
     },
     {

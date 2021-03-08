@@ -22,7 +22,8 @@
     "vue-gtm": "^3.4.0-vue2",
     "vue-i18n": "^8.0.0",
     "vue-meta": "^2.4.0",
-    "vue-property-decorator": "^8.3.0"
+    "vue-property-decorator": "^8.3.0",
+    "vuedraggable": "^2.24.3"
   },
   "devDependencies": {
     "@quasar/app": "^2.0.0",

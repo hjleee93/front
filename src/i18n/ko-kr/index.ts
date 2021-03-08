@@ -414,6 +414,12 @@ export default {
         moveChannel : '개발자 채널 가기',
         reportGame : '게임 신고 하기',
         cancelLabel : '취소',
+    },
 
-    }
+    playlist : {
+        moveChannel : '개발자 채널 가기',
+        reportGame : '게임 신고 하기',
+        removeItem : '목록에서 제거',
+        cancelLabel : '취소',
+   },
 };
