@@ -61,21 +61,21 @@ import MetaSetting from "src/scripts/metaSetting";
 
 @Component({
     components: {AffiliateCarousel, SearchGame, MainFooter, SortCategory, GenreCategory, GameCard, GameCardSkeleton},
-    metaInfo() {
-        return {
-            // titleTemplate: '%s ← My Site',
-            meta: [
-                {name: 'description', content: '더 다양한 게임들을 원하시나요? ZEMPIE를 통해 모두 플레이해보세요.' },
-
-                {name: 'og:url', content: `${this.$store.getters.VUE_APP_ZEMPIE_URL}affiliate` },
-                {name: 'og:site_name', content: 'Zempie Affiliate - 웹 게임 공유 플랫폼' },
-                {name: 'og:title', content: '어디서든 모두 즐길 수 있는 게임공유플랫폼 ZEMPIE' },
-                {name: 'og:description', content: '더 다양한 게임들을 원하시나요? ZEMPIE를 통해 모두 플레이해보세요.' },
-                {name: 'og:image', content: '' },
-                {name: 'og:type', content: 'website' },
-            ]
-        }
-    }
+    // metaInfo() {
+    //     return {
+    //         // titleTemplate: '%s ← My Site',
+    //         meta: [
+    //             {name: 'description', content: '더 다양한 게임들을 원하시나요? ZEMPIE를 통해 모두 플레이해보세요.' },
+    //
+    //             {name: 'og:url', content: `${this.$store.getters.VUE_APP_ZEMPIE_URL}affiliate` },
+    //             {name: 'og:site_name', content: 'Zempie Affiliate - 웹 게임 공유 플랫폼' },
+    //             {name: 'og:title', content: '어디서든 모두 즐길 수 있는 게임공유플랫폼 ZEMPIE' },
+    //             {name: 'og:description', content: '더 다양한 게임들을 원하시나요? ZEMPIE를 통해 모두 플레이해보세요.' },
+    //             {name: 'og:image', content: '' },
+    //             {name: 'og:type', content: 'website' },
+    //         ]
+    //     }
+    // }
 })
 export default class Affiliate extends Vue {
 
@@ -105,7 +105,6 @@ export default class Affiliate extends Vue {
                 { property: 'og:url', content: `${this.$store.getters.VUE_APP_ZEMPIE_URL}affiliate` },
                 { property: 'og:title', content: `${this.$t('pageTitle.affiliate')} | Zempie.com` },
                 { property: 'og:description', content: `${this.$t('pageDescription.affiliate')}` },
-                // { property: 'og:image', content: '' },
             ]
         } );
 
