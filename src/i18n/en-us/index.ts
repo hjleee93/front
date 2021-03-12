@@ -184,7 +184,7 @@ export default {
     },
 
     searchGame : {
-        inputLabel : '게임 검색하기',
+        inputLabel : '해시태그 검색하기',
         notResultLabel : '검색된 결과가 없습니다.',
     },
 

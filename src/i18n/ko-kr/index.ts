@@ -61,7 +61,7 @@ export default {
             header:'개발자 도전하기',
             headerDesc:'간편하게 개발자로 등록하고, 내가 만든 게임을 내 채널에 공유해보세요',
             label:'개발자 가입하기',
-            close:'나중에'            
+            close:'나중에'
         }
     },
 
@@ -184,7 +184,7 @@ export default {
     },
 
     searchGame : {
-        inputLabel : '게임 검색하기',
+        inputLabel : '해시태그 검색하기',
         notResultLabel : '검색된 결과가 없습니다.',
     },
 
