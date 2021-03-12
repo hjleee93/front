@@ -164,7 +164,9 @@ export default class JoinEmailContinue extends Vue {
             await LoginManager.login();
 
             if( this.$store.getters.redirectUrl ) {
-                window.location.href = this.$store.getters.redirectUrl;
+                const url = this.$store.getters.redirectUrl;
+                this.$store.commit('redirectUrl', null);
+                window.location.href = url;
             }
             else {
                 await this.$router.replace('/');

@@ -5,7 +5,7 @@
         <div :class="isVisible?'visible':''">
             <div class="thumbBox">
 <!--                <q-img class="base" :src="'img/default.png'"></q-img>-->
-                <q-img class="base" src="http://placehold.it/150x100"></q-img>
+                <q-img class="base" src="https://placehold.it/150x100"></q-img>
                 <q-img class="thumb video" :src="`${data.url_thumb_gif || data.url_thumb || 'img/default.png'}`">
 
                 </q-img>

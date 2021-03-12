@@ -255,7 +255,9 @@ export default class Login extends Vue {
                     // this.$store.commit('loginState', LoginState.login );
 
                     if( this.$store.getters.redirectUrl ) {
-                        window.location.href = this.$store.getters.redirectUrl;
+                        const url = this.$store.getters.redirectUrl;
+                        this.$store.commit('redirectUrl', null);
+                        window.location.href = url;
                     }
                     else {
                         await this.$router.replace('/');
@@ -311,7 +313,9 @@ export default class Login extends Vue {
             // this.$store.commit('loginState', LoginState.login );
             // await this.$router.replace('/');
             if( this.$store.getters.redirectUrl ) {
-                window.location.href = this.$store.getters.redirectUrl;
+                const url = this.$store.getters.redirectUrl;
+                this.$store.commit('redirectUrl', null);
+                window.location.href = url;
             }
             else {
                 await this.$router.replace('/');
@@ -345,7 +349,9 @@ export default class Login extends Vue {
             // this.$store.commit('loginState', LoginState.login );
             // await this.$router.replace('/');
             if( this.$store.getters.redirectUrl ) {
-                window.location.href = this.$store.getters.redirectUrl;
+                const url = this.$store.getters.redirectUrl;
+                this.$store.commit('redirectUrl', null);
+                window.location.href = url;
             }
             else {
                 await this.$router.replace('/');

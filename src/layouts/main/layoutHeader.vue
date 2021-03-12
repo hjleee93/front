@@ -127,7 +127,7 @@ export default class LayoutHeader extends Vue {
     async openMailPopup() {
         await this.$store.dispatch('loadMails');
         this.$store.commit('mailPopupMobile', true);
-    }
+    }firebase
     //개발 스튜디오 알람 모달
     goDevSignUP(){
         window.location.href = this.$store.getters.studioUrl
