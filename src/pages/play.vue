@@ -124,6 +124,7 @@ export default class Play extends Vue {
                 break;
             }
             case '@requestLogin': {
+                this.$store.commit('redirectUrl', window.location.href);
                 await this.$router.push('/login');
                 break;
             }
