@@ -129,23 +129,21 @@ export default class LayoutHeader extends Vue {
         this.$store.commit('mailPopupMobile', true);
     }
     //개발 스튜디오 알람 모달
-    goDevSignUP(){        
+    goDevSignUP(){
         window.location.href = this.$store.getters.studioUrl
     }
     showModal(){
-        console.log(this.$store.getters.user.is_developer)
-         if(this.$store.getters.user !== null){
-            
-        
-        if( this.$store.getters.user.is_developer=== true){
+        // console.log(this.$store.getters.user.is_developer)
+        if (this.$store.getters.user !== null) {
+            if (this.$store.getters.user.is_developer === true) {
+                this.goDevSignUP();
+            } else {
+                this.modal = true;
+            }
+        } else {
             this.goDevSignUP();
-        }else{
-            this.modal=true;
         }
-         }else{
-             this.goDevSignUP();
-         }
-             
+
     }
 }
 </script>
@@ -185,12 +183,12 @@ export default class LayoutHeader extends Vue {
             z-index: -1;
         }
     }
-    // 모달        
+    // 모달
     .header{
         color:#181818;
         font-weight: bold;
         font-size: 3rem;
-        
+
     }
     .header-desc{
         color: #181818;
@@ -200,7 +198,7 @@ export default class LayoutHeader extends Vue {
         margin-top: 20px;
         border-radius: 40px;
         padding: 0 20px 0 20px;
-        height: 60px;    
+        height: 60px;
         font-size: 17px;
         font-weight: bold;
     }
