@@ -105,7 +105,7 @@ export default class Play extends Vue {
     }
 
     async onMessage(msg: MessageEvent) {
-        const {type} = msg.data;
+        const {type, channel_id} = msg.data;
 
         switch (type) {
             case '@initLauncher': {
@@ -129,6 +129,10 @@ export default class Play extends Vue {
             }
             case '@exit': {
                 this.exit();
+                break;
+            }
+            case '@moveChannel': {
+                await this.$router.push(`/channel/${channel_id}`);
                 break;
             }
         }
