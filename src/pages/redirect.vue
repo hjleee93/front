@@ -13,7 +13,6 @@ export default class Redirect extends Vue {
     constructor() {
         super();
 
-        console.log( this.$route );
         const { params } = this.$route;
         const {pathMatch} = params;
         this.$router.replace( pathMatch );

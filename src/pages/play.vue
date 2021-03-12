@@ -48,7 +48,6 @@ export default class Play extends Vue {
             else {
 
                 this.gameData = result.game;
-                console.log( this.gameData );
                 const title = this.gameData?.title;
                 const description = this.gameData?.description;
                 const thumb = this.gameData?.url_thumb;
