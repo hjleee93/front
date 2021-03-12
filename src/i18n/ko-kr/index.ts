@@ -57,6 +57,12 @@ export default {
             studio : '개발 스튜디오'
         },
         loginBtn : '로그인',
+        modal:{
+            header:'개발자 도전하기',
+            headerDesc:'간편하게 개발자로 등록하고, 내가 만든 게임을 내 채널에 공유해보세요',
+            label:'개발자 가입하기',
+            close:'나중에'            
+        }
     },
 
     layoutFooter : {

@@ -33,10 +33,32 @@
                     <q-route-tab to="/official" name="major" :label="$t('layoutHeader.routeTab.official')"></q-route-tab>
                     <q-route-tab to="/challenge" name="minor" :label="$t('layoutHeader.routeTab.challenge')"></q-route-tab>
                     <q-route-tab to="/affiliate" name="affiliate" :label="$t('layoutHeader.routeTab.affiliate')"></q-route-tab>
-                    <a :href="$store.getters.studioUrl" class="aTab">
+                    <!-- <a :href="$store.getters.studioUrl" class="aTab">
+                        <q-tab name="g-studio" :label="$t('layoutHeader.routeTab.studio')">
+                        </q-tab>
+                    </a> -->
+                      <!-- 모달 추가 -->
+                    <a @click="showModal" class="aTab">
                         <q-tab name="g-studio" :label="$t('layoutHeader.routeTab.studio')">
                         </q-tab>
                     </a>
+                    <template v-if="modal">
+                        <guide-modal @close="modal = false" :close="$t('layoutHeader.modal.close')" src="img/sprinting.gif">
+                            <template v-slot:header >
+                            <p class="header">{{$t('layoutHeader.modal.header')}}</p>
+                            <p class="header-desc">{{$t('layoutHeader.modal.headerDesc')}}</p>
+                            </template>
+                            <template v-slot:body >
+                            <q-btn
+                            class="modal-body-btn"
+                            color="black"
+                            text-color="white"
+                            :label="$t('layoutHeader.modal.label')"
+                            @click="goDevSignUP()"
+                            />
+                            </template>
+                        </guide-modal>
+                    </template>
                 </q-tabs>
 
 <!--                <q-btn-->
@@ -79,11 +101,14 @@ import AccountPopupDesktop from "components/common/menu/accountPopupDesktop.vue"
 import MailPopupDesktop from "components/common/menu/mailPopupDesktop.vue";
 import MailPopupMobile from "components/common/menu/mailPopupMobile.vue";
 import {consoleLog} from "src/scripts/consoleLog";
+import GuideModal from "layouts/guideModal.vue";
+
 @Component({
-    components: {AccountPopupDesktop, AccountPopupMobile, MailPopupDesktop, MailPopupMobile}
+    components: {AccountPopupDesktop, AccountPopupMobile, MailPopupDesktop, MailPopupMobile,GuideModal}
 })
 export default class LayoutHeader extends Vue {
     private tab = '';
+     private modal: boolean = false;
 
     mounted() {
         this.tab = this.$store.getters.navTab;
@@ -102,6 +127,25 @@ export default class LayoutHeader extends Vue {
     async openMailPopup() {
         await this.$store.dispatch('loadMails');
         this.$store.commit('mailPopupMobile', true);
+    }
+    //개발 스튜디오 알람 모달
+    goDevSignUP(){        
+        window.location.href = this.$store.getters.studioUrl
+    }
+    showModal(){
+        console.log(this.$store.getters.user.is_developer)
+         if(this.$store.getters.user !== null){
+            
+        
+        if( this.$store.getters.user.is_developer=== true){
+            this.goDevSignUP();
+        }else{
+            this.modal=true;
+        }
+         }else{
+             this.goDevSignUP();
+         }
+             
     }
 }
 </script>
@@ -140,5 +184,24 @@ export default class LayoutHeader extends Vue {
             border-radius: 50%;
             z-index: -1;
         }
+    }
+    // 모달        
+    .header{
+        color:#181818;
+        font-weight: bold;
+        font-size: 3rem;
+        
+    }
+    .header-desc{
+        color: #181818;
+        font-size: 1rem;
+    }
+    .modal-body-btn{
+        margin-top: 20px;
+        border-radius: 40px;
+        padding: 0 20px 0 20px;
+        height: 60px;    
+        font-size: 17px;
+        font-weight: bold;
     }
 </style>
