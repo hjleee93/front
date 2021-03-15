@@ -13,7 +13,7 @@
             <!--            <genre-category></genre-category>-->
             <!--            <q-separator inset/>-->
             <search-game></search-game>
-            <sort-category v-on:@sortChange="sortChange"></sort-category>
+            <sort-category v-on:@sortChange="sortChange" :list="list"></sort-category>
             <div class="q-pt-none">
                 <div class="cardContainer" v-if="$store.getters.isSearchGame">
 
@@ -79,6 +79,21 @@ import MetaSetting from "src/scripts/metaSetting";
 })
 export default class Affiliate extends Vue {
 
+    private list : any[] = [
+        {
+            name : 'new',
+            text : this.$t('sortCategory.text1') as string,
+        },
+        {
+            name : 'create',
+            text : this.$t('sortCategory.text2') as string,
+        },
+        {
+            name : 'name',
+            text : this.$t('sortCategory.text3') as string,
+        },
+    ]
+
     private sort : string = 'create';
     private sortData : {
         [ name:string ] : {
@@ -89,8 +104,6 @@ export default class Affiliate extends Vue {
         new : { sort : 'u', dir : 'desc' },
         create : { sort : 'c', dir : 'asc' },
         name : { sort : 't', dir : 'asc' },
-        play : { sort : 'p', dir : 'asc' },
-        heart : { sort : 'h', dir : 'asc' },
     };
 
     private metaSetting : MetaSetting;
@@ -153,8 +166,9 @@ export default class Affiliate extends Vue {
 
     async sortChange( sort ) {
         this.sort = sort;
+        console.log( sort );
 
-        await this.$store.dispatch('clearGames', 0);
+        await this.$store.dispatch('clearGames', 2);
         await this.$store.dispatch('loadGames', {
             category : 2,
             sort : this.sortData[ this.sort ].sort,

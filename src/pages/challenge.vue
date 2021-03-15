@@ -13,7 +13,7 @@
 <!--            <genre-category></genre-category>-->
 <!--            <q-separator inset/>-->
             <search-game></search-game>
-            <sort-category v-on:@sortChange="sortChange"></sort-category>
+            <sort-category v-on:@sortChange="sortChange" :list="list"></sort-category>
             <div class="q-pt-none">
                 <div class="cardContainer" v-if="$store.getters.isSearchGame">
 
@@ -78,6 +78,29 @@ import MetaSetting from "src/scripts/metaSetting";
     // }
 })
 export default class Challenge extends Vue {
+
+    private list : any[] = [
+        {
+            name : 'new',
+            text : this.$t('sortCategory.text1') as string,
+        },
+        {
+            name : 'create',
+            text : this.$t('sortCategory.text2') as string,
+        },
+        {
+            name : 'name',
+            text : this.$t('sortCategory.text3') as string,
+        },
+        {
+            name : 'play',
+            text : this.$t('sortCategory.text4') as string,
+        },
+        {
+            name : 'heart',
+            text : this.$t('sortCategory.text5') as string,
+        },
+    ]
 
     private sort : string = 'create';
     private sortData : {
