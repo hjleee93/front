@@ -157,7 +157,7 @@
 
 <script lang="ts">
 import {Vue, Component, Watch, Prop} from 'vue-property-decorator';
-import firebase from "firebase";
+import firebase from "firebase/app";
 import {LoginState} from "src/store/modules/user";
 import {_store} from "src/store";
 import LoginManager from "src/scripts/login";
@@ -254,7 +254,12 @@ export default class Login extends Vue {
                     await LoginManager.login();
                     // this.$store.commit('loginState', LoginState.login );
 
-                    if( this.$store.getters.redirectUrl ) {
+                    if(this.$store.getters.redirectRouter) {
+                        const router = this.$store.getters.redirectRouter;
+                        this.$store.commit('redirectRouter', null);
+                        await this.$router.replace( router );
+                    }
+                    else if( this.$store.getters.redirectUrl ) {
                         const url = this.$store.getters.redirectUrl;
                         this.$store.commit('redirectUrl', null);
                         window.location.href = url;
@@ -312,7 +317,12 @@ export default class Login extends Vue {
             await LoginManager.login();
             // this.$store.commit('loginState', LoginState.login );
             // await this.$router.replace('/');
-            if( this.$store.getters.redirectUrl ) {
+            if(this.$store.getters.redirectRouter) {
+                const router = this.$store.getters.redirectRouter;
+                this.$store.commit('redirectRouter', null);
+                await this.$router.replace( router );
+            }
+            else if( this.$store.getters.redirectUrl ) {
                 const url = this.$store.getters.redirectUrl;
                 this.$store.commit('redirectUrl', null);
                 window.location.href = url;
@@ -348,7 +358,12 @@ export default class Login extends Vue {
             await LoginManager.login();
             // this.$store.commit('loginState', LoginState.login );
             // await this.$router.replace('/');
-            if( this.$store.getters.redirectUrl ) {
+            if(this.$store.getters.redirectRouter) {
+                const router = this.$store.getters.redirectRouter;
+                this.$store.commit('redirectRouter', null);
+                await this.$router.replace( router );
+            }
+            else if( this.$store.getters.redirectUrl ) {
                 const url = this.$store.getters.redirectUrl;
                 this.$store.commit('redirectUrl', null);
                 window.location.href = url;

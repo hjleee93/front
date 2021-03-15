@@ -24,7 +24,9 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    _store.commit('fromRouterName', from.name);
+    if( from.name !== 'redirect' ) {
+        _store.commit('fromRouterName', from.name);
+    }
     next();
 });
 

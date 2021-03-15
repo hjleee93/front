@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import {Vue, Component, Watch, Prop} from 'vue-property-decorator';
-import firebase from "firebase";
+import firebase from "firebase/app";
 import {LoginState} from "src/store/modules/user";
 import MetaSetting from "src/scripts/metaSetting";
 
@@ -123,8 +123,9 @@ export default class Play extends Vue {
                 break;
             }
             case '@requestLogin': {
-                this.$store.commit('redirectUrl', window.location.href);
-                await this.$router.push('/login');
+                console.log( this.$route, this.$router );
+                // this.$store.commit('redirectRouter', window.location.href);
+                // await this.$router.replace('/login');
                 break;
             }
             case '@exit': {

@@ -42,7 +42,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import ContentItem from "components/common/contentItem.vue";
-import firebase from "firebase";
+import firebase from "firebase/app";
 @Component({
     components: {ContentItem}
 })

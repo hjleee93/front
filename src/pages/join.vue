@@ -102,7 +102,7 @@
 
 <script lang="ts">
 import {Vue, Component, Watch} from 'vue-property-decorator';
-import firebase from "firebase";
+import firebase from "firebase/app";
 import {LoginState} from "src/store/modules/user";
 import Tos from "components/join/tos.vue";
 import Tos2 from "components/join/tos2.vue";
@@ -165,7 +165,12 @@ export default class JoinEmail extends Vue {
             await LoginManager.login();
             // await this.$router.replace('/');
 
-            if (this.$store.getters.redirectUrl) {
+            if(this.$store.getters.redirectRouter) {
+                const router = this.$store.getters.redirectRouter;
+                this.$store.commit('redirectRouter', null);
+                await this.$router.replace( router );
+            }
+            else if (this.$store.getters.redirectUrl) {
                 const url = this.$store.getters.redirectUrl;
                 this.$store.commit('redirectUrl', null);
                 window.location.href = url;
