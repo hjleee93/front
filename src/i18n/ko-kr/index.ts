@@ -359,6 +359,11 @@ export default {
             main : '고퀄리티 캐주얼 게임',
             sub : '누구나 무료로 게임을 즐겨 보세요!',
         },
+        slide : {
+            main : 'GAMERS TO CREATORS',
+            sub1 : '누구나 게임을 업로드하고 플레이할 수 있는 게임공유플랫폼 젬파이',
+            sub2 : '내가 만든 게임을 업로드하고 전세계 사람들과 즐거움을 공유해보세요.',
+        },
     },
 
     homeCategory : {

@@ -1,8 +1,8 @@
 <template>
-    <div class="searchRoot q-py-md flex justify-end items-center">
-        <div class="box">
-            <div class="searchForm flex items-center justify-around">
-                <div class="icon">
+    <div class="searchRoot q-py-md flex justify-center items-center">
+        <div class="box flex justify-center">
+            <div class="searchForm flex items-center">
+                <div class="icon flex items-center">
                     <q-icon class="q-ml-sm q-mr-sm" name="fa fa-search"></q-icon>
                 </div>
                 <div class="inputArea">
@@ -142,16 +142,25 @@ export default class SearchGame extends Vue {
 @import "../../css/quasar.variables";
 
     .searchRoot {
-        width: 99%;
+        width: 100%;
+        margin-top: 30px;
 
         .box {
             width: 100%;
+            max-width: 480px;
+            height: 40px;
+
             //max-width: 250px;
 
             color: #737373;
+            flex-direction: column;
 
             .searchForm {
-                border: 1px solid #737373;
+                //border: 1px solid #737373;
+                //width: 480px;
+                border-radius: 24px;
+                background-color: #fff;
+                overflow: hidden;
             }
 
             .icon {
@@ -160,13 +169,15 @@ export default class SearchGame extends Vue {
             }
 
             .inputArea {
-                width: calc(100% - 38px);
+                width: calc(100% - 44px);
+                //width: 100%;
 
                 input {
-                    color: white;
+                    //color: white;
+                    color: #913200;
                     height: 40px;
                     border: none;
-                    background-color: transparent;
+                    //background-color: transparent;
                     width: 100%;
                     outline: none;
                 }
@@ -175,16 +186,16 @@ export default class SearchGame extends Vue {
 
 
 
-            @media (min-width: $breakpoint-xs) {
-                max-width: 250px;
-            }
+            //@media (min-width: $breakpoint-xs) {
+            //    max-width: 250px;
+            //}
         }
         //.clear {
         //    clear: both;
         //}
 
         .popup {
-            text-align: left;
+            //text-align: left;
             position: relative;
 
             .fade {

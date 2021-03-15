@@ -202,14 +202,22 @@ a {
             display: inline-block;
             //margin-left: 10px
             .title {
-                font-size: 1.2em;
+                //font-size: 1.2em;
+                //font-size: 20px;
+                font-size: 14px;
             }
             .userName {
-                color: #d0d0d0;
+                //font-size: 16px;
+                font-size: 12px;
+                color: #787878;
+                //line-height: 16px;
             }
             .playCount {
-                color: #d0d0d0;
-                font-size: 0.9em;
+                //color: #d0d0d0;
+                //font-size: 0.9em;
+                //font-size: 16px;
+                font-size: 12px;
+                color: #a5e9ff;
             }
         }
 

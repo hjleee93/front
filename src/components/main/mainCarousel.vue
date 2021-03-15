@@ -14,60 +14,80 @@
 
         <q-carousel-slide name="game" class="column no-wrap flex-center relative-position no-padding" img-src="">
             <q-img src="game/gamebg.png" class="gameBg"></q-img>
-            <div class="width100p maxWidth text-left">
-                <div>
-                    <iframe class="game" src="game/kr/index.html"></iframe>
-                </div>
-                <div class="info">
-                    <div class="text  q-pl-lg">
-                        <div class="text-h4 text-weight-bold">
-                            {{ $t('mainCarousel.slide1.main') }}
-                        </div>
-                        <div class="text-h6">
-                            {{ $t('mainCarousel.slide1.sub') }}
-                        </div>
+            <div class="mainView bg-zem">
+                <q-img src="img/img_sun.png" class="sun" />
+                <q-img src="img/img_char.png" class="char" />
+
+                <div class="text text-center">
+                    <div class="mainText">
+                        {{ $t('mainCarousel.slide.main') }}
+                    </div>
+
+                    <div class="subText1">
+                        {{ $t('mainCarousel.slide.sub1') }}
+                    </div>
+
+                    <div class="subText2">
+                        {{ $t('mainCarousel.slide.sub2') }}
                     </div>
                 </div>
             </div>
+
+<!--            <q-img src="game/gamebg.png" class="gameBg"></q-img>-->
+<!--            <div class="width100p maxWidth text-left">-->
+<!--                <div>-->
+<!--                    <iframe class="game" src="game/kr/index.html"></iframe>-->
+<!--                </div>-->
+<!--                <div class="info">-->
+<!--                    <div class="text  q-pl-lg">-->
+<!--                        <div class="text-h4 text-weight-bold">-->
+<!--                            {{ $t('mainCarousel.slide1.main') }}-->
+<!--                        </div>-->
+<!--                        <div class="text-h6">-->
+<!--                            {{ $t('mainCarousel.slide1.sub') }}-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
         </q-carousel-slide>
 
-        <q-carousel-slide name="game2" class="column no-wrap flex-center relative-position no-padding" img-src="">
-            <q-img src="game/gamebg.png" class="gameBg"></q-img>
-            <div class="width100p maxWidth text-left">
-                <div>
-                    <iframe class="game" src="game/alpaca/index.html"></iframe>
-                </div>
-                <div class="info">
-                    <div class="text  q-pl-lg">
-                        <div class="text-h4 text-weight-bold">
-                            {{ $t('mainCarousel.slide1.main') }}
-                        </div>
-                        <div class="text-h6">
-                            {{ $t('mainCarousel.slide1.sub') }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </q-carousel-slide>
+<!--        <q-carousel-slide name="game2" class="column no-wrap flex-center relative-position no-padding" img-src="">-->
+<!--            <q-img src="game/gamebg.png" class="gameBg"></q-img>-->
+<!--            <div class="width100p maxWidth text-left">-->
+<!--                <div>-->
+<!--                    <iframe class="game" src="game/alpaca/index.html"></iframe>-->
+<!--                </div>-->
+<!--                <div class="info">-->
+<!--                    <div class="text  q-pl-lg">-->
+<!--                        <div class="text-h4 text-weight-bold">-->
+<!--                            {{ $t('mainCarousel.slide1.main') }}-->
+<!--                        </div>-->
+<!--                        <div class="text-h6">-->
+<!--                            {{ $t('mainCarousel.slide1.sub') }}-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </q-carousel-slide>-->
 
-        <q-carousel-slide name="game3" class="column no-wrap flex-center relative-position no-padding" img-src="">
-            <q-img src="game/gamebg.png" class="gameBg"></q-img>
-            <div class="width100p maxWidth text-left">
-                <div>
-                    <iframe class="game" src="game/totembreaker/index.html"></iframe>
-                </div>
-                <div class="info">
-                    <div class="text  q-pl-lg">
-                        <div class="text-h4 text-weight-bold">
-                            {{ $t('mainCarousel.slide1.main') }}
-                        </div>
-                        <div class="text-h6">
-                            {{ $t('mainCarousel.slide1.sub') }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </q-carousel-slide>
+<!--        <q-carousel-slide name="game3" class="column no-wrap flex-center relative-position no-padding" img-src="">-->
+<!--            <q-img src="game/gamebg.png" class="gameBg"></q-img>-->
+<!--            <div class="width100p maxWidth text-left">-->
+<!--                <div>-->
+<!--                    <iframe class="game" src="game/totembreaker/index.html"></iframe>-->
+<!--                </div>-->
+<!--                <div class="info">-->
+<!--                    <div class="text  q-pl-lg">-->
+<!--                        <div class="text-h4 text-weight-bold">-->
+<!--                            {{ $t('mainCarousel.slide1.main') }}-->
+<!--                        </div>-->
+<!--                        <div class="text-h6">-->
+<!--                            {{ $t('mainCarousel.slide1.sub') }}-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </q-carousel-slide>-->
 
 <!--        <q-carousel-slide name="game2" class="column no-wrap flex-center" img-src="banner/img-main-banner-03.png">-->
 <!--            <div class="width100p maxWidth text-left q-pt-lg">-->
@@ -111,8 +131,8 @@ export default class mainCarousel extends Vue {
 
     private gameList : string[] = [
         'game',
-        'game2',
-        'game3'
+        // 'game2',
+        // 'game3'
     ];
 
     private slide: string = 'game2';
@@ -141,8 +161,9 @@ export default class mainCarousel extends Vue {
 
         position: relative;
         width: 100%;
-        height: 100%;
-        max-height: 300px;
+        //height: 100%;
+        //max-height: 320px;
+        height: 320px;
         background-color: black;
 
         .game {
@@ -155,8 +176,127 @@ export default class mainCarousel extends Vue {
         }
 
         .gameBg {
-            max-height: 300px;
+            max-height: 320px;
             width: 100%;
+        }
+
+        .mainView {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top:0;
+            overflow: hidden;
+
+            .sun {
+                position: absolute;
+                width: 280px;
+                height: 280px;
+                left: 150px;
+                top: -70px;
+
+                @media (max-width: $breakpoint-xs) {
+                    width: 70px;
+                    height: 70px;
+                    left: 37px;
+                    top: 0;
+                }
+
+                @media (min-width: $breakpoint-xs) and (max-width: $breakpoint-sm) {
+                    width: 140px;
+                    height: 140px;
+                    left: 75px;
+                    top: 0;
+                }
+                @media (min-width: $breakpoint-sm) and (max-width: $breakpoint-md) {
+                    width: 210px;
+                    height: 210px;
+                    left: 150px;
+                    top: -30px;
+                }
+            }
+
+            .char {
+                position: absolute;
+                width: 820px;
+                height: 400px;
+                right: 0;
+                bottom: -50px;
+
+                @media (max-width: $breakpoint-xs) {
+                    width: 205px;
+                    height: 100px;
+                    right: 0;
+                    bottom: 0;
+                }
+
+                @media (min-width: $breakpoint-xs) and (max-width: $breakpoint-sm) {
+                    width: 420px;
+                    height: 200px;
+                    right: 0;
+                    bottom: 0;
+                }
+                @media (min-width: $breakpoint-sm) and (max-width: $breakpoint-md) {
+                    width: 615px;
+                    height: 300px;
+                    right: 0;
+                    bottom: -20px;
+                }
+            }
+
+            .text {
+                position: relative;
+                z-index: 100;
+                margin-top: 110px;
+
+                .mainText {
+                    font-size: 64px;
+                }
+                .subText1 {
+                    font-size: 28px;
+                }
+                .subText2 {
+                    font-size: 20px;
+                }
+
+                @media (max-width: $breakpoint-xs) {
+                    margin-top: 70px;
+                    .mainText {
+                        font-size: 40px;
+                    }
+                    .subText1 {
+                        font-size: 16px;
+                        padding: 0 40px;
+                    }
+                    .subText2 {
+                        font-size: 14px;
+                        padding: 0 40px;
+                    }
+                }
+
+                @media (min-width: $breakpoint-xs) and (max-width: $breakpoint-sm) {
+                    .mainText {
+                        font-size: 50px;
+                    }
+                    .subText1 {
+                        font-size: 20px;
+                    }
+                    .subText2 {
+                        font-size: 18px;
+                    }
+                }
+                @media (min-width: $breakpoint-sm) and (max-width: $breakpoint-md) {
+                    .mainText {
+                        font-size: 50px;
+                    }
+                    .subText1 {
+                        font-size: 22px;
+                    }
+                    .subText2 {
+                        font-size: 18px;
+                    }
+                }
+            }
         }
 
         .info {
