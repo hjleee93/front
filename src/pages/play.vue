@@ -123,9 +123,8 @@ export default class Play extends Vue {
                 break;
             }
             case '@requestLogin': {
-                console.log( this.$route, this.$router );
-                // this.$store.commit('redirectRouter', window.location.href);
-                // await this.$router.replace('/login');
+                this.$store.commit('redirectRouter', this.$route.fullPath);
+                await this.$router.replace('/login');
                 break;
             }
             case '@exit': {
