@@ -18,10 +18,7 @@ let app: App;
 @Component
 export default class App extends Vue {
     async mounted() {
-        this.$i18n.locale = navigator.language.toLowerCase();
-        // console.log( this.$i18n.locale );
-        // this.$i18n.locale = 'en-us';
-        // console.log( this.$i18n.t('pageHomeTitle') );
+        this.$i18n.locale = navigator.language.substring(0,2);
         app = this;
 
         await this.$store.dispatch('loginState');
