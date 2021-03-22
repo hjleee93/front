@@ -12,6 +12,11 @@ const routes: RouteConfig[] = [
                 component: () => import('pages/home.vue'),
             },
             {
+                name: 'oldHome',
+                path: '/home',
+                redirect: '/',
+            },
+            {
                 name: 'official',
                 path: '/official',
                 component: () => import('pages/official.vue')
