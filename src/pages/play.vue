@@ -150,7 +150,7 @@ export default class Play extends Vue {
             this.$router.back();
         }
         else {
-            this.$router.push('/home');
+            this.$router.push('/');
         }
     }
 

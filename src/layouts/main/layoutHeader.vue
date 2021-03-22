@@ -29,7 +29,7 @@
                 </q-toolbar-title>
 
                 <q-tabs v-model="tab" v-if="$q.platform.is.desktop" inline-label shrink stretch active-bg-color="zem" active-color="black">
-                    <q-route-tab to="/home" name="home" :label="$t('layoutHeader.routeTab.home')"></q-route-tab>
+                    <q-route-tab to="/" name="home" :label="$t('layoutHeader.routeTab.home')"></q-route-tab>
                     <q-route-tab to="/official" name="major" :label="$t('layoutHeader.routeTab.official')"></q-route-tab>
                     <q-route-tab to="/challenge" name="minor" :label="$t('layoutHeader.routeTab.challenge')"></q-route-tab>
                     <q-route-tab to="/affiliate" name="affiliate" :label="$t('layoutHeader.routeTab.affiliate')"></q-route-tab>

@@ -21,7 +21,7 @@
                 align="center"
                 :breakpoint="1"
             >
-                <q-route-tab to="/home" class="min-height50" name="home" icon="home" :label="$t('layoutFooter.routeTab.home')"/>
+                <q-route-tab to="/" class="min-height50" name="home" icon="home" :label="$t('layoutFooter.routeTab.home')"/>
                 <q-route-tab to="/official" class="min-height50" name="best" icon="star" :label="$t('layoutFooter.routeTab.official')"/>
                 <q-route-tab to="/challenge" class="min-height50" name="challenge" icon="emoji_events" :label="$t('layoutFooter.routeTab.challenge')"/>
                 <q-route-tab to="/affiliate" class="min-height50" name="affiliate" icon="business" :label="$t('layoutFooter.routeTab.affiliate')"/>
