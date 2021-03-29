@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import {Vue, Component, Watch, Prop} from 'vue-property-decorator';
-import firebase from "firebase";
+import firebase from "firebase/app";
 import {LoginState} from "src/store/modules/user";
 import MetaSetting from "src/scripts/metaSetting";
 
@@ -48,7 +48,6 @@ export default class Play extends Vue {
             else {
 
                 this.gameData = result.game;
-                console.log( this.gameData );
                 const title = this.gameData?.title;
                 const description = this.gameData?.description;
                 const thumb = this.gameData?.url_thumb;
@@ -105,7 +104,7 @@ export default class Play extends Vue {
     }
 
     async onMessage(msg: MessageEvent) {
-        const {type} = msg.data;
+        const {type, channel_id} = msg.data;
 
         switch (type) {
             case '@initLauncher': {
@@ -124,11 +123,16 @@ export default class Play extends Vue {
                 break;
             }
             case '@requestLogin': {
-                await this.$router.push('/login');
+                this.$store.commit('redirectRouter', this.$route.fullPath);
+                await this.$router.replace('/login');
                 break;
             }
             case '@exit': {
                 this.exit();
+                break;
+            }
+            case '@moveChannel': {
+                await this.$router.push(`/channel/${channel_id}`);
                 break;
             }
         }
@@ -146,7 +150,7 @@ export default class Play extends Vue {
             this.$router.back();
         }
         else {
-            this.$router.push('/home');
+            this.$router.push('/');
         }
     }
 

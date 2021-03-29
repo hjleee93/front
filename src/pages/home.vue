@@ -31,6 +31,12 @@
             </div>
         </div>
 
+        <ins class="adsbygoogle"
+             style="display:inline-block;width:468px;height:60px"
+             data-ad-client="ca-pub-2187650629390403"
+             data-ad-slot="1069857092"></ins>
+
+
 <!--        <ins class="adsbygoogle"-->
 <!--             style="display:block"-->
 <!--             data-ad-client="ca-pub-2187650629390403"-->
@@ -110,14 +116,14 @@ export default class Home extends Vue {
         this.featuredList = result;
         consoleLog.log(result);
 
-        // this.$nextTick(()=>{
-        //     document.querySelectorAll('.adsbygoogle').forEach(  (element : Element) => {
-        //         if(element.getAttribute('data-ad-slot')) {
-        //             //@ts-ignore
-        //             (window.adsbygoogle || []).push({});
-        //         }
-        //     } )
-        // })
+        this.$nextTick(()=>{
+            document.querySelectorAll('.adsbygoogle').forEach(  (element : Element) => {
+                if(element.getAttribute('data-ad-slot')) {
+                    //@ts-ignore
+                    (window.adsbygoogle || []).push({});
+                }
+            } )
+        })
 
 
         // this.$store.commit('isOfficialPage', true);

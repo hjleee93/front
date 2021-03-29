@@ -13,7 +13,7 @@
             <!--            <genre-category></genre-category>-->
             <!--            <q-separator inset/>-->
             <search-game></search-game>
-            <sort-category v-on:@sortChange="sortChange"></sort-category>
+            <sort-category v-on:@sortChange="sortChange" :list="list"></sort-category>
             <div class="q-pt-none">
                 <div class="cardContainer" v-if="$store.getters.isSearchGame">
 
@@ -61,23 +61,38 @@ import MetaSetting from "src/scripts/metaSetting";
 
 @Component({
     components: {AffiliateCarousel, SearchGame, MainFooter, SortCategory, GenreCategory, GameCard, GameCardSkeleton},
-    metaInfo() {
-        return {
-            // titleTemplate: '%s ← My Site',
-            meta: [
-                {name: 'description', content: '더 다양한 게임들을 원하시나요? ZEMPIE를 통해 모두 플레이해보세요.' },
-
-                {name: 'og:url', content: `${this.$store.getters.VUE_APP_ZEMPIE_URL}affiliate` },
-                {name: 'og:site_name', content: 'Zempie Affiliate - 웹 게임 공유 플랫폼' },
-                {name: 'og:title', content: '어디서든 모두 즐길 수 있는 게임공유플랫폼 ZEMPIE' },
-                {name: 'og:description', content: '더 다양한 게임들을 원하시나요? ZEMPIE를 통해 모두 플레이해보세요.' },
-                {name: 'og:image', content: '' },
-                {name: 'og:type', content: 'website' },
-            ]
-        }
-    }
+    // metaInfo() {
+    //     return {
+    //         // titleTemplate: '%s ← My Site',
+    //         meta: [
+    //             {name: 'description', content: '더 다양한 게임들을 원하시나요? ZEMPIE를 통해 모두 플레이해보세요.' },
+    //
+    //             {name: 'og:url', content: `${this.$store.getters.VUE_APP_ZEMPIE_URL}affiliate` },
+    //             {name: 'og:site_name', content: 'Zempie Affiliate - 웹 게임 공유 플랫폼' },
+    //             {name: 'og:title', content: '어디서든 모두 즐길 수 있는 게임공유플랫폼 ZEMPIE' },
+    //             {name: 'og:description', content: '더 다양한 게임들을 원하시나요? ZEMPIE를 통해 모두 플레이해보세요.' },
+    //             {name: 'og:image', content: '' },
+    //             {name: 'og:type', content: 'website' },
+    //         ]
+    //     }
+    // }
 })
 export default class Affiliate extends Vue {
+
+    private list : any[] = [
+        {
+            name : 'new',
+            text : this.$t('sortCategory.text1') as string,
+        },
+        {
+            name : 'create',
+            text : this.$t('sortCategory.text2') as string,
+        },
+        {
+            name : 'name',
+            text : this.$t('sortCategory.text3') as string,
+        },
+    ]
 
     private sort : string = 'create';
     private sortData : {
@@ -89,8 +104,6 @@ export default class Affiliate extends Vue {
         new : { sort : 'u', dir : 'desc' },
         create : { sort : 'c', dir : 'asc' },
         name : { sort : 't', dir : 'asc' },
-        play : { sort : 'p', dir : 'asc' },
-        heart : { sort : 'h', dir : 'asc' },
     };
 
     private metaSetting : MetaSetting;
@@ -105,7 +118,6 @@ export default class Affiliate extends Vue {
                 { property: 'og:url', content: `${this.$store.getters.VUE_APP_ZEMPIE_URL}affiliate` },
                 { property: 'og:title', content: `${this.$t('pageTitle.affiliate')} | Zempie.com` },
                 { property: 'og:description', content: `${this.$t('pageDescription.affiliate')}` },
-                // { property: 'og:image', content: '' },
             ]
         } );
 
@@ -154,8 +166,9 @@ export default class Affiliate extends Vue {
 
     async sortChange( sort ) {
         this.sort = sort;
+        console.log( sort );
 
-        await this.$store.dispatch('clearGames', 0);
+        await this.$store.dispatch('clearGames', 2);
         await this.$store.dispatch('loadGames', {
             category : 2,
             sort : this.sortData[ this.sort ].sort,

@@ -1,4 +1,4 @@
-import firebase from "firebase";
+import firebase from "firebase/app";
 import Vue from "vue";
 
 enum LoginState {
@@ -17,6 +17,7 @@ export default {
         // developer: null,
         user: null,
         redirectUrl : null,
+        redirectRouter : null,
     },
     getters: {
         loginState(state: any) {
@@ -54,6 +55,10 @@ export default {
         redirectUrl(state: any) {
             return state.redirectUrl;
         },
+
+        redirectRouter(state: any) {
+            return state.redirectRouter;
+        },
     },
 
     mutations: {
@@ -71,6 +76,10 @@ export default {
 
         redirectUrl(state: any, payload: any) {
             state.redirectUrl = payload;
+        },
+
+        redirectRouter(state: any, payload: any) {
+            state.redirectRouter = payload;
         },
 
         // developer(state: any, payload: any) {

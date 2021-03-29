@@ -5,7 +5,7 @@
         <div :class="isVisible?'visible':''">
             <div class="thumbBox">
 <!--                <q-img class="base" :src="'img/default.png'"></q-img>-->
-                <q-img class="base" src="http://placehold.it/150x100"></q-img>
+                <q-img class="base" src="https://placehold.it/150x100"></q-img>
                 <q-img class="thumb video" :src="`${data.url_thumb_gif || data.url_thumb || 'img/default.png'}`">
 
                 </q-img>
@@ -202,14 +202,22 @@ a {
             display: inline-block;
             //margin-left: 10px
             .title {
-                font-size: 1.2em;
+                //font-size: 1.2em;
+                //font-size: 20px;
+                font-size: 14px;
             }
             .userName {
-                color: #d0d0d0;
+                //font-size: 16px;
+                font-size: 12px;
+                color: #787878;
+                //line-height: 16px;
             }
             .playCount {
-                color: #d0d0d0;
-                font-size: 0.9em;
+                //color: #d0d0d0;
+                //font-size: 0.9em;
+                //font-size: 16px;
+                font-size: 12px;
+                color: #a5e9ff;
             }
         }
 

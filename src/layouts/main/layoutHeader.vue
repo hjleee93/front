@@ -22,14 +22,14 @@
 <!--                </q-avatar>-->
 
 
-                    <q-toolbar-title class="non-selectable cursor-pointer">
-                        <a :href="$store.getters.homeUrl">
-                            <q-img src="img/zempie-logo.png" width="130px"></q-img>
-                        </a>
-                    </q-toolbar-title>
+                <q-toolbar-title class="non-selectable cursor-pointer">
+                    <a :href="$store.getters.homeUrl">
+                        <q-img src="img/zempie-logo.png" width="130px"></q-img>
+                    </a>
+                </q-toolbar-title>
 
-                <q-tabs v-model="tab" v-if="$q.platform.is.desktop" inline-label shrink stretch>
-                    <q-route-tab to="/home" name="home" :label="$t('layoutHeader.routeTab.home')"></q-route-tab>
+                <q-tabs v-model="tab" v-if="$q.platform.is.desktop" inline-label shrink stretch active-bg-color="zem" active-color="black">
+                    <q-route-tab to="/" name="home" :label="$t('layoutHeader.routeTab.home')"></q-route-tab>
                     <q-route-tab to="/official" name="major" :label="$t('layoutHeader.routeTab.official')"></q-route-tab>
                     <q-route-tab to="/challenge" name="minor" :label="$t('layoutHeader.routeTab.challenge')"></q-route-tab>
                     <q-route-tab to="/affiliate" name="affiliate" :label="$t('layoutHeader.routeTab.affiliate')"></q-route-tab>
@@ -127,9 +127,9 @@ export default class LayoutHeader extends Vue {
     async openMailPopup() {
         await this.$store.dispatch('loadMails');
         this.$store.commit('mailPopupMobile', true);
-    }
+    }firebase
     //개발 스튜디오 알람 모달
-    goDevSignUP(){        
+    goDevSignUP(){
         window.location.href = this.$store.getters.studioUrl
 
     }
@@ -184,12 +184,12 @@ export default class LayoutHeader extends Vue {
             z-index: -1;
         }
     }
-    // 모달        
+    // 모달
     .header{
         color:#181818;
         font-weight: bold;
         font-size: 3rem;
-        
+
     }
     .header-desc{
         color: #181818;
@@ -199,7 +199,7 @@ export default class LayoutHeader extends Vue {
         margin-top: 20px;
         border-radius: 40px;
         padding: 0 20px 0 20px;
-        height: 60px;    
+        height: 60px;
         font-size: 17px;
         font-weight: bold;
     }

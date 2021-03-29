@@ -4,12 +4,17 @@ const routes: RouteConfig[] = [
     {
         path: '/',
         component: () => import('layouts/mainLayout.vue'),
-        redirect: '/home',
+        // redirect: '/home',
         children: [
             {
                 name: 'home',
-                path: '/home',
+                path: '/',
                 component: () => import('pages/home.vue'),
+            },
+            {
+                name: 'oldHome',
+                path: '/home',
+                redirect: '/',
             },
             {
                 name: 'official',

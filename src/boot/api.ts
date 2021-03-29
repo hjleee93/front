@@ -1,5 +1,5 @@
 import Vue, {PluginObject} from 'vue';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 import {boot} from "quasar/wrappers";
 import store, {_store} from './../store'
 
