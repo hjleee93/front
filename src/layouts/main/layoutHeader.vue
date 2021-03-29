@@ -131,19 +131,18 @@ export default class LayoutHeader extends Vue {
     //개발 스튜디오 알람 모달
     goDevSignUP(){        
         window.location.href = this.$store.getters.studioUrl
+
     }
     showModal(){
-        console.log(this.$store.getters.user.is_developer)
-         if(this.$store.getters.user !== null){
-            
-        
-        if( this.$store.getters.user.is_developer=== true){
-            this.goDevSignUP();
-        }else{
-            this.modal=true;
-        }
+        // console.log(this.$store.getters.user.is_developer)
+         if(this.$store.getters.user !== null){                    
+            if( this.$store.getters.user.is_developer=== true){
+                this.goDevSignUP();
+            }else{
+                this.modal=true;
+            }
          }else{
-             this.goDevSignUP();
+            this.modal=true;
          }
              
     }
