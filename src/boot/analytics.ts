@@ -11,7 +11,8 @@ declare module 'vue/types/vue' {
 }
 
 Vue.use(VueGtagPlugin,{
-    config :{
-        id,
-    },
+    config :{ id },
+    includes: [
+        { id: 'AW-455806232' },
+    ]
 }, router );
