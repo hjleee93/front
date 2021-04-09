@@ -3,6 +3,8 @@ import firebase from 'firebase/app';
 import {boot} from "quasar/wrappers";
 import store, {_store} from './../store'
 
+import Ads from "src/scripts/ads"
+
 
 declare module 'vue/types/vue' {
     interface Vue {
@@ -180,11 +182,10 @@ class Api {
     }
 
     async signUp(name : string) {
-
+        Ads.gtag_report_conversion()
         const response = await this.request( 'post', `/user/sign-up`, {
             name
         }, true );
-
         return response.result || response;
     }
 
