@@ -6,16 +6,21 @@
   "author": "hg.park <hg.park@fromthered.com>",
   "private": true,
   "scripts": {
-    "serve": "cross-env QENV=local quasar dev",
+    "serve": "npm run download:i18n && cross-env QENV=local quasar dev ",
     "build-dev": "cross-env QENV=development quasar build",
     "build": "cross-env QENV=production quasar build",
-    "build:pwa": "quasar build -m pwa"
+    "build:pwa": "quasar build -m pwa",
+    "i18n:report": "vue-cli-service i18n:report --src \"./src/**/*.?(js|vue)\" --locales \"./src/locales/**/*.json\"",
+    "scan:i18n": "i18next-scanner --config i18next-scanner.config.js",
+    "upload:i18n": "npm run scan:i18n && node translation_tool/upload.js",
+    "download:i18n": "node translation_tool/download.js"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "firebase": "^8.0.0",
+    "google-spreadsheet": "^3.1.15",
     "quasar": "^1.0.0",
     "vue-class-component": "^7.2.2",
     "vue-gtag": "^1.10.0",
@@ -29,7 +34,8 @@
     "@quasar/app": "^2.0.0",
     "@quasar/quasar-app-extension-qenv": "^1.0.3",
     "@types/node": "^10.17.15",
-    "cross-env": "^7.0.2"
+    "cross-env": "^7.0.2",
+    "i18next-scanner": "^3.0.0"
   },
   "browserslist": [
     "ie >= 11",

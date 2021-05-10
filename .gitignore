@@ -33,3 +33,5 @@ yarn-error.log*
 *.sln
 /.vscode/
 /package-lock.json
+.quasar.env.json
+translation_tool/.credentials/round-ring-307203-d7d20d7d442d.json
