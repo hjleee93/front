@@ -6,6 +6,7 @@ const routes: RouteConfig[] = [
         component: () => import('layouts/mainLayout.vue'),
         // redirect: '/home',
         children: [
+            
             {
                 name: 'home',
                 path: '/',
@@ -62,6 +63,11 @@ const routes: RouteConfig[] = [
                 name : 'playlist',
                 path : '/playlist',
                 component: () => import( 'pages/playlist.vue' ),
+            },
+            {
+                name: 'gamePage',
+                path: '/gamePage',
+                component: () => import('pages/gamePage.vue'),
             },
         ]
     },

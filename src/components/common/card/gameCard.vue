@@ -13,9 +13,9 @@
 
                 </q-img>
 
-                <div class="heartBox" v-if="data.category !== 2">
+                <!-- <div class="heartBox" v-if="data.category !== 2">
                     🧡 {{ data.count_heart.toLocaleString() }}
-                </div>
+                </div> -->
             </div>
 
             <div class="row detail text-left q-mt-sm">
@@ -29,17 +29,17 @@
                         class="ellipsis block title">
                         {{ data.title }}
                     </strong>
-                    <span
+                    <!-- <span
                         class="ellipsis block userName"
                         v-if="data.user !== undefined">
                         {{ data.user.name }}
-                    </span>
-                    <span
+                    </span> -->
+                    <!-- <span
                         class="ellipsis block playCount"
                         v-if="data.category !== 2">
                         {{ data.count_over.toLocaleString() }}{{ $t('gameCard.playLabel') }}
+                    </span> -->
 <!--                        {{ countOverFormat(data.count_over)}}{{ $t('gameCard.playLabel') }}-->
-                    </span>
                 </div>
 
                 <div class="more" :class="$q.platform.is.desktop ? 'desktop' : ''" v-if="data.user !== undefined">

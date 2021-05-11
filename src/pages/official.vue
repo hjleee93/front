@@ -12,7 +12,7 @@
         <div class="maxWidth">
             <!--            <genre-category></genre-category>-->
             <!--            <q-separator inset/>-->
-            <search-game></search-game>
+            <!-- <search-game></search-game> -->
             <sort-category v-on:@sortChange="sortChange" :list="list"></sort-category>
 
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="sortCategory q-mr-sm flex justify-center">
+    <div class="sortCategory q-my-xl q-mr-sm flex justify-center">
 <!--        <ul class="desktop">-->
 <!--            <div v-for="item in list" class="sortItem" :class="tab===item.name && 'select'">-->
 <!--                <li>-->
@@ -102,9 +102,12 @@ export default class SortCategory extends Vue {
 <style lang="scss">
 
 .sortCategory {
+    align-content: center;
     //text-align: right;
 
+
     .sortForm {
+        align-content: center;
         width: 100%;
         max-width: 460px;
         height: 40px;

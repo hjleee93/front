@@ -26,10 +26,11 @@
                     <a :href="$store.getters.homeUrl">
                         <q-img src="img/zempie-logo.png" width="130px"></q-img>
                     </a>
+                    <search-game></search-game>
                 </q-toolbar-title>
 
                 <q-tabs v-model="tab" v-if="$q.platform.is.desktop" inline-label shrink stretch active-bg-color="zem" active-color="black">
-                    <q-route-tab to="/" name="home" :label="$t('layoutHeader.routeTab.home')"></q-route-tab>
+                    <!-- <q-route-tab to="/" name="home" :label="$t('layoutHeader.routeTab.home')"></q-route-tab> -->
                     <q-route-tab to="/official" name="major" :label="$t('layoutHeader.routeTab.official')"></q-route-tab>
                     <q-route-tab to="/challenge" name="minor" :label="$t('layoutHeader.routeTab.challenge')"></q-route-tab>
                     <q-route-tab to="/affiliate" name="affiliate" :label="$t('layoutHeader.routeTab.affiliate')"></q-route-tab>
@@ -102,9 +103,10 @@ import MailPopupDesktop from "components/common/menu/mailPopupDesktop.vue";
 import MailPopupMobile from "components/common/menu/mailPopupMobile.vue";
 import {consoleLog} from "src/scripts/consoleLog";
 import GuideModal from "layouts/guideModal.vue";
+import SearchGame from "components/common/searchGame.vue";
 
 @Component({
-    components: {AccountPopupDesktop, AccountPopupMobile, MailPopupDesktop, MailPopupMobile,GuideModal}
+    components: {AccountPopupDesktop, AccountPopupMobile, MailPopupDesktop, MailPopupMobile,GuideModal, SearchGame}
 })
 export default class LayoutHeader extends Vue {
     private tab = '';
@@ -131,10 +133,8 @@ export default class LayoutHeader extends Vue {
     //개발 스튜디오 알람 모달
     goDevSignUP(){
         window.location.href = this.$store.getters.studioUrl
-
     }
     showModal(){
-        // console.log(this.$store.getters.user.is_developer)
          if(this.$store.getters.user !== null){                    
             if( this.$store.getters.user.is_developer=== true){
                 this.goDevSignUP();

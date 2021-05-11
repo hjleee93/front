@@ -1,5 +1,5 @@
 <template>
-    <div class="searchRoot q-py-md flex justify-center items-center">
+    <div class="searchRoot q-ml-md">
         <div class="box flex justify-center">
             <div class="searchForm flex items-center">
                 <div class="icon flex items-center">
@@ -142,14 +142,16 @@ export default class SearchGame extends Vue {
 @import "../../css/quasar.variables";
 
     .searchRoot {
-        width: 100%;
-        margin-top: 30px;
+        width: 25%;
+        display: inline-block;
+        
+      
 
         .box {
             width: 100%;
             max-width: 480px;
-            height: 40px;
-
+            height: 30px;
+            flex-wrap: nowrap;
             //max-width: 250px;
 
             color: #737373;
@@ -161,6 +163,7 @@ export default class SearchGame extends Vue {
                 border-radius: 24px;
                 background-color: #fff;
                 overflow: hidden;
+                flex-wrap: nowrap;
             }
 
             .icon {
@@ -180,6 +183,7 @@ export default class SearchGame extends Vue {
                     //background-color: transparent;
                     width: 100%;
                     outline: none;
+                    font-size: 16px
                 }
             }
 
