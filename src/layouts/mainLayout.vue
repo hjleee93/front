@@ -49,6 +49,3 @@ export default class MainLayout extends Vue {
   }
 }
 </script>
-<style>
-
-</style>

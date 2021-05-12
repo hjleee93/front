@@ -19,10 +19,10 @@
             </div>
 
             <div class="row detail text-left q-mt-sm">
-                <router-link class="q-mt-xs" :to="`/channel/${data.user.channel_id}`" v-if="data.user !== undefined">
+                <!-- <router-link class="q-mt-xs" :to="`/channel/${data.user.channel_id}`" v-if="data.user !== undefined">
                     <q-img class="developerLogo" :src="data.user.picture">
                     </q-img>
-                </router-link>
+                </router-link> -->
 
                 <div class="text q-ml-sm">
                     <strong

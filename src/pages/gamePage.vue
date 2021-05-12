@@ -1,9 +1,10 @@
 <template>
     <q-page
-        class="items-center justify-evenly text-center"
+        class="game-container items-center justify-evenly text-center"
         :class="$q.platform.is.desktop ? 'page' : ''"
     >
-        <div class="maxWidth">
+        <tagbutton></tagbutton>
+        <div class="main-container">
             <div class="header text-left">
                 <tr class="header-contents">
                     <td>
@@ -20,36 +21,85 @@
                 </tr>
             </div>
             <q-tabs
-                v-model="tab"
+                v-model="$route.query.tag"
                 dense
-                class="text-grey tabs"
+                class="text-grey tabs game-tab text-h5"
                 active-color="white"
+                indicator-color="white"
                 align="left"
-                narrow-indicator
             >
-                <q-tab name="game" label="게임" />
-                <q-tab name="alarms" label="인디게임" />
+                <q-route-tab to="/gamePage?tag=game" :name="game">게임</q-route-tab>
+                <q-route-tab to="/gamePage?tag=indie" :name="indie">인디 게임</q-route-tab>
             </q-tabs>
+            <q-separator />
             <sort-category
                 v-on:@sortChange="sortChange"
                 :list="list"
             ></sort-category>
-            <!-- <search-game></search-game> -->
+            <div class="q-gutter-y-sm">
+                <q-tab-panels v-model="$route.query.tag" class="text-white text-center">
+                    <q-tab-panel name="game">
+                        <div class="q-pt-none">
+                            <template
+                                v-for="(featured, index) in featuredList"
+                                v-if="featured.games.length"
+                            >
+                                <home-category
+                                    :data="featured"
+                                    :game-list="featured.games"
+                                >
+                                </home-category>
+                                <div class="q-mb-xl"></div>
+                                <div v-if="banners[index]"></div>
+                            </template>
+                        </div>
+                    </q-tab-panel>
+                    <q-tab-panel name="indie">
+                        <div class="q-pt-none">
+                            <div
+                                class="cardContainer"
+                                v-if="$store.getters.isSearchGame"
+                            >
+                                <game-card
+                                    v-for="(game, index) in $store.getters
+                                        .searchGames"
+                                    :key="index"
+                                    :index="index"
+                                    class="card"
+                                    :data="game"
+                                >
+                                </game-card>
 
-            <div class="q-pt-none">
-                <template
-                    v-for="(featured, index) in featuredList"
-                    v-if="featured.games.length"
-                >
-                    <home-category :data="featured" :game-list="featured.games">
-                    </home-category>
-                    <div class="q-mb-xl"></div>
-                    <div v-if="banners[index]">
-                        <!--                        <router-link :to="banners[index].link">-->
-                        <!--                            <q-img :src="banners[index].src"></q-img>-->
-                        <!--                        </router-link>-->
-                    </div>
-                </template>
+                                <!--                    <game-card v-for="game in $store.getters.searchGames" :data="game"></game-card>-->
+                            </div>
+                            <div class="cardContainer" v-else>
+                                <game-card
+                                    v-for="(game, index) in $store.getters
+                                        .challengeGames"
+                                    :key="index"
+                                    :index="index"
+                                    class="card"
+                                    v-on:onVisible="onVisibleItem"
+                                    :data="game"
+                                >
+                                </game-card>
+
+                                <!--                    <game-card v-intersection="entry => onIntersection(index, entry)" v-for="(game,index) in $store.getters.noneOfficialGames" :data="game"></game-card>-->
+                            </div>
+                            <div
+                                v-if="
+                                    $store.getters.challengeGames.length === 0
+                                "
+                                class="cardContainer"
+                            >
+                                <game-card-skeleton
+                                    v-for="(_, index) in 20"
+                                    :key="index"
+                                />
+                            </div>
+                        </div>
+                    </q-tab-panel>
+                </q-tab-panels>
             </div>
         </div>
 
@@ -76,6 +126,7 @@ import { Vue, Component } from "vue-property-decorator";
 import MainCarousel from "components/main/mainCarousel.vue";
 import GameCard from "components/common/card/gameCard.vue";
 import GenreCategory from "components/main/genreCategory.vue";
+import GameCardSkeleton from "components/common/card/gameCardSkeleton.vue";
 import SortCategory from "components/main/sortCategory.vue";
 import MainFooter from "components/main/mainFooter.vue";
 import SearchGame from "components/common/searchGame.vue";
@@ -83,6 +134,7 @@ import { GameLoadState } from "src/store/modules/games";
 import HomeCategory from "components/home/homeCategory.vue";
 import { consoleLog } from "src/scripts/consoleLog";
 import MetaSetting from "src/scripts/metaSetting";
+import Tagbutton from "components/game/tagbutton.vue";
 
 @Component({
     components: {
@@ -90,14 +142,17 @@ import MetaSetting from "src/scripts/metaSetting";
         SearchGame,
         MainFooter,
         SortCategory,
+        GameCardSkeleton,
         GenreCategory,
         GameCard,
         MainCarousel,
+        Tagbutton,
     },
     // metaInfo() {
 })
 export default class GamePage extends Vue {
-    private tab:string = 'game'
+    private indie: string = "indie";
+    private game: string = "game";
     private list: any[] = [
         {
             name: "new",
@@ -148,6 +203,27 @@ export default class GamePage extends Vue {
     async mounted() {
         const result = await this.$api.featured();
         this.featuredList = result;
+
+        await this.$store.dispatch("clearGames", 0);
+        await this.$store.dispatch("loadGames", {
+            category: 0,
+            sort: this.sortData[this.sort].sort,
+            dir: this.sortData[this.sort].dir,
+        });
+    }
+
+    onVisibleItem(index: number) {
+        const games = this.$store.getters.challengeGames;
+        if (index < games.length - 1) {
+            return;
+        }
+        if (this.$store.getters.challengeLoadState === GameLoadState.loaded) {
+            this.$store.dispatch("loadGames", {
+                category: 0,
+                sort: this.sortData[this.sort].sort,
+                dir: this.sortData[this.sort].dir,
+            });
+        }
     }
 
     async sortChange(sort) {
@@ -164,6 +240,14 @@ export default class GamePage extends Vue {
 </script>
 
 <style scoped>
+.game-container {
+    display: flex;
+    align-items: flex-start;
+}
+.main-container {
+    max-width: 1439px;
+    flex: 2;
+}
 .header {
     height: 250px;
     display: flex;
@@ -171,5 +255,14 @@ export default class GamePage extends Vue {
 }
 .tab {
     height: 50px;
+}
+.q-tab-panel {
+    background-color: #121212;
+}
+.adsbygoogle {
+    flex: 0.5;
+}
+.game-tab .q-tab--active {
+    border-bottom: 1px solid;
 }
 </style>

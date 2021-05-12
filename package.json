@@ -35,7 +35,8 @@
     "@quasar/quasar-app-extension-qenv": "^1.0.3",
     "@types/node": "^10.17.15",
     "cross-env": "^7.0.2",
-    "i18next-scanner": "^3.0.0"
+    "i18next-scanner": "^3.0.0",
+    "webpack": "^4.44.2"
   },
   "browserslist": [
     "ie >= 11",

@@ -9,14 +9,14 @@
         </div>
 
         <div class="flex" v-else>
-            <q-skeleton type="QAvatar" class="q-mt-md logo" v-if="!$q.platform.is.mobile" />
+            <!-- <q-skeleton type="QAvatar" class="q-mt-md logo" v-if="!$q.platform.is.mobile" /> -->
 
-            <div class="q-ml-sm q-mt-sm text">
+            <!-- <div class="q-ml-sm q-mt-sm text">
                 <q-skeleton type="text" class="text-subtitle1" />
 
                 <q-skeleton type="text" width="50%" class="text-caption" />
                 <q-skeleton type="text" width="50%" class="text-caption" />
-            </div>
+            </div> -->
         </div>
     </q-card>
 </template>

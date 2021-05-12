@@ -14,7 +14,7 @@
             <!--                    고품질의 검증된 게임만을 유통하는 수익화 플랫폼!-->
             <!--                </div>-->
             <!--            </div>-->
-      <q-btn class="more-gmaes-btn q-my-xl" label="더 많은 게임 보기" to="/gamePage" />
+      <q-btn class="more-gmaes-btn q-my-xl" label="더 많은 게임 보기" to="/gamePage?tag=game" />
             <!-- <search-game></search-game> -->
 
             <div class="q-pt-none">
@@ -31,72 +31,8 @@
                         <!--                        </router-link>-->
                     </div>
                 </template>
+         <carousel-slider></carousel-slider>
             </div>
-            <!-- carousel test -->
-            <div class="home-bottom">
-                <div class="home-info">
-                    <q-carousel
-                        v-model="slide"
-                        transition-prev="jump-right"
-                        transition-next="jump-left"
-                        swipeable
-                        animated
-                        control-color="black"
-                       
-                        navigation-icon="radio_button_unchecked"
-                        navigation
-                        padding
-                        height="400px"
-                        class="bg-white shadow-1 rounded-borders"
-                    >
-                        <q-carousel-slide
-                            name="style"
-                            class="column no-wrap flex-center"
-                        >
-                            <div class="carousel-tab">
-                                <span class="active q-mr-xl"
-                                    >FOR DEVELOPER</span
-                                >
-                                <span>FOR PUBLISHER</span>
-                            </div>
-
-                            <div class="carousel-mid q-mt-md text-center">
-                                자랑해보세요!<br />
-
-                                내가만든 게임을 <br />전세계에 알리기<br />
-
-                                <q-btn class="carousel-btn" label="바로가기" />
-                            </div>
-                        </q-carousel-slide>
-                        <q-carousel-slide
-                            name="style1"
-                            class="column no-wrap flex-center"
-                        >
-                            <div class="carousel-tab">
-                                <span class="active q-mr-xl"
-                                    >FOR DEVELOPER</span
-                                >
-                                <span>FOR PUBLISHER</span>
-                            </div>
-
-                            <div class="carousel-mid q-mt-md text-center">
-                               퍼블리셔용<br>
-
-                                <q-btn class="carousel-btn" label="바로가기" />
-                            </div>
-                        </q-carousel-slide>
-                    </q-carousel>
-                </div>
-                <div class="carousel-img">
-                    <q-img
-                        src="img/developer.png"
-                        height="400px"
-                       
-                    />
-                    <q-img src="img/publisher.png"  class="off" height="400px" />
-                </div>
-            </div>
-            <!-- test fin -->
         </div>
 
         <ins
@@ -129,6 +65,7 @@ import { GameLoadState } from "src/store/modules/games";
 import HomeCategory from "components/home/homeCategory.vue";
 import { consoleLog } from "src/scripts/consoleLog";
 import MetaSetting from "src/scripts/metaSetting";
+import CarouselSlider from "components/main/carouselSlider.vue"
 
 @Component<Home>({
     components: {
@@ -139,6 +76,7 @@ import MetaSetting from "src/scripts/metaSetting";
         GenreCategory,
         GameCard,
         MainCarousel,
+        CarouselSlider
     },
     // metaInfo() {
     //     return {
@@ -158,10 +96,6 @@ import MetaSetting from "src/scripts/metaSetting";
     // }
 })
 export default class Home extends Vue {
-    private slide = "style";
-    private lorem =
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque voluptatem totam, architecto cupiditate officia rerum, error dignissimos praesentium libero ab nemo.";
-
     private featuredList: any[] = [];
     private banners: {
         src: string;

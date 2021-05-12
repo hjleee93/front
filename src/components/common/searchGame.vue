@@ -142,7 +142,7 @@ export default class SearchGame extends Vue {
 @import "../../css/quasar.variables";
 
     .searchRoot {
-        width: 25%;
+        width: 27%;
         display: inline-block;
         
       
