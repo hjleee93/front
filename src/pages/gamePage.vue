@@ -1,9 +1,9 @@
 <template>
     <q-page
-        class="game-container items-center justify-evenly text-center"
-        :class="$q.platform.is.desktop ? 'page' : ''"
+        class="items-center justify-evenly text-center"
+        :class="$q.platform.is.desktop ? 'page game-container' : 'maxWidth'"
     >
-        <tagbutton></tagbutton>
+        <tagbutton v-if="$q.platform.is.desktop"></tagbutton>
         <div class="main-container">
             <div class="header text-left">
                 <tr class="header-contents">
@@ -20,6 +20,7 @@
                     </td>
                 </tr>
             </div>
+
             <q-tabs
                 v-model="$route.query.tag"
                 dense
@@ -28,16 +29,24 @@
                 indicator-color="white"
                 align="left"
             >
-                <q-route-tab to="/gamePage?tag=game" :name="game">게임</q-route-tab>
-                <q-route-tab to="/gamePage?tag=indie" :name="indie">인디 게임</q-route-tab>
+                <q-route-tab to="/gamePage?tag=game" :name="game"
+                    >게임</q-route-tab
+                >
+                <q-route-tab to="/gamePage?tag=indie" :name="indie"
+                    >인디 게임</q-route-tab
+                >
             </q-tabs>
             <q-separator />
+            <tagbutton v-if="$q.platform.is.mobile"></tagbutton>
             <sort-category
                 v-on:@sortChange="sortChange"
                 :list="list"
             ></sort-category>
             <div class="q-gutter-y-sm">
-                <q-tab-panels v-model="$route.query.tag" class="text-white text-center">
+                <q-tab-panels
+                    v-model="$route.query.tag"
+                    class="text-white text-center"
+                >
                     <q-tab-panel name="game">
                         <div class="q-pt-none">
                             <template

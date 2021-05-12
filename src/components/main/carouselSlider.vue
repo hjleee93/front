@@ -8,8 +8,8 @@
                 indicator-color="primary"
                 align="justify"
             >
-                <q-tab name="developer" label="FOR DEVELOPER" />
-                <q-tab name="publisher" label="FOR PUBLISHER" />
+                <q-tab class="slider-tab" name="developer" label="FOR DEVELOPER" />
+                <q-tab class="slider-tab" name="publisher" label="FOR PUBLISHER" />
             </q-tabs>
             <q-carousel
                 v-model="slide"
