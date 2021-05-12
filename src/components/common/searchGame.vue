@@ -1,5 +1,5 @@
 <template>
-    <div class="searchRoot q-ml-md">
+    <div class="searchRoot q-ml-md" :class="$q.platform.is.mobile?'mobile' : ''">
         <div class="box flex justify-center">
             <div class="searchForm flex items-center">
                 <div class="icon flex items-center">
@@ -140,12 +140,13 @@ export default class SearchGame extends Vue {
 </script>
 <style lang="scss" scoped>
 @import "../../css/quasar.variables";
+.searchRoot.mobile{
+    width: 40% !important;
+}
 
     .searchRoot {
         width: 27%;
         display: inline-block;
-        
-      
 
         .box {
             width: 100%;
@@ -228,3 +229,4 @@ export default class SearchGame extends Vue {
     }
 
 </style>
+cb
