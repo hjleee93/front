@@ -29,7 +29,7 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 @Component({
     components: {},
 })
-export default class GuideModal extends Vue {
+export default class Modal extends Vue {
     @Prop() private src!: string;
     @Prop() private close!: string;
 }
@@ -51,6 +51,7 @@ export default class GuideModal extends Vue {
 .close-btn{
     color:#838282;
     text-decoration: underline;
+    font-size: 14px;
 }
 .close-btn:hover{
     cursor: pointer;

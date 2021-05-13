@@ -6,6 +6,8 @@
         transition-next="jump-left"
         swipeable
         animated
+        infinite
+        autoplay
         control-color="white"
         :navigation="navigation"
         padding
@@ -17,7 +19,6 @@
             <div class="mainView bg-zem">
                 <q-img src="img/img_sun.png" class="sun" />
                 <q-img src="img/img_char.png" class="char" />
-
                 <div class="text text-center">
                     <div class="mainText">
                         {{ $t('mainCarousel.slide.main') }}
@@ -51,24 +52,24 @@
 <!--            </div>-->
         </q-carousel-slide>
 
-<!--        <q-carousel-slide name="game2" class="column no-wrap flex-center relative-position no-padding" img-src="">-->
-<!--            <q-img src="game/gamebg.png" class="gameBg"></q-img>-->
-<!--            <div class="width100p maxWidth text-left">-->
-<!--                <div>-->
-<!--                    <iframe class="game" src="game/alpaca/index.html"></iframe>-->
-<!--                </div>-->
-<!--                <div class="info">-->
-<!--                    <div class="text  q-pl-lg">-->
-<!--                        <div class="text-h4 text-weight-bold">-->
-<!--                            {{ $t('mainCarousel.slide1.main') }}-->
-<!--                        </div>-->
-<!--                        <div class="text-h6">-->
-<!--                            {{ $t('mainCarousel.slide1.sub') }}-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </q-carousel-slide>-->
+       <q-carousel-slide name="game2" class="column no-wrap flex-center relative-position no-padding" img-src="">
+           <q-img src="game/gamebg.png" class="gameBg"></q-img>
+           <div class="width100p maxWidth text-left">
+               <!-- <div>
+                   <iframe class="game" src="game/alpaca/index.html"></iframe>
+               </div> -->
+               <div class="info">
+                   <div class="text  q-pl-lg">
+                       <div class="text-h4 text-weight-bold">
+                           {{ $t('mainCarousel.slide1.main') }}
+                       </div>
+                       <div class="text-h6">
+                           {{ $t('mainCarousel.slide1.sub') }}
+                       </div>
+                   </div>
+               </div>
+           </div>
+        </q-carousel-slide> 
 
 <!--        <q-carousel-slide name="game3" class="column no-wrap flex-center relative-position no-padding" img-src="">-->
 <!--            <q-img src="game/gamebg.png" class="gameBg"></q-img>-->

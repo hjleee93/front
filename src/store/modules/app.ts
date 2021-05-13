@@ -11,6 +11,7 @@ export default {
         launcherUrl : process.env.VUE_APP_LAUNCHER_URL,
         tosUrl : process.env.VUE_APP_TOS_URL,
         policyUrl : process.env.VUE_APP_POLICY_URL,
+        developerWiki : process.env.VUE_APP_DEVELOPER_WIKI_URL,
     },
     getters: {
         navTab(state: any) {
@@ -42,6 +43,9 @@ export default {
         },
         policyUrl(state) {
             return state.policyUrl;
+        },
+        developerWiki(state) {
+            return state.developerWiki;
         },
         fromRouterName(state) {
             return state.fromRouterName;

@@ -4,29 +4,19 @@
         </div>
         <footer class="mainFooter bgColor-0 q-mt-lg q-pb-lg">
             <div class="maxWidth text-left q-px-md">
-                <div class="q-pt-xl q-mb-xl">
-                    <div class="text-h7 text-weight-bold row q-mb-md cursor-pointer">
-                        <a class="text-h7" :href="$store.getters.supportUrl">
-                            {{ $t('mainFooter.support.home') }}
-                        </a>
-                    </div>
-                    <div class="row">
-                        <div class="q-mr-md"><a class="cursor-pointer smallFont" :href="`${$store.getters.supportUrl}notice`">{{ $t('mainFooter.support.notice') }}</a></div>
-                        <q-separator vertical class="q-mr-md"></q-separator>
-<!--                        <div class="q-mr-md"><a class="cursor-pointer" >이벤트</a></div>-->
-<!--                        <q-separator vertical class="q-mr-md"></q-separator>-->
-                        <div class="q-mr-md"><a class="cursor-pointer smallFont" :href="`${$store.getters.supportUrl}faq`">{{ $t('mainFooter.support.faq') }}</a></div>
-                        <q-separator vertical class="q-mr-md"></q-separator>
-                        <div class="q-mr-md"><a class="cursor-pointer smallFont" :href="`${$store.getters.supportUrl}inquiry`">{{ $t('mainFooter.support.inquiry') }}</a></div>
-                        <q-separator vertical class="q-mr-md"></q-separator>
-                        <div class="q-mr-md"><a class="cursor-pointer smallFont" :href="`${$store.getters.supportUrl}guide`">{{ $t('mainFooter.support.guide') }}</a></div>
-                        <q-separator vertical class="q-mr-md"></q-separator>
-                        <div class="q-mr-md"><a class="cursor-pointer smallFont" :href="`${$store.getters.supportUrl}tos`">{{ $t('mainFooter.support.tos') }}</a></div>
-                        <q-separator vertical class="q-mr-md"></q-separator>
-                        <div class="q-mr-md"><a class="cursor-pointer smallFont" :href="`${$store.getters.supportUrl}policy`">{{ $t('mainFooter.support.policy') }}</a></div>
-                    </div>
+                <div class="q-mt-xl">
+                    <tr>
+                        <td class='q-pr-xl text-weight-bold'>DEVELOPER</td>
+                        <td><a :href="`${$store.getters.developerWiki}`" target="_black" >개발자 위키</a></td>
+                    </tr>
+                     <tr>
+                        <td class="q-pt-sm text-weight-bold">SNS</td>
+                        <td><q-img src="img/instagram_logo.png" width="60%"/></td>
+                    </tr>                    
+            
                 </div>
-                <div class="company q-mb-xl">
+                 <q-separator class="q-my-xl " />
+                <div class="company q-mb-md">
                     <div>{{ $t('mainFooter.company.data1') }}</div>
                     <div>{{ $t('mainFooter.company.data2') }}</div>
                     <div>{{ $t('mainFooter.company.data3') }}</div>
@@ -35,8 +25,30 @@
 <!--                    <div>E-Mail : help@fromthred.com</div>-->
 <!--                    <div>SNS : @zempie_help</div>-->
                 </div>
-                <div class="copyright">
+                
+ <div class="row">
+     <div class="q-mr-md">
+                        <a class="text-h7" :href="$store.getters.supportUrl">
+                            {{ $t('mainFooter.support.home') }}
+                        </a>
+                    </div>
+                        <!-- <div class="q-mr-md"><a class="cursor-pointer smallFont" :href="`${$store.getters.supportUrl}notice`">{{ $t('mainFooter.support.notice') }}</a></div>
+                        <q-separator vertical class="q-mr-md"></q-separator> -->
+<!--                        <div class="q-mr-md"><a class="cursor-pointer" >이벤트</a></div>-->
+<!--                        <q-separator vertical class="q-mr-md"></q-separator>-->
+                        <!-- <div class="q-mr-md"><a class="cursor-pointer smallFont" :href="`${$store.getters.supportUrl}faq`">{{ $t('mainFooter.support.faq') }}</a></div>
+                        <q-separator vertical class="q-mr-md"></q-separator> -->
+                        <!-- <div class="q-mr-md"><a class="cursor-pointer smallFont" :href="`${$store.getters.supportUrl}inquiry`">{{ $t('mainFooter.support.inquiry') }}</a></div>
+                        <q-separator vertical class="q-mr-md"></q-separator> -->
+                        <!-- <div class="q-mr-md"><a class="cursor-pointer smallFont" :href="`${$store.getters.supportUrl}guide`">{{ $t('mainFooter.support.guide') }}</a></div>
+                        <q-separator vertical class="q-mr-md"></q-separator> -->
+                        <div class="q-mr-md"><a class="cursor-pointer text-h7" :href="`${$store.getters.supportUrl}tos`">{{ $t('mainFooter.support.tos') }}</a></div>
+                        
+                        <div class="q-mr-md"><a class="cursor-pointer text-h7" :href="`${$store.getters.supportUrl}policy`">{{ $t('mainFooter.support.policy') }}</a></div>
                     Copyright 2020. zempie. All rights reserved.
+                    </div>
+                
+                <div class="copyright">
                 </div>
             </div>
         </footer>
