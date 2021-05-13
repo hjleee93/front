@@ -275,3 +275,4 @@ export default class GamePage extends Vue {
     border-bottom: 1px solid;
 }
 </style>
+ㄴ
