@@ -3,7 +3,7 @@
         class="items-center justify-evenly text-center"
         :class="$q.platform.is.desktop ? 'page' : ''"
     >
-        <tagbutton v-if="$q.platform.is.desktop"></tagbutton>
+        <!-- <tagbutton v-if="$q.platform.is.desktop"></tagbutton> -->
         <div class="maxWidth">
             <div class="header text-left">
                 <tr class="header-contents">
@@ -49,39 +49,34 @@
                 >
                     <q-tab-panel name="game">
                         <div class="q-pt-none">
-                            <template
-                                v-for="(featured, index) in featuredList"
-                                v-if="featured.games.length"
-                            >
-                                <home-category
-                                    :data="featured"
-                                    :game-list="featured.games"
-                                >
-                                </home-category>
-                                <div class="q-mb-xl"></div>
-                                <div v-if="banners[index]"></div>
-                            </template>
-                        </div>
-                    </q-tab-panel>
-                    <q-tab-panel name="indie">
-                        <div class="q-pt-none">
-                            <div
-                                class="cardContainer"
-                                v-if="$store.getters.isSearchGame"
-                            >
+                            <div class="cardContainer">
                                 <game-card
-                                    v-for="(game, index) in $store.getters
-                                        .searchGames"
+                                    v-for="(game, index) in $store.getters.games"
                                     :key="index"
                                     :index="index"
                                     class="card"
                                     :data="game"
                                 >
+                                
                                 </game-card>
-
-                                <!--                    <game-card v-for="game in $store.getters.searchGames" :data="game"></game-card>-->
                             </div>
-                            <div class="cardContainer" v-else>
+                             <div
+                                v-if="
+                                    $store.getters.games.length === 0
+                                "
+                                class="cardContainer"
+                            >
+                                <game-card-skeleton
+                                    v-for="(_, index) in 20"
+                                    :key="index"
+                                />
+                            </div>
+                        </div>
+                    </q-tab-panel>
+                    <q-tab-panel name="indie">
+                        <div class="q-pt-none">
+                            
+                            <div class="cardContainer" >
                                 <game-card
                                     v-for="(game, index) in $store.getters
                                         .challengeGames"
@@ -92,8 +87,6 @@
                                     :data="game"
                                 >
                                 </game-card>
-
-                                <!--                    <game-card v-intersection="entry => onIntersection(index, entry)" v-for="(game,index) in $store.getters.noneOfficialGames" :data="game"></game-card>-->
                             </div>
                             <div
                                 v-if="
@@ -219,6 +212,7 @@ export default class GamePage extends Vue {
             sort: this.sortData[this.sort].sort,
             dir: this.sortData[this.sort].dir,
         });
+        await this.$store.dispatch("games");
     }
 
     onVisibleItem(index: number) {

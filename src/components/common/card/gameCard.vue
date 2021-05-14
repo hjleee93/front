@@ -1,8 +1,10 @@
 <template>
     <router-link class="card" :to="`/play/${data.pathname}`" v-intersection="entry => onIntersection(entry)"
     >
+  
 <!--        <div class="object3d" :class="isVisible?'visible':''">-->
         <div :class="isVisible?'visible':''">
+            
             <div class="thumbBox">
 <!--                <q-img class="base" :src="'img/default.png'"></q-img>-->
                 <q-img class="base" src="https://placehold.it/150x100"></q-img>

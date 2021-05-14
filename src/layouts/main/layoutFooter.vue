@@ -28,6 +28,7 @@
                 <q-route-tab v-if="$store.getters.isLogin" :to="`/channel/${$store.getters.user.channel_id}`" class="min-height50" name="channel" icon="far fa-id-card" :label="$t('layoutFooter.routeTab.channel')"/>
             </q-tabs>
         </q-footer>
+        
     </div>
 </template>
 

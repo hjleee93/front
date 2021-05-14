@@ -1,5 +1,5 @@
 <template>
-    <div v-if="$q.platform.is.desktop" class="tag-container-desktop">
+    <div v-if="isFloatingTag" class="tag-container-desktop">
         <div class="text-h5 text-bold q-mb-md">TAGS</div>
 
         <template v-for="i in tags">
@@ -31,7 +31,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from "vue-property-decorator";
+import { Vue, Component, Prop, Watch } from "vue-property-decorator";
 
 @Component
 export default class tagbutton extends Vue {
@@ -42,6 +42,27 @@ export default class tagbutton extends Vue {
         "diffeeeeeeeeeeeeeeeeeeicult",
         "easy",
     ];
+    isFloatingTag: boolean = true;
+
+    mounted() {
+        if (window.innerWidth < 2100) {
+            this.isFloatingTag = false;
+        } else {
+            this.isFloatingTag = true;
+        }
+        window.addEventListener("resize", this.handleResize);
+    }
+    beforeDestroy() {
+        window.removeEventListener("resize", this.handleResize);
+    }
+
+    handleResize() {
+        if (window.innerWidth < 2100) {
+            this.isFloatingTag = false;
+        } else {
+            this.isFloatingTag = true;
+        }
+    }
 }
 </script>
 <style scoped>

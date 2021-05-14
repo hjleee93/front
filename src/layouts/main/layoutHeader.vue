@@ -47,16 +47,16 @@
                         name="major"
                         :label="$t('layoutHeader.routeTab.official')"
                     ></q-route-tab>
-                    <q-route-tab
+                    <!-- <q-route-tab
                         to="/gamePage?tag=indie"
                         name="minor"
                         :label="$t('layoutHeader.routeTab.challenge')"
-                    ></q-route-tab>
-                    <q-route-tab
+                    ></q-route-tab> -->
+                    <!-- <q-route-tab
                         to="/affiliate"
                         name="affiliate"
                         :label="$t('layoutHeader.routeTab.affiliate')"
-                    ></q-route-tab>
+                    ></q-route-tab> -->
                     <!-- <a :href="$store.getters.studioUrl" class="aTab">
                         <q-tab name="g-studio" :label="$t('layoutHeader.routeTab.studio')">
                         </q-tab>
