@@ -76,6 +76,7 @@ export default class SearchGame extends Vue {
     }
 
     onClickSearchItem(index : number) {
+        console.log("?")
         const tagData = this.tags[index];
         // consoleLog.log(tagData);
         this.$gtag && this.$gtag.event('search_tag', {
@@ -85,7 +86,7 @@ export default class SearchGame extends Vue {
     }
 
     async onSearch() {
-
+console.log("????")
         const search = this.$refs.input as HTMLInputElement;
         const value = search.value;
 
@@ -97,7 +98,7 @@ export default class SearchGame extends Vue {
         this.timer = 0;
 
         const result = await this.$api.hashtags( value );
-        // consoleLog.log( result );
+        consoleLog.log( result );
 
         if( result.tags?.length  ) {
             this.tags = result.tags;
@@ -213,12 +214,12 @@ export default class SearchGame extends Vue {
             }
 
             .searchListBox {
-                position: absolute;
+                position: fixed;
 
-                width: 100%;
+                width: 21%;
                 background-color: #272727;
-
-                z-index: 100;
+                font-size: 14px;
+                z-index: 999;
 
                 a {
                     text-decoration: none;
