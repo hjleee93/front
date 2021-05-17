@@ -39,7 +39,7 @@
   "mailPopup.date.month": "month(s)",
   "mailPopup.date.year": "year(s)",
   "mailPopup.mailLabel": "",
-  "searchGame.inputLabel": "Search for hashtag",
+  "searchGame.desktop.inputLabel": "Search for hashtag",
   "searchGame.notResultLabel": "No results found",
   "homeCategory.moreGame.official": "More games",
   "homeCategory.moreGame.challenge": "More games",
@@ -242,5 +242,6 @@
   "resetPassword.btnLabel": "Reset password",
   "pageTitle.resetPassword": "Change password",
   "resetPassword.checkAlertMessage": "Reset email has been sent. Please check your inbox",
-  "pageTitle.searchResult": "Search result"
+  "pageTitle.searchResult": "Search result",
+  "searchGame.mobile.inputLabel": "Hashtag"
 }

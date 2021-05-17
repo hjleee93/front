@@ -39,7 +39,7 @@
   "mailPopup.date.month": "개월",
   "mailPopup.date.year": "년",
   "mailPopup.mailLabel": "",
-  "searchGame.inputLabel": "해시태그 검색하기",
+  "searchGame.desktop.inputLabel": "해시태그 검색하기",
   "searchGame.notResultLabel": "검색된 결과가 없습니다.",
   "homeCategory.moreGame.official": "더 보기",
   "homeCategory.moreGame.challenge": "더 보기",
@@ -242,5 +242,6 @@
   "resetPassword.btnLabel": "비밀번호 초기화",
   "pageTitle.resetPassword": "비밀번호 변경",
   "resetPassword.checkAlertMessage": "재설정 메일을 보냈습니다. 메일을 확인해 주세요.",
-  "pageTitle.searchResult": "검색 결과"
+  "pageTitle.searchResult": "검색 결과",
+  "searchGame.mobile.inputLabel": "해시태그"
 }
