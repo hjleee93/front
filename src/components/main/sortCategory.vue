@@ -1,5 +1,5 @@
 <template>
-    <div class="sortCategory q-mr-sm flex justify-center">
+    <div class="sortCategory q-mr-sm q-mt-md flex justify-center">
 <!--        <ul class="desktop">-->
 <!--            <div v-for="item in list" class="sortItem" :class="tab===item.name && 'select'">-->
 <!--                <li>-->

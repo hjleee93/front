@@ -1,6 +1,14 @@
 // app global css in SCSS form
 @import "quasar.variables";
 
+@font-face {
+    font-family: "ARLRDBD";
+    src: url("../assets/font/ArialRoundedMTBold.woff");
+    src: url("../assets/font/ArialRoundedMTBold.woff") format("woff");
+    font-weight: 200;
+    font-style: normal;
+}
+
 .maxWidth {
     max-width: $breakpoint-md;
     margin: 0 auto;

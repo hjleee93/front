@@ -17,22 +17,25 @@
                            :index="index"
                            :data="game">
                 </game-card>
+                
+                
             </div>
+            
             <div class="ctrl">
                 <q-btn class="button prev" @click="prev" v-show="isPrev"><q-icon name="arrow_back_ios"></q-icon></q-btn>
                 <q-btn class="button next" @click="next" v-show="isNext"><q-icon name="arrow_forward_ios"></q-icon></q-btn>
             </div>
         </div>
-        <div class="more">
+        <!-- <div class="more">
             <router-link v-if="data.key === 'official'" to="/official" class="q-mr-lg self-center moreGameBtn">{{ $t('homeCategory.moreGame.official') }}</router-link>
             <router-link v-else-if="data.key === 'unofficial'" to="/challenge" class="q-mr-lg self-center moreGameBtn">{{ $t('homeCategory.moreGame.challenge') }}</router-link>
-        </div>
+        </div> -->
     </div>
 </template>
 
 <style lang="scss" scoped>
 .homeCategory {
-    text-align: left;
+    text-align: center;
 
     a {
         text-decoration: none;
@@ -41,6 +44,7 @@
     }
 
     .top {
+
         .title {
             font-size: 28px;
             font-weight: bold;

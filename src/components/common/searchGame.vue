@@ -1,35 +1,148 @@
 <template>
-    <div class="searchRoot q-py-md flex justify-center items-center">
-        <div class="box flex justify-center">
-            <div class="searchForm flex items-center">
-                <div class="icon flex items-center">
-                    <q-icon class="q-ml-sm q-mr-sm" name="fa fa-search"></q-icon>
+    <div
+        class="searchRoot q-ml-md"
+        :class="$q.platform.is.mobile ? 'mobile' : ''"
+    >
+        <!-- desktop search bar -->
+        <template v-if="$q.platform.is.desktop">
+            <div class="box flex justify-center">
+                <div class="searchForm flex items-center">
+                    <div class="icon flex items-center">
+                        <q-icon
+                            class="q-ml-sm q-mr-sm"
+                            name="fa fa-search"
+                        ></q-icon>
+                    </div>
+
+                    <div class="inputArea">
+                        <input
+                            ref="input"
+                            v-model="search"
+                            :placeholder="
+                                $q.platform.is.mobile
+                                    ? ''
+                                    : $t('searchGame.desktop.inputLabel')
+                            "
+                            type="search"
+                            class="searh-input"
+                            @keyup="onChanged"
+                            @click="clickSearchBar"
+                        />
+                    </div>
                 </div>
-                <div class="inputArea">
-                    <input ref="input" v-model="search" :placeholder="$t('searchGame.inputLabel')" type="search" @keyup="onChanged">
+
+                <div
+                    class="popup"
+                    :class="$q.platform.is.mobile ? 'off' : ''"
+                    v-if="this.tags && this.tags.length && this.isFocus"
+                >
+                    <div class="searchListBox">
+                        <div class="fade" @click="onBlur"></div>
+                        <q-list dark bordered>
+                            <template v-for="(tag, index) in tags">
+                                <router-link
+                                    v-if="tag.id"
+                                    :to="`/searchresult/${tag.id}`"
+                                >
+                                    <q-item
+                                        class="searchItem"
+                                        clickable
+                                        v-ripple
+                                        @click.stop="onClickSearchItem(index)"
+                                    >
+                                        <q-item-section avatar>
+                                            <q-icon
+                                                color="grey"
+                                                name="fas fa-hashtag"
+                                            />
+                                        </q-item-section>
+                                        <q-item-section>
+                                            <q-item-label>
+                                                {{ `${tag.tag}` }}
+                                            </q-item-label>
+                                        </q-item-section>
+                                    </q-item>
+                                </router-link>
+                                <div v-else>
+                                    <q-item class="searchItem">
+                                        <q-item-section>
+                                            <q-item-label
+                                                style="user-select: none"
+                                            >
+                                                {{
+                                                    $t(
+                                                        "searchGame.notResultLabel"
+                                                    )
+                                                }}
+                                            </q-item-label>
+                                        </q-item-section>
+                                    </q-item>
+                                </div>
+                            </template>
+                        </q-list>
+                    </div>
                 </div>
             </div>
-            <div class="popup" v-if="this.tags && this.tags.length && this.isFocus">
+        </template>
+        <template v-if="$q.platform.is.mobile">
+           
+            <!-- 모바일용 searchbar -->
+            <div
+                class="mobile-search-container"
+                :class="isClickSearch ? '' : 'off'"
+            >
+                <input
+                    class="mobile-search-input"
+                    v-model="search"
+                    ref="mobileSearchInput"
+                    @keyup="onChanged"
+                />
+            </div>
+            <div
+                class="mobilePopup"
+                :class="$q.platform.is.desktop ? 'off' : ''"
+                v-if="this.tags && this.tags.length && this.isFocus"
+            >
                 <div class="searchListBox">
-                    <div class="fade" @click="onBlur">
-                    </div>
+                    <div class="fade" @click="onBlur"></div>
                     <q-list dark bordered>
                         <template v-for="(tag, index) in tags">
-                            <router-link v-if="tag.id" :to="`/searchresult/${tag.id}`">
-                                <q-item class="searchItem" clickable v-ripple @click.stop="onClickSearchItem(index)">
+                            <router-link
+                                v-if="tag.id"
+                                :to="`/searchresult/${tag.id}`"
+                            >
+                                <q-item
+                                    class="searchItem"
+                                    clickable
+                                    v-ripple
+                                    @click.stop="onClickSearchItem(index)"
+                                >
                                     <q-item-section avatar>
-                                        <q-icon color="grey" name="fas fa-hashtag" />
+                                        <q-icon
+                                            color="grey"
+                                            name="fas fa-hashtag"
+                                        />
                                     </q-item-section>
                                     <q-item-section>
-                                        <q-item-label> {{ `${tag.tag}` }} </q-item-label>
-<!--                                        <q-item-label overline>게임 145,000 </q-item-label>-->
+                                        <q-item-label>
+                                            {{ `${tag.tag}` }}
+                                        </q-item-label>
                                     </q-item-section>
                                 </q-item>
                             </router-link>
                             <div v-else>
                                 <q-item class="searchItem">
                                     <q-item-section>
-                                        <q-item-label style="user-select: none"> {{$t('searchGame.notResultLabel')}} </q-item-label>
+                                        <q-item-label
+                                            style="
+                                                user-select: none;
+                                                color: black;
+                                            "
+                                        >
+                                            {{
+                                                $t("searchGame.notResultLabel")
+                                            }}
+                                        </q-item-label>
                                     </q-item-section>
                                 </q-item>
                             </div>
@@ -37,30 +150,35 @@
                     </q-list>
                 </div>
             </div>
-        </div>
-<!--        <div class="clear"></div>-->
+        </template>
+        <!--        <div class="clear"></div>-->
     </div>
 </template>
 
 <script lang="ts">
-import {Vue, Component, Prop} from 'vue-property-decorator';
-import {consoleLog} from "src/scripts/consoleLog";
+import { Vue, Component, Prop } from "vue-property-decorator";
+import { consoleLog } from "src/scripts/consoleLog";
 
 @Component
 export default class SearchGame extends Vue {
-    private search : string = '';
-    private timer : number = 0;
+    private search: string = "";
+    private timer: number = 0;
 
-    private tags : any[] = [];
-    private isFocus : boolean = true;
+    private tags: any[] = [];
+    private isFocus: boolean = true;
+
+    private isClickSearch: boolean = false;
 
     onChanged() {
-        if(this.timer) {
-            window.clearTimeout( this.timer );
+        if (this.timer) {
+            window.clearTimeout(this.timer);
         }
-        this.timer = window.setTimeout( this.onSearch, 500 );
+        this.timer = window.setTimeout(this.onSearch, 500);
 
-        (this.$refs.input as HTMLInputElement).addEventListener('focus', this.onFocus );
+        (this.$refs.input as HTMLInputElement).addEventListener(
+            "focus",
+            this.onFocus
+        );
     }
 
     onFocus() {
@@ -72,45 +190,46 @@ export default class SearchGame extends Vue {
     }
 
     beforeDestroy() {
-        (this.$refs.input as HTMLInputElement).removeEventListener('focus', this.onFocus );
+        (this.$refs.input as HTMLInputElement).removeEventListener(
+            "focus",
+            this.onFocus
+        );
     }
 
-    onClickSearchItem(index : number) {
+    onClickSearchItem(index: number) {
+        console.log("?");
         const tagData = this.tags[index];
         // consoleLog.log(tagData);
-        this.$gtag && this.$gtag.event('search_tag', {
-            tag: tagData.tag,
-        })
+        this.$gtag &&
+            this.$gtag.event("search_tag", {
+                tag: tagData.tag,
+            });
         this.onBlur();
     }
 
     async onSearch() {
-
         const search = this.$refs.input as HTMLInputElement;
         const value = search.value;
 
-        if( value === '' ) {
+        if (value === "") {
             this.tags = [];
             return;
         }
 
         this.timer = 0;
 
-        const result = await this.$api.hashtags( value );
-        // consoleLog.log( result );
+        const result = await this.$api.hashtags(value);
+        consoleLog.log(result);
 
-        if( result.tags?.length  ) {
+        if (result.tags?.length) {
             this.tags = result.tags;
-        }
-        else {
+        } else {
             this.tags = [];
-            Vue.set( this.tags, 0, {
-                id : 0,
-                tag : '',
-            } );
+            Vue.set(this.tags, 0, {
+                id: 0,
+                tag: "",
+            });
         }
-
-
 
         // if( this.search === '' || this.search[0] === '#' ) {
         //     this.$store.commit('isSearchGame', false );
@@ -136,91 +255,140 @@ export default class SearchGame extends Vue {
         // }
     }
 
+    clickSearchBar() {
+        //모바일인 경우만
+        if (this.$q.platform.is.mobile) {
+            this.isClickSearch = !this.isClickSearch;
+            if (this.isClickSearch) {
+                this.$nextTick(() => this.$refs.mobileSearchInput.focus());
+            }
+        }
+    }
 }
 </script>
 <style lang="scss" scoped>
 @import "../../css/quasar.variables";
 
-    .searchRoot {
+.searchRoot.mobile {
+    width: 25% !important;
+}
+// 모바일 search
+.mobile-search-icon {
+    justify-content: flex-end;
+}
+.mobile .searh-input {
+    font-size: 12px !important;
+}
+.mobile-search-container {
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    left: 0;
+    display: inline-block;
+}
+.mobile-search-container.off {
+    display: none;
+}
+.mobile-search-input {
+    width: 100%;
+    height: 50px;
+    background-color: #ededed;
+    opacity: 0.9;
+    border: 1px solid #d5d5d5;
+}
+.mobilePopup {
+    position: absolute;
+    top: 100px;
+    width: 100%;
+    left: 0;
+    display: inline-block;
+    background-color: #ededed;
+    opacity: 0.9;
+    border: 0;
+    /* color: black; */
+}
+
+.searchRoot {
+    // width: 40%;
+    display: inline-block;
+
+    .box {
         width: 100%;
-        margin-top: 30px;
+        max-width: 480px;
+        height: 30px;
+        flex-wrap: nowrap;
+        //max-width: 250px;
 
-        .box {
-            width: 100%;
-            max-width: 480px;
-            height: 40px;
+        color: #737373;
+        flex-direction: column;
 
-            //max-width: 250px;
-
-            color: #737373;
-            flex-direction: column;
-
-            .searchForm {
-                //border: 1px solid #737373;
-                //width: 480px;
-                border-radius: 24px;
-                background-color: #fff;
-                overflow: hidden;
-            }
-
-            .icon {
-                font-size: 18px;
-                width: 38px;
-            }
-
-            .inputArea {
-                width: calc(100% - 44px);
-                //width: 100%;
-
-                input {
-                    //color: white;
-                    color: #913200;
-                    height: 40px;
-                    border: none;
-                    //background-color: transparent;
-                    width: 100%;
-                    outline: none;
-                }
-            }
-
-
-
-
-            //@media (min-width: $breakpoint-xs) {
-            //    max-width: 250px;
-            //}
+        .searchForm {
+            //border: 1px solid #737373;
+            //width: 480px;
+            border-radius: 24px;
+            background-color: #fff;
+            overflow: hidden;
+            flex-wrap: nowrap;
         }
-        //.clear {
-        //    clear: both;
-        //}
 
-        .popup {
-            //text-align: left;
-            position: relative;
+        .icon {
+            font-size: 18px;
+            width: 38px;
+        }
 
-            .fade {
-                position: fixed;
-                width: 100vw;
-                height: 100vh;
-                background-color: rgba(0,0,0,0);
-                left: 0;
-                top: 0;
-            }
+        .inputArea {
+            width: calc(100% - 44px);
+            //width: 100%;
 
-            .searchListBox {
-                position: absolute;
-
+            input {
+                //color: white;
+                color: #913200;
+                height: 40px;
+                border: none;
+                //background-color: transparent;
                 width: 100%;
-                background-color: #272727;
+                outline: none;
+                font-size: 16px;
+            }
+        }
 
-                z-index: 100;
+        //@media (min-width: $breakpoint-xs) {
+        //    max-width: 250px;
+        //}
+    }
+    //.clear {
+    //    clear: both;
+    //}
+    .popup.off {
+        display: none;
+    }
 
-                a {
-                    text-decoration: none;
-                }
+    .popup {
+        //text-align: left;
+        position: relative;
 
+        .fade {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0);
+            left: 0;
+            top: 0;
+        }
+
+        .searchListBox {
+            position: fixed;
+            min-width: 174px;
+            width: 21%;
+            background-color: #272727;
+            font-size: 14px;
+            z-index: 999;
+
+            a {
+                text-decoration: none;
             }
         }
     }
-
+}
 </style>
+cb

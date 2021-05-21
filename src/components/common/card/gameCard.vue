@@ -3,7 +3,7 @@
     >
 <!--        <div class="object3d" :class="isVisible?'visible':''">-->
         <div :class="isVisible?'visible':''">
-            <div class="thumbBox">
+            <div class="thumbBox" @mouseover="thumOver = !thumOver" @mouseout="thumOver = false">
 <!--                <q-img class="base" :src="'img/default.png'"></q-img>-->
                 <q-img class="base" src="https://placehold.it/150x100"></q-img>
                 <q-img class="thumb video" :src="`${data.url_thumb_gif || data.url_thumb || 'img/default.png'}`">
@@ -13,36 +13,36 @@
 
                 </q-img>
 
-                <div class="heartBox" v-if="data.category !== 2">
+                <!-- <div class="heartBox" v-if="data.category !== 2">
                     🧡 {{ data.count_heart.toLocaleString() }}
-                </div>
+                </div> -->
             </div>
 
             <div class="row detail text-left q-mt-sm">
-                <router-link class="q-mt-xs" :to="`/channel/${data.user.channel_id}`" v-if="data.user !== undefined">
+                <!-- <router-link class="q-mt-xs" :to="`/channel/${data.user.channel_id}`" v-if="data.user !== undefined">
                     <q-img class="developerLogo" :src="data.user.picture">
                     </q-img>
-                </router-link>
+                </router-link> -->
 
-                <div class="text q-ml-sm">
-                    <strong
-                        class="ellipsis block title">
-                        {{ data.title }}
-                    </strong>
+                <div class="text q-ml-sm" >
                     <span
+                        class="ellipsis block title game-title" :style="thumOver ? 'text-decoration:underline' : ''" >
+                        {{ data.title }}
+                    </span>
+                    <!-- <span
                         class="ellipsis block userName"
                         v-if="data.user !== undefined">
                         {{ data.user.name }}
-                    </span>
-                    <span
+                    </span> -->
+                    <!-- <span
                         class="ellipsis block playCount"
                         v-if="data.category !== 2">
                         {{ data.count_over.toLocaleString() }}{{ $t('gameCard.playLabel') }}
-<!--                        {{ countOverFormat(data.count_over)}}{{ $t('gameCard.playLabel') }}-->
-                    </span>
+                       {{ countOverFormat(data.count_over)}}{{ $t('gameCard.playLabel') }}
+                    </span> -->
                 </div>
 
-                <div class="more" :class="$q.platform.is.desktop ? 'desktop' : ''" v-if="data.user !== undefined">
+                <!-- <div class="more" :class="$q.platform.is.desktop ? 'desktop' : ''" v-if="data.user !== undefined">
                     <q-btn @click.prevent="more" flat dense color="bg-transparent" class="" key="btn_size_dense_rd_md" size="md">
                         <q-icon color="grey-5" name="more_vert"></q-icon>
 
@@ -77,7 +77,7 @@
                                     <q-item clickable class="">
                                         <q-item-section>
                                             <div class="row">
-                                                <!--                                            <q-icon name="far fa-id-card" class="self-center q-mr-sm"></q-icon>-->
+                                                                                           <q-icon name="far fa-id-card" class="self-center q-mr-sm"></q-icon>
                                                 <div class="self-center">{{ $t('gameCard.moveChannel') }}</div>
                                             </div>
                                         </q-item-section>
@@ -86,7 +86,7 @@
                                 <q-item clickable class="" @click="popupReport = true; popup = false;" v-if="$store.getters.isLogin">
                                     <q-item-section>
                                         <div class="row">
-                                            <!--                                            <q-icon name="report" class="self-center q-mr-sm"></q-icon>-->
+                                                                                       <q-icon name="report" class="self-center q-mr-sm"></q-icon>
                                             <div>{{ $t('gameCard.reportGame') }}</div>
                                         </div>
                                     </q-item-section>
@@ -94,7 +94,7 @@
                                 <q-item clickable class="" @click="popup = !popup">
                                     <q-item-section>
                                         <div class="row">
-<!--                                            <q-icon name="report" class="self-center q-mr-sm"></q-icon>-->
+                                           <q-icon name="report" class="self-center q-mr-sm"></q-icon>
                                             <div>{{ $t('gameCard.cancelLabel') }}</div>
                                         </div>
                                     </q-item-section>
@@ -102,10 +102,10 @@
                             </q-list>
                         </q-dialog>
                     </q-btn>
-                </div>
+                </div> -->
             </div>
         </div>
-        <report-popup :visible="popupReport" v-on:@close="popupReport=false;" :data="data"></report-popup>
+        <!-- <report-popup :visible="popupReport" v-on:@close="popupReport=false;" :data="data"></report-popup> -->
     </router-link>
 </template>
 
@@ -122,6 +122,7 @@ export default class GameCard extends Vue {
     private isVisible : boolean = false;
     private popup : boolean = false;
     private popupReport : boolean = false;
+    private thumOver: boolean = false;
 
     mounted() {
     }
@@ -205,6 +206,7 @@ a {
                 //font-size: 1.2em;
                 //font-size: 20px;
                 font-size: 14px;
+                font-weight: 400;
             }
             .userName {
                 //font-size: 16px;
@@ -303,6 +305,8 @@ a {
                 transform: scale(1.1);
                 opacity: 0;
             }
+            
+            
         }
 
         .heartBox {
@@ -318,7 +322,6 @@ a {
             right: 10px;
         }
     }
-
 
     //.card {
     //

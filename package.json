@@ -28,7 +28,8 @@
     "vue-i18n": "^8.0.0",
     "vue-meta": "^2.4.0",
     "vue-property-decorator": "^8.3.0",
-    "vuedraggable": "^2.24.3"
+    "vuedraggable": "^2.24.3",
+    "webpack": "^4.44.2"
   },
   "devDependencies": {
     "@quasar/app": "^2.0.0",

@@ -1,67 +1,79 @@
 <template>
-    <q-page class="items-center justify-evenly text-center"
-            :class="$q.platform.is.desktop ? 'page' : ''"
+    <q-page
+        class="items-center justify-evenly text-center"
+        :class="$q.platform.is.desktop ? 'page' : ''"
     >
         <main-carousel></main-carousel>
 
         <div class="maxWidth">
-<!--            <div>-->
-<!--                <div class="text-h3 text-weight-bold q-mt-xl q-mb-md">-->
-<!--                    HTML5 GAMES-->
-<!--                </div>-->
-<!--                <div class="text-h5 q-mt-md q-mb-xl">-->
-<!--                    고품질의 검증된 게임만을 유통하는 수익화 플랫폼!-->
-<!--                </div>-->
-<!--            </div>-->
+            <!--            <div>-->
+            <!--                <div class="text-h3 text-weight-bold q-mt-xl q-mb-md">-->
+            <!--                    HTML5 GAMES-->
+            <!--                </div>-->
+            <!--                <div class="text-h5 q-mt-md q-mb-xl">-->
+            <!--                    고품질의 검증된 게임만을 유통하는 수익화 플랫폼!-->
+            <!--                </div>-->
+            <!--            </div>-->
 
-            <search-game></search-game>
-
+            <!-- <search-game></search-game> -->
+            <div  :class="$q.platform.is.desktop ? 'q-mb-xl' : 'q-mb-sm'" ></div>
             <div class="q-pt-none">
-                <template v-for="(featured, index) in featuredList" v-if="featured.games.length">
-                    <home-category :data="featured"
-                                   :game-list="featured.games">
+                <template
+                    v-for="(featured, index) in featuredList"
+                    v-if="featured.games.length"
+                >
+                    <home-category :data="featured" :game-list="featured.games">
                     </home-category>
-                    <div class="q-mb-xl"></div>
+
                     <div v-if="banners[index]">
-<!--                        <router-link :to="banners[index].link">-->
-<!--                            <q-img :src="banners[index].src"></q-img>-->
-<!--                        </router-link>-->
+                        <!--                        <router-link :to="banners[index].link">-->
+                        <!--                            <q-img :src="banners[index].src"></q-img>-->
+                        <!--                        </router-link>-->
                     </div>
                 </template>
             </div>
         </div>
 
-        <ins class="adsbygoogle"
-             style="display:inline-block;width:468px;height:60px"
-             data-ad-client="ca-pub-2187650629390403"
-             data-ad-slot="1069857092"></ins>
+        <ins
+            class="adsbygoogle"
+            style="display: inline-block; width: 468px; height: 60px"
+            data-ad-client="ca-pub-2187650629390403"
+            data-ad-slot="1069857092"
+        ></ins>
 
-
-<!--        <ins class="adsbygoogle"-->
-<!--             style="display:block"-->
-<!--             data-ad-client="ca-pub-2187650629390403"-->
-<!--             data-ad-slot="4210825092"-->
-<!--             data-ad-format="auto"-->
-<!--             data-full-width-responsive="true"></ins>-->
+        <!--        <ins class="adsbygoogle"-->
+        <!--             style="display:block"-->
+        <!--             data-ad-client="ca-pub-2187650629390403"-->
+        <!--             data-ad-slot="4210825092"-->
+        <!--             data-ad-format="auto"-->
+        <!--             data-full-width-responsive="true"></ins>-->
         <main-footer></main-footer>
     </q-page>
 </template>
 
 <script lang="ts">
-import {Vue, Component} from 'vue-property-decorator';
+import { Vue, Component } from "vue-property-decorator";
 import MainCarousel from "components/main/mainCarousel.vue";
 import GameCard from "components/common/card/gameCard.vue";
 import GenreCategory from "components/main/genreCategory.vue";
 import SortCategory from "components/main/sortCategory.vue";
 import MainFooter from "components/main/mainFooter.vue";
 import SearchGame from "components/common/searchGame.vue";
-import {GameLoadState} from "src/store/modules/games";
+import { GameLoadState } from "src/store/modules/games";
 import HomeCategory from "components/home/homeCategory.vue";
-import {consoleLog} from "src/scripts/consoleLog";
+import { consoleLog } from "src/scripts/consoleLog";
 import MetaSetting from "src/scripts/metaSetting";
 
 @Component<Home>({
-    components: {HomeCategory, SearchGame, MainFooter, SortCategory, GenreCategory, GameCard, MainCarousel},
+    components: {
+        HomeCategory,
+        SearchGame,
+        MainFooter,
+        SortCategory,
+        GenreCategory,
+        GameCard,
+        MainCarousel,
+    },
     // metaInfo() {
     //     return {
     //         // titleTemplate: '%s ← My Site',
@@ -80,51 +92,63 @@ import MetaSetting from "src/scripts/metaSetting";
     // }
 })
 export default class Home extends Vue {
-
-    private featuredList : any[] = [];
-    private banners : {
-        src : string,
-        link : string,
+    private featuredList: any[] = [];
+    private banners: {
+        src: string;
+        link: string;
     }[] = [
         null,
-        { src : 'banner/banner1.png', link : '' },
+        { src: "banner/banner1.png", link: "" },
         null,
-        { src : 'banner/banner2.png', link : '' },
-    ]
+        { src: "banner/banner2.png", link: "" },
+    ];
 
-    private metaSetting : MetaSetting;
+    private metaSetting: MetaSetting;
 
     async mounted() {
         // document.title = this.$t('pageTitle.home') as string;
 
-        this.metaSetting = new MetaSetting( {
-            title : `${this.$t('pageTitle.home')} | Zempie.com`,
-            meta : [
-                { name: 'description', content:  `${this.$t('pageDescription.home')}` },
-                { property: 'og:url', content: `${this.$store.getters.VUE_APP_ZEMPIE_URL}home` },
-                { property: 'og:title', content: `${this.$t('pageTitle.home')} | Zempie.com` },
-                { property: 'og:description', content: `${this.$t('pageDescription.home')}` },
+        this.metaSetting = new MetaSetting({
+            title: `${this.$t("pageTitle.home")} | Zempie.com`,
+            meta: [
+                {
+                    name: "description",
+                    content: `${this.$t("pageDescription.home")}`,
+                },
+                {
+                    property: "og:url",
+                    content: `${this.$store.getters.VUE_APP_ZEMPIE_URL}home`,
+                },
+                {
+                    property: "og:title",
+                    content: `${this.$t("pageTitle.home")} | Zempie.com`,
+                },
+                {
+                    property: "og:description",
+                    content: `${this.$t("pageDescription.home")}`,
+                },
                 // { property: 'og:image', content: '' },
-            ]
-        } );
+            ],
+        });
 
-
-        this.$store.commit('headerBgTransparent', true );
-        this.$store.commit('navTab', 'Home');
+        this.$store.commit("headerBgTransparent", true);
+        this.$store.commit("navTab", "Home");
 
         const result = await this.$api.featured();
         this.featuredList = result;
-        consoleLog.log(result);
+        
+        console.log(result);
 
-        this.$nextTick(()=>{
-            document.querySelectorAll('.adsbygoogle').forEach(  (element : Element) => {
-                if(element.getAttribute('data-ad-slot')) {
-                    //@ts-ignore
-                    (window.adsbygoogle || []).push({});
-                }
-            } )
-        })
-
+        this.$nextTick(() => {
+            document
+                .querySelectorAll(".adsbygoogle")
+                .forEach((element: Element) => {
+                    if (element.getAttribute("data-ad-slot")) {
+                        //@ts-ignore
+                        (window.adsbygoogle || []).push({});
+                    }
+                });
+        });
 
         // this.$store.commit('isOfficialPage', true);
         // await this.$store.dispatch('clearGames', 1);
@@ -136,14 +160,14 @@ export default class Home extends Vue {
     }
 
     beforeDestroy() {
-        this.$store.commit('headerBgTransparent', false );
+        this.$store.commit("headerBgTransparent", false);
 
-        if(this.metaSetting) {
+        if (this.metaSetting) {
             this.metaSetting.reset();
             this.metaSetting = null;
         }
     }
-};
+}
 </script>
 <style scoped lang="scss">
 @import "./../css/quasar.variables";
@@ -151,7 +175,4 @@ export default class Home extends Vue {
 .page {
     top: -50px;
 }
-
-
-
 </style>

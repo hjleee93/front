@@ -13,7 +13,6 @@
             <!--      </q-toolbar-title>-->
             <!--    </q-toolbar>-->
 
-
             <q-tabs
                 v-model="tab"
                 active-color="white"

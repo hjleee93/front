@@ -17,7 +17,13 @@
                     <tr>
                         <td class="q-pt-sm text-weight-bold">SNS</td>
                         <td>
-                            <q-img src="img/instagram_logo.png" width="60%" />
+                            <a
+                                :href="`${$store.getters.instaUrl}`"
+                                target="_black"
+                                ><q-img
+                                    src="img/instagram_logo.png"
+                                    width="60%"
+                            /></a>
                         </td>
                     </tr>
                 </div>
@@ -46,7 +52,6 @@
                     <!--                    <div>E-Mail : help@fromthred.com</div>-->
                     <!--                    <div>SNS : @zempie_help</div>-->
                 </div>
-
                 <div class="row">
                     <div class="q-mr-md">
                         <a class="text-h7" :href="$store.getters.supportUrl">
@@ -78,6 +83,13 @@
                             >{{ $t("mainFooter.support.policy") }}</a
                         >
                     </div>
+                     <div class="q-mr-md">
+                        <a
+                            class="cursor-pointer text-h7"
+                            :href="`mailto:${$store.getters.inquiryMail}`"
+                            >{{ $t("mainFooter.support.inquiry") }}</a
+                        >
+                    </div>
                     Copyright 2020. zempie. All rights reserved.
                 </div>
 
@@ -91,7 +103,7 @@
 import { Vue, Component, Prop } from "vue-property-decorator";
 // import Language from "components/main/languages/language.vue";
 
-@Component({ components: {  } })
+@Component({ components: {} })
 export default class MainFooter extends Vue {
     private lang: string = navigator.language;
     // private languages = { ko: "한국어", en: "ENGLISH" };
@@ -160,5 +172,8 @@ export default class MainFooter extends Vue {
 }
 .language.active {
     color: #fff;
+}
+.hidden-btn{
+
 }
 </style>

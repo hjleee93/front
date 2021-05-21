@@ -12,7 +12,8 @@ export default {
         tosUrl : process.env.VUE_APP_TOS_URL,
         policyUrl : process.env.VUE_APP_POLICY_URL,
         developerWiki : process.env.VUE_APP_DEVELOPER_WIKI_URL,
-        instaURL:process.env.VUE_APP_INSTA_URL
+        instaURL:process.env.VUE_APP_INSTA_URL,
+        inquiryMail:process.env.VUE_APP_INQUIRY_EMAIL,
     },
     getters: {
         navTab(state: any) {
@@ -53,6 +54,9 @@ export default {
         },
         instaUrl(state){
             return state.instaURL;
+        },
+        inquiryMail(state){
+            return state.inquiryMail;
         }
     },
 
