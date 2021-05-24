@@ -14,7 +14,7 @@
             <!--                    고품질의 검증된 게임만을 유통하는 수익화 플랫폼!-->
             <!--                </div>-->
             <!--            </div>-->
-
+<!-- <q-btn class="more-gmaes-btn q-my-xl" label="더 많은 게임 보기" to="/gamePage?tag=game" /> -->
             <!-- <search-game></search-game> -->
             <div  :class="$q.platform.is.desktop ? 'q-mb-xl' : 'q-mb-sm'" ></div>
             <div class="q-pt-none">
@@ -175,4 +175,57 @@ export default class Home extends Vue {
 .page {
     top: -50px;
 }
+.home-info {
+    display: inline-block;
+    width: 40%;
+}
+.carousel-img {
+    display: inline-block;
+    width: 60%;
+}
+.carousel-img .off {
+    display: none;
+}
+.home-bottom {
+    display: flex;
+}
+.develop-btn {
+    display: inline-block;
+}
+.carousel-tab {
+    height: 20%;
+    color: #4545459a;
+    font-weight: 700;
+    font-size: 18px;
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+.carousel-tab .active {
+    color: #454545;
+}
+.carousel-mid {
+    height: 80%;
+    width: 100%;
+    text-align: left;
+    padding-left: 10%;
+    font-size: 2rem;
+    color: #454545;
+    
+}
+.carousel-btn{
+    color: #454545;
+    background-color:#e89414;
+    width: 130px;
+    border-radius: 30px;
+}
+.more-gmaes-btn{
+    color: #454545;
+    background-color:#e89414;
+    width: 200px;
+    border-radius: 30px;
+    font-size: 18px;
+}
+
 </style>

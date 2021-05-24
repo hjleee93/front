@@ -29,79 +29,55 @@
                     <a :href="$store.getters.homeUrl">
                         <q-img src="img/zempie-logo.png" width="130px"></q-img>
                     </a>
+                  
+                </q-toolbar-title>
 
-                    <q-tabs
-                        v-model="tab"
-                        v-if="$q.platform.is.desktop"
-                        inline-label
-                        class="header-tab"
-                        shrink
-                        stretch
-                        active-bg-color="zem"
-                        active-color="black"
-                    >
-                        <!-- <q-route-tab
-                        to="/"
-                        name="home"
-                        :label="$t('layoutHeader.routeTab.home')"
-                    ></q-route-tab> -->
-                        <q-route-tab
-                            to="/official"
-                            name="major"
-                            :label="$t('layoutHeader.routeTab.official')"
-                        ></q-route-tab>
-                        <q-route-tab
-                            to="/challenge"
-                            name="minor"
-                            :label="$t('layoutHeader.routeTab.challenge')"
-                        ></q-route-tab>
-                        <q-route-tab
-                            to="/affiliate"
-                            name="affiliate"
-                            :label="$t('layoutHeader.routeTab.affiliate')"
-                        ></q-route-tab>
-                        <!-- <a :href="$store.getters.studioUrl" class="aTab">
+                <q-tabs
+                    v-model="tab"
+                    v-if="$q.platform.is.desktop"
+                    inline-label
+                    shrink
+                    stretch
+                    active-bg-color="zem"
+                    active-color="black"
+                >
+                    <!-- <q-route-tab to="/" name="home" :label="$t('layoutHeader.routeTab.home')"></q-route-tab> -->
+                    <q-route-tab
+                        to="/gamePage?tag=game"
+                        name="major"
+                        :label="$t('layoutHeader.routeTab.official')"
+                    ></q-route-tab>
+                    <q-route-tab
+                        to="/gamePage?tag=indie"
+                        name="minor"
+                        :label="$t('layoutHeader.routeTab.challenge')"
+                    ></q-route-tab>
+                    <q-route-tab
+                        to="/affiliate"
+                        name="affiliate"
+                        :label="$t('layoutHeader.routeTab.affiliate')"
+                    ></q-route-tab>
+                    <!-- <a :href="$store.getters.studioUrl" class="aTab">
                         <q-tab name="g-studio" :label="$t('layoutHeader.routeTab.studio')">
                         </q-tab>
                     </a> -->
-                        <!-- 모달 추가 -->
-                        <a @click="showModal" class="aTab">
-                            <q-tab
-                                name="g-studio"
-                                :label="$t('layoutHeader.routeTab.studio')"
-                            >
-                            </q-tab>
-                        </a>
-                        <template v-if="modal">
-                            <guide-modal
-                                @close="modal = false"
-                                :close="$t('layoutHeader.modal.close')"
-                                src="img/sprinting.gif"
-                            >
-                                <template v-slot:header>
-                                    <p class="header">
-                                        {{ $t("layoutHeader.modal.header") }}
-                                    </p>
-                                    <p class="header-desc">
-                                        {{
-                                            $t("layoutHeader.modal.headerDesc")
-                                        }}
-                                    </p>
-                                </template>
-                                <template v-slot:body>
-                                    <q-btn
-                                        class="modal-body-btn"
-                                        color="black"
-                                        text-color="white"
-                                        :label="$t('layoutHeader.modal.label')"
-                                        @click="goDevSignUP()"
-                                    />
-                                </template>
-                            </guide-modal>
-                        </template>
-                    </q-tabs>
-                </q-toolbar-title>
-                <search-game></search-game>
+                    <!-- 모달 추가 -->
+                    <a @click="showModal" class="aTab">
+                        <q-tab
+                            name="g-studio"
+                            :label="$t('layoutHeader.routeTab.studio')"
+                        >
+                        </q-tab>
+                    </a>
+
+                    <entry-modal v-if="modal" @close="modal = false" />
+                </q-tabs>
+                <template v-if="$q.platform.is.desktop">
+                    <search-game></search-game>
+                </template>
+                <template v-if="$q.platform.is.mobile">
+                    <search-game-mobile></search-game-mobile>
+                </template>
                 <!--                <q-btn-->
                 <!--                    flat-->
                 <!--                    dense-->
@@ -150,40 +126,14 @@
                             v-if="$q.platform.is.mobile"
                         ></account-popup-mobile>
                     </q-avatar>
-                    <!-- <router-link to="/login" v-else> -->
-                        <!-- <q-btn color="positive" class="text-no-wrap">
+                    <router-link to="/login" v-else>
+                        <q-btn color="positive" class="text-no-wrap">
                             {{ $t("layoutHeader.loginBtn") }}
-                        </q-btn> -->
-                        <svg
-                        @click="isLoginClick = !isLoginClick"
-                            data-v-17c0497e=""
-                            viewBox="0 0 16 16"
-                            width="2.5em"
-                            height="2.5em"
-                            focusable="false"
-                            role="img"
-                            aria-label="person fill"
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="bi-person-fill b-icon bi"
-                            fill="currentColor"
-                            style="margin-top: 4px"
-                        >
-                            <g data-v-17c0497e="">
-                                <path
-                                    data-v-17c0497e=""
-                                    d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"
-                                    style="color: #ededed"
-                                ></path>
-                            </g>
-                        </svg>
-                        
-                    <!-- </router-link> -->
+                        </q-btn>
+                    </router-link>
                 </div>
             </q-toolbar>
         </q-header>
-        <template v-if="isLoginClick">
-                        <login-drawer></login-drawer>
-                        </template>
     </div>
 </template>
 
@@ -194,9 +144,10 @@ import AccountPopupDesktop from "components/common/menu/accountPopupDesktop.vue"
 import MailPopupDesktop from "components/common/menu/mailPopupDesktop.vue";
 import MailPopupMobile from "components/common/menu/mailPopupMobile.vue";
 import { consoleLog } from "src/scripts/consoleLog";
-import GuideModal from "layouts/guideModal.vue";
+import Modal from "src/layouts/modal.vue";
 import SearchGame from "components/common/searchGame.vue";
-import LoginDrawer from "components/login/loginDrawer.vue"
+import SearchGameMobile from "components/common/searchGameMobile.vue"
+import EntryModal from "components/studio/entryModal.vue";
 
 @Component({
     components: {
@@ -204,16 +155,15 @@ import LoginDrawer from "components/login/loginDrawer.vue"
         AccountPopupMobile,
         MailPopupDesktop,
         MailPopupMobile,
-        GuideModal,
+        Modal,
         SearchGame,
-        LoginDrawer
+        SearchGameMobile,
+        EntryModal,
     },
 })
 export default class LayoutHeader extends Vue {
     private tab = "";
     private modal: boolean = false;
-
-    private isLoginClick: boolean = false;
 
     mounted() {
         this.tab = this.$store.getters.navTab;
@@ -235,14 +185,11 @@ export default class LayoutHeader extends Vue {
     }
     firebase;
     //개발 스튜디오 알람 모달
-    goDevSignUP() {
-        window.location.href = this.$store.getters.studioUrl;
-    }
+   
     showModal() {
-        // console.log(this.$store.getters.user.is_developer)
         if (this.$store.getters.user !== null) {
             if (this.$store.getters.user.is_developer === true) {
-                this.goDevSignUP();
+               window.location.href = this.$store.getters.studioUrl;
             } else {
                 this.modal = true;
             }
@@ -250,10 +197,6 @@ export default class LayoutHeader extends Vue {
             this.modal = true;
         }
     }
-    //로그인 drawer
-    // openLoginDrawer(){
-
-    // }
 }
 </script>
 
@@ -291,26 +234,5 @@ a {
         border-radius: 50%;
         z-index: -1;
     }
-}
-.header-tab {
-    display: inline-block;
-}
-// 모달
-.header {
-    color: #181818;
-    font-weight: bold;
-    font-size: 3rem;
-}
-.header-desc {
-    color: #181818;
-    font-size: 1rem;
-}
-.modal-body-btn {
-    margin-top: 20px;
-    border-radius: 40px;
-    padding: 0 20px 0 20px;
-    height: 60px;
-    font-size: 17px;
-    font-weight: bold;
 }
 </style>
