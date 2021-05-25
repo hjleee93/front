@@ -1,6 +1,7 @@
 <template>
     <q-page
-        class="items-center justify-evenly text-center"
+        class="items-center justify-evenly text-center home-body"
+        id="homeMain"
         :class="$q.platform.is.desktop ? 'page' : ''"
     >
         <main-carousel></main-carousel>

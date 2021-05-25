@@ -7,69 +7,71 @@
                 @click="clickSearch"
             ></q-icon>
             <!-- <template v-if="searchOpen"> -->
-                <div class="inputArea" :style="searchOpen ? 'opacity: 1;' : 'opacity: 0;'">
-                    <input
-                        ref="input"
-                        v-model="search"
-                        :placeholder="$t('searchGame.desktop.inputLabel')"
-                        type="search"
-                        @keyup="onChanged"
-                        @blur="handleBlur"
-                    />
-                    <div
-                        class="popup"
-                        v-if="this.tags && this.tags.length && this.isFocus"
-                    >
-                        <div class="searchListBox">
-                            <div class="fade" @click="onBlur"></div>
-                            <q-list dark>
-                                <template v-for="(tag, index) in tags">
-                                    <router-link
-                                        v-if="tag.id"
-                                        :to="`/searchresult/${tag.id}`"
+
+            <div
+                class="inputArea"
+                :style="searchOpen ? 'opacity: 1;' : 'opacity: 0;'"
+            >
+                <input
+                    ref="input"
+                    v-model="search"
+                    :placeholder="$t('searchGame.desktop.inputLabel')"
+                    type="search"
+                    @keyup="onChanged"
+                    @blur="handleBlur"
+                />
+                <div
+                    class="popup"
+                    v-if="this.tags && this.tags.length && this.isFocus"
+                >
+                    <div class="searchListBox">
+                        <div class="fade" @click="onBlur"></div>
+                        <q-list dark>
+                            <template v-for="(tag, index) in tags">
+                                <router-link
+                                    v-if="tag.id"
+                                    :to="`/searchresult/${tag.id}`"
+                                >
+                                    <q-item
+                                        class="searchItem"
+                                        clickable
+                                        v-ripple
+                                        @click.stop="onClickSearchItem(index)"
                                     >
-                                        <q-item
-                                            class="searchItem"
-                                            clickable
-                                            v-ripple
-                                            @click.stop="
-                                                onClickSearchItem(index)
-                                            "
-                                        >
-                                            <q-item-section avatar>
-                                                <q-icon
-                                                    color="grey"
-                                                    name="fas fa-hashtag"
-                                                />
-                                            </q-item-section>
-                                            <q-item-section>
-                                                <q-item-label>
-                                                    {{ `${tag.tag}` }}
-                                                </q-item-label>
-                                                <!--                                        <q-item-label overline>게임 145,000 </q-item-label>-->
-                                            </q-item-section>
-                                        </q-item>
-                                    </router-link>
-                                    <div v-else>
-                                        <q-item class="searchItem">
-                                            <q-item-section>
-                                                <q-item-label
-                                                    style="user-select: none"
-                                                >
-                                                    {{
-                                                        $t(
-                                                            "searchGame.notResultLabel"
-                                                        )
-                                                    }}
-                                                </q-item-label>
-                                            </q-item-section>
-                                        </q-item>
-                                    </div>
-                                </template>
-                            </q-list>
-                        </div>
+                                        <q-item-section avatar>
+                                            <q-icon
+                                                color="grey"
+                                                name="fas fa-hashtag"
+                                            />
+                                        </q-item-section>
+                                        <q-item-section>
+                                            <q-item-label>
+                                                {{ `${tag.tag}` }}
+                                            </q-item-label>
+                                            <!--                                        <q-item-label overline>게임 145,000 </q-item-label>-->
+                                        </q-item-section>
+                                    </q-item>
+                                </router-link>
+                                <div v-else>
+                                    <q-item class="searchItem">
+                                        <q-item-section>
+                                            <q-item-label
+                                                style="user-select: none"
+                                            >
+                                                {{
+                                                    $t(
+                                                        "searchGame.notResultLabel"
+                                                    )
+                                                }}
+                                            </q-item-label>
+                                        </q-item-section>
+                                    </q-item>
+                                </div>
+                            </template>
+                        </q-list>
                     </div>
                 </div>
+            </div>
             <!-- </template> -->
         </div>
         <!--        <div class="clear"></div>-->
@@ -89,8 +91,12 @@ export default class SearchGame extends Vue {
     private isFocus: boolean = true;
 
     private searchOpen: boolean = false;
+    //dimmed 처리용
+    private body: HTMLElement = null;
     mounted() {
         this.$q.iconSet.expansionItem.icon = "";
+        this.body = document.getElementById("homeMain");
+        this.body.addEventListener("click", this.clickSearch);
     }
 
     onChanged() {
@@ -183,11 +189,16 @@ export default class SearchGame extends Vue {
         this.searchOpen = false;
     }
     clickSearch() {
-
         this.searchOpen = !this.searchOpen;
         this.search = "";
+        this.tags = [];
+        if (this.searchOpen === true) {
+            this.body.classList.add('dimmed')
+        }else if(this.searchOpen === false){
+            this.body.classList.remove('dimmed')
+        }
         // if(this.searchOpen === false){
-            // this.isFocus = this.isFocus;
+        // this.isFocus = this.isFocus;
         // }
         // this.$nextTick(() => {
         //     this.$refs.input.focus();
@@ -224,8 +235,7 @@ export default class SearchGame extends Vue {
         }
 
         .inputArea {
-            
-            transition: all 0.7s;
+            transition: all 0.5s;
             width: 100%;
             position: absolute;
             top: 50px;
