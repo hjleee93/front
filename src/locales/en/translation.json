@@ -65,6 +65,7 @@
   "mainFooter.company.data2": "CEO: SeoSangWook",
   "mainFooter.company.data3": "Business Number: 178-88-00617",
   "mainFooter.company.data4": "Address: 3rd floor, 105 Bukahyeon-ro, Seodaemun-gu, Seoul",
+  "mainFooter.developer.wiki": "Developer Wiki",
   "sortCategory.text1": "Most recent",
   "sortCategory.text2": "Oldest",
   "sortCategory.text3": "[By] name",
@@ -243,5 +244,11 @@
   "pageTitle.resetPassword": "Change password",
   "resetPassword.checkAlertMessage": "Reset email has been sent. Please check your inbox",
   "pageTitle.searchResult": "Search result",
-  "searchGame.mobile.inputLabel": "Hashtag"
+  "searchGame.mobile.inputLabel": "Hashtag",
+  "home.aboutUs1.title": "Create and share games",
+  "home.aboutUs1.desc1": "Anyone can become a Zempie game developer through a simple registering procedure. Registered games are played directly by players all over the world without downloading and installing. Share your game link with friends and enjoy the game together! Best free HTML5 games for everyone on Zempie.com. Welcome to Zempie.com, South Korean platform where you can play thousands of hyper casual games in all genres you can imagine. No need of installation or download, now you can enjoy your favorite games on the go! We offer not only popular affiliate games, but also Indie and Exclusive games. It originally was lauched in 2006, and since then.",
+  "home.aboutUs2.title": "Are you a developer?",
+  "home.aboutUs2.desc1": "If you are a developer and interested in publishing your own games. you can do so easily by registering on the site and uploading your masterpieces from the developer page! Please note that currently monetization is not available. However, we will be adding option for developers to monetize their games through ads soon, so stay tuned. For more information please contact email",
+  "home.aboutUs3.title": "What's next?",
+  "home.aboutUs3.desc1": "Our dedicated team is currently working on creation of the community where amateur developers, designers, and wannabes will have access to all kind of resources including tutorials, images, sounds and game features. We understand the struggle of getting needed resources and being a novice, so we are here to help you!"
 }

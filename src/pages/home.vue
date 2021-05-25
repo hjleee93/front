@@ -1,8 +1,10 @@
 <template>
     <q-page
-        class="items-center justify-evenly text-center home-body"
-        id="homeMain"
-        :class="$q.platform.is.desktop ? 'page' : ''"
+        class="items-center justify-evenly text-center"
+        :class="[
+            $q.platform.is.desktop ? 'page' : '',
+            $store.getters.searchBarOpen ? 'dim' : '',
+        ]"
     >
         <main-carousel></main-carousel>
 
@@ -15,10 +17,10 @@
             <!--                    고품질의 검증된 게임만을 유통하는 수익화 플랫폼!-->
             <!--                </div>-->
             <!--            </div>-->
-<!-- <q-btn class="more-gmaes-btn q-my-xl" label="더 많은 게임 보기" to="/gamePage?tag=game" /> -->
+            <!-- <q-btn class="more-gmaes-btn q-my-xl" label="더 많은 게임 보기" to="/gamePage?tag=game" /> -->
             <!-- <search-game></search-game> -->
-            <div  :class="$q.platform.is.desktop ? 'q-mb-xl' : 'q-mb-sm'" ></div>
-            <div class="q-pt-none">
+            <div :class="$q.platform.is.desktop ? 'q-mb-xl' : 'q-mb-sm'"></div>
+            <div class="q-pt-none section">
                 <template
                     v-for="(featured, index) in featuredList"
                     v-if="featured.games.length"
@@ -48,9 +50,60 @@
         <!--             data-ad-slot="4210825092"-->
         <!--             data-ad-format="auto"-->
         <!--             data-full-width-responsive="true"></ins>-->
+
+        <!-- about us -->
+        <div class="maxWidth about-section">
+            <span class="about-us">ABOUT US</span>
+            <div class="short-seperator"></div>
+            <div class="desc-section">
+                <q-img
+                    src="img/aboutUs/computer_1.png"
+                    class="about-img"
+                ></q-img>
+                <div class="description">
+                    <div class="title q-mb-md">
+                        {{ $t("home.aboutUs1.title") }}
+                    </div>
+                    <div style="text-align: left">
+                        <div>{{ $t("home.aboutUs1.desc1") }}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="desc-section">
+                <div class="description">
+                    <div class="title q-mb-md">
+                        {{ $t("home.aboutUs2.title") }}
+                    </div>
+                    <div style="text-align: right">
+                        <div>{{ $t("home.aboutUs2.desc1") }}</div>
+                    </div>
+                </div>
+                <q-img
+                    src="img/aboutUs/computer_2.png"
+                    class="about-img"
+                ></q-img>
+            </div>
+
+            <div class="desc-section">
+                <q-img
+                    src="img/aboutUs/computer_3.png"
+                    class="about-img"
+                ></q-img>
+                <div class="description">
+                    <div class="title q-mb-md">
+                        {{ $t("home.aboutUs3.title") }}
+                    </div>
+                    <div style="text-align: left">
+                        <div>{{ $t("home.aboutUs3.desc1") }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <main-footer></main-footer>
     </q-page>
 </template>
+
 
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
@@ -106,6 +159,11 @@ export default class Home extends Vue {
 
     private metaSetting: MetaSetting;
 
+    private options = {
+        controlArrows: true,
+        scrollBar: true,
+    };
+
     async mounted() {
         // document.title = this.$t('pageTitle.home') as string;
 
@@ -136,9 +194,8 @@ export default class Home extends Vue {
         this.$store.commit("navTab", "Home");
 
         const result = await this.$api.featured();
-        this.featuredList = result;
-        
         console.log(result);
+        this.featuredList = result;
 
         this.$nextTick(() => {
             document
@@ -213,20 +270,63 @@ export default class Home extends Vue {
     padding-left: 10%;
     font-size: 2rem;
     color: #454545;
-    
 }
-.carousel-btn{
+.carousel-btn {
     color: #454545;
-    background-color:#e89414;
+    background-color: #e89414;
     width: 130px;
     border-radius: 30px;
 }
-.more-gmaes-btn{
+.more-gmaes-btn {
     color: #454545;
-    background-color:#e89414;
+    background-color: #e89414;
     width: 200px;
     border-radius: 30px;
     font-size: 18px;
 }
+.dim {
+    transition: all 0.5s;
+    opacity: 0.5;
+    background-color: rgb(0, 0, 0);
+}
 
+//about us
+
+.about-section {
+    .short-seperator {
+        width: 30px;
+        border-bottom: 3px solid #ededed;
+        margin: 20px auto 20px auto;
+    }
+    .title {
+        font-size: 25px;
+        font-weight: bold;
+    }
+    .about-us {
+        font-weight: bold;
+        font-size: 40px;
+    }
+    .my-card {
+        width: 33%;
+        display: inline-block;
+    }
+    .desc-section {
+        width: 70%;
+        margin: 0 auto;
+        display: inline-block;
+        .about-img {
+            width: 40%;
+
+            // border: 1px solid #ededed;
+        }
+        .description {
+            font-size: 16px;
+            width: 60%;
+            display: inline-block;
+            vertical-align: middle;
+
+            // border: 1px solid #ededed;
+        }
+    }
+}
 </style>

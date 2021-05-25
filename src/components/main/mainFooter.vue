@@ -10,7 +10,7 @@
                             <a
                                 :href="`${$store.getters.developerWiki}`"
                                 target="_black"
-                                >개발자 위키</a
+                                >{{ $t("mainFooter.developer.wiki") }}</a
                             >
                         </td>
                     </tr>

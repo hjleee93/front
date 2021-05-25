@@ -1,6 +1,10 @@
 <template>
-    <q-page class="items-center justify-evenly text-center"
-            :class="$q.platform.is.desktop ? 'page' : ''"
+     <q-page
+        class="items-center justify-evenly text-center"
+        :class="[
+            $q.platform.is.desktop ? 'page' : '',
+            $store.getters.searchBarOpen ? 'dim' : '',
+        ]"
     >
         <main-carousel></main-carousel>
 <!--        <ins class="adsbygoogle"-->
@@ -177,5 +181,9 @@ export default class Official extends Vue {
     top: -50px;
 }
 
-
+.dim {
+    transition: all 0.5s;
+    opacity: 0.5;
+    background-color: rgb(0, 0, 0);
+}
 </style>

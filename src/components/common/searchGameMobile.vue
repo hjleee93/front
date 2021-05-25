@@ -4,7 +4,7 @@
             <q-icon
                 class="q-ml-sm q-mr-sm"
                 name="fa fa-search"
-                @click="clickSearch"
+                @mousedown="clickSearch"
             ></q-icon>
             <!-- <template v-if="searchOpen"> -->
 
@@ -91,12 +91,8 @@ export default class SearchGame extends Vue {
     private isFocus: boolean = true;
 
     private searchOpen: boolean = false;
-    //dimmed 처리용
-    private body: HTMLElement = null;
     mounted() {
         this.$q.iconSet.expansionItem.icon = "";
-        this.body = document.getElementById("homeMain");
-        this.body.addEventListener("click", this.clickSearch);
     }
 
     onChanged() {
@@ -186,23 +182,29 @@ export default class SearchGame extends Vue {
 
     //search bar
     handleBlur() {
-        this.searchOpen = false;
+        console.log("blur~", this.searchOpen);
+        // (this.$refs.input as HTMLElement).blur();
+        if (this.searchOpen) {
+            this.searchOpen = false;
+            this.$store.commit("searchBarOpen", false);
+        }
     }
-    clickSearch() {
+    clickSearch(e: Event) {
+        console.log("click");
         this.searchOpen = !this.searchOpen;
         this.search = "";
         this.tags = [];
-        if (this.searchOpen === true) {
-            this.body.classList.add('dimmed')
-        }else if(this.searchOpen === false){
-            this.body.classList.remove('dimmed')
+        // this.handleBlur();
+
+        if (this.searchOpen === false) {
+            this.$store.commit("searchBarOpen", false);
+        } else {
+            this.$store.commit("searchBarOpen", true);
         }
-        // if(this.searchOpen === false){
-        // this.isFocus = this.isFocus;
-        // }
-        // this.$nextTick(() => {
-        //     this.$refs.input.focus();
-        // });
+        this.$nextTick(() => {
+            (this.$refs.input as HTMLElement).focus();
+        });
+         e.preventDefault();
     }
 }
 </script>

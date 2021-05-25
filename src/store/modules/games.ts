@@ -165,7 +165,7 @@ export default {
                 const offset = context.state[gameKey].length;
                 context.commit( stateKey, GameLoadState.loading );
 
-                const result = await Vue.$api.games(limit, offset, category, sort, dir);
+                const result = await Vue.$api.games(limit, offset, category, sort, dir);                
                 if( !result || result.error ) {
                     result && result.error && console.error( result.error );
                     context.commit(gameKey, []);

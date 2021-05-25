@@ -29,7 +29,6 @@
                     <a :href="$store.getters.homeUrl">
                         <q-img src="img/zempie-logo.png" width="130px"></q-img>
                     </a>
-                  
                 </q-toolbar-title>
 
                 <q-tabs
@@ -127,9 +126,12 @@
                         ></account-popup-mobile>
                     </q-avatar>
                     <router-link to="/login" v-else>
-                        <q-btn color="positive" class="text-no-wrap">
-                            {{ $t("layoutHeader.loginBtn") }}
-                        </q-btn>
+                        
+                        <!-- <q-btn class="text-no-wrap"> -->
+                            <!-- <div style="border: 1px solid; padding:5px; border-radius: 3px" > -->
+                                <b>{{ $t("layoutHeader.loginBtn") }}</b>
+                                <!-- </div> -->
+                        <!-- </q-btn> -->
                     </router-link>
                 </div>
             </q-toolbar>
@@ -146,7 +148,7 @@ import MailPopupMobile from "components/common/menu/mailPopupMobile.vue";
 import { consoleLog } from "src/scripts/consoleLog";
 import Modal from "src/layouts/modal.vue";
 import SearchGame from "components/common/searchGame.vue";
-import SearchGameMobile from "components/common/searchGameMobile.vue"
+import SearchGameMobile from "components/common/searchGameMobile.vue";
 import EntryModal from "components/studio/entryModal.vue";
 
 @Component({
@@ -185,11 +187,11 @@ export default class LayoutHeader extends Vue {
     }
     firebase;
     //개발 스튜디오 알람 모달
-   
+
     showModal() {
         if (this.$store.getters.user !== null) {
             if (this.$store.getters.user.is_developer === true) {
-               window.location.href = this.$store.getters.studioUrl;
+                window.location.href = this.$store.getters.studioUrl;
             } else {
                 this.modal = true;
             }

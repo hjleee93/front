@@ -6,6 +6,9 @@ export default {
         scrollPrePos: 0,
         scrollMovePos: 0,
         scrollHeight: 0,
+
+        //dimmed 
+        searchBarOpen : false,
     },
     getters: {
         leftDrawerOpen(state: any) {
@@ -25,6 +28,9 @@ export default {
         },
         scrollHeight(state: any) {
             return state.scrollHeight;
+        },
+        searchBarOpen(state: any) {
+            return state.searchBarOpen;
         },
     },
 
@@ -46,6 +52,9 @@ export default {
         },
         scrollHeight(state: any, payload: number) {
             state.scrollHeight = payload;
+        },
+        searchBarOpen(state: any, payload: number) {
+            state.searchBarOpen = payload;
         },
     },
     actions: {}
